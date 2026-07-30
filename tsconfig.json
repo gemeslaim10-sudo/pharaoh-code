@@ -1,0 +1,59 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+
+    // ─── Module & Build ───────────────────────────────────────────────────────
+    "allowJs": false,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+
+    // ─── Strict Type Checking ─────────────────────────────────────────────────
+    "strict": true,                          // enables all strict* flags below
+    "strictNullChecks": true,                // no hidden null/undefined bugs
+    "strictFunctionTypes": true,             // catch bad callback signatures
+    "strictBindCallApply": true,             // strict bind/call/apply types
+    "strictPropertyInitialization": true,    // class props must be initialized
+    "noImplicitAny": true,                   // ban implicit `any` everywhere
+    "noImplicitThis": true,                  // ban untyped `this`
+    "useUnknownInCatchVariables": true,      // catch vars are `unknown`, not `any`
+    "alwaysStrict": true,                    // emit "use strict" in every file
+
+    // ─── Code Quality & Dead Code ─────────────────────────────────────────────
+    "noUnusedLocals": true,                  // error on unused variables
+    "noUnusedParameters": true,              // error on unused function params
+    "noImplicitReturns": true,               // every code path must return
+    "noFallthroughCasesInSwitch": true,      // no accidental switch fallthrough
+    "noUncheckedIndexedAccess": true,        // array[i] returns T | undefined
+    "noPropertyAccessFromIndexSignature": false, // force explicit index access
+    "exactOptionalPropertyTypes": true,      // `x?: T` ≠ `x?: T | undefined`
+
+    // ─── Advanced Safety ──────────────────────────────────────────────────────
+    "forceConsistentCasingInFileNames": true, // no case-insensitive import bugs
+    "allowUnreachableCode": false,           // error on dead/unreachable code
+    "allowUnusedLabels": false,              // error on unused labels
+
+    // ─── Next.js Plugin ───────────────────────────────────────────────────────
+    "plugins": [{ "name": "next" }],
+
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "**/*.mts"
+  ],
+  "exclude": ["node_modules"]
+}

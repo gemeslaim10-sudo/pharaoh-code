@@ -1,0 +1,286 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-pharaohGold: #C5A16F;
+  --color-pharaohNavy: #0A192F;
+  --color-pharaohCard: #112240;
+  --color-deepNavy: #0A192F;
+  --color-premiumBeige: #C5A16F;
+}
+
+body {
+  font-family: var(--font-tajawal), sans-serif;
+  background-color: #0A192F;
+  color: #ffffff;
+}
+
+/* شاشة التحميل باللوجو الجديد */
+#preloader {
+  position: fixed;
+  inset: 0;
+  background: #0A192F;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.loader-logo {
+  width: 150px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+/* مخصص للموبايل - Slide Menu */
+.mobile-menu {
+  transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(100%);
+}
+.mobile-menu.active {
+  transform: translateX(0);
+}
+
+/* حركات الهيرو */
+.swiper-slide-active .content-up {
+  animation: fadeInUp 1s ease forwards 0.3s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+/* أنيميشن النبض للنص */
+@keyframes textPulse {
+  0%,
+  100% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+.pulse-animation {
+  animation: textPulse 2s infinite ease-in-out;
+}
+
+/* أنيميشن شريط التحميل */
+@keyframes loadingBar {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+.animate-loadingBar {
+  animation: loadingBar 1.5s infinite ease-in-out;
+}
+
+/* =========================================
+   RESTORED ANIMATIONS & CUSTOM STYLES
+   (Recovered from original <style> tags)
+   ========================================= */
+
+/* Mobile Menu Animation */
+.mobile-menu { transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); }
+.mobile-menu.active { transform: translateX(0); }
+
+/* Text Pulse */
+@keyframes textPulse {
+    0%, 100% { opacity: 0.9; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.02); }
+}
+.pulse-animation {
+    animation: textPulse 2s infinite ease-in-out;
+}
+
+/* Loading Bar */
+@keyframes loadingBar {
+    0% { transform: translateX(-100%); }
+    50% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
+}
+.animate-loadingBar {
+    animation: loadingBar 1.5s infinite ease-in-out;
+}
+
+/* Hero Animations (index.html) */
+.swiper-slide-active .content-up { animation: fadeInUp 1s ease forwards 0.3s; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.05); opacity: 1; } }
+
+/* Portfolio transitions */
+.portfolio-item { transition: opacity 0.5s ease, transform 0.5s ease; }
+.line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* SEO 3D icon */
+.pharaoh-3d-icon {
+    background: #0D1E36;
+    border: 2px solid #1A2F4C;
+    box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.03),
+                inset -2px -2px 5px rgba(0, 0, 0, 0.5),
+                5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Custom scrollbar for team modal */
+.custom-modal-scroll::-webkit-scrollbar { width: 6px; }
+.custom-modal-scroll::-webkit-scrollbar-track { background: #112240; }
+.custom-modal-scroll::-webkit-scrollbar-thumb { background: rgba(197, 161, 111, 0.3); border-radius: 10px; }
+.custom-modal-scroll::-webkit-scrollbar-thumb:hover { background: #C5A16F; }
+
+/* Dashboard Scrollbars */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #0A192F; }
+::-webkit-scrollbar-thumb { background: rgba(197, 161, 111, 0.2); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #C5A16F; }
+
+/* Dashboard field fades */
+@keyframes fieldFadeIn {
+    from { opacity: 0; transform: scale(0.98) translateY(-5px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.animate-field-fade { animation: fieldFadeIn 0.35s ease-out forwards; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fadeIn 0.3s ease-out forwards; }
+
+
+/* Additional page-specific animations */
+@keyframes pharaohBrandFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.02); }
+}
+.pharaoh-brand-animation {
+    animation: pharaohBrandFloat 5s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(12deg); }
+    50% { transform: translateY(-20px) rotate(15deg); }
+}
+.floating-icon {
+    animation: float 5s ease-in-out infinite;
+}
+
+.filter-btn {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.input-glow:focus {
+    box-shadow: 0 0 15px rgba(197, 161, 111, 0.2);
+    border-color: #C5A16F !important;
+}
+
+/* Eliminate tap flicker globally on touch devices */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Restore sticky hover state on mobile devices since Tailwind v4 media queries disable it */
+@media (hover: none) {
+  /* Opacity */
+  .group:hover .group-hover\:opacity-100 {
+    opacity: 1 !important;
+  }
+  
+  /* Borders */
+  .group:hover .group-hover\:border-\[\#C5A16F\] {
+    border-color: #C5A16F !important;
+  }
+  .group:hover .group-hover\:border-pharaohGold\/30 {
+    border-color: rgba(197, 161, 111, 0.3) !important;
+  }
+  .group:hover .group-hover\:border-\[\#C5A16F\]\/30 {
+    border-color: rgba(197, 161, 111, 0.3) !important;
+  }
+  
+  /* Backgrounds */
+  .group:hover .group-hover\:bg-\[\#C5A16F\] {
+    background-color: #C5A16F !important;
+  }
+  .group:hover .group-hover\:bg-pharaohGold {
+    background-color: #C5A16F !important;
+  }
+  
+  /* Text colors */
+  .group:hover .group-hover\:text-\[\#0A192F\] {
+    color: #0A192F !important;
+  }
+  .group:hover .group-hover\:text-pharaohNavy {
+    color: #0A192F !important;
+  }
+  .group:hover .group-hover\:text-pharaohGold {
+    color: #C5A16F !important;
+  }
+  .group:hover .group-hover\:text-\[\#C5A16F\] {
+    color: #C5A16F !important;
+  }
+  
+  /* Rotations and transforms */
+  .group:hover .group-hover\:rotate-\[360deg\] {
+    transform: rotate(360deg) !important;
+  }
+  .group:hover .group-hover\:rotate-12 {
+    transform: rotate(12deg) !important;
+  }
+  .group:hover .group-hover\:-rotate-12 {
+    transform: rotate(-12deg) !important;
+  }
+  .group:hover .group-hover\:rotate-1 {
+    transform: rotate(1deg) !important;
+  }
+  
+  /* Width and translation */
+  .group:hover .group-hover\:w-full {
+    width: 100% !important;
+  }
+  .group:hover .group-hover\:w-20 {
+    width: 5rem !important;
+  }
+  .group:hover .group-hover\:translate-x-\[-3px\] {
+    transform: translateX(-3px) !important;
+  }
+  .group:hover .group-hover\:translate-y-0 {
+    transform: translateY(0) !important;
+  }
+  
+  /* Scales */
+  .group:hover .group-hover\:scale-110 {
+    transform: scale(1.1) !important;
+  }
+  
+  /* Filters */
+  .group:hover .group-hover\:grayscale-0 {
+    filter: grayscale(0) !important;
+  }
+  
+  /* Shadows and glows */
+  .group:hover .group-hover\:shadow-\[0_0_25px_rgba\(197\,161\,111\,0\.15\)\] {
+    box-shadow: 0 0 25px rgba(197, 161, 111, 0.15) !important;
+  }
+}

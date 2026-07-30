@@ -1,0 +1,29 @@
+[
+    {
+        "id": "home_portfolio_01",
+        "title": "منصة الاكل المنزلي ( بيتي )",
+        "category": "WEB DEVELOPMENT",
+        "categoryFilter": "web",
+        "description": "بناء موقع الاكل المنزلي ( بيتي ) متكامل مع خرائط تفاعلية ونظام إدارة وحدات.",
+        "image": "..//assets/projects/homemade_food.png",
+        "link": "https://ahmedsh72.github.io/BETIY/"
+    },
+    {
+        "id": "home_portfolio_02",
+        "title": "منصة دعم الزهايمر",
+        "category": "WEB DEVELOPMENT",
+        "categoryFilter": "app",
+        "description": "بناء موقع دعم الزهايمر متكامل مع خرائط تفاعلية ونظام إدارة وحدات.",
+        "image": "..//assets/projects/./alzheimers.png",
+        "link": "https://ahmedsh72.github.io/Alzheimer-s/"
+    },
+    {
+        "id": "home_portfolio_03",
+        "title": "منصة أكاديمية Triumph",
+        "category": "WEB DEVELOPMENT",
+        "categoryFilter": "motion",
+        "description": "بناء موقع أكاديمية Triumph متكامل مع خرائط تفاعلية ونظام إدارة وحدات.",
+        "image": "..//assets/projects/football.png",
+        "link": "https://ahmedsh72.github.io/Triumph/"
+    }
+]

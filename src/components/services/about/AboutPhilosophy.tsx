@@ -1,0 +1,40 @@
+'use client';
+import { SectionData, SectionItem } from '@/types';
+
+export default function AboutPhilosophy({ data }: { data: SectionData }) {
+  if (!data) return null;
+
+  return (
+    <section className="relative py-24 bg-[#0A192F] overflow-hidden" dir="rtl">
+        <div className="absolute top-10 right-10 opacity-10 text-6xl rotate-12 floating-icon text-[#C5A16F]">𓀀</div>
+        <div className="absolute bottom-10 left-10 opacity-10 text-6xl -rotate-12 floating-icon text-[#C5A16F]">𓋹</div>
+        <div className="absolute top-1/2 left-20 opacity-5 text-8xl font-black text-white select-none">CODE</div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+            <div className="text-center mb-16">
+                <h3 className="text-[#C5A16F] font-bold tracking-widest text-xs uppercase mb-2">
+                    {data.subtitle || "How We Think"}
+                </h3>
+                <h2 className="text-4xl font-black text-white">
+                    {data.titlePart1 || "فلسفة"} <span className="text-[#C5A16F]">{data.titlePart2 || "التشييد الرقمي"}</span>
+                </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+                {data.items?.map((item: SectionItem, index: number) => {
+                    const numStr = String(index + 1).padStart(2, '0');
+                    return (
+                        <div key={index} className="relative p-8 bg-[#112240] rounded-2xl border-b-4 border-[#C5A16F] group hover:-translate-y-2 transition-all duration-500">
+                            <div className="text-[#C5A16F] text-5xl font-black opacity-20 absolute top-4 left-4 group-hover:opacity-100 transition-opacity">
+                                {numStr}
+                            </div>
+                            <h4 className="text-white text-2xl font-black mb-4">{item.title}</h4>
+                            <p className="text-gray-400">{item.description}</p>
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    </section>
+  );
+}

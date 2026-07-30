@@ -1,0 +1,50 @@
+[
+    {
+        "id": "portfolio_01",
+        "title": "إيجل العقارية",
+        "category": "Web Development",
+        "categoryFilter": "web",
+        "description": "منصة متطورة للتحكم في العقارات مع خرائط حرارية ذكية.",
+        "image": "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=800"
+    },
+    {
+        "id": "portfolio_02",
+        "title": "تطبيق \"صحتي\"",
+        "category": "Application Development",
+        "categoryFilter": "app",
+        "description": "ربط المرضى بالأطباء فورياً باستخدام تقنيات الـ WebRTC.",
+        "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800"
+    },
+    {
+        "id": "portfolio_03",
+        "title": "فيديو ترويجي لشركة",
+        "category": "Motion Graphics",
+        "categoryFilter": "motion",
+        "description": "عرض إعلانات تفاعلية مع تأثيرات بصرية مذهلة.",
+        "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800"
+    },
+    {
+        "id": "portfolio_04",
+        "title": "متجر \"فاشون\"",
+        "category": "Web Development",
+        "categoryFilter": "web",
+        "description": "تجربة تسوق فريدة مع نظام دفع مشفر وسرعة فائقة.",
+        "image": "https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=800"
+    },
+    {
+        "id": "portfolio_05",
+        "title": "لوحة تحكم \"أومني\"",
+        "category": "Application Development",
+        "categoryFilter": "app",
+        "description": "نظام ERP متكامل لإدارة الشركات المتوسطة والكبيرة.",
+        "image": "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=800"
+    },
+    {
+        "id": "portfolio_06",
+        "title": "فيديو ترويجي لشركة",
+        "category": "Motion Graphics",
+        "categoryFilter": "motion",
+        "description": "عرض إعلانات تفاعلية مع تأثيرات بصرية مذهلة.",
+        "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800"
+    }
+]

@@ -1,0 +1,64 @@
+[
+    {
+        "id": "service_01",
+        "title": "تطبيقات الموبايل",
+        "description": "بناء تطبيقات iOS و Android بأداء فائق وتصميم مستخدم ذكي.",
+        "image": "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=800",
+        "badgeRight": "مشاريع +16",
+        "badgeLeft": "خصم لفترة محدودة",
+        "feature": "فريق عمل متكامل",
+        "price": "10,000 ج.م",
+        "link": "mobile-apps.html"
+    },
+    {
+        "id": "service_02",
+        "title": "مواقع الشركات",
+        "description": "واجهات ويب احترافية تعكس هوية شركتك وتجذب عملائك المستهدفين.",
+        "image": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=800",
+        "badgeRight": "مشاريع +45",
+        "feature": "سرعة وأمان 100%",
+        "price": "2,500 ج.م",
+        "link": "web-development.html"
+    },
+    {
+        "id": "service_03",
+        "title": "المتاجر الإلكترونية",
+        "description": "حوّل منتجاتك إلى مبيعات عبر متاجر سهلة الاستخدام وتدعم الدفع الإلكتروني.",
+        "image": "https://images.unsplash.com/photo-1556742049-13ad733f0219?q=80&w=800",
+        "badgeRight": "مشاريع +90",
+        "badgeLeft": "الأكثر طلباً",
+        "feature": "لوحة تحكم عربية",
+        "price": "4,000 ج.م",
+        "link": "web-development.html"
+    },
+    {
+        "id": "service_04",
+        "title": "SEO وتصدر النتائج",
+        "description": "اجعل موقعك في الصفحة الأولى لجوجل واحصل على زيارات مجانية مستمرة.",
+        "image": "https://images.unsplash.com/photo-1562577309-4932fdd64cd1?q=80&w=800",
+        "badgeRight": "تصدّر النتائج",
+        "feature": "تقارير شهرية",
+        "price": "1,500 ج.م",
+        "link": "SEO.html"
+    },
+    {
+        "id": "service_05",
+        "title": "تصميم الهوية البصرية",
+        "description": "نصمم شعارات وهوية تجارية متكاملة تترك أثراً في ذاكرة عملائك.",
+        "image": "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=800",
+        "badgeRight": "تصميم ملكي",
+        "feature": "ملفات المصدر بالكامل",
+        "price": "2,000 ج.م",
+        "link": "design.html"
+    },
+    {
+        "id": "service_06",
+        "title": "نظام الإدارة الذكي",
+        "description": "حلول متطورة لإدارة علاقات العملاء CRM، تنظيم شؤون الموظفين و HR، مع نظام دقيق لإدارة المستخدمين وتوزيع الصلاحيات بكفاءة وأمان.",
+        "image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=800",
+        "badgeRight": "نظام متكامل",
+        "feature": "لوحة تحكم شاملة",
+        "price": "14,999 ج.م",
+        "link": "System.html"
+    }
+]

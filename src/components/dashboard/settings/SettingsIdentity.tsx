@@ -4,16 +4,20 @@ import { useState, useEffect } from 'react';
 import { getIdentity, updateIdentity } from '@/app/actions/dashboard/settings';
 import { uploadImage } from '@/app/actions/dashboard/upload';
 import { auth } from '@/lib/firebase/config';
-import SettingsIdentityForm from './SettingsIdentityForm';
+import SettingsIdentityForm, { IdentityFormData } from './SettingsIdentityForm';
 
 export default function SettingsIdentity() {
     const [loading, setLoading] = useState(false);
     const [initialLoad, setInitialLoad] = useState(true);
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<IdentityFormData>({
         name: '',
+        name_en: '',
         title: '',
+        title_en: '',
         keywords: '',
+        keywords_en: '',
         desc: '',
+        desc_en: '',
         favicon: ''
     });
     const [faviconFile, setFaviconFile] = useState<File | null>(null);
@@ -25,10 +29,14 @@ export default function SettingsIdentity() {
                 const data = await getIdentity();
                 if (data) {
                     setFormData({
-                        name: data.name || '',
-                        title: data.title || '',
-                        keywords: data.keywords || '',
-                        desc: data.desc || '',
+                        name: data.name || data.name_ar || '',
+                        name_en: data.name_en || '',
+                        title: data.title || data.title_ar || '',
+                        title_en: data.title_en || '',
+                        keywords: data.keywords || data.keywords_ar || '',
+                        keywords_en: data.keywords_en || '',
+                        desc: data.desc || data.desc_ar || data.description || '',
+                        desc_en: data.desc_en || data.description_en || '',
                         favicon: data.favicon || ''
                     });
                 }
@@ -61,7 +69,16 @@ export default function SettingsIdentity() {
                 finalFaviconUrl = uploadRes.url || '';
             }
 
-            await updateIdentity(token, { ...formData, favicon: finalFaviconUrl });
+            const payload = {
+                ...formData,
+                name_ar: formData.name,
+                title_ar: formData.title,
+                keywords_ar: formData.keywords,
+                desc_ar: formData.desc,
+                favicon: finalFaviconUrl
+            };
+
+            await updateIdentity(token, payload);
             setFaviconFile(null);
             alert("تم تحديث وحفظ سجل الهوية الرقمية المعتمدة! 👑");
         } catch (error) {
@@ -73,9 +90,10 @@ export default function SettingsIdentity() {
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const fieldKey = e.target.id.replace('site-', '');
         setFormData(prev => ({
             ...prev,
-            [e.target.id.replace('site-', '')]: e.target.value
+            [fieldKey]: e.target.value
         }));
     };
 
@@ -114,8 +132,14 @@ export default function SettingsIdentity() {
                         </thead>
                         <tbody>
                             <tr className="border-b border-white/5 hover:bg-white/5 transition">
-                                <td className="px-6 py-4 font-bold text-white">{formData.name}</td>
-                                <td className="px-6 py-4">{formData.title}</td>
+                                <td className="px-6 py-4 font-bold text-white">
+                                    <div>{formData.name}</div>
+                                    {formData.name_en && <div className="text-xs text-pharaohGold/80" dir="ltr">{formData.name_en}</div>}
+                                </td>
+                                <td className="px-6 py-4">
+                                    <div>{formData.title}</div>
+                                    {formData.title_en && <div className="text-xs text-pharaohGold/80" dir="ltr">{formData.title_en}</div>}
+                                </td>
                                 <td className="px-6 py-4 truncate max-w-[200px]">{formData.keywords}</td>
                                 <td className="px-6 py-4 text-center">
                                     <span className="text-xs text-pharaohGold bg-pharaohGold/10 px-3 py-1 rounded-full">السجل النشط 🟢</span>

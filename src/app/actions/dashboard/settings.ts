@@ -2,7 +2,7 @@
 
 import { admin, serializeData } from '@/lib/firebase/admin';
 
-export async function updateIdentity(token: string, data: { name: string; title: string; keywords: string; desc: string; favicon?: string }) {
+export async function updateIdentity(token: string, data: any) {
     try {
         const decodedToken = await admin.auth().verifyIdToken(token);
         if (!decodedToken) throw new Error('Unauthorized');
@@ -41,7 +41,6 @@ export async function addAdmin(token: string, email: string) {
         const decodedToken = await admin.auth().verifyIdToken(token);
         if (!decodedToken) throw new Error('Unauthorized');
         
-        // Ensure requester is an admin (optional step, but good for security)
         const db = admin.firestore();
         
         await db.collection('admins').add({
@@ -71,7 +70,7 @@ export async function removeAdmin(token: string, id: string) {
 
 export async function checkIsAdminAction(email: string) {
     if (!email) return false;
-    if (email === 'cubsacademy29@gmail.com') return true; // Master Admin
+    if (email === 'cubsacademy29@gmail.com') return true;
     
     try {
         const db = admin.firestore();

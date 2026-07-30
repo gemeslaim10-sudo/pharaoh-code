@@ -35,10 +35,16 @@ export default async function PortfolioPage() {
   const dbServices = servicesDocs.map(doc => {
       const sData = doc.data();
       return {
-          title: sData.title || '',
-          description: sData.desc || '',
+          title: sData.title || sData.title_ar || '',
+          title_ar: sData.title_ar || sData.title || '',
+          title_en: sData.title_en || '',
+          description: sData.desc || sData.description || sData.desc_ar || '',
+          description_ar: sData.desc_ar || sData.description_ar || sData.desc || '',
+          description_en: sData.desc_en || sData.description_en || '',
           iconSvg: sData.icon || '',
           actionText: sData.btnText || '',
+          actionText_ar: sData.btnText_ar || sData.btnText || '',
+          actionText_en: sData.btnText_en || '',
       };
   });
 
@@ -51,8 +57,12 @@ export default async function PortfolioPage() {
   const dbPhilosophy = philosophyDocs.map(doc => {
       const phData = doc.data();
       return {
-          title: phData.title || '',
-          description: phData.desc || '',
+          title: phData.title || phData.title_ar || '',
+          title_ar: phData.title_ar || phData.title || '',
+          title_en: phData.title_en || '',
+          description: phData.desc || phData.description || phData.desc_ar || '',
+          description_ar: phData.desc_ar || phData.description_ar || phData.desc || '',
+          description_en: phData.desc_en || phData.description_en || '',
           iconSvg: phData.icon || '',
       };
   });
@@ -66,11 +76,15 @@ export default async function PortfolioPage() {
   const dbPortfolio = portfolioDocs.map(doc => {
       const pData = doc.data();
       return {
-          title: pData.title || '',
+          title: pData.title || pData.title_ar || '',
+          title_ar: pData.title_ar || pData.title || '',
+          title_en: pData.title_en || '',
           category: pData.category === 'web' ? 'Web Development' : pData.category === 'app' ? 'App Development' : 'Motion Graphics',
           filterClass: pData.category || 'web',
           image: pData.image || '',
-          description: pData.desc || '',
+          description: pData.desc || pData.description || pData.desc_ar || '',
+          description_ar: pData.desc_ar || pData.description_ar || pData.desc || '',
+          description_en: pData.desc_en || pData.description_en || '',
           link: pData.link || ''
       };
   });
@@ -88,4 +102,3 @@ export default async function PortfolioPage() {
     </>
   );
 }
-

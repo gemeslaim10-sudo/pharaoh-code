@@ -1,11 +1,14 @@
 'use client';
 import { SectionData, SectionItem } from '@/types';
+import { useTranslation } from '@/contexts/LanguageContext';
+import { getDynamicText } from '@/lib/i18nHelper';
 
 export default function AboutHero({ data }: { data: SectionData }) {
+  const { language, direction } = useTranslation();
   if (!data) return null;
 
   return (
-    <section id="about-us" className="relative py-24 bg-[#0A192F] overflow-hidden" dir="rtl">
+    <section id="about-us" className="relative py-24 bg-[#0A192F] overflow-hidden" dir={direction}>
         <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-20 z-0">
             <div className="absolute top-10 right-[10%] animate-pulse duration-[4000ms]">
                 <svg className="w-16 h-16 text-[#C5A16F]/20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -58,34 +61,39 @@ export default function AboutHero({ data }: { data: SectionData }) {
                 <div className="w-full lg:w-1/2 space-y-8">
                     <div className="inline-block border-r-4 border-[#C5A16F] pr-4">
                         <h2 className="text-[#C5A16F] font-bold tracking-[0.3em] uppercase text-xs">
-                            {data.subtitle || "Legacy & Vision"}
+                            {getDynamicText(data, 'subtitle', language) || "Legacy & Vision"}
                         </h2>
                         <h3 className="text-4xl md:text-5xl font-black text-white mt-2 leading-tight">
-                            {data.titlePart1 || "حيث يلتقي ذكاء الكود"} <br /> <span className="text-[#C5A16F]">{data.titlePart2 || "بعظمة الأجداد"}</span>
+                            {getDynamicText(data, 'titlePart1', language) || (language === 'ar' ? "حيث يلتقي ذكاء الكود" : "Where Code Mastery Meets")} <br /> <span className="text-[#C5A16F]">{getDynamicText(data, 'titlePart2', language) || (language === 'ar' ? "بعظمة الأجداد" : "Legacy Engineering")}</span>
                         </h3>
                     </div>
 
                     <p className="text-gray-400 text-lg leading-relaxed">
-                        {data.description || "في **Pharaoh Code**، نحن لا نكتفي ببرمجة تطبيقات؛ نحن نشيّد صروحاً رقمية. بدأت رحلتنا من شغف عميق بتغيير الخارطة التقنية، لنكون الجسر الذي يعبر به عملاؤنا من مجرد \"التواجد الرقمي\" إلى \"السيادة الرقمية\"."}
+                        {getDynamicText(data, 'description', language) || (language === 'ar' ? "في Pharaoh Code، نحن لا نكتفي ببرمجة تطبيقات؛ نحن نشيّد صروحاً رقمية. بدأت رحلتنا من شغف عميق بتغيير الخارطة التقنية، لنكون الجسر الذي يعبر به عملاؤنا من مجرد التواجد الرقمي إلى السيادة الرقمية." : "At Pharaoh Code, we don't just write apps; we engineer digital empires. Our journey began with a deep passion for technological transformation, bridging our clients from mere digital presence to total market dominance.")}
                     </p>
 
                     <div className="grid grid-cols-2 gap-8 pt-4">
-                        {data.features?.map((feature: SectionItem, index: number) => (
-                            <div key={index} className="flex items-start gap-4 group/item">
-                                <div className="w-10 h-10 bg-[#C5A16F]/10 rounded-lg flex-shrink-0 flex items-center justify-center group-hover/item:bg-[#C5A16F] transition-colors duration-300">
-                                    <div className="text-[#C5A16F] group-hover/item:text-[#0A192F]" dangerouslySetInnerHTML={{ __html: feature.iconSvg }} />
+                        {data.features?.map((feature: SectionItem, index: number) => {
+                            const featTitle = getDynamicText(feature, 'title', language) || feature.title;
+                            const featDesc = getDynamicText(feature, 'description', language) || feature.description;
+
+                            return (
+                                <div key={index} className="flex items-start gap-4 group/item">
+                                    <div className="w-10 h-10 bg-[#C5A16F]/10 rounded-lg flex-shrink-0 flex items-center justify-center group-hover/item:bg-[#C5A16F] transition-colors duration-300">
+                                        <div className="text-[#C5A16F] group-hover/item:text-[#0A192F]" dangerouslySetInnerHTML={{ __html: feature.iconSvg }} />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-white font-bold">{featTitle}</h4>
+                                        <p className="text-gray-500 text-sm">{featDesc}</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h4 className="text-white font-bold">{feature.title}</h4>
-                                    <p className="text-gray-500 text-sm">{feature.description}</p>
-                                </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
 
                     <div className="pt-6">
                         <a href={data.buttonLink || "#contact"} className="inline-flex items-center gap-3 bg-[#C5A16F] text-[#0A192F] px-8 py-4 rounded-xl font-black hover:bg-white transition-all duration-500 group/btn shadow-[0_0_20px_rgba(197,161,111,0.3)]">
-                            {data.buttonText || "استكشف عالمنا"}
+                            {getDynamicText(data, 'buttonText', language) || (language === 'ar' ? "استكشف عالمنا" : "Explore Our World")}
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transform group-hover/btn:translate-x-[-5px] transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                             </svg>

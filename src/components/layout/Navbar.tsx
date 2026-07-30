@@ -40,15 +40,15 @@ export default function Navbar({ siteName = "PHARAOH CODE" }: { siteName?: strin
             {isAdmin && (
               <Link href="/dashboard" className="bg-[#112240] text-white border border-[#C5A16F]/30 px-4 py-2 rounded-lg font-bold hover:bg-[#C5A16F] hover:text-[#0A192F] transition-all flex items-center gap-2 mr-2">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-                لوحة التحكم
+                {t("nav.dashboard")}
               </Link>
             )}
 
             {user ? (
-               <button onClick={logout} className="text-red-400 hover:text-red-300 transition text-sm mr-2 font-bold">تسجيل الخروج</button>
+               <button onClick={logout} className="text-red-400 hover:text-red-300 transition text-sm mr-2 font-bold">{t("nav.logout")}</button>
             ) : (
                <Link href="/login" className="border-2 border-white/20 text-white hover:border-[#C5A16F] hover:text-[#C5A16F] px-4 py-2 rounded-lg font-bold transition-all text-sm mr-2">
-                 دخول الإدارة
+                 {t("nav.login")}
                </Link>
             )}
           </div>
@@ -80,25 +80,25 @@ export default function Navbar({ siteName = "PHARAOH CODE" }: { siteName?: strin
         </div>
 
         <div className="flex flex-col p-8 gap-8 text-white text-xl font-bold">
-          <Link href="/" className="m-link hover:text-pharaohGold transition-colors">الرئيسية</Link>
-          <Link href="/about" className="m-link hover:text-pharaohGold transition-colors">من نحن</Link>
-          <Link href="/services" className="m-link hover:text-pharaohGold transition-colors">الخدمات</Link>
-          <Link href="/portfolio" className="m-link hover:text-pharaohGold transition-colors">الأعمال</Link>
-          <Link href="/team" className="m-link hover:text-pharaohGold transition-colors">فريق العمل</Link>
-          <Link href="/clients" className="m-link hover:text-pharaohGold transition-colors">عملائنا</Link>
-          <Link href="/contact" className="m-link hover:text-pharaohGold transition-colors">تواصل معنا</Link>
+          <Link href="/" className="m-link hover:text-pharaohGold transition-colors">{t("nav.home")}</Link>
+          <Link href="/about" className="m-link hover:text-pharaohGold transition-colors">{t("nav.about")}</Link>
+          <Link href="/services" className="m-link hover:text-pharaohGold transition-colors">{t("nav.services")}</Link>
+          <Link href="/portfolio" className="m-link hover:text-pharaohGold transition-colors">{t("nav.portfolio")}</Link>
+          <Link href="/team" className="m-link hover:text-pharaohGold transition-colors">{t("nav.team")}</Link>
+          <Link href="/clients" className="m-link hover:text-pharaohGold transition-colors">{t("nav.clients")}</Link>
+          <Link href="/contact" className="m-link hover:text-pharaohGold transition-colors">{t("nav.contact")}</Link>
 
           {isAdmin && (
             <Link href="/dashboard" className="m-link bg-[#112240] border border-[#C5A16F] text-white px-6 py-4 rounded-xl text-center hover:bg-[#C5A16F] hover:text-[#0A192F] transition-colors">
-              لوحة التحكم
+              {t("nav.dashboard")}
             </Link>
           )}
 
           {user ? (
-            <button onClick={() => { logout(); document.getElementById('mobile-nav')?.classList.remove('active'); }} className="text-red-400 text-center hover:text-red-300 transition-colors">تسجيل الخروج</button>
+            <button onClick={() => { logout(); document.getElementById('mobile-nav')?.classList.remove('active'); }} className="text-red-400 text-center hover:text-red-300 transition-colors">{t("nav.logout")}</button>
           ) : (
             <Link href="/start-project" className="m-link mt-4 bg-pharaohGold text-pharaohNavy px-6 py-4 rounded-xl font-black text-center shadow-[0_10px_20px_rgba(197,161,111,0.2)] hover:bg-white transition-all">
-              ابدأ مشروعك
+              {t("nav.startProject")}
             </Link>
           )}
         </div>

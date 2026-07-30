@@ -1,8 +1,12 @@
 'use client';
 
+import { useTranslation } from '@/contexts/LanguageContext';
+
 export default function TeamProcess() {
+  const { language, direction } = useTranslation();
+
   return (
-    <section id="our-process" className="py-24 bg-[#0A192F] relative overflow-hidden text-right" dir="rtl">
+    <section id="our-process" className="py-24 bg-[#0A192F] relative overflow-hidden" dir={direction}>
         <div className="absolute inset-0 opacity-10">
             <svg width="100%" height="100%" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="400" cy="400" r="300" stroke="#C5A16F" strokeWidth="0.5" fill="none" />
@@ -14,7 +18,11 @@ export default function TeamProcess() {
             <div className="text-center mb-20">
                 <h2 className="text-[#C5A16F] font-bold tracking-[0.3em] uppercase text-xs mb-4">How We Master</h2>
                 <h3 className="text-4xl md:text-5xl font-black text-white leading-tight">
-                    عقلية <span className="text-[#C5A16F]">الفريق الواحد</span> <br /> في بناء صرحك الرقمي
+                    {language === 'ar' ? (
+                        <>عقلية <span className="text-[#C5A16F]">الفريق الواحد</span> <br /> في بناء صرحك الرقمي</>
+                    ) : (
+                        <>One Team <span className="text-[#C5A16F]">Mindset</span> <br /> Building Your Digital Empire</>
+                    )}
                 </h3>
             </div>
 
@@ -27,9 +35,13 @@ export default function TeamProcess() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                             </svg>
                         </div>
-                        <h4 className="text-white text-2xl font-bold mb-4">اندماج العقول (Brain-Sync)</h4>
+                        <h4 className="text-white text-2xl font-bold mb-4">
+                            {language === 'ar' ? 'اندماج العقول (Brain-Sync)' : 'Brain-Sync Fusion'}
+                        </h4>
                         <p className="text-gray-400 leading-relaxed">
-                            هنا لا نجلس كشركة وعميل، بل كفريق واحد. نجتمع بكل خبراتنا (مصممين، مطورين، ومحللين) لنفهم رؤيتك ونحولها إلى استراتيجية تقنية متكاملة.
+                            {language === 'ar' 
+                                ? 'هنا لا نجلس كشركة وعميل، بل كفريق واحد. نجتمع بكل خبراتنا (مصممين، مطورين، ومحللين) لنفهم رؤيتك ونحولها إلى استراتيجية تقنية متكاملة.'
+                                : 'We collaborate as a unified team of designers, engineers, and analysts to transform your vision into an engineering strategy.'}
                         </p>
                     </div>
                 </div>
@@ -42,9 +54,13 @@ export default function TeamProcess() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                             </svg>
                         </div>
-                        <h4 className="text-white text-2xl font-bold mb-4">النحت الرقمي (Precision Coding)</h4>
+                        <h4 className="text-white text-2xl font-bold mb-4">
+                            {language === 'ar' ? 'النحت الرقمي (Precision Coding)' : 'Precision Coding'}
+                        </h4>
                         <p className="text-gray-400 leading-relaxed">
-                            فريق المطورين لدينا يعملون بتناغم "خلية النحل"؛ حيث نكتب أكواداً نظيفة وقابلة للتوسع، مع مراجعة جماعية لكل سطر برمجي لضمان الصفر أخطاء.
+                            {language === 'ar'
+                                ? 'فريق المطورين لدينا يعملون بتناغم "خلية النحل"؛ حيث نكتب أكواداً نظيفة وقابلة للتوسع، مع مراجعة جماعية لكل سطر برمجي لضمان الصفر أخطاء.'
+                                : 'Our engineers work in high synergy, sculpting clean, scalable code with mandatory peer reviews guaranteeing zero bugs.'}
                         </p>
                     </div>
                 </div>
@@ -57,9 +73,13 @@ export default function TeamProcess() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                             </svg>
                         </div>
-                        <h4 className="text-white text-2xl font-bold mb-4">إطلاق الصرح (The Grand Reveal)</h4>
+                        <h4 className="text-white text-2xl font-bold mb-4">
+                            {language === 'ar' ? 'إطلاق الصرح (The Grand Reveal)' : 'The Grand Reveal'}
+                        </h4>
                         <p className="text-gray-400 leading-relaxed">
-                            نحن لا نسلمك ملفات ونرحل، بل نطلق المشروع مع دعم فني مستمر وتطوير دائم، كأننا شركاؤك في النجاح ولسنا مجرد منفذين.
+                            {language === 'ar'
+                                ? 'نحن لا نسلمك ملفات ونرحل، بل نطلق المشروع مع دعم فني مستمر وتطوير دائم، كأننا شركاؤك في النجاح ولسنا مجرد منفذين.'
+                                : 'We launch your system with ongoing technical support and continuous updates, remaining your long-term success partners.'}
                         </p>
                     </div>
                 </div>

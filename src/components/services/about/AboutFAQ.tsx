@@ -1,11 +1,14 @@
 'use client';
 import { SectionData, SectionItem } from '@/types';
+import { useTranslation } from '@/contexts/LanguageContext';
+import { getDynamicText } from '@/lib/i18nHelper';
 
 export default function AboutFAQ({ data }: { data: SectionData }) {
+  const { language, direction } = useTranslation();
   if (!data) return null;
 
   return (
-    <section id="faq" className="relative py-6 bg-[#0A192F] overflow-hidden" dir="rtl">
+    <section id="faq" className="relative py-16 bg-[#0A192F] overflow-hidden" dir={direction}>
         <div className="absolute inset-0 pointer-events-none">
             <div className="absolute top-20 right-[5%] text-[#C5A16F]/10 text-9xl font-black select-none opacity-20">?</div>
             <div className="absolute bottom-20 left-[5%] text-[#C5A16F]/10 text-9xl font-black select-none opacity-20">?</div>
@@ -20,16 +23,19 @@ export default function AboutFAQ({ data }: { data: SectionData }) {
         <div className="max-w-5xl mx-auto px-6 relative z-10">
             <div className="text-center mb-20">
                 <div className="inline-block px-4 py-1 border border-[#C5A16F]/30 rounded-full text-[#C5A16F] text-xs font-bold tracking-[0.3em] mb-4 uppercase">
-                    {data.subtitle || "Knowledge Base"}
+                    {getDynamicText(data, 'subtitle', language) || "Knowledge Base"}
                 </div>
                 <h2 className="text-4xl md:text-6xl font-black text-white">
-                    {data.titlePart1 || "لديك أسئلة؟"} <br /> <span className="text-[#C5A16F]">{data.titlePart2 || "لدينا حلول أسطورية"}</span>
+                    {getDynamicText(data, 'titlePart1', language) || (language === 'ar' ? "لديك أسئلة؟" : "Have Questions?")} <br /> <span className="text-[#C5A16F]">{getDynamicText(data, 'titlePart2', language) || (language === 'ar' ? "لدينا حلول أسطورية" : "We Have Engineering Answers")}</span>
                 </h2>
             </div>
 
             <div className="space-y-6">
                 {data.faqs?.map((faq: SectionItem, index: number) => {
                     const numStr = String(index + 1).padStart(2, '0');
+                    const questionText = getDynamicText(faq, 'question', language) || faq.question;
+                    const answerText = getDynamicText(faq, 'answer', language) || faq.answer;
+
                     return (
                         <div key={index} className="group border border-white/5 bg-[#112240]/50 backdrop-blur-md rounded-3xl overflow-hidden transition-all duration-500 hover:border-[#C5A16F]/50 shadow-xl">
                             <details className="appearance-none group">
@@ -39,7 +45,7 @@ export default function AboutFAQ({ data }: { data: SectionData }) {
                                             {numStr}
                                         </span>
                                         <h3 className="text-white text-xl font-bold group-hover:text-[#C5A16F] transition-colors">
-                                            {faq.question}
+                                            {questionText}
                                         </h3>
                                     </div>
                                     <div className="w-8 h-8 rounded-full border border-[#C5A16F]/30 flex items-center justify-center group-open:rotate-180 transition-transform duration-500">
@@ -49,7 +55,7 @@ export default function AboutFAQ({ data }: { data: SectionData }) {
                                     </div>
                                 </summary>
                                 <div className="px-24 pb-8 text-gray-400 leading-relaxed text-lg">
-                                    {faq.answer}
+                                    {answerText}
                                 </div>
                             </details>
                         </div>

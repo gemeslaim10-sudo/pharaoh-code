@@ -19,14 +19,24 @@ export default async function ServicesPage() {
     const dbServices = servicesSnap.docs.map(doc => {
       const sData = doc.data();
       return {
-        title: sData.title || '',
-        description: sData.desc || '',
+        title: sData.title || sData.title_ar || '',
+        title_ar: sData.title_ar || sData.title || '',
+        title_en: sData.title_en || '',
+        description: sData.desc || sData.description || sData.desc_ar || '',
+        description_ar: sData.desc_ar || sData.description_ar || sData.desc || '',
+        description_en: sData.desc_en || sData.description_en || '',
         image: sData.image || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600',
         badgeTopRight: sData.type || '',
+        badgeTopRight_ar: sData.type_ar || sData.type || '',
+        badgeTopRight_en: sData.type_en || sData.type || '',
         badgeTopLeft: sData.badge || '',
-        metaKey: sData.price ? "السعر يبدأ من" : "",
+        badgeTopLeft_ar: sData.badge_ar || sData.badge || '',
+        badgeTopLeft_en: sData.badge_en || sData.badge || '',
+        metaKey_ar: sData.price ? "السعر يبدأ من" : "",
+        metaKey_en: sData.price ? "Starting from" : "",
         metaValue: sData.price || "",
-        linkText: sData.detailPageUrl ? "استكشف الخدمة" : "اطلب الخدمة",
+        linkText_ar: sData.detailPageUrl ? "استكشف الخدمة" : "اطلب الخدمة",
+        linkText_en: sData.detailPageUrl ? "Explore Service" : "Order Service",
         linkUrl: sData.detailPageUrl || "/start-project"
       };
     });

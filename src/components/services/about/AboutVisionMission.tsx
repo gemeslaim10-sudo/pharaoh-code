@@ -1,11 +1,14 @@
 'use client';
 import { SectionData } from '@/types';
+import { useTranslation } from '@/contexts/LanguageContext';
+import { getDynamicText } from '@/lib/i18nHelper';
 
 export default function AboutVisionMission({ data }: { data: SectionData }) {
+  const { language, direction } = useTranslation();
   if (!data) return null;
 
   return (
-    <section id="vision-mission" className="relative py-32 bg-[#0A192F] overflow-hidden" dir="rtl">
+    <section id="vision-mission" className="relative py-32 bg-[#0A192F] overflow-hidden" dir={direction}>
         <div className="absolute inset-0 pointer-events-none opacity-10">
             <div className="absolute top-1/4 left-10 text-7xl rotate-12 floating-icon">𓂀</div>
             <div className="absolute bottom-1/4 right-10 text-5xl -rotate-12 opacity-20">𓋹</div>
@@ -26,10 +29,12 @@ export default function AboutVisionMission({ data }: { data: SectionData }) {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                 </svg>
                             </div>
-                            <h3 className="text-3xl font-black text-white">{data.visionTitle || "رؤيتنا"}</h3>
+                            <h3 className="text-3xl font-black text-white">
+                                {getDynamicText(data, 'visionTitle', language) || (language === 'ar' ? "رؤيتنا" : "Our Vision")}
+                            </h3>
                         </div>
                         <p className="text-gray-400 text-lg leading-relaxed italic">
-                            "{data.visionText || "أن نعيد كتابة تاريخ التكنولوجيا بأيادٍ مصرية، لنحول كل فكرة معقدة إلى صرح رقمي شامخ يناطح السحاب ويخلد في ذاكرة المستخدمين."}"
+                            "{getDynamicText(data, 'visionText', language) || (language === 'ar' ? "أن نعيد كتابة تاريخ التكنولوجيا بأيادٍ مصرية، لنحول كل فكرة معقدة إلى صرح رقمي شامخ يناطح السحاب ويخلد في ذاكرة المستخدمين." : "To rewrite technology history through engineering mastery, transforming complex ideas into monumental digital empires that dominate the market.")}"
                         </p>
                     </div>
                 </div>
@@ -44,10 +49,12 @@ export default function AboutVisionMission({ data }: { data: SectionData }) {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
                                 </svg>
                             </div>
-                            <h3 className="text-3xl font-black text-white">{data.missionTitle || "رسالتنا"}</h3>
+                            <h3 className="text-3xl font-black text-white">
+                                {getDynamicText(data, 'missionTitle', language) || (language === 'ar' ? "رسالتنا" : "Our Mission")}
+                            </h3>
                         </div>
                         <p className="text-gray-400 text-lg leading-relaxed italic">
-                            "{data.missionText || "تمكين طموحات عملائنا عبر تقديم حلول برمجية ذكية، آمنة، وفائقة السرعة، مع الالتزام بأعلى معايير الجودة العالمية في كل سطر كود نكتبه."}"
+                            "{getDynamicText(data, 'missionText', language) || (language === 'ar' ? "تمكين طموحات عملائنا عبر تقديم حلول برمجية ذكية، آمنة، وفائقة السرعة، مع الالتزام بأعلى معايير الجودة العالمية في كل سطر كود نكتبه." : "Empowering our clients' ambitions through intelligent, ultra-secure, high-speed software solutions built to global engineering benchmarks.")}"
                         </p>
                     </div>
                 </div>

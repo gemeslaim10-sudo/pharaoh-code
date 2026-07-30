@@ -11,10 +11,12 @@ interface Props {
 export default function CreativityProjectForm({ onSuccess }: Props) {
     const [loading, setLoading] = useState(false);
     const [title, setTitle] = useState('');
+    const [titleEn, setTitleEn] = useState('');
     const [category, setCategory] = useState('web');
     const [imageUrl, setImageUrl] = useState('');
     const [link, setLink] = useState('');
     const [desc, setDesc] = useState('');
+    const [descEn, setDescEn] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -26,17 +28,26 @@ export default function CreativityProjectForm({ onSuccess }: Props) {
             
             await addCreativityItem(token, 'portfolio', {
                 title,
+                title_ar: title,
+                title_en: titleEn,
                 category,
                 image: imageUrl,
                 desc,
+                desc_ar: desc,
+                desc_en: descEn,
+                description: desc,
+                description_ar: desc,
+                description_en: descEn,
                 link
             });
             
             setTitle('');
+            setTitleEn('');
             setCategory('web');
             setImageUrl('');
             setLink('');
             setDesc('');
+            setDescEn('');
             onSuccess();
         } catch (error) {
             console.error(error);
@@ -50,37 +61,40 @@ export default function CreativityProjectForm({ onSuccess }: Props) {
         <form onSubmit={handleSubmit} className="db-form-content bg-pharaohCard border border-white/5 rounded-3xl p-6 lg:p-10 shadow-2xl relative">
             <div className="absolute top-0 left-10 transform -translate-y-1/2 bg-pharaohGold text-pharaohNavy font-black text-[10px] uppercase tracking-[3px] px-4 py-1.5 rounded-full shadow-lg">PORTFOLIO DEPLOYMENT</div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-6">
-                    <div>
-                        <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">عنوان المشروع الملكي</label>
-                        <input type="text" required value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition" placeholder="مثال: منصة حورس للتجارة الإلكترونية" />
-                    </div>
-                    <div>
-                        <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">تصنيف العمل الرقمي</label>
-                        <select value={category} onChange={e => setCategory(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-pharaohGold transition">
-                            <option value="web">تطوير الويب (Web Development)</option>
-                            <option value="app">تطبيقات الهواتف (App Development)</option>
-                            <option value="motion">موشن جرافيك وتصميم (Graphics)</option>
-                        </select>
-                    </div>
+                <div>
+                    <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">عنوان المشروع (بالعربية)</label>
+                    <input type="text" required value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition" placeholder="مثال: منصة حورس للتجارة الإلكترونية" />
+                </div>
+                <div>
+                    <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">عنوان المشروع (بالإنجليزية - Title EN)</label>
+                    <input type="text" value={titleEn} onChange={e => setTitleEn(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition" placeholder="e.g. Horus E-Commerce Platform" dir="ltr" />
+                </div>
+
+                <div>
+                    <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">تصنيف العمل الرقمي</label>
+                    <select value={category} onChange={e => setCategory(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-pharaohGold transition">
+                        <option value="web">تطوير الويب (Web Development)</option>
+                        <option value="app">تطبيقات الهواتف (App Development)</option>
+                        <option value="motion">موشن جرافيك وتصميم (Graphics)</option>
+                    </select>
                 </div>
                 <div>
                     <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">رابط غلاف المشروع (Image URL)</label>
-                    <div className="border border-white/10 hover:border-pharaohGold/40 rounded-2xl p-6 text-center bg-[#0A192F]/50 transition relative flex flex-col justify-center items-center h-[142px]">
-                        <input type="url" required value={imageUrl} onChange={e => setImageUrl(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition" placeholder="https://example.com/image.jpg" />
-                        <p className="text-[10px] text-gray-500 mt-3">قم بإضافة رابط مباشر للصورة بدلاً من الرفع المباشر.</p>
-                    </div>
+                    <input type="url" required value={imageUrl} onChange={e => setImageUrl(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition" placeholder="https://example.com/image.jpg" />
+                </div>
+
+                <div className="md:col-span-2">
+                    <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">رابط المشروع الحي (Project Link - اختياري)</label>
+                    <input type="url" value={link} onChange={e => setLink(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition" placeholder="https://my-project.com" dir="ltr" />
+                </div>
+
+                <div>
+                    <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">شرح المشروع (بالعربية)</label>
+                    <textarea rows={3} required value={desc} onChange={e => setDesc(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition resize-none" placeholder="اكتب هنا التفاصيل المعمارية البرمجية للمشروع المنجز..."></textarea>
                 </div>
                 <div>
-                    <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">رابط المشروع الحي (Project Link)</label>
-                    <div className="border border-white/10 hover:border-pharaohGold/40 rounded-2xl p-6 text-center bg-[#0A192F]/50 transition relative flex flex-col justify-center items-center h-[142px]">
-                        <input type="url" value={link} onChange={e => setLink(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition" placeholder="https://my-project.com" />
-                        <p className="text-[10px] text-gray-500 mt-3">رابط اختياري لزيارة المشروع الفعلي.</p>
-                    </div>
-                </div>
-                <div className="md:col-span-2">
-                    <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">شرح تفصيلي للمشروع وسياق بنائه</label>
-                    <textarea rows={4} required value={desc} onChange={e => setDesc(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition resize-none" placeholder="اكتب هنا التفاصيل المعمارية البرمجية للمشروع المنجز..."></textarea>
+                    <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">شرح المشروع (بالإنجليزية - Description EN)</label>
+                    <textarea rows={3} value={descEn} onChange={e => setDescEn(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition resize-none" placeholder="Write software architectural details in English..." dir="ltr"></textarea>
                 </div>
             </div>
             <div className="mt-8 flex justify-end">

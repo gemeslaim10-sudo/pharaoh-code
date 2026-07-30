@@ -11,8 +11,10 @@ interface Props {
 export default function CreativityThinkForm({ onSuccess }: Props) {
     const [loading, setLoading] = useState(false);
     const [title, setTitle] = useState('');
+    const [titleEn, setTitleEn] = useState('');
     const [icon, setIcon] = useState('');
     const [desc, setDesc] = useState('');
+    const [descEn, setDescEn] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -24,13 +26,22 @@ export default function CreativityThinkForm({ onSuccess }: Props) {
             
             await addCreativityItem(token, 'philosophy', {
                 title,
+                title_ar: title,
+                title_en: titleEn,
                 icon,
-                desc
+                desc,
+                desc_ar: desc,
+                desc_en: descEn,
+                description: desc,
+                description_ar: desc,
+                description_en: descEn
             });
             
             setTitle('');
+            setTitleEn('');
             setIcon('');
             setDesc('');
+            setDescEn('');
             onSuccess();
         } catch (error) {
             console.error(error);
@@ -45,16 +56,26 @@ export default function CreativityThinkForm({ onSuccess }: Props) {
             <div className="absolute top-0 left-10 transform -translate-y-1/2 bg-pharaohGold text-pharaohNavy font-black text-[10px] uppercase tracking-[3px] px-4 py-1.5 rounded-full shadow-lg">PHILOSOPHY AND CORE VALUE</div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                    <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">عنوان الفلسفة الرشيدة</label>
+                    <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">عنوان الفلسفة (بالعربية)</label>
                     <input type="text" required value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition" placeholder="مثال: الشفرة النظيفة الفخمة" />
                 </div>
                 <div>
+                    <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">عنوان الفلسفة (بالإنجليزية - Title EN)</label>
+                    <input type="text" value={titleEn} onChange={e => setTitleEn(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition" placeholder="e.g. Luxurious Clean Code" dir="ltr" />
+                </div>
+
+                <div className="md:col-span-2">
                     <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">كود أيقونة الـ SVG البرمجية</label>
                     <input type="text" required value={icon} onChange={e => setIcon(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition font-mono text-left" placeholder="<svg />...</svg>" />
                 </div>
-                <div className="md:col-span-2">
-                    <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">مضمون الفلسفة وجوهرها</label>
+
+                <div>
+                    <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">مضمون الفلسفة (بالعربية)</label>
                     <textarea rows={4} required value={desc} onChange={e => setDesc(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition resize-none" placeholder="اشرح طريقتكم في تحقيق هذه الميزة البرمجية وكيف تبنونها..."></textarea>
+                </div>
+                <div>
+                    <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">مضمون الفلسفة (بالإنجليزية - Description EN)</label>
+                    <textarea rows={4} value={descEn} onChange={e => setDescEn(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition resize-none" placeholder="Explain your method to build this software feature in English..." dir="ltr"></textarea>
                 </div>
             </div>
             <div className="mt-8 flex justify-end">

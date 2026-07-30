@@ -78,7 +78,8 @@ export default function CreativityRecords({ activeTab, refreshKey }: Props) {
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                             </button>
                             
-                            <h4 className="text-white font-bold text-lg mb-2 pl-10 truncate">{record.title}</h4>
+                            <h4 className="text-white font-bold text-lg mb-1 pl-10 truncate">{record.title || record.title_ar}</h4>
+                            {record.title_en && <p className="text-pharaohGold/80 text-xs mb-2 italic" dir="ltr">{record.title_en}</p>}
                             
                             {activeTab === 'portfolio' && (
                                 <div className="space-y-3">
@@ -88,7 +89,7 @@ export default function CreativityRecords({ activeTab, refreshKey }: Props) {
                                             <a href={record.link} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 bg-blue-400/10 px-3 py-1 rounded-full hover:bg-blue-400/20 transition-colors">عرض الرابط</a>
                                         )}
                                     </div>
-                                    <p className="text-gray-400 text-xs line-clamp-2">{record.desc}</p>
+                                    <p className="text-gray-400 text-xs line-clamp-2">{record.desc || record.description || record.desc_ar}</p>
                                     {record.image && <img src={record.image} alt={record.title} className="w-full h-32 object-cover rounded-xl mt-3" />}
                                 </div>
                             )}
@@ -96,14 +97,14 @@ export default function CreativityRecords({ activeTab, refreshKey }: Props) {
                             {activeTab === 'philosophy' && (
                                 <div className="space-y-3">
                                     <div className="text-pharaohGold w-10 h-10" dangerouslySetInnerHTML={{ __html: record.icon }} />
-                                    <p className="text-gray-400 text-xs line-clamp-3">{record.desc}</p>
+                                    <p className="text-gray-400 text-xs line-clamp-3">{record.desc || record.description || record.desc_ar}</p>
                                 </div>
                             )}
 
                             {activeTab === 'services' && (
                                 <div className="space-y-3">
                                     <div className="text-pharaohGold w-10 h-10" dangerouslySetInnerHTML={{ __html: record.icon }} />
-                                    <p className="text-gray-400 text-xs line-clamp-3">{record.desc}</p>
+                                    <p className="text-gray-400 text-xs line-clamp-3">{record.desc || record.description || record.desc_ar}</p>
                                     <span className="text-xs text-blue-400 bg-blue-400/10 px-3 py-1 rounded-full mt-2 inline-block">{record.btnText}</span>
                                 </div>
                             )}

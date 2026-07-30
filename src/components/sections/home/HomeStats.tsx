@@ -1,7 +1,9 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
 import { SectionData, SectionItem } from '@/types';
+import { useTranslation } from '@/contexts/LanguageContext';
+import { getDynamicText } from '@/lib/i18nHelper';
+import StatCounter from './StatCounter';
 
 function stripSvgColors(svg: string): string {
   if (!svg) return '';
@@ -13,76 +15,6 @@ function stripSvgColors(svg: string): string {
     .replace(/stroke:#[a-fA-F0-9]{3,6}/g, 'stroke:currentColor')
     .replace(/fill:#[a-fA-F0-9]{3,6}/g, 'fill:currentColor');
 }
-
-// Helper React Counter component for animating numbers when visible
-function Counter({ targetValue, duration = 2000 }: { targetValue: number; duration?: number }) {
-  const [count, setCount] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const elementRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry && entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
-    }
-
-    return () => {
-      if (elementRef.current) {
-        observer.unobserve(elementRef.current);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!isVisible) return;
-
-    let start = 0;
-    const end = targetValue;
-    if (start === end) return;
-
-    const totalDuration = duration;
-    const startTime = performance.now();
-    let animationFrameId: number;
-
-    const updateCount = (currentTime: number) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / totalDuration, 1);
-      
-      // Easing: easeOutQuad
-      const easedProgress = progress * (2 - progress);
-      
-      setCount(Math.floor(easedProgress * end));
-
-      if (progress < 1) {
-        animationFrameId = requestAnimationFrame(updateCount);
-      } else {
-        setCount(end);
-      }
-    };
-
-    animationFrameId = requestAnimationFrame(updateCount);
-
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, [isVisible, targetValue, duration]);
-
-  return <span ref={elementRef}>{count}</span>;
-}
-
-import { useTranslation } from '@/contexts/LanguageContext';
-import { getDynamicText } from '@/lib/i18nHelper';
 
 export default function HomeStats({ data }: { data?: SectionData }) {
   const { t, language } = useTranslation();
@@ -137,13 +69,13 @@ export default function HomeStats({ data }: { data?: SectionData }) {
                                     <div className="flex items-center justify-center gap-1 mb-2">
                                         {item.prefix && <span className="text-[#C5A16F] text-2xl font-bold">{item.prefix}</span>}
                                         <span className="text-4xl md:text-5xl font-black text-white">
-                                            <Counter targetValue={parseInt(item.value || '0', 10) || 0} />
+                                            <StatCounter targetValue={parseInt(item.value || '0', 10) || 0} />
                                         </span>
                                         {item.suffix && <span className="text-[#C5A16F] text-2xl font-bold">{item.suffix}</span>}
                                     </div>
                                 ) : (
                                     <span className="text-4xl md:text-5xl font-black text-white block mb-2">
-                                        <Counter targetValue={parseInt(item.value || '0', 10) || 0} />
+                                        <StatCounter targetValue={parseInt(item.value || '0', 10) || 0} />
                                     </span>
                                 )}
                                 <p className="text-[#C5A16F] font-bold text-sm tracking-widest">{getDynamicText(item, 'title', language) || item.title}</p>

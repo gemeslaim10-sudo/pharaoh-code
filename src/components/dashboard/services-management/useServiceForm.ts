@@ -4,8 +4,6 @@ import { useState, useEffect } from 'react';
 import { auth } from '@/lib/firebase/config';
 import { addService, updateService } from '@/app/actions/dashboard';
 import { uploadImage } from '@/app/actions/dashboard/upload';
-import { getAvailablePages } from '@/app/actions/dashboard/pages';
-
 export function useServiceForm(editingService: any, setEditingService: (service: any) => void, onSuccess: () => void) {
     const [loading, setLoading] = useState(false);
     const [title, setTitle] = useState('');
@@ -18,15 +16,52 @@ export function useServiceForm(editingService: any, setEditingService: (service:
     const [svg, setSvg] = useState('');
     const [desc, setDesc] = useState('');
     const [descEn, setDescEn] = useState('');
-    const [detailPageUrl, setDetailPageUrl] = useState('');
     
     const [imageFile, setImageFile] = useState<File | null>(null);
     const [imageUrl, setImageUrl] = useState('');
-    const [availablePages, setAvailablePages] = useState<{ value: string; label: string }[]>([]);
 
-    useEffect(() => {
-        getAvailablePages().then(setAvailablePages);
-    }, []);
+    // Extended Template Fields for Service Detail Page
+    const [heroSubtitleAr, setHeroSubtitleAr] = useState('');
+    const [heroSubtitleEn, setHeroSubtitleEn] = useState('');
+    const [heroTitle1Ar, setHeroTitle1Ar] = useState('');
+    const [heroTitle1En, setHeroTitle1En] = useState('');
+    const [heroTitle2Ar, setHeroTitle2Ar] = useState('');
+    const [heroTitle2En, setHeroTitle2En] = useState('');
+    const [heroDescAr, setHeroDescAr] = useState('');
+    const [heroDescEn, setHeroDescEn] = useState('');
+    const [heroBtnAr, setHeroBtnAr] = useState('');
+    const [heroBtnEn, setHeroBtnEn] = useState('');
+
+    const [overviewSubtitleAr, setOverviewSubtitleAr] = useState('');
+    const [overviewSubtitleEn, setOverviewSubtitleEn] = useState('');
+    const [overviewTitleAr, setOverviewTitleAr] = useState('');
+    const [overviewTitleEn, setOverviewTitleEn] = useState('');
+    const [overviewDescAr, setOverviewDescAr] = useState('');
+    const [overviewDescEn, setOverviewDescEn] = useState('');
+
+    const [packagesTitleAr, setPackagesTitleAr] = useState('');
+    const [packagesTitleEn, setPackagesTitleEn] = useState('');
+
+    const [features, setFeatures] = useState<any[]>([
+        { title_ar: '', title_en: '', desc_ar: '', desc_en: '' },
+        { title_ar: '', title_en: '', desc_ar: '', desc_en: '' },
+        { title_ar: '', title_en: '', desc_ar: '', desc_en: '' }
+    ]);
+
+    const [packages, setPackages] = useState<any[]>([
+        { badge_ar: '', badge_en: '', title_ar: '', title_en: '', price: '', period_ar: '', period_en: '', desc_ar: '', desc_en: '', isPopular: false },
+        { badge_ar: '', badge_en: '', title_ar: '', title_en: '', price: '', period_ar: '', period_en: '', desc_ar: '', desc_en: '', isPopular: true },
+        { badge_ar: '', badge_en: '', title_ar: '', title_en: '', price: '', period_ar: '', period_en: '', desc_ar: '', desc_en: '', isPopular: false }
+    ]);
+
+    const [roadmapSteps, setRoadmapSteps] = useState<any[]>([
+        { number: '01', title_ar: '', title_en: '', desc_ar: '', desc_en: '' },
+        { number: '02', title_ar: '', title_en: '', desc_ar: '', desc_en: '' },
+        { number: '03', title_ar: '', title_en: '', desc_ar: '', desc_en: '' },
+        { number: '04', title_ar: '', title_en: '', desc_ar: '', desc_en: '' }
+    ]);
+
+
 
     useEffect(() => {
         if (editingService) {
@@ -46,9 +81,39 @@ export function useServiceForm(editingService: any, setEditingService: (service:
             setSvg(editingService.icon || '');
             setDesc(editingService.desc || editingService.desc_ar || '');
             setDescEn(editingService.desc_en || '');
-            setDetailPageUrl(editingService.detailPageUrl || '');
             setImageUrl(editingService.image || '');
             setImageFile(null);
+
+            // Populate Template Fields
+            setHeroSubtitleAr(editingService.heroSubtitle_ar || '');
+            setHeroSubtitleEn(editingService.heroSubtitle_en || '');
+            setHeroTitle1Ar(editingService.heroTitle1_ar || '');
+            setHeroTitle1En(editingService.heroTitle1_en || '');
+            setHeroTitle2Ar(editingService.heroTitle2_ar || '');
+            setHeroTitle2En(editingService.heroTitle2_en || '');
+            setHeroDescAr(editingService.heroDesc_ar || '');
+            setHeroDescEn(editingService.heroDesc_en || '');
+            setHeroBtnAr(editingService.heroBtn_ar || '');
+            setHeroBtnEn(editingService.heroBtn_en || '');
+
+            setOverviewSubtitleAr(editingService.overviewSubtitle_ar || '');
+            setOverviewSubtitleEn(editingService.overviewSubtitle_en || '');
+            setOverviewTitleAr(editingService.overviewTitle_ar || '');
+            setOverviewTitleEn(editingService.overviewTitle_en || '');
+            setOverviewDescAr(editingService.overviewDesc_ar || '');
+            setOverviewDescEn(editingService.overviewDesc_en || '');
+            setPackagesTitleAr(editingService.packagesTitle_ar || '');
+            setPackagesTitleEn(editingService.packagesTitle_en || '');
+
+            if (Array.isArray(editingService.features) && editingService.features.length > 0) {
+                setFeatures(editingService.features);
+            }
+            if (Array.isArray(editingService.packages) && editingService.packages.length > 0) {
+                setPackages(editingService.packages);
+            }
+            if (Array.isArray(editingService.roadmapSteps) && editingService.roadmapSteps.length > 0) {
+                setRoadmapSteps(editingService.roadmapSteps);
+            }
         } else {
             setTitle('');
             setTitleEn('');
@@ -60,9 +125,43 @@ export function useServiceForm(editingService: any, setEditingService: (service:
             setSvg('');
             setDesc('');
             setDescEn('');
-            setDetailPageUrl('');
             setImageUrl('');
             setImageFile(null);
+
+            setHeroSubtitleAr('');
+            setHeroSubtitleEn('');
+            setHeroTitle1Ar('');
+            setHeroTitle1En('');
+            setHeroTitle2Ar('');
+            setHeroTitle2En('');
+            setHeroDescAr('');
+            setHeroDescEn('');
+            setHeroBtnAr('');
+            setHeroBtnEn('');
+
+            setOverviewSubtitleAr('');
+            setOverviewSubtitleEn('');
+            setOverviewTitleAr('');
+            setOverviewTitleEn('');
+            setOverviewDescAr('');
+            setOverviewDescEn('');
+
+            setFeatures([
+                { title_ar: '', title_en: '', desc_ar: '', desc_en: '' },
+                { title_ar: '', title_en: '', desc_ar: '', desc_en: '' },
+                { title_ar: '', title_en: '', desc_ar: '', desc_en: '' }
+            ]);
+            setPackages([
+                { badge_ar: '', badge_en: '', title_ar: '', title_en: '', price: '', period_ar: '', period_en: '', desc_ar: '', desc_en: '', isPopular: false },
+                { badge_ar: '', badge_en: '', title_ar: '', title_en: '', price: '', period_ar: '', period_en: '', desc_ar: '', desc_en: '', isPopular: true },
+                { badge_ar: '', badge_en: '', title_ar: '', title_en: '', price: '', period_ar: '', period_en: '', desc_ar: '', desc_en: '', isPopular: false }
+            ]);
+            setRoadmapSteps([
+                { number: '01', title_ar: '', title_en: '', desc_ar: '', desc_en: '' },
+                { number: '02', title_ar: '', title_en: '', desc_ar: '', desc_en: '' },
+                { number: '03', title_ar: '', title_en: '', desc_ar: '', desc_en: '' },
+                { number: '04', title_ar: '', title_en: '', desc_ar: '', desc_en: '' }
+            ]);
         }
     }, [editingService]);
 
@@ -105,8 +204,28 @@ export function useServiceForm(editingService: any, setEditingService: (service:
                 desc,
                 desc_ar: desc,
                 desc_en: descEn,
-                detailPageUrl,
-                image: finalImageUrl
+                image: finalImageUrl,
+                heroSubtitle_ar: heroSubtitleAr,
+                heroSubtitle_en: heroSubtitleEn,
+                heroTitle1_ar: heroTitle1Ar,
+                heroTitle1_en: heroTitle1En,
+                heroTitle2_ar: heroTitle2Ar,
+                heroTitle2_en: heroTitle2En,
+                heroDesc_ar: heroDescAr,
+                heroDesc_en: heroDescEn,
+                heroBtn_ar: heroBtnAr,
+                heroBtn_en: heroBtnEn,
+                overviewSubtitle_ar: overviewSubtitleAr,
+                overviewSubtitle_en: overviewSubtitleEn,
+                overviewTitle_ar: overviewTitleAr,
+                overviewTitle_en: overviewTitleEn,
+                overviewDesc_ar: overviewDescAr,
+                overviewDesc_en: overviewDescEn,
+                packagesTitle_ar: packagesTitleAr,
+                packagesTitle_en: packagesTitleEn,
+                features,
+                packages,
+                roadmapSteps
             };
 
             if (editingService) {
@@ -117,19 +236,6 @@ export function useServiceForm(editingService: any, setEditingService: (service:
                 alert('تمت إضافة الخدمة بنجاح 𓂀');
             }
 
-            setTitle('');
-            setTitleEn('');
-            setType('لوحة تحكم شاملة');
-            setTypeCustom('');
-            setPrice('');
-            setBadge('');
-            setBtnText('');
-            setSvg('');
-            setDesc('');
-            setDescEn('');
-            setDetailPageUrl('');
-            setImageUrl('');
-            setImageFile(null);
             setEditingService(null);
             onSuccess();
         } catch (error: any) {
@@ -152,9 +258,28 @@ export function useServiceForm(editingService: any, setEditingService: (service:
         svg, setSvg,
         desc, setDesc,
         descEn, setDescEn,
-        detailPageUrl, setDetailPageUrl,
         imageFile, imageUrl,
-        availablePages,
+        heroSubtitleAr, setHeroSubtitleAr,
+        heroSubtitleEn, setHeroSubtitleEn,
+        heroTitle1Ar, setHeroTitle1Ar,
+        heroTitle1En, setHeroTitle1En,
+        heroTitle2Ar, setHeroTitle2Ar,
+        heroTitle2En, setHeroTitle2En,
+        heroDescAr, setHeroDescAr,
+        heroDescEn, setHeroDescEn,
+        heroBtnAr, setHeroBtnAr,
+        heroBtnEn, setHeroBtnEn,
+        overviewSubtitleAr, setOverviewSubtitleAr,
+        overviewSubtitleEn, setOverviewSubtitleEn,
+        overviewTitleAr, setOverviewTitleAr,
+        overviewTitleEn, setOverviewTitleEn,
+        overviewDescAr, setOverviewDescAr,
+        overviewDescEn, setOverviewDescEn,
+        packagesTitleAr, setPackagesTitleAr,
+        packagesTitleEn, setPackagesTitleEn,
+        features, setFeatures,
+        packages, setPackages,
+        roadmapSteps, setRoadmapSteps,
         handleFileChange,
         handleSubmit
     };

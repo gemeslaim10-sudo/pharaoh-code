@@ -86,13 +86,13 @@ export async function getSocialLinks() {
     try {
         const db = admin.firestore();
         const doc = await db.collection('settings').doc('social').get();
-        return serializeData(doc.data() || { fb: '#', li: '#', tw: '#', gh: '#' });
+        return serializeData(doc.data() || { fb: '#', wa: '#', ig: '#' });
     } catch (error: any) {
-        return { fb: '#', li: '#', tw: '#', gh: '#' };
+        return { fb: '#', wa: '#', ig: '#' };
     }
 }
 
-export async function updateSocialLinks(token: string, data: { fb: string; li: string; tw: string; gh: string }) {
+export async function updateSocialLinks(token: string, data: { fb: string; wa: string; ig: string }) {
     try {
         const decodedToken = await admin.auth().verifyIdToken(token);
         if (!decodedToken) throw new Error('Unauthorized');

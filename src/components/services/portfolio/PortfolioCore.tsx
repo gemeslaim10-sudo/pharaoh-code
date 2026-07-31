@@ -22,8 +22,8 @@ export default function PortfolioCore({ data }: { data: SectionData }) {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-white/10 rounded-[3rem] overflow-hidden shadow-2xl">
                 {data.items?.map((item: SectionItem, index: number) => {
-                    const itemTitle = getDynamicText(item, 'title', language) || item.title;
-                    const itemDesc = getDynamicText(item, 'description', language) || getDynamicText(item, 'desc', language) || item.description;
+                    const itemTitle = getDynamicText(item, 'title', language);
+                    const itemDesc = getDynamicText(item, 'description', language) || getDynamicText(item, 'desc', language);
 
                     return (
                         <div key={index} className={`p-12 ${index === 2 ? 'bg-white/5' : index === 1 ? 'bg-white/[0.07] border-r border-white/10' : 'bg-white/5 border-r border-white/10'} hover:bg-pharaohGold group transition-all duration-700`}>

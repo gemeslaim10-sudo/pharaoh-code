@@ -1,4 +1,6 @@
 'use client';
+
+import Link from 'next/link';
 import { SectionData } from '@/types';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
@@ -25,12 +27,12 @@ export default function PortfolioServices({ data }: { data?: SectionData }) {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {itemsToRender.map((item: any, index: number) => {
-                    const itemTitle = getDynamicText(item, 'title', language) || item.title;
-                    const itemDesc = getDynamicText(item, 'description', language) || getDynamicText(item, 'desc', language) || item.description;
-                    const actionText = getDynamicText(item, 'actionText', language) || item.actionText || item.btnText || item.label || t('services.exploreBtn');
+                    const itemTitle = getDynamicText(item, 'title', language);
+                    const itemDesc = getDynamicText(item, 'description', language) || getDynamicText(item, 'desc', language);
+                    const actionText = getDynamicText(item, 'actionText', language) || t('services.exploreBtn');
 
                     return (
-                        <div key={index} className="group relative p-1 bg-gradient-to-b from-pharaohGold/20 to-transparent rounded-[2rem] transition-all duration-500 hover:scale-105">
+                        <Link key={index} href="/contact" className="block group relative p-1 bg-gradient-to-b from-pharaohGold/20 to-transparent rounded-[2rem] transition-all duration-500 hover:scale-105 cursor-pointer">
                             <div className="bg-pharaohNavy/90 backdrop-blur-xl p-10 rounded-[1.9rem] h-full border border-white/5 group-hover:border-pharaohGold/50 transition-all">
                                 <div className="w-16 h-16 bg-pharaohGold/10 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-pharaohGold transition-colors duration-500">
                                     <div dangerouslySetInnerHTML={{ __html: item.iconSvg || item.icon }} className="w-8 h-8 text-pharaohGold group-hover:text-pharaohNavy transition-colors flex items-center justify-center" />
@@ -42,7 +44,7 @@ export default function PortfolioServices({ data }: { data?: SectionData }) {
                                     <span className="ml-2">→</span>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     );
                 })}
             </div>

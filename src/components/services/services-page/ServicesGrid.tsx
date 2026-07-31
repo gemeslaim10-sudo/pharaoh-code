@@ -5,7 +5,7 @@ import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 
 export default function ServicesGrid({ data }: { data: SectionData }) {
-  const { language, direction } = useTranslation();
+  const { t, language, direction } = useTranslation();
 
   if (!data) return null;
 
@@ -17,10 +17,10 @@ export default function ServicesGrid({ data }: { data: SectionData }) {
                     {data.backgroundText || "Empire"}
                 </div>
                 <h2 className="text-4xl md:text-6xl font-black mb-4">
-                    {getDynamicText(data, 'titlePart1', language) || (language === 'ar' ? "حلولنا" : "Our Software")} <span className="text-[#C5A16F]">{getDynamicText(data, 'titlePart2', language) || (language === 'ar' ? "البرمجية" : "Services")}</span>
+                    {getDynamicText(data, 'titlePart1', language) || t('services.titlePart1')} <span className="text-[#C5A16F]">{getDynamicText(data, 'titlePart2', language) || t('services.titlePart2')}</span>
                 </h2>
                 <p className="text-gray-400 max-w-2xl mx-auto">
-                    {getDynamicText(data, 'description', language) || (language === 'ar' ? "من بناء الأساسات حتى القمة، نحن نوفر لك كل ما يحتاجه مشروعك للسيادة الرقمية." : "From foundation to apex, we provide everything your business needs for digital dominance.")}
+                    {getDynamicText(data, 'description', language) || t('services.subtitle')}
                 </p>
             </div>
 
@@ -28,7 +28,8 @@ export default function ServicesGrid({ data }: { data: SectionData }) {
                 {data.items?.map((item: SectionItem, index: number) => {
                     const titleText = getDynamicText(item, 'title', language) || item.title;
                     const descText = getDynamicText(item, 'description', language) || getDynamicText(item, 'desc', language) || item.description;
-                    const linkText = getDynamicText(item, 'linkText', language) || (language === 'ar' ? "استكشف الخدمة" : "Explore Service");
+                    const linkText = getDynamicText(item, 'linkText', language) || item.linkText_ar || t('services.exploreBtn');
+                    const metaKeyText = getDynamicText(item, 'metaKey', language) || item.metaKey_ar || (item.metaValue ? t('techStack.startingFrom') : '');
 
                     return (
                         <div key={index} className="group bg-[#0f172a] rounded-[2.5rem] overflow-hidden border border-white/5 transition-all duration-500 hover:border-[#C5A16F]/40 shadow-2xl">
@@ -54,11 +55,11 @@ export default function ServicesGrid({ data }: { data: SectionData }) {
                                 <p className="text-gray-400 text-sm mb-6 h-12 line-clamp-2">{descText}</p>
                                 
                                 <div className="flex justify-between items-center mb-6 pt-4 border-t border-white/5">
-                                    <span className="text-xs text-gray-500">{getDynamicText(item, 'metaKey', language)}</span>
-                                    <span className="text-[#C5A16F] font-bold">{getDynamicText(item, 'metaValue', language)}</span>
+                                    <span className="text-xs text-gray-500">{metaKeyText}</span>
+                                    <span className="text-[#C5A16F] font-bold">{getDynamicText(item, 'metaValue', language) || item.metaValue}</span>
                                 </div>
                                 
-                                <a href={item.linkUrl || "#"} className="block w-full py-4 border border-[#C5A16F]/20 rounded-2xl font-bold hover:bg-[#C5A16F] hover:text-[#0A192F] transition-all">
+                                <a href={`/services/${item.id || 'default'}`} className="block w-full py-4 border border-[#C5A16F]/20 rounded-2xl font-bold hover:bg-[#C5A16F] hover:text-[#0A192F] transition-all">
                                     {linkText}
                                 </a>
                             </div>

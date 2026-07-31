@@ -7,7 +7,7 @@ import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 
 export default function ContactSection({ data }: { data: SectionData }) {
-  const { language, direction } = useTranslation();
+  const { t, language, direction } = useTranslation();
   if (!data) return null;
 
   return (
@@ -18,13 +18,13 @@ export default function ContactSection({ data }: { data: SectionData }) {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
                 <h2 className="text-[#C5A16F] font-bold tracking-[0.3em] uppercase text-xs mb-4">
-                    {getDynamicText(data, 'subtitle', language) || "Get In Touch"}
+                    {getDynamicText(data, 'subtitle', language) || t('contact.getInTouch')}
                 </h2>
                 <h3 className="text-4xl md:text-6xl font-black text-white">
-                    {getDynamicText(data, 'titlePart1', language) || (language === 'ar' ? "لنصنع" : "Let's Build")} <span className="text-[#C5A16F]">{getDynamicText(data, 'titlePart2', language) || (language === 'ar' ? "التاريخ الرقمي" : "Digital History")}</span> {getDynamicText(data, 'titlePart3', language) || (language === 'ar' ? "معاً" : "Together")}
+                    {getDynamicText(data, 'titlePart1', language) || t('contact.mainTitle1')} <span className="text-[#C5A16F]">{getDynamicText(data, 'titlePart2', language) || t('contact.mainTitle2')}</span> {getDynamicText(data, 'titlePart3', language) || t('contact.mainTitle3')}
                 </h3>
                 <p className="text-gray-400 mt-6 max-w-2xl mx-auto text-lg leading-relaxed">
-                    {getDynamicText(data, 'description', language) || (language === 'ar' ? "سواء كنت تملك فكرة ناشئة أو صرحاً قائماً، فريقنا جاهز لتحويل رؤيتك إلى شفرات برمجية تسيطر على السوق." : "Whether you have a startup idea or an established enterprise, our team is ready to engineer your vision into market dominance.")}
+                    {getDynamicText(data, 'description', language) || t('contact.mainDesc')}
                 </p>
             </div>
 

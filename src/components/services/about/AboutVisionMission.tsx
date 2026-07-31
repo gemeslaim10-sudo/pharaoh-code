@@ -4,7 +4,7 @@ import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 
 export default function AboutVisionMission({ data }: { data: SectionData }) {
-  const { language, direction } = useTranslation();
+  const { t, language, direction } = useTranslation();
   if (!data) return null;
 
   return (
@@ -30,11 +30,11 @@ export default function AboutVisionMission({ data }: { data: SectionData }) {
                                 </svg>
                             </div>
                             <h3 className="text-3xl font-black text-white">
-                                {getDynamicText(data, 'visionTitle', language) || (language === 'ar' ? "رؤيتنا" : "Our Vision")}
+                                {getDynamicText(data, 'visionTitle', language) || t('about.visionTitle')}
                             </h3>
                         </div>
                         <p className="text-gray-400 text-lg leading-relaxed italic">
-                            "{getDynamicText(data, 'visionText', language) || (language === 'ar' ? "أن نعيد كتابة تاريخ التكنولوجيا بأيادٍ مصرية، لنحول كل فكرة معقدة إلى صرح رقمي شامخ يناطح السحاب ويخلد في ذاكرة المستخدمين." : "To rewrite technology history through engineering mastery, transforming complex ideas into monumental digital empires that dominate the market.")}"
+                            &quot;{getDynamicText(data, 'visionText', language) || t('about.visionText')}&quot;
                         </p>
                     </div>
                 </div>
@@ -50,11 +50,11 @@ export default function AboutVisionMission({ data }: { data: SectionData }) {
                                 </svg>
                             </div>
                             <h3 className="text-3xl font-black text-white">
-                                {getDynamicText(data, 'missionTitle', language) || (language === 'ar' ? "رسالتنا" : "Our Mission")}
+                                {getDynamicText(data, 'missionTitle', language) || t('about.missionTitle')}
                             </h3>
                         </div>
                         <p className="text-gray-400 text-lg leading-relaxed italic">
-                            "{getDynamicText(data, 'missionText', language) || (language === 'ar' ? "تمكين طموحات عملائنا عبر تقديم حلول برمجية ذكية، آمنة، وفائقة السرعة، مع الالتزام بأعلى معايير الجودة العالمية في كل سطر كود نكتبه." : "Empowering our clients' ambitions through intelligent, ultra-secure, high-speed software solutions built to global engineering benchmarks.")}"
+                            &quot;{getDynamicText(data, 'missionText', language) || t('about.missionText')}&quot;
                         </p>
                     </div>
                 </div>
@@ -64,7 +64,7 @@ export default function AboutVisionMission({ data }: { data: SectionData }) {
                 <div className="flex justify-center gap-4 text-[#C5A16F] text-2xl">
                     <span>𓉐</span> <span>𓉔</span> <span>𓉀</span> <span>𓉐</span>
                 </div>
-                <p className="text-xs text-white/50 mt-4 tracking-[1rem] uppercase">The Egyptian Standard</p>
+                <p className="text-xs text-white/50 mt-4 tracking-[1rem] uppercase">{t('about.egyptianStandard')}</p>
             </div>
         </div>
     </section>

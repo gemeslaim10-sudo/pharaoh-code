@@ -4,7 +4,7 @@ import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 
 export default function AboutFAQ({ data }: { data: SectionData }) {
-  const { language, direction } = useTranslation();
+  const { t, language, direction } = useTranslation();
   if (!data) return null;
 
   return (
@@ -23,10 +23,10 @@ export default function AboutFAQ({ data }: { data: SectionData }) {
         <div className="max-w-5xl mx-auto px-6 relative z-10">
             <div className="text-center mb-20">
                 <div className="inline-block px-4 py-1 border border-[#C5A16F]/30 rounded-full text-[#C5A16F] text-xs font-bold tracking-[0.3em] mb-4 uppercase">
-                    {getDynamicText(data, 'subtitle', language) || "Knowledge Base"}
+                    {getDynamicText(data, 'subtitle', language) || t('about.knowledgeBase')}
                 </div>
                 <h2 className="text-4xl md:text-6xl font-black text-white">
-                    {getDynamicText(data, 'titlePart1', language) || (language === 'ar' ? "لديك أسئلة؟" : "Have Questions?")} <br /> <span className="text-[#C5A16F]">{getDynamicText(data, 'titlePart2', language) || (language === 'ar' ? "لدينا حلول أسطورية" : "We Have Engineering Answers")}</span>
+                    {getDynamicText(data, 'titlePart1', language) || t('about.faqTitle1')} <br /> <span className="text-[#C5A16F]">{getDynamicText(data, 'titlePart2', language) || t('about.faqTitle2')}</span>
                 </h2>
             </div>
 

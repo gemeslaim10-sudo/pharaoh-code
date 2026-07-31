@@ -14,7 +14,7 @@ export default function Navbar({ siteName = "PHARAOH CODE" }: { siteName?: strin
 
   return (
     <>
-      <nav className="fixed w-full z-[100] bg-pharaohNavy/80 backdrop-blur-lg border-b border-white/5 h-20">
+      <nav className="fixed w-full z-[100] bg-pharaohNavy/80 backdrop-blur-lg border-b border-white/5 h-20" dir="ltr">
         <div className="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
           <div className="flex items-center gap-2">
             <Link href="/" className="text-white font-black text-xl sm:block tracking-tighter uppercase">

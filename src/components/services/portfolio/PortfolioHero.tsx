@@ -91,6 +91,22 @@ export default function PortfolioHero({ data }: { data: SectionData }) {
                                   </span>
                                   <h4 className="text-white text-2xl font-bold mt-3 group-hover:text-pharaohGold transition">{itemTitle}</h4>
                                   <p className="text-gray-400 text-sm mt-3 line-clamp-2">{itemDesc}</p>
+                                  {(item.link || item.appLink) && (
+                                      <div className="flex flex-wrap gap-3 mt-4 pt-4 border-t border-white/5">
+                                          {item.link && (
+                                              <a href={item.link} target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-pharaohGold hover:text-white bg-pharaohGold/10 hover:bg-pharaohGold/20 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1">
+                                                  <span>الموقع الحي</span>
+                                                  <span>↗</span>
+                                              </a>
+                                          )}
+                                          {item.appLink && (
+                                              <a href={item.appLink} target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-green-400 hover:text-white bg-green-500/10 hover:bg-green-500/20 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1">
+                                                  <span>تحميل التطبيق</span>
+                                                  <span>📱</span>
+                                              </a>
+                                          )}
+                                      </div>
+                                  )}
                               </div>
                           </div>
                       );

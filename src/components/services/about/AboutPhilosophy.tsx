@@ -4,7 +4,7 @@ import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 
 export default function AboutPhilosophy({ data }: { data: SectionData }) {
-  const { language, direction } = useTranslation();
+  const { t, language, direction } = useTranslation();
   if (!data) return null;
 
   return (
@@ -16,18 +16,18 @@ export default function AboutPhilosophy({ data }: { data: SectionData }) {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
                 <h3 className="text-[#C5A16F] font-bold tracking-widest text-xs uppercase mb-2">
-                    {getDynamicText(data, 'subtitle', language) || "How We Think"}
+                    {getDynamicText(data, 'subtitle', language) || t('about.philosophySubtitle')}
                 </h3>
                 <h2 className="text-4xl font-black text-white">
-                    {getDynamicText(data, 'titlePart1', language) || (language === 'ar' ? "فلسفة" : "Philosophy of")} <span className="text-[#C5A16F]">{getDynamicText(data, 'titlePart2', language) || (language === 'ar' ? "التشييد الرقمي" : "Digital Engineering")}</span>
+                    {getDynamicText(data, 'titlePart1', language) || t('about.philosophyTitle1')} <span className="text-[#C5A16F]">{getDynamicText(data, 'titlePart2', language) || t('about.philosophyTitle2')}</span>
                 </h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                 {data.items?.map((item: SectionItem, index: number) => {
                     const numStr = String(index + 1).padStart(2, '0');
-                    const itemTitle = getDynamicText(item, 'title', language) || item.title;
-                    const itemDesc = getDynamicText(item, 'description', language) || getDynamicText(item, 'desc', language) || item.description;
+                    const itemTitle = getDynamicText(item, 'title', language);
+                    const itemDesc = getDynamicText(item, 'description', language) || getDynamicText(item, 'desc', language);
 
                     return (
                         <div key={index} className="relative p-8 bg-[#112240] rounded-2xl border-b-4 border-[#C5A16F] group hover:-translate-y-2 transition-all duration-500">

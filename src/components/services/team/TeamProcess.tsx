@@ -3,7 +3,7 @@
 import { useTranslation } from '@/contexts/LanguageContext';
 
 export default function TeamProcess() {
-  const { language, direction } = useTranslation();
+  const { t, direction } = useTranslation();
 
   return (
     <section id="our-process" className="py-24 bg-[#0A192F] relative overflow-hidden" dir={direction}>
@@ -16,13 +16,9 @@ export default function TeamProcess() {
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-20">
-                <h2 className="text-[#C5A16F] font-bold tracking-[0.3em] uppercase text-xs mb-4">How We Master</h2>
+                <h2 className="text-[#C5A16F] font-bold tracking-[0.3em] uppercase text-xs mb-4">{t('team.processSubtitle')}</h2>
                 <h3 className="text-4xl md:text-5xl font-black text-white leading-tight">
-                    {language === 'ar' ? (
-                        <>عقلية <span className="text-[#C5A16F]">الفريق الواحد</span> <br /> في بناء صرحك الرقمي</>
-                    ) : (
-                        <>One Team <span className="text-[#C5A16F]">Mindset</span> <br /> Building Your Digital Empire</>
-                    )}
+                    {t('team.processTitle1')} <span className="text-[#C5A16F]">{t('team.processTitle2')}</span> <br /> {t('team.processTitle3')}
                 </h3>
             </div>
 
@@ -36,12 +32,10 @@ export default function TeamProcess() {
                             </svg>
                         </div>
                         <h4 className="text-white text-2xl font-bold mb-4">
-                            {language === 'ar' ? 'اندماج العقول (Brain-Sync)' : 'Brain-Sync Fusion'}
+                            {t('team.processStep1Title')}
                         </h4>
                         <p className="text-gray-400 leading-relaxed">
-                            {language === 'ar' 
-                                ? 'هنا لا نجلس كشركة وعميل، بل كفريق واحد. نجتمع بكل خبراتنا (مصممين، مطورين، ومحللين) لنفهم رؤيتك ونحولها إلى استراتيجية تقنية متكاملة.'
-                                : 'We collaborate as a unified team of designers, engineers, and analysts to transform your vision into an engineering strategy.'}
+                            {t('team.processStep1Desc')}
                         </p>
                     </div>
                 </div>
@@ -55,12 +49,10 @@ export default function TeamProcess() {
                             </svg>
                         </div>
                         <h4 className="text-white text-2xl font-bold mb-4">
-                            {language === 'ar' ? 'النحت الرقمي (Precision Coding)' : 'Precision Coding'}
+                            {t('team.processStep2Title')}
                         </h4>
                         <p className="text-gray-400 leading-relaxed">
-                            {language === 'ar'
-                                ? 'فريق المطورين لدينا يعملون بتناغم "خلية النحل"؛ حيث نكتب أكواداً نظيفة وقابلة للتوسع، مع مراجعة جماعية لكل سطر برمجي لضمان الصفر أخطاء.'
-                                : 'Our engineers work in high synergy, sculpting clean, scalable code with mandatory peer reviews guaranteeing zero bugs.'}
+                            {t('team.processStep2Desc')}
                         </p>
                     </div>
                 </div>
@@ -74,12 +66,10 @@ export default function TeamProcess() {
                             </svg>
                         </div>
                         <h4 className="text-white text-2xl font-bold mb-4">
-                            {language === 'ar' ? 'إطلاق الصرح (The Grand Reveal)' : 'The Grand Reveal'}
+                            {t('team.processStep3Title')}
                         </h4>
                         <p className="text-gray-400 leading-relaxed">
-                            {language === 'ar'
-                                ? 'نحن لا نسلمك ملفات ونرحل، بل نطلق المشروع مع دعم فني مستمر وتطوير دائم، كأننا شركاؤك في النجاح ولسنا مجرد منفذين.'
-                                : 'We launch your system with ongoing technical support and continuous updates, remaining your long-term success partners.'}
+                            {t('team.processStep3Desc')}
                         </p>
                     </div>
                 </div>

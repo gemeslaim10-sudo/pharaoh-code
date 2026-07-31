@@ -84,6 +84,7 @@ export async function getHomePageData() {
   const dbServices = servicesDocs.map(doc => {
       const sData = doc.data();
       return {
+          id: doc.id,
           title: sData.title,
           title_ar: sData.title_ar || sData.title,
           title_en: sData.title_en,
@@ -91,7 +92,6 @@ export async function getHomePageData() {
           description_ar: sData.desc_ar || sData.description_ar || sData.desc,
           description_en: sData.desc_en || sData.description_en,
           iconSvg: sData.icon,
-          detailPageUrl: sData.detailPageUrl || '',
       };
   });
   if (!data.services) data.services = {};

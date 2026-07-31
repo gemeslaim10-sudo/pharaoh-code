@@ -19,6 +19,7 @@ export default async function ServicesPage() {
     const dbServices = servicesSnap.docs.map(doc => {
       const sData = doc.data();
       return {
+        id: doc.id,
         title: sData.title || sData.title_ar || '',
         title_ar: sData.title_ar || sData.title || '',
         title_en: sData.title_en || '',
@@ -35,15 +36,21 @@ export default async function ServicesPage() {
         metaKey_ar: sData.price ? "السعر يبدأ من" : "",
         metaKey_en: sData.price ? "Starting from" : "",
         metaValue: sData.price || "",
-        linkText_ar: sData.detailPageUrl ? "استكشف الخدمة" : "اطلب الخدمة",
-        linkText_en: sData.detailPageUrl ? "Explore Service" : "Order Service",
-        linkUrl: sData.detailPageUrl || "/start-project"
+        linkText_ar: "استكشف الخدمة",
+        linkText_en: "Explore Service",
+        linkUrl: `/services/${doc.id}`
       };
     });
 
     if (!data.grid) data.grid = {};
     if (dbServices.length > 0) {
       data.grid.items = dbServices;
+    } else if (Array.isArray(data.grid?.items)) {
+      data.grid.items = data.grid.items.map((item: any, idx: number) => ({
+        ...item,
+        id: item.id || `service-${idx + 1}`,
+        linkUrl: `/services/${item.id || `service-${idx + 1}`}`
+      }));
     }
   } catch (error) {
     console.error("Failed to fetch services page data from firebase, using fallbacks:", error);
@@ -52,7 +59,7 @@ export default async function ServicesPage() {
   return (
     <>
       <ServicesGrid data={data.grid || {}} />
-      <ServicesTechStack />
+      <ServicesTechStack data={data.techStack} />
     </>
   );
 }

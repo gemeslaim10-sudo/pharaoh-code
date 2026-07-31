@@ -55,18 +55,12 @@ export default function HomeServices({ data }: { data?: SectionData }) {
                         </>
                     );
 
-                    if (item.detailPageUrl) {
-                        return (
-                            <Link key={index} href={item.detailPageUrl} className="group p-8 rounded-[2rem] bg-[#112240] border border-white/5 hover:border-[#C5A16F]/40 transition-all duration-500 hover:-translate-y-3 shadow-xl cursor-pointer block">
-                                {cardContent}
-                            </Link>
-                        );
-                    }
+                    const targetUrl = item.id ? `/services/${item.id}` : '/services';
 
                     return (
-                        <div key={index} className="group p-8 rounded-[2rem] bg-[#112240] border border-white/5 hover:border-[#C5A16F]/40 transition-all duration-500 hover:-translate-y-3 shadow-xl">
+                        <Link key={index} href={targetUrl} className="group p-8 rounded-[2rem] bg-[#112240] border border-white/5 hover:border-[#C5A16F]/40 transition-all duration-500 hover:-translate-y-3 shadow-xl cursor-pointer block">
                             {cardContent}
-                        </div>
+                        </Link>
                     );
                 })}
             </div>

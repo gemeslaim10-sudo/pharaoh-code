@@ -83,12 +83,15 @@ export default function CreativityRecords({ activeTab, refreshKey }: Props) {
                             
                             {activeTab === 'portfolio' && (
                                 <div className="space-y-3">
-                                    <div className="flex gap-2 items-center">
-                                        <span className="text-xs bg-pharaohGold/10 text-pharaohGold px-3 py-1 rounded-full">{record.category}</span>
-                                        {record.link && (
-                                            <a href={record.link} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 bg-blue-400/10 px-3 py-1 rounded-full hover:bg-blue-400/20 transition-colors">عرض الرابط</a>
-                                        )}
-                                    </div>
+                                     <div className="flex flex-wrap gap-2 items-center">
+                                         <span className="text-xs bg-pharaohGold/10 text-pharaohGold px-3 py-1 rounded-full">{record.category}</span>
+                                         {record.link && (
+                                             <a href={record.link} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 bg-blue-400/10 px-3 py-1 rounded-full hover:bg-blue-400/20 transition-colors">رابط الموقع</a>
+                                         )}
+                                         {record.appLink && (
+                                             <a href={record.appLink} target="_blank" rel="noopener noreferrer" className="text-xs text-green-400 bg-green-400/10 px-3 py-1 rounded-full hover:bg-green-400/20 transition-colors flex items-center gap-1">📱 رابط التطبيق</a>
+                                         )}
+                                     </div>
                                     <p className="text-gray-400 text-xs line-clamp-2">{record.desc || record.description || record.desc_ar}</p>
                                     {record.image && <img src={record.image} alt={record.title} className="w-full h-32 object-cover rounded-xl mt-3" />}
                                 </div>

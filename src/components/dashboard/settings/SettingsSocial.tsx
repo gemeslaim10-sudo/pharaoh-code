@@ -9,9 +9,8 @@ export default function SettingsSocial() {
     const [initialLoad, setInitialLoad] = useState(true);
     const [formData, setFormData] = useState({
         fb: '',
-        li: '',
-        tw: '',
-        gh: ''
+        wa: '',
+        ig: ''
     });
 
     const loadData = async () => {
@@ -20,9 +19,8 @@ export default function SettingsSocial() {
             if (data) {
                 setFormData({
                     fb: data.fb || '',
-                    li: data.li || '',
-                    tw: data.tw || '',
-                    gh: data.gh || ''
+                    wa: data.wa || '',
+                    ig: data.ig || ''
                 });
             }
         } catch (error) {
@@ -74,32 +72,26 @@ export default function SettingsSocial() {
                 <h3
                     className="text-lg font-bold text-white mb-6 flex items-center gap-3 text-pharaohGold">
                     <span className="w-2 h-2 bg-pharaohGold rounded-full"></span>
-                    ربط القنوات الخارجية والشبكات
+                    ربط القنوات الخارجية والشبكات (فيسبوك - واتساب - انستجرام)
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div>
-                        <label className="block text-xs font-bold text-gray-400 mb-2">رابط حساب فيسبوك</label>
-                        <input type="url" id="social-fb" required value={formData.fb} onChange={handleChange}
+                        <label className="block text-xs font-bold text-gray-400 mb-2">رابط حساب فيسبوك (Facebook)</label>
+                        <input type="url" id="social-fb" value={formData.fb} onChange={handleChange}
                             className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-pharaohGold transition"
-                            placeholder="https://facebook.com/..." />
+                            placeholder="https://facebook.com/your-page" dir="ltr" />
                     </div>
                     <div>
-                        <label className="block text-xs font-bold text-gray-400 mb-2">رابط حساب لينكد إن</label>
-                        <input type="url" id="social-li" required value={formData.li} onChange={handleChange}
+                        <label className="block text-xs font-bold text-gray-400 mb-2">رابط / رقم واتساب (WhatsApp)</label>
+                        <input type="text" id="social-wa" value={formData.wa} onChange={handleChange}
                             className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-pharaohGold transition"
-                            placeholder="https://linkedin.com/in/..." />
+                            placeholder="https://wa.me/201000000000 أو 201000000000" dir="ltr" />
                     </div>
                     <div>
-                        <label className="block text-xs font-bold text-gray-400 mb-2">رابط حساب إكس / تويتر</label>
-                        <input type="url" id="social-tw" required value={formData.tw} onChange={handleChange}
+                        <label className="block text-xs font-bold text-gray-400 mb-2">رابط حساب انستجرام (Instagram)</label>
+                        <input type="url" id="social-ig" value={formData.ig} onChange={handleChange}
                             className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-pharaohGold transition"
-                            placeholder="https://x.com/..." />
-                    </div>
-                    <div>
-                        <label className="block text-xs font-bold text-gray-400 mb-2">رابط مستودع جيت هاب</label>
-                        <input type="url" id="social-gh" required value={formData.gh} onChange={handleChange}
-                            className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-pharaohGold transition"
-                            placeholder="https://github.com/..." />
+                            placeholder="https://instagram.com/your-account" dir="ltr" />
                     </div>
                 </div>
                 <div className="mt-6 flex justify-end">
@@ -111,30 +103,26 @@ export default function SettingsSocial() {
             </form>
 
             <div className="bg-[#112240]/40 border border-white/5 rounded-3xl p-6 lg:p-8">
-                <h4 className="text-sm font-bold text-pharaohGold mb-4">📜 السجلات الحالية لقنوات الاتصال والمستودعات البرمجية</h4>
+                <h4 className="text-sm font-bold text-pharaohGold mb-4">📜 السجلات الحالية لقنوات الاتصال الرسمية</h4>
                 <div className="overflow-x-auto">
                     <table className="w-full text-left md:text-right text-sm text-gray-400" dir="ltr">
                         <thead className="text-xs uppercase bg-[#0A192F] text-pharaohGold font-bold border-b border-white/10 text-right">
                             <tr>
                                 <th className="px-6 py-4">فيسبوك (Facebook)</th>
-                                <th className="px-6 py-4">لينكد إن (LinkedIn)</th>
-                                <th className="px-6 py-4">إكس (X.com)</th>
-                                <th className="px-6 py-4">جيت هاب (GitHub)</th>
+                                <th className="px-6 py-4">واتساب (WhatsApp)</th>
+                                <th className="px-6 py-4">انستجرام (Instagram)</th>
                             </tr>
                         </thead>
                         <tbody className="text-right">
                             <tr className="border-b border-white/5 hover:bg-white/5 transition">
-                                <td className="px-6 py-4 truncate max-w-[150px]">
-                                    <a href={formData.fb} target="_blank" className="text-[#C5A16F] hover:underline">{formData.fb}</a>
+                                <td className="px-6 py-4 truncate max-w-[200px]">
+                                    <a href={formData.fb} target="_blank" className="text-[#C5A16F] hover:underline">{formData.fb || 'غير محدد'}</a>
                                 </td>
-                                <td className="px-6 py-4 truncate max-w-[150px]">
-                                    <a href={formData.li} target="_blank" className="text-[#C5A16F] hover:underline">{formData.li}</a>
+                                <td className="px-6 py-4 truncate max-w-[200px]">
+                                    <a href={formData.wa} target="_blank" className="text-[#C5A16F] hover:underline">{formData.wa || 'غير محدد'}</a>
                                 </td>
-                                <td className="px-6 py-4 truncate max-w-[150px]">
-                                    <a href={formData.tw} target="_blank" className="text-[#C5A16F] hover:underline">{formData.tw}</a>
-                                </td>
-                                <td className="px-6 py-4 truncate max-w-[150px]">
-                                    <a href={formData.gh} target="_blank" className="text-[#C5A16F] hover:underline">{formData.gh}</a>
+                                <td className="px-6 py-4 truncate max-w-[200px]">
+                                    <a href={formData.ig} target="_blank" className="text-[#C5A16F] hover:underline">{formData.ig || 'غير محدد'}</a>
                                 </td>
                             </tr>
                         </tbody>

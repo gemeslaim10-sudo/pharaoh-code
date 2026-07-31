@@ -92,6 +92,46 @@ export default function SidebarNavLinks({ onNavigate }: SidebarNavLinksProps) {
             </Link>
 
             <Link
+              href="/dashboard/about"
+              onClick={onNavigate}
+              className="flex items-center gap-4 px-4 py-3.5 bg-[#112240] text-pharaohGold rounded-xl font-bold text-sm border border-pharaohGold/20 hover:border-pharaohGold/50 transition-all"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-info">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 16v-4" />
+                <path d="M12 8h.01" />
+              </svg>
+              صفحة (من نحن)
+            </Link>
+
+            <Link
+              href="/dashboard/tech-stack"
+              onClick={onNavigate}
+              className="flex items-center gap-4 px-4 py-3.5 bg-[#112240] text-pharaohGold rounded-xl font-bold text-sm border border-pharaohGold/20 hover:border-pharaohGold/50 transition-all"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-cpu">
+                <rect x="4" y="4" width="16" height="16" rx="2" />
+                <rect x="9" y="9" width="6" height="6" />
+                <path d="M15 2v2" /><path d="M15 20v2" /><path d="M2 15h2" /><path d="M2 9h2" />
+                <path d="M20 15h2" /><path d="M20 9h2" /><path d="M9 2v2" /><path d="M9 20v2" />
+              </svg>
+              قسم التقنيات (Tech Stack)
+            </Link>
+
+            <Link
+              href="/dashboard/categories"
+              onClick={onNavigate}
+              className="flex items-center gap-4 px-4 py-3.5 bg-[#112240] text-pharaohGold rounded-xl font-bold text-sm border border-pharaohGold/20 hover:border-pharaohGold/50 transition-all"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-tags">
+                <path d="M9 5H2v7l6.29 6.29c.94.94 2.48.94 3.41 0l4.71-4.71c.94-.94.94-2.48 0-3.41L9 5z" />
+                <path d="M6 9.01V9" />
+                <path d="m15 5 6.3 6.3a2.4 2.4 0 0 1 0 3.4L17 19" />
+              </svg>
+              تصنيفات الأعمال (Categories)
+            </Link>
+
+            <Link
               href="/dashboard/settings"
               onClick={onNavigate}
               className="flex items-center gap-4 px-4 py-3.5 bg-[#112240] text-pharaohGold rounded-xl font-bold text-sm border border-pharaohGold/20 hover:border-pharaohGold/50 transition-all"

@@ -103,9 +103,9 @@ export default function AboutHero({ data }: { data: SectionData }) {
                     </div>
 
                     <div className="pt-6">
-                        <a href={data.buttonLink || "#contact"} className="inline-flex items-center gap-3 bg-[#C5A16F] text-[#0A192F] px-8 py-4 rounded-xl font-black hover:bg-white transition-all duration-500 group/btn shadow-[0_0_20px_rgba(197,161,111,0.3)]">
+                        <a href={data.buttonLink || "/portfolio"} className="inline-flex items-center gap-3 bg-[#C5A16F] text-[#0A192F] px-8 py-4 rounded-xl font-black hover:bg-white transition-all duration-500 group/btn shadow-[0_0_20px_rgba(197,161,111,0.3)]">
                             {getDynamicText(data, 'buttonText', language) || t('about.exploreWorld')}
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transform group-hover/btn:translate-x-[-5px] transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transform group-hover/btn:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                             </svg>
                         </a>

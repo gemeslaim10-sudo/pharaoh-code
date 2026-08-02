@@ -31,11 +31,11 @@ export default function AboutPhilosophy({ data }: { data: SectionData }) {
 
                     return (
                         <div key={index} className="relative p-8 bg-[#112240] rounded-2xl border-b-4 border-[#C5A16F] group hover:-translate-y-2 transition-all duration-500">
-                            <div className="text-[#C5A16F] text-5xl font-black opacity-20 absolute top-4 left-4 group-hover:opacity-100 transition-opacity">
+                            <div className={`text-[#C5A16F] text-5xl font-black opacity-20 absolute top-4 ${direction === 'rtl' ? 'left-4' : 'right-4'} group-hover:opacity-100 transition-opacity pointer-events-none z-0`}>
                                 {numStr}
                             </div>
-                            <h4 className="text-white text-2xl font-black mb-4">{itemTitle}</h4>
-                            <p className="text-gray-400">{itemDesc}</p>
+                            <h4 className="text-white text-2xl font-black mb-4 relative z-10">{itemTitle}</h4>
+                            <p className="text-gray-400 relative z-10">{itemDesc}</p>
                         </div>
                     );
                 })}

@@ -30,7 +30,7 @@ export default function TeamHero({ data }: { data: SectionData }) {
                 <h3 className="text-4xl md:text-6xl font-black text-white">
                     {getDynamicText(data, 'titlePart1', language) || t('team.titlePart1')} <span className="text-[#C5A16F]">{getDynamicText(data, 'titlePart2', language) || t('team.titlePart2')}</span>
                 </h3>
-                <p className="text-gray-400 mt-6 max-w-2xl text-lg leading-relaxed border-r-4 border-[#C5A16F] pr-6">
+                <p className={`text-gray-400 mt-6 max-w-2xl text-lg leading-relaxed ${direction === 'rtl' ? 'border-r-4 pr-6' : 'border-l-4 pl-6'} border-[#C5A16F]`}>
                     {getDynamicText(data, 'description', language) || t('team.subtitle')}
                 </p>
             </div>

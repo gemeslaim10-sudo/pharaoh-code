@@ -16,7 +16,7 @@ import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 
 export default function HomeWorkflow({ data }: { data?: SectionData }) {
-  const { t, language } = useTranslation();
+  const { t, language, direction } = useTranslation();
 
   const defaultSteps = [
     {
@@ -44,7 +44,7 @@ export default function HomeWorkflow({ data }: { data?: SectionData }) {
   const stepsToRender = (data?.steps && data.steps.length > 0 && data.steps[0].iconSvg) ? data.steps : defaultSteps;
 
   return (
-    <section id="project-steps" className="relative py-24 bg-[#0A192F] overflow-hidden">
+    <section id="project-steps" className="relative py-24 bg-[#0A192F] overflow-hidden" dir={direction}>
         <div className="absolute top-0 left-0 w-full h-full opacity-[0.03] pointer-events-none">
             <svg width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">

@@ -5,7 +5,7 @@ import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 
 export default function HomePortfolio({ data }: { data?: SectionData }) {
-  const { t, language } = useTranslation();
+  const { t, language, direction } = useTranslation();
 
   useEffect(() => {
     const filterBtns = document.querySelectorAll('#portfolio .filter-btn');
@@ -38,7 +38,7 @@ export default function HomePortfolio({ data }: { data?: SectionData }) {
   const portfolioItems = data?.items || [];
 
   return (
-    <section id="portfolio" className="py-24 bg-pharaohNavy relative overflow-hidden">
+    <section id="portfolio" className="relative py-24 bg-[#0A192F] overflow-hidden" dir={direction}>
         <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-12">
                 <h3 className="text-4xl md:text-5xl font-black text-white leading-tight">

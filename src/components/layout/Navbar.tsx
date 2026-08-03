@@ -5,20 +5,37 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useTranslation } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
-export default function Navbar({ siteName = "PHARAOH CODE" }: { siteName?: string }) {
+export default function Navbar({ 
+  siteName = "PHARAOH CODE", 
+  logoUrl,
+  reverseNavbarAr = true
+}: { 
+  siteName?: string; 
+  logoUrl?: string;
+  reverseNavbarAr?: boolean;
+}) {
   const { user, isAdmin, logout } = useAuth();
-  const { t } = useTranslation();
+  const { t, language, direction } = useTranslation();
   const nameParts = siteName.split(' ');
   const firstWord = nameParts[0];
   const restWords = nameParts.slice(1).join(' ');
 
+  // Compute actual navigation direction based on admin setting for Arabic
+  const navDirection = language === 'ar' && !reverseNavbarAr ? 'ltr' : direction;
+
   return (
     <>
-      <nav className="fixed w-full z-[100] bg-pharaohNavy/80 backdrop-blur-lg border-b border-white/5 h-20" dir="ltr">
+      <nav className="fixed w-full z-[100] bg-pharaohNavy/80 backdrop-blur-lg border-b border-white/5 h-20" dir={navDirection}>
         <div className="max-w-7xl mx-auto px-6 h-full flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <Link href="/" className="text-white font-black text-xl sm:block tracking-tighter uppercase">
-              {firstWord} {restWords && <span className="text-pharaohGold">{restWords}</span>}
+            <Link href="/" className="text-white font-black text-xl sm:block tracking-tighter uppercase flex items-center">
+              {logoUrl ? (
+                <img src={logoUrl} alt={siteName} className="h-10 w-auto object-contain" />
+              ) : (
+                <>
+                  {firstWord} {restWords && <span className="text-pharaohGold">{restWords}</span>}
+                </>
+              )}
             </Link>
           </div>
 
@@ -67,8 +84,14 @@ export default function Navbar({ siteName = "PHARAOH CODE" }: { siteName?: strin
       <div id="mobile-nav" className="fixed inset-0 z-[110] bg-pharaohNavy mobile-menu lg:hidden">
         <div className="p-6 flex justify-between items-center border-b border-white/10">
           <div className="flex items-center gap-2">
-            <span className="text-white font-black text-2xl tracking-tighter uppercase">
-              {firstWord} {restWords && <span className="text-pharaohGold">{restWords}</span>}
+            <span className="text-white font-black text-2xl tracking-tighter uppercase flex items-center">
+              {logoUrl ? (
+                <img src={logoUrl} alt={siteName} className="h-10 w-auto object-contain" />
+              ) : (
+                <>
+                  {firstWord} {restWords && <span className="text-pharaohGold">{restWords}</span>}
+                </>
+              )}
             </span>
           </div>
 

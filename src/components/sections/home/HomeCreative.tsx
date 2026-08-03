@@ -30,14 +30,14 @@ export default function HomeCreative({ data }: { data?: SectionData }) {
             <div className="flex flex-col md:flex-row items-center justify-between mb-24 border-b border-white/5 pb-12">
                 <div>
                     <h2 className="text-[#C5A16F] font-bold tracking-[0.5em] uppercase text-xs mb-4">
-                        {data?.subtitle || t("creative.subtitle")}
+                        {getDynamicText(data, 'subtitle', language) || t("creative.subtitle")}
                     </h2>
                     <h3 className="text-4xl md:text-6xl font-black text-white">
                         {t("creative.titlePart1")} <span className="text-[#C5A16F]">{t("creative.titlePart2")}</span>
                     </h3>
                 </div>
                 <p className="text-gray-400 max-w-md mt-6 md:mt-0 leading-relaxed">
-                    {data?.description || t("creative.subtitle")}
+                    {getDynamicText(data, 'description', language) || t("creative.subtitle")}
                 </p>
             </div>
 

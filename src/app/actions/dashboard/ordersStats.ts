@@ -60,7 +60,9 @@ export async function getDashboardChartsData(idToken: string) {
     if (ordersSnap.empty) {
       return {
         lineChartData: [0, 0, 0, 0, 0, 0, 0],
-        pieChartData: [0, 0, 0, 0]
+        pieChartData: [0, 0, 0, 0],
+        totalOrdersCount: 0,
+        activeOrdersCount: 0
       };
     }
 
@@ -68,23 +70,22 @@ export async function getDashboardChartsData(idToken: string) {
     let erpCount = 0;
     let webCount = 0;
     let seoCount = 0;
+    let activeOrdersCount = 0;
 
     ordersSnap.forEach(doc => {
         const data = doc.data();
         const service = data.service || '';
+        const status = data.status || '';
+
+        if (status === 'contacted' || status === 'in_progress' || status === 'completed') {
+            activeOrdersCount++;
+        }
         
         if (service.includes('تطبيق') || service.includes('جوال')) appCount++;
         else if (service.includes('ERP') || service.includes('سيستم')) erpCount++;
         else if (service.includes('موقع') || service.includes('ويب')) webCount++;
         else seoCount++;
     });
-
-    if (appCount === 0 && erpCount === 0 && webCount === 0 && seoCount === 0) {
-        return {
-            lineChartData: [0, 0, 0, 0, 0, 0, 0],
-            pieChartData: [0, 0, 0, 0]
-        };
-    }
 
     return {
         lineChartData: [0, 0, 0, 0, 0, 0, 0],
@@ -93,7 +94,9 @@ export async function getDashboardChartsData(idToken: string) {
             erpCount, 
             webCount, 
             seoCount
-        ]
+        ],
+        totalOrdersCount: ordersSnap.size,
+        activeOrdersCount
     };
   } catch (error) {
     console.error('Error fetching charts data:', error);

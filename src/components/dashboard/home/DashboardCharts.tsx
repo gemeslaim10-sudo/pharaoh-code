@@ -12,6 +12,7 @@ export default function DashboardCharts() {
         web: 0,
         seo: 0
     });
+    const [activeOrdersCount, setActiveOrdersCount] = useState<number>(0);
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async (user) => {
@@ -25,6 +26,9 @@ export default function DashboardCharts() {
                     if (chartsData?.pieChartData) {
                         const [app = 0, erp = 0, web = 0, seo = 0] = chartsData.pieChartData;
                         setChartCounts({ app, erp, web, seo });
+                    }
+                    if (typeof chartsData?.activeOrdersCount === 'number') {
+                        setActiveOrdersCount(chartsData.activeOrdersCount);
                     }
                 } catch (e) {
                     console.error("Failed to fetch dashboard charts/counters data:", e);
@@ -62,6 +66,37 @@ export default function DashboardCharts() {
 
     const weeklyAvg = totalServiceOrders > 0 ? (totalServiceOrders / 4).toFixed(1) : '0';
 
+    // Dynamic stats calculations
+    const activityRate = totalServiceOrders > 0 ? Math.round((activeOrdersCount / totalServiceOrders) * 100) : 0;
+    
+    let activityText = "لا يوجد نشاط حالياً";
+    if (totalServiceOrders > 0) {
+        if (activityRate >= 70) activityText = "إقبال ممتاز 🔥";
+        else if (activityRate > 0) activityText = "نشاط متوسط 📈";
+        else activityText = "في انتظار المعالجة";
+    }
+
+    // Determine peak service category or peak period
+    let peakPeriodText = "لا يوجد";
+    let peakSubtext = "لا توجد طلبات مسجلة";
+
+    if (totalServiceOrders > 0) {
+        const services = [
+            { name: "تطبيقات الجوال", count: chartCounts.app },
+            { name: "أنظمة ERP", count: chartCounts.erp },
+            { name: "مواقع ويب", count: chartCounts.web },
+            { name: "تسويق و SEO", count: chartCounts.seo },
+        ];
+        services.sort((a, b) => b.count - a.count);
+        if (services[0]?.count && services[0].count > 0) {
+            peakPeriodText = services[0].name;
+            peakSubtext = `الأكثر طلباً (${services[0].count} طلب)`;
+        } else {
+            peakPeriodText = "هذا الشهر";
+            peakSubtext = "بناءً على البيانات الفعلية";
+        }
+    }
+
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div className="lg:col-span-2 space-y-6">
@@ -85,8 +120,8 @@ export default function DashboardCharts() {
                             <h3 className="text-2xl md:text-3xl font-black text-pharaohGold tracking-tight">
                                 {totalServiceOrders}
                             </h3>
-                            <span className="text-[10px] text-emerald-400 font-bold mt-2 inline-flex items-center gap-1">
-                                ↑ +18% مقارنة بالشهر السابق
+                            <span className={`text-[10px] font-bold mt-2 inline-flex items-center gap-1 ${totalServiceOrders > 0 ? 'text-emerald-400' : 'text-gray-500'}`}>
+                                {totalServiceOrders > 0 ? `إجمالي ${totalServiceOrders} طلبات فعلي` : 'لا توجد طلبات بعد'}
                             </span>
                         </div>
 
@@ -102,27 +137,27 @@ export default function DashboardCharts() {
                             </span>
                         </div>
 
-                        {/* العداد 3: معدل الاستجابة */}
+                        {/* العداد 3: معدل الاستجابة ونشاط الإقبال */}
                         <div className="bg-[#0A192F] p-4 rounded-2xl border border-emerald-500/20 relative overflow-hidden group hover:border-emerald-500/50 transition-all">
                             <div className="absolute top-0 right-0 w-1.5 h-full bg-emerald-500"></div>
                             <p className="text-[11px] font-bold text-gray-400 mb-1">نشاط الإقبال</p>
                             <h3 className="text-2xl md:text-3xl font-black text-emerald-400 tracking-tight">
-                                98%
+                                {activityRate}%
                             </h3>
-                            <span className="text-[10px] text-emerald-400 font-bold mt-2 inline-flex items-center gap-1">
-                                إقبال ممتاز 🔥
+                            <span className={`text-[10px] font-bold mt-2 inline-flex items-center gap-1 ${totalServiceOrders > 0 ? 'text-emerald-400' : 'text-gray-500'}`}>
+                                {activityText}
                             </span>
                         </div>
 
-                        {/* العداد 4: حالة التفاعل */}
+                        {/* العداد 4: فترة الذروة */}
                         <div className="bg-[#0A192F] p-4 rounded-2xl border border-purple-500/20 relative overflow-hidden group hover:border-purple-500/50 transition-all">
                             <div className="absolute top-0 right-0 w-1.5 h-full bg-purple-500"></div>
                             <p className="text-[11px] font-bold text-gray-400 mb-1">فترة الذروة</p>
-                            <h3 className="text-xl md:text-2xl font-black text-purple-400 tracking-tight">
-                                هذا الشهر
+                            <h3 className="text-lg md:text-xl font-black text-purple-400 tracking-tight truncate">
+                                {peakPeriodText}
                             </h3>
-                            <span className="text-[10px] text-purple-300 mt-2 block">
-                                أعلى معدل تحويل
+                            <span className="text-[10px] text-purple-300 mt-2 block truncate">
+                                {peakSubtext}
                             </span>
                         </div>
                     </div>
@@ -154,7 +189,7 @@ export default function DashboardCharts() {
                                 </div>
                             </div>
                             <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
-                                <div className="h-full bg-pharaohGold rounded-full transition-all duration-500" style={{ width: `${Math.max(appPct, 5)}%` }}></div>
+                                <div className="h-full bg-pharaohGold rounded-full transition-all duration-500" style={{ width: `${appPct}%` }}></div>
                             </div>
                         </div>
 
@@ -171,7 +206,7 @@ export default function DashboardCharts() {
                                 </div>
                             </div>
                             <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
-                                <div className="h-full bg-blue-500 rounded-full transition-all duration-500" style={{ width: `${Math.max(erpPct, 5)}%` }}></div>
+                                <div className="h-full bg-blue-500 rounded-full transition-all duration-500" style={{ width: `${erpPct}%` }}></div>
                             </div>
                         </div>
 
@@ -188,7 +223,7 @@ export default function DashboardCharts() {
                                 </div>
                             </div>
                             <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
-                                <div className="h-full bg-purple-500 rounded-full transition-all duration-500" style={{ width: `${Math.max(webPct, 5)}%` }}></div>
+                                <div className="h-full bg-purple-500 rounded-full transition-all duration-500" style={{ width: `${webPct}%` }}></div>
                             </div>
                         </div>
 
@@ -205,7 +240,7 @@ export default function DashboardCharts() {
                                 </div>
                             </div>
                             <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
-                                <div className="h-full bg-emerald-500 rounded-full transition-all duration-500" style={{ width: `${Math.max(seoPct, 5)}%` }}></div>
+                                <div className="h-full bg-emerald-500 rounded-full transition-all duration-500" style={{ width: `${seoPct}%` }}></div>
                             </div>
                         </div>
                     </div>

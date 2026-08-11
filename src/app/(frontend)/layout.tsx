@@ -18,6 +18,8 @@ export default async function FrontendLayout({
   ]);
 
   const siteName = identity?.name || "PHARAOH CODE";
+  const logoUrl = identity?.logo || "";
+  const reverseNavbarAr = identity?.reverse_navbar_ar !== undefined ? identity.reverse_navbar_ar : true;
 
   if (systemStatus?.mode === 'on') {
     return (
@@ -55,7 +57,7 @@ export default async function FrontendLayout({
   return (
     <>
       <Preloader />
-      <Navbar siteName={siteName} />
+      <Navbar siteName={siteName} logoUrl={logoUrl} reverseNavbarAr={reverseNavbarAr} />
       
       <main className="flex-grow bg-[#0A192F]">
         <PageTransitionWrapper>{children}</PageTransitionWrapper>

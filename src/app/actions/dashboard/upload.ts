@@ -24,6 +24,7 @@ export async function uploadImage(token: string, formData: FormData) {
         return { success: true, url: uploadResponse.secure_url };
     } catch (error: any) {
         console.error('Upload error:', error);
-        return { success: false, error: 'حدث خطأ أثناء رفع الصورة.' };
+        const detailMessage = error?.message || error?.error?.message || 'حدث خطأ أثناء رفع الصورة.';
+        return { success: false, error: detailMessage };
     }
 }

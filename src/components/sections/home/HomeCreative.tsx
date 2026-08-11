@@ -16,28 +16,26 @@ function stripSvgColors(svg: string): string {
 }
 
 export default function HomeCreative({ data }: { data?: SectionData }) {
-  const { t, language } = useTranslation();
+  const { t, language, direction } = useTranslation();
 
   const creativeItems = data?.items || [];
 
   return (
-    <section id="about-creative" className="relative py-24 bg-[#0A192F] overflow-hidden">
+    <section id="about-creative" className="relative py-24 bg-[#0A192F] overflow-hidden" dir={direction}>
         <div className="absolute top-20 right-10 text-[10rem] font-black text-[#C5A16F]/[0.02] pointer-events-none select-none">
             {data?.backgroundText || "CREATIVE"}
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-            <div className="flex flex-col md:flex-row items-center justify-between mb-24 border-b border-white/5 pb-12">
-                <div>
-                    <h2 className="text-[#C5A16F] font-bold tracking-[0.5em] uppercase text-xs mb-4">
-                        {data?.subtitle || t("creative.subtitle")}
-                    </h2>
-                    <h3 className="text-4xl md:text-6xl font-black text-white">
-                        {t("creative.titlePart1")} <span className="text-[#C5A16F]">{t("creative.titlePart2")}</span>
-                    </h3>
-                </div>
-                <p className="text-gray-400 max-w-md mt-6 md:mt-0 leading-relaxed">
-                    {data?.description || t("creative.subtitle")}
+            <div className={`mb-24 border-b border-white/5 pb-12 ${direction === 'rtl' ? 'text-right' : 'text-left'}`}>
+                <h2 className="text-[#C5A16F] font-bold tracking-[0.5em] uppercase text-xs mb-4">
+                    {getDynamicText(data, 'subtitle', language) || t("creative.subtitle")}
+                </h2>
+                <h3 className="text-4xl md:text-6xl font-black text-white mb-6">
+                    {t("creative.titlePart1")} <span className="text-[#C5A16F]">{t("creative.titlePart2")}</span>
+                </h3>
+                <p className="text-gray-400 max-w-2xl leading-relaxed text-lg">
+                    {getDynamicText(data, 'description', language) || t("creative.subtitle")}
                 </p>
             </div>
 

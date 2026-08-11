@@ -31,7 +31,26 @@ export default function AboutFAQ({ data }: { data: SectionData }) {
             </div>
 
             <div className="space-y-6">
-                {data.faqs?.map((faq: SectionItem, index: number) => {
+                {((data?.faqs && data.faqs.length > 0) ? data.faqs : [
+                    {
+                        question_ar: "ما هي الخدمات التي تقدمونها؟",
+                        question_en: "What services do you offer?",
+                        answer_ar: "نقدم خدمات تطوير الويب المتقدمة، تطبيقات الجوال عالية الأداء، وأنظمة إدارة المؤسسات والذكاء الاصطناعي.",
+                        answer_en: "We offer advanced web development, high-performance mobile apps, enterprise systems, and AI integration."
+                    },
+                    {
+                        question_ar: "كم يستغرق بناء المشروعات؟",
+                        question_en: "How long does a project take?",
+                        answer_ar: "يعتمد ذلك على حجم ونطاق المشروع، وتتراوح المدة عادةً بين 4 إلى 12 أسبوعاً مع تسليم مرحلي ودوري.",
+                        answer_en: "It depends on the scope of the project, usually ranging between 4 to 12 weeks with phased deliveries."
+                    },
+                    {
+                        question_ar: "كيف تضمنون جودة الكود والأمان؟",
+                        question_en: "How do you ensure code quality and security?",
+                        answer_ar: "نتبع أفضل معايير البرمجة النظيفة (Clean Code) مع اختبارات دقيقة وتشفير كامل للبيانات وأعلى معايير الأمان.",
+                        answer_en: "We follow Clean Code best practices, rigorous testing, data encryption, and top security standards."
+                    }
+                ]).map((faq: SectionItem, index: number) => {
                     const numStr = String(index + 1).padStart(2, '0');
                     const questionText = getDynamicText(faq, 'question', language) || faq.question;
                     const answerText = getDynamicText(faq, 'answer', language) || faq.answer;
@@ -54,7 +73,7 @@ export default function AboutFAQ({ data }: { data: SectionData }) {
                                         </svg>
                                     </div>
                                 </summary>
-                                <div className="px-24 pb-8 text-gray-400 leading-relaxed text-lg">
+                                <div className="px-8 md:px-24 pb-8 text-gray-400 leading-relaxed text-lg">
                                     {answerText}
                                 </div>
                             </details>

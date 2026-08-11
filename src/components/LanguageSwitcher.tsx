@@ -5,9 +5,10 @@ import { useLanguage } from '@/contexts/LanguageContext';
 
 interface LanguageSwitcherProps {
   className?: string;
+  iconOnly?: boolean;
 }
 
-export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className = '' }) => {
+export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className = '', iconOnly = false }) => {
   const { language, toggleLanguage } = useLanguage();
   const [mounted, setMounted] = useState(false);
 
@@ -19,10 +20,36 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className = 
     return (
       <button
         aria-label="Toggle language"
-        className={`px-2.5 py-1 rounded-lg border border-[#C5A16F]/20 bg-[#0F2338] text-gray-400 text-xs font-bold flex items-center gap-1.5 opacity-50 ${className}`}
+        className={iconOnly 
+          ? `w-10 h-10 rounded-xl border border-[#C5A16F]/20 bg-[#0F2338] text-gray-400 flex items-center justify-center opacity-50 ${className}`
+          : `px-2.5 py-1 rounded-lg border border-[#C5A16F]/20 bg-[#0F2338] text-gray-400 text-xs font-bold flex items-center gap-1.5 opacity-50 ${className}`}
       >
-        <span className="w-3.5 h-3.5" />
-        <span>..</span>
+        <span className="w-4 h-4" />
+      </button>
+    );
+  }
+
+  if (iconOnly) {
+    return (
+      <button
+        onClick={toggleLanguage}
+        title={language === 'ar' ? 'English (EN)' : 'العربية (AR)'}
+        aria-label="Toggle language"
+        className={`w-10 h-10 rounded-xl border border-[#C5A16F]/30 bg-[#0F2338] text-[#C5A16F] hover:border-[#C5A16F] hover:bg-[#C5A16F] hover:text-[#0A192F] transition-all shadow-md flex items-center justify-center group ${className}`}
+      >
+        <svg
+          className="w-5 h-5 transition-transform group-hover:rotate-45 duration-300"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+          />
+        </svg>
       </button>
     );
   }

@@ -6,12 +6,12 @@ import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 
 export default function HomeTeam({ data }: { data?: SectionData }) {
-  const { t, language } = useTranslation();
+  const { t, language, direction } = useTranslation();
 
   const membersToRender = data?.members || [];
 
   return (
-    <section id="our-team" className="relative py-24 bg-[#0A192F] overflow-hidden">
+    <section id="our-team" className="relative py-24 bg-[#0A192F] overflow-hidden" dir={direction}>
         <div className="absolute top-0 left-0 w-full h-full opacity-[0.02] pointer-events-none">
             <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -24,15 +24,15 @@ export default function HomeTeam({ data }: { data?: SectionData }) {
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-            <div className="mb-20">
+            <div className={`mb-20 ${direction === 'rtl' ? 'text-right' : 'text-left'}`}>
                 <h2 className="text-[#C5A16F] font-bold tracking-[0.4em] uppercase text-xs mb-4">
-                    {data?.subtitle || t("team.subtitle")}
+                    {getDynamicText(data, 'subtitle', language) || t("team.subtitle")}
                 </h2>
                 <h3 className="text-4xl md:text-6xl font-black text-white">
                     {t("team.titlePart1")} <span className="text-[#C5A16F]">{t("team.titlePart2")}</span>
                 </h3>
-                <p className="text-gray-400 mt-6 max-w-2xl text-lg leading-relaxed border-r-4 border-[#C5A16F] pr-6">
-                    {data?.description || t("team.subtitle")}
+                <p className={`text-gray-400 mt-6 max-w-2xl text-lg leading-relaxed ${direction === 'rtl' ? 'border-r-4 pr-6' : 'border-l-4 pl-6'} border-[#C5A16F]`}>
+                    {getDynamicText(data, 'description', language) || t("team.subtitle")}
                 </p>
             </div>
 

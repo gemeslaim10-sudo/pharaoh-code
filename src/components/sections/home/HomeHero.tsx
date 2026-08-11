@@ -57,7 +57,31 @@ export default function HomeHero({ data }: { data?: SectionData }) {
   const slide2Title2 = getDynamicText(heroData.slides?.[1], 'titlePart2', language) || t('hero.slide2.titlePart2');
   const slide2Subtitle = getDynamicText(heroData.slides?.[1], 'subtitle', language) || t('hero.slide2.subtitle');
 
-  const buttonText = language === 'ar' ? 'اكتشف عالمنا' : 'Discover Our World';
+  const discoverButtonText = language === 'ar' ? 'اكتشف عالمنا' : 'Discover Our World';
+  const contactButtonText = language === 'ar' ? 'تواصل معنا' : 'Contact Us';
+
+  const renderButtons = () => (
+    <div className="flex flex-wrap items-center justify-center gap-4">
+      <Link 
+        href="/services" 
+        className="btn-pharaoh-gold px-6 py-3 sm:px-7 sm:py-3.5 rounded-xl font-extrabold text-sm sm:text-base shadow-xl hover:shadow-pharaohGold/40 transition-all flex items-center gap-2 group"
+      >
+        <span>{discoverButtonText}</span>
+        <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+        </svg>
+      </Link>
+      <Link 
+        href="/contact" 
+        className="btn-pharaoh-glass px-6 py-3 sm:px-7 sm:py-3.5 rounded-xl font-bold text-sm sm:text-base transition-all flex items-center gap-2 group border border-white/20 hover:border-pharaohGold"
+      >
+        <span>{contactButtonText}</span>
+        <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+        </svg>
+      </Link>
+    </div>
+  );
 
   return (
     <div ref={containerRef} key={language} dir={direction} className="swiper heroSwiper h-screen">
@@ -71,34 +95,30 @@ export default function HomeHero({ data }: { data?: SectionData }) {
                 <div className="absolute inset-0 bg-gradient-to-t from-pharaohNavy to-transparent"></div>
                 <div className="relative z-20 h-full flex items-center justify-center text-center px-6">
                     <div className="max-w-4xl content-up transition-opacity duration-700">
-                        <h1 className="text-4xl sm:text-6xl md:text-8xl font-black text-white mb-6 leading-tight tracking-tight">
+                        <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-white mb-5 leading-tight tracking-tight">
                             {slide1Title1} <span className="text-pharaohGold">{slide1Title2}</span> {slide1Title3}
                         </h1>
-                        <p className="text-gray-300 text-lg sm:text-xl md:text-2xl mb-10 max-w-3xl mx-auto leading-relaxed">
+                        <p className="text-gray-300 text-sm sm:text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
                             {slide1Subtitle}
                         </p>
-                        <Link href="/services" className="inline-block bg-pharaohGold text-pharaohNavy px-10 py-4 sm:px-12 sm:py-5 rounded-full font-black text-base sm:text-lg shadow-2xl hover:bg-white transition-all">
-                            {buttonText}
-                        </Link>
+                        {renderButtons()}
                     </div>
                 </div>
             </div>
 
             {/* SLIDE 2 */}
-            <div className="swiper-slide">
-                <img src={heroData.slides?.[1]?.imageUrl || heroData.slides?.[1]?.image || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1920"} className="absolute inset-0 w-full h-full object-cover" alt="Coding" />
-                <div className="absolute inset-0 bg-pharaohNavy/80"></div>
+            <div className="swiper-slide bg-pharaohNavy">
+                <img src={heroData.slides?.[1]?.imageUrl || heroData.slides?.[1]?.image || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1920"} className="absolute inset-0 w-full h-full object-cover opacity-20" alt="Coding" />
+                <div className="absolute inset-0 bg-gradient-to-t from-pharaohNavy to-transparent"></div>
                 <div className="relative z-20 h-full flex items-center justify-center text-center px-6">
                     <div className="max-w-4xl content-up transition-opacity duration-700">
-                        <h2 className="text-4xl sm:text-6xl md:text-7xl font-black text-white mb-6 leading-tight tracking-tight">
-                            {slide2Title1} <span className="text-pharaohGold italic block sm:inline">{slide2Title2}</span>
-                        </h2>
-                        <p className="text-gray-300 text-lg sm:text-xl mb-10 max-w-3xl mx-auto leading-relaxed">
+                        <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-white mb-5 leading-tight tracking-tight">
+                            {slide2Title1} <span className="text-pharaohGold">{slide2Title2}</span>
+                        </h1>
+                        <p className="text-gray-300 text-sm sm:text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
                             {slide2Subtitle}
                         </p>
-                        <Link href="/services" className="inline-block border-2 border-pharaohGold text-pharaohGold px-10 py-4 sm:px-12 sm:py-4 rounded-full font-bold hover:bg-pharaohGold hover:text-white transition-all">
-                            {buttonText}
-                        </Link>
+                        {renderButtons()}
                     </div>
                 </div>
             </div>

@@ -44,7 +44,7 @@ export default function Navbar({ onOpenMenu }: NavbarProps) {
             {t("nav.contact")}
           </Link>
           
-          <LanguageSwitcher />
+          <LanguageSwitcher iconOnly={true} />
 
           <Link
             href="/start-project"
@@ -55,7 +55,7 @@ export default function Navbar({ onOpenMenu }: NavbarProps) {
         </div>
 
         <div className="lg:hidden flex items-center gap-3">
-          <LanguageSwitcher />
+          <LanguageSwitcher iconOnly={true} />
           <button onClick={onOpenMenu} className="text-pharaohGold p-1">
             <svg
               className="w-8 h-8"

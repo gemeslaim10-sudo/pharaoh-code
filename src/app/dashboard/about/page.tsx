@@ -43,7 +43,8 @@ export default function DashboardAboutPage() {
         faq: {
             subtitle_ar: '', subtitle_en: '',
             titlePart1_ar: '', titlePart1_en: '',
-            titlePart2_ar: '', titlePart2_en: ''
+            titlePart2_ar: '', titlePart2_en: '',
+            faqs: []
         }
     });
 
@@ -56,7 +57,7 @@ export default function DashboardAboutPage() {
                     hero: { ...prev.hero, ...(content.hero || {}) },
                     visionMission: { ...prev.visionMission, ...(content.visionMission || {}) },
                     philosophy: { ...prev.philosophy, ...(content.philosophy || {}) },
-                    faq: { ...prev.faq, ...(content.faq || {}) }
+                    faq: { ...prev.faq, faqs: [], ...(content.faq || {}) }
                 }));
             }
             setLoading(false);
@@ -699,6 +700,118 @@ export default function DashboardAboutPage() {
                                     dir="ltr"
                                 />
                             </div>
+                        </div>
+
+                        {/* FAQ Items (Questions & Answers) */}
+                        <div className="space-y-6 border-t border-white/10 pt-6">
+                            <div className="flex items-center justify-between">
+                                <h3 className="text-md font-bold text-white">الأسئلة والإجابات ({form.faq.faqs?.length || 0})</h3>
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        const currentFaqs = [...(form.faq.faqs || [])];
+                                        setForm({
+                                            ...form,
+                                            faq: {
+                                                ...form.faq,
+                                                faqs: [
+                                                    ...currentFaqs,
+                                                    { question_ar: '', question_en: '', answer_ar: '', answer_en: '' }
+                                                ]
+                                            }
+                                        });
+                                    }}
+                                    className="bg-pharaohGold/20 hover:bg-pharaohGold text-pharaohGold hover:text-[#0A192F] px-4 py-2 rounded-xl text-xs font-bold transition-all border border-pharaohGold/40"
+                                >
+                                    + إضافة سؤال جديد
+                                </button>
+                            </div>
+
+                            {(!form.faq.faqs || form.faq.faqs.length === 0) && (
+                                <p className="text-xs text-gray-400 italic">لا يوجد أسئلة حالية. اضغط على "+ إضافة سؤال جديد" لإضافة أول سؤال وإجابة.</p>
+                            )}
+
+                            {form.faq.faqs?.map((faqItem: any, idx: number) => (
+                                <div key={idx} className="bg-[#0A192F] p-4 rounded-xl border border-white/10 space-y-4 relative">
+                                    <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                                        <h4 className="text-sm font-bold text-pharaohGold">السؤال رقم {idx + 1}</h4>
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                const updated = form.faq.faqs.filter((_: any, i: number) => i !== idx);
+                                                setForm({ ...form, faq: { ...form.faq, faqs: updated } });
+                                            }}
+                                            className="text-red-400 hover:text-red-300 text-xs font-bold bg-red-500/10 hover:bg-red-500/20 px-3 py-1 rounded-lg transition-all border border-red-500/20"
+                                        >
+                                            حذف السؤال
+                                        </button>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label className="block text-xs text-gray-400 mb-1">السؤال (عربي)</label>
+                                            <input
+                                                type="text"
+                                                placeholder="مثال: ما هي الخدمات التي تقدمونها؟"
+                                                value={faqItem.question_ar || faqItem.question || ''}
+                                                onChange={(e) => {
+                                                    const faqs = [...(form.faq.faqs || [])];
+                                                    faqs[idx] = { ...faqs[idx], question_ar: e.target.value };
+                                                    setForm({ ...form, faq: { ...form.faq, faqs } });
+                                                }}
+                                                className="w-full bg-[#112240] border border-white/10 rounded-lg p-2.5 text-xs text-white outline-none focus:border-pharaohGold"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs text-gray-400 mb-1">Question (English)</label>
+                                            <input
+                                                type="text"
+                                                placeholder="e.g. What services do you offer?"
+                                                value={faqItem.question_en || ''}
+                                                onChange={(e) => {
+                                                    const faqs = [...(form.faq.faqs || [])];
+                                                    faqs[idx] = { ...faqs[idx], question_en: e.target.value };
+                                                    setForm({ ...form, faq: { ...form.faq, faqs } });
+                                                }}
+                                                className="w-full bg-[#112240] border border-white/10 rounded-lg p-2.5 text-xs text-white outline-none focus:border-pharaohGold"
+                                                dir="ltr"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label className="block text-xs text-gray-400 mb-1">الإجابة (عربي)</label>
+                                            <textarea
+                                                rows={3}
+                                                placeholder="مثال: نقدم خدمات تطوير الويب المتقدمة..."
+                                                value={faqItem.answer_ar || faqItem.answer || ''}
+                                                onChange={(e) => {
+                                                    const faqs = [...(form.faq.faqs || [])];
+                                                    faqs[idx] = { ...faqs[idx], answer_ar: e.target.value };
+                                                    setForm({ ...form, faq: { ...form.faq, faqs } });
+                                                }}
+                                                className="w-full bg-[#112240] border border-white/10 rounded-lg p-2.5 text-xs text-white outline-none focus:border-pharaohGold resize-none"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block text-xs text-gray-400 mb-1">Answer (English)</label>
+                                            <textarea
+                                                rows={3}
+                                                placeholder="e.g. We offer advanced web development..."
+                                                value={faqItem.answer_en || ''}
+                                                onChange={(e) => {
+                                                    const faqs = [...(form.faq.faqs || [])];
+                                                    faqs[idx] = { ...faqs[idx], answer_en: e.target.value };
+                                                    setForm({ ...form, faq: { ...form.faq, faqs } });
+                                                }}
+                                                className="w-full bg-[#112240] border border-white/10 rounded-lg p-2.5 text-xs text-white outline-none focus:border-pharaohGold resize-none"
+                                                dir="ltr"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 )}

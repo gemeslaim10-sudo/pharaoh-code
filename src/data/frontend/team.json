@@ -2,17 +2,23 @@
     {
         "id": "team_01",
         "name": "سما أحمد فهمي",
+        "name_ar": "سما أحمد فهمي",
+        "name_en": "Sama Ahmed Fahmy",
         "role": "Sales Development Representative",
+        "role_ar": "ممثل تطوير المبيعات",
+        "role_en": "Sales Development Representative",
         "image": "..//assets/team/sama_ahmed_fahmy.jpeg",
         "description": "تقود مسار تطوير الأعمال وبناء العلاقات الاستدامة مع الشركات والعملاء، متخصصة في دراسة احتياجات السوق بدقة وتحويل المتطلبات التقنية إلى مشاريع استثمارية ناجحة ومثمرة.",
+        "description_ar": "تقود مسار تطوير الأعمال وبناء العلاقات الاستدامة مع الشركات والعملاء، متخصصة في دراسة احتياجات السوق بدقة وتحويل المتطلبات التقنية إلى مشاريع استثمارية ناجحة ومثمرة.",
+        "description_en": "Sales development professional skilled at identifying growth opportunities and establishing sustainable client partnerships while optimizing the full sales cycle.",
         "skills": [
-            { "name": "تطوير الأعمال واستقطاب المشاريع", "value": "94%" },
-            { "name": "إدارة وتخطيط علاقات العملاء CRM", "value": "96%" },
-            { "name": "إستراتيجيات التفاوض وإغلاق الصفقات", "value": "91%" }
+            { "name": "Business Development & Prospecting", "value": "94%" },
+            { "name": "Effective Communication & Negotiation", "value": "96%" },
+            { "name": "Sales Tools & CRM Management", "value": "91%" }
         ],
         "stats": [
-            { "value": "20+", "label": "مشاريع مستقطبة" },
-            { "value": "98%", "label": "معدل رضا العملاء" }
+            { "value": "20+", "label": "Client Outreach Rate", "label_ar": "مشاريع مستقطبة", "label_en": "Client Outreach Rate" },
+            { "value": "98%", "label": "Client Satisfaction Rate", "label_ar": "معدل رضا العملاء", "label_en": "Client Satisfaction Rate" }
         ],
         "social": {
             "facebook": "https://www.facebook.com/share/14cbGyBkzFu/",
@@ -22,17 +28,23 @@
     {
         "id": "team_02",
         "name": "عبد الرحمن",
+        "name_ar": "عبد الرحمن",
+        "name_en": "Abdelrahman",
         "role": "UI/UX Designer",
+        "role_ar": "مصمم واجهات وتجربة المستخدم",
+        "role_en": "UI/UX Designer",
         "image": "..//assets/team/samhan.jpeg",
         "description": "العقل المبتكر خلف تجارب المستخدم السلسة والواجهات البصرية الجذابة. يركز على دراسة سلوك المستخدم وتطبيق أعلى معايير التصميم العصرية لبناء منتجات رقمية فريدة.",
+        "description_ar": "العقل المبتكر خلف تجارب المستخدم السلسة والواجهات البصرية الجذابة. يركز على دراسة سلوك المستخدم وتطبيق أعلى معايير التصميم العصرية لبناء منتجات رقمية فريدة.",
+        "description_en": "Creative UI/UX designer crafting aesthetic user experiences and modern digital interfaces.",
         "skills": [
-            { "name": "هندسة واجهات المستخدم Figma", "value": "95%" },
-            { "name": "بناء النماذج التفاعلية Prototyping", "value": "92%" },
-            { "name": "أبحاث وتحليل تجربة المستخدم", "value": "88%" }
+            { "name": "Figma UI Engineering", "value": "95%" },
+            { "name": "Interactive Prototyping", "value": "92%" },
+            { "name": "User Experience Research & Analysis", "value": "88%" }
         ],
         "stats": [
-            { "value": "35+", "label": "واجهة مستخدم مصممة" },
-            { "value": "100%", "label": "دقة الهوية البصرية" }
+            { "value": "35+", "label": "Designed User Interfaces", "label_ar": "واجهة مستخدم مصممة", "label_en": "Designed User Interfaces" },
+            { "value": "100%", "label": "Visual Identity Precision", "label_ar": "دقة الهوية البصرية", "label_en": "Visual Identity Precision" }
         ],
         "social": {
             "facebook": "https://facebook.com",
@@ -42,17 +54,23 @@
     {
         "id": "team_03",
         "name": "م/ أحمد أسعد",
+        "name_ar": "م/ أحمد أسعد",
+        "name_en": "Eng. Ahmed Assaad",
         "role": "CTO (Chief Technology Officer)",
+        "role_ar": "CTO (رئيس القطاع التقني)",
+        "role_en": "Chief Technology Officer (CTO)",
         "image": "..//assets/team/asaad.jpeg",
         "description": "المشرف التقني المسؤول عن هندسة المنظومات المعقدة وتصميم البنية التحتية البرمجية السحابية للشركة لضمان ثبات الخوادم وسرعة الأداء المطلقة تحت أي ضغط.",
+        "description_ar": "المشرف التقني المسؤول عن هندسة المنظومات المعقدة وتصميم البنية التحتية البرمجية السحابية للشركة لضمان ثبات الخوادم وسرعة الأداء المطلقة تحت أي ضغط.",
+        "description_en": "Strategic technology leader orchestrating tech infrastructure and engineering teams to build scalable, high-performance software products.",
         "skills": [
-            { "name": "معمارية الأنظمة وقواعد البيانات", "value": "97%" },
-            { "name": "هندسة البرمجيات الخلفية Backend", "value": "95%" },
-            { "name": "إدارة البنية التحتية السحابية", "value": "93%" }
+            { "name": "System Architecture & Database Design", "value": "97%" },
+            { "name": "Backend Software Engineering", "value": "95%" },
+            { "name": "Cloud Infrastructure Management", "value": "93%" }
         ],
         "stats": [
-            { "value": "50+", "label": "منظومة برمجية مدمجة" },
-            { "value": "99.9%", "label": "استقرار الأنظمة" }
+            { "value": "50+", "label": "Integrated Systems", "label_ar": "منظومة برمجية مدمجة", "label_en": "Integrated Systems" },
+            { "value": "99.9%", "label": "System Uptime & Stability", "label_ar": "استقرار الأنظمة", "label_en": "System Uptime & Stability" }
         ],
         "social": {
             "facebook": "https://facebook.com",
@@ -62,17 +80,23 @@
     {
         "id": "team_04",
         "name": "م/ أحمد إسماعيل",
+        "name_ar": "م/ أحمد إسماعيل",
+        "name_en": "Eng. Ahmed Ismail",
         "role": "Founder & CEO",
+        "role_ar": "المؤسس والرئيس التنفيذي",
+        "role_en": "Founder & CEO",
         "image": "..//assets/team/shabana.jpg",
         "description": "الموجه الإستراتيجي والملهم الأول لفريق العمل. يقود صرح Pharaoh Code برؤية طموحة ومبتكرة لتقديم أرقى الحلول البرمجية الفاخرة للشركات الناشئة والكبرى.",
+        "description_ar": "الموجه الإستراتيجي والملهم الأول لفريق العمل. يقود صرح Pharaoh Code برؤية طموحة ومبتكرة لتقديم أرقى الحلول البرمجية الفاخرة للشركات الناشئة والكبرى.",
+        "description_en": "Founder and CEO with a strong strategic vision for building innovative software products and empowering high-performing engineering teams.",
         "skills": [
-            { "name": "التخطيط الإستراتيجي وحوكمة الشركات", "value": "99%" },
-            { "name": "إدارة المنتجات البرمجية الفاخرة", "value": "96%" },
-            { "name": "القيادة والتوجيه التنفيذي", "value": "98%" }
+            { "name": "Strategic Planning & Corporate Governance", "value": "99%" },
+            { "name": "Operations & Process Management", "value": "96%" },
+            { "name": "Executive Leadership & Mentorship", "value": "98%" }
         ],
         "stats": [
-            { "value": "1", "label": "رؤية برمجية موحدة" },
-            { "value": "100%", "label": "التزام بجودة المخرجات" }
+            { "value": "25", "label": "Established Projects", "label_ar": "مشاريع تم تأسيسها", "label_en": "Established Projects" },
+            { "value": "3", "label": "Years of Leadership", "label_ar": "سنوات القيادة", "label_en": "Years of Leadership" }
         ],
         "social": {
             "facebook": "https://facebook.com",
@@ -82,17 +106,23 @@
     {
         "id": "team_05",
         "name": "بدر سيد العربي",
+        "name_ar": "بدر سيد العربي",
+        "name_en": "Badr Sayed Al-Arabi",
         "role": "Media Buyer",
+        "role_ar": "خبير التسويق الإعلاني المدفوع",
+        "role_en": "Media Buyer & Digital Marketer",
         "image": "..//assets/team/badr.jpeg",
         "description": "خبير الحملات الإعلانية والتسويق الرقمي المدفوع، متمكن من إدارة وتوجيه الميزانيات التسويقية بكفاءة بالبث المباشر والمستهدف لتحقيق أعلى عائد استثماري للمشاريع.",
+        "description_ar": "خبير الحملات الإعلانية والتسويق الرقمي المدفوع، متمكن من إدارة وتوجيه الميزانيات التسويقية بكفاءة بالبث المباشر والمستهدف لتحقيق أعلى عائد استثماري للمشاريع.",
+        "description_en": "Digital marketing and media buying expert specializing in paid ad optimization, audience targeting, and high ROI marketing campaigns.",
         "skills": [
-            { "name": "إدارة الحملات الإعلانية المدفوعة", "value": "96%" },
-            { "name": "تحليل البيانات وتحسين العائد ROI", "value": "93%" },
-            { "name": "استهداف الجمهور وإعادة التسويق", "value": "95%" }
+            { "name": "Paid Advertising Campaigns Management", "value": "96%" },
+            { "name": "Data Analytics & ROI Optimization", "value": "93%" },
+            { "name": "Audience Targeting & Remarketing", "value": "95%" }
         ],
         "stats": [
-            { "value": "12+", "label": "حملة إعلانية كبرى" },
-            { "value": "4.5x", "label": "معدل مضاعفة المبيعات" }
+            { "value": "12+", "label": "Major Ad Campaigns", "label_ar": "حملة إعلانية كبرى", "label_en": "Major Ad Campaigns" },
+            { "value": "4.5x", "label": "Sales ROI Multiplier", "label_ar": "معدل مضاعفة المبيعات", "label_en": "Sales ROI Multiplier" }
         ],
         "social": {
             "facebook": "https://facebook.com",
@@ -101,18 +131,24 @@
     },
     {
         "id": "team_06",
-        "name": "م/ جمال ",
+        "name": "م/ جمال",
+        "name_ar": "م/ جمال سليم",
+        "name_en": "Gamal Sellim",
         "role": "Backend Developer",
+        "role_ar": "مطور الأنظمة الخلفية",
+        "role_en": "Backend Developer",
         "image": "..//assets/team/gamal.jpeg",
         "description": "مهندس متخصص في بناء وتطوير الخدمات الخلفية وقواعد البيانات السحابية وضمان استقرار الـ APIs، متميز في تحسين جودة الأكواد البرمجية وتسريع معالجة البيانات بكفاءة عالية.",
+        "description_ar": "مهندس متخصص في بناء وتطوير الخدمات الخلفية وقواعد البيانات السحابية وضمان استقرار الـ APIs، متميز في تحسين جودة الأكواد البرمجية وتسريع معالجة البيانات بكفاءة عالية.",
+        "description_en": "Backend developer specialized in building high-performance APIs, relational database design, server management, and secure software architecture.",
         "skills": [
-            { "name": "بناء الـ Restful APIs وتكامل الأنظمة", "value": "95%" },
-            { "name": "إدارة قواعد البيانات SQL & NoSQL", "value": "92%" },
-            { "name": "تأمين الخوادم والحماية من الثغرات البرمجية", "value": "94%" }
+            { "name": "RESTful APIs & System Integration", "value": "95%" },
+            { "name": "SQL & NoSQL Database Management", "value": "92%" },
+            { "name": "Server Security & Vulnerability Hardening", "value": "94%" }
         ],
         "stats": [
-            { "value": "40+", "label": "قاعدة بيانات مدمجة" },
-            { "value": "98ms", "label": "سرعة استجابة السيرفر" }
+            { "value": "40+", "label": "Integrated Databases", "label_ar": "قاعدة بيانات مدمجة", "label_en": "Integrated Databases" },
+            { "value": "98ms", "label": "Server Response Time", "label_ar": "سرعة استجابة السيرفر", "label_en": "Server Response Time" }
         ],
         "social": {
             "facebook": "https://facebook.com",
@@ -122,17 +158,23 @@
     {
         "id": "team_07",
         "name": "م/ هدى يحيى",
+        "name_ar": "م/ هدى يحيى",
+        "name_en": "Eng. Hoda Yehia",
         "role": "Project Manager",
+        "role_ar": "مدير مشاريع برمجية",
+        "role_en": "Software Project Manager",
         "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400",
         "description": "المسؤولة عن توجيه وتنسيق وإدارة دورات حياة المشاريع البرمجية كاملة، مع تذليل العقبات وتطبيق منهجيات Agile الرشيقة لضمان تسليم المهام بدقة تامة وفي المواعيد المحددة.",
+        "description_ar": "المسؤولة عن توجيه وتنسيق وإدارة دورات حياة المشاريع البرمجية كاملة، مع تذليل العقبات وتطبيق منهجيات Agile الرشيقة لضمان تسليم المهام بدقة تامة وفي المواعيد المحددة.",
+        "description_en": "Project manager guiding full software lifecycle through Agile & Scrum methodologies to deliver tasks on time.",
         "skills": [
-            { "name": "منهجيات الإدارة Agile & Scrum", "value": "96%" },
-            { "name": "إدارة الوقت والموارد وتخفيف المخاطر", "value": "94%" },
-            { "name": "أدوات إدارة المهام Jira & Trello", "value": "98%" }
+            { "name": "Agile & Scrum Management Methodologies", "value": "96%" },
+            { "name": "Resource Allocation & Risk Mitigation", "value": "94%" },
+            { "name": "Task Management (Jira & Trello)", "value": "98%" }
         ],
         "stats": [
-            { "value": "25+", "label": "مشروع تم تسليمه بنجاح" },
-            { "value": "100%", "label": "التزام بالجداول الزمنية" }
+            { "value": "25+", "label": "Delivered Projects", "label_ar": "مشروع تم تسليمه بنجاح", "label_en": "Delivered Projects" },
+            { "value": "100%", "label": "On-Time Schedule Delivery", "label_ar": "التزام بالجداول الزمنية", "label_en": "On-Time Schedule Delivery" }
         ],
         "social": {
             "facebook": "https://facebook.com",
@@ -142,17 +184,23 @@
     {
         "id": "team_08",
         "name": "م/ رامي سمير",
+        "name_ar": "م/ رامي سمير",
+        "name_en": "Eng. Ramy Samir",
         "role": "Security Specialist",
+        "role_ar": "أخصائي أمن سيبراني",
+        "role_en": "Cyber Security Specialist",
         "image": "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?q=80&w=400",
         "description": "خبير الأمن السيبراني المسؤول عن تحصين تطبيقاتنا البرمجية وبنيتنا التحتية ضد أي اختراقات أو تسريبات للبيانات، مطبقاً أعلى المعايير الأمنية العالمية للتشفير والحماية.",
+        "description_ar": "خبير الأمن السيبراني المسؤول عن تحصين تطبيقاتنا البرمجية وبنيتنا التحتية ضد أي اختراقات أو تسريبات للبيانات، مطبقاً أعلى المعايير الأمنية العالمية للتشفير والحماية.",
+        "description_en": "Cyber security expert specializing in infrastructure protection, penetration testing, and data encryption.",
         "skills": [
-            { "name": "إختبارات الاختراق Penetration Testing", "value": "98%" },
-            { "name": "تأمين الشبكات والبرمجيات السحابية", "value": "95%" },
-            { "name": "تطبيق معايير تشفير البيانات والـ Encryption", "value": "97%" }
+            { "name": "Penetration Testing & Vulnerability Assessment", "value": "98%" },
+            { "name": "Cloud Software & Network Hardening", "value": "95%" },
+            { "name": "Data Encryption & Security Standards", "value": "97%" }
         ],
         "stats": [
-            { "value": "0", "label": "ثغرات أمنية مكتشفة لاحقاً" },
-            { "value": "100%", "label": "أمان وخصوصية تامة" }
+            { "value": "0", "label": "Discovered Vulnerabilities", "label_ar": "ثغرات أمنية مكتشفة لاحقاً", "label_en": "Discovered Vulnerabilities" },
+            { "value": "100%", "label": "Privacy & Data Security", "label_ar": "أمان وخصوصية تامة", "label_en": "Privacy & Data Security" }
         ],
         "social": {
             "facebook": "https://facebook.com",

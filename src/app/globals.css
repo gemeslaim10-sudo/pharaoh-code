@@ -23,6 +23,60 @@ section,
   color: #ffffff;
 }
 
+/* ==========================================================================
+   LIGHT MODE OVERRIDES ([data-theme="light"] / .light)
+   ========================================================================== */
+
+html.light,
+html[data-theme="light"],
+body.light {
+  background-color: #F8FAFC !important;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(184, 134, 11, 0.08) 0%, transparent 65%),
+    linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 56px 56px, 56px 56px !important;
+  background-attachment: fixed !important;
+  color: #0F172A !important;
+}
+
+html[data-theme="light"] section,
+html[data-theme="light"] .bg-pharaohNavy {
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+html[data-theme="light"] .bg-pharaohCard,
+html[data-theme="light"] .bg-\[\#112240\],
+html[data-theme="light"] .bg-\[\#0A192F\] {
+  background-color: #FFFFFF !important;
+  border-color: rgba(15, 23, 42, 0.1) !important;
+  color: #0F172A !important;
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08) !important;
+}
+
+html[data-theme="light"] .text-white {
+  color: #0F172A !important;
+}
+
+html[data-theme="light"] .text-gray-300,
+html[data-theme="light"] .text-gray-400 {
+  color: #475569 !important;
+}
+
+html[data-theme="light"] nav {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+html[data-theme="light"] nav a:not(.btn-pharaoh-gold) {
+  color: #0F172A !important;
+}
+
+html[data-theme="light"] nav a:not(.btn-pharaoh-gold):hover {
+  color: #B8860B !important;
+}
+
 /* شاشة التحميل باللوجو الجديد */
 #preloader {
   position: fixed;

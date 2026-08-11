@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import { useTranslation } from "@/contexts/LanguageContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
 export default function Navbar({ 
   siteName = "PHARAOH CODE", 
@@ -53,6 +54,7 @@ export default function Navbar({
 
           {/* Action Buttons & Utilities Section */}
           <div className="hidden lg:flex items-center gap-3">
+            <ThemeSwitcher />
             <LanguageSwitcher iconOnly={true} />
 
             <Link href="/start-project" className="btn-pharaoh-gold px-4 h-10 rounded-xl text-xs font-extrabold shadow-md hover:shadow-pharaohGold/30 transition-all flex items-center gap-1.5 shrink-0">
@@ -123,11 +125,14 @@ export default function Navbar({
             </span>
           </div>
 
-          <button id="close-menu" className="text-pharaohGold hover:rotate-90 transition-all duration-300">
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
+          <div className="flex items-center gap-3">
+            <ThemeSwitcher />
+            <button id="close-menu" className="text-pharaohGold hover:rotate-90 transition-all duration-300">
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
         </div>
 
         <div className="flex flex-col p-8 gap-8 text-white text-xl font-bold">

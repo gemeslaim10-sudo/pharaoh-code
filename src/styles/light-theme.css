@@ -1,0 +1,119 @@
+/* ==========================================================================
+   COMPREHENSIVE LIGHT MODE OVERRIDES ([data-theme="light"] / .light)
+   ========================================================================== */
+
+/* 1. Base Light Mode Background & Text */
+html.light,
+html[data-theme="light"],
+body.light {
+  background-color: #F8FAFC !important;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(184, 134, 11, 0.08) 0%, transparent 65%),
+    linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 56px 56px, 56px 56px !important;
+  background-attachment: fixed !important;
+  color: #0F172A !important;
+}
+
+/* 2. Section & Container Backgrounds */
+html[data-theme="light"] section,
+html[data-theme="light"] .bg-pharaohNavy {
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+/* 3. Cards & Dark Containers - Crisp White with Sharp Contrast Border */
+html[data-theme="light"] .bg-pharaohCard,
+html[data-theme="light"] .bg-\[\#112240\],
+html[data-theme="light"] .bg-\[\#0A192F\] {
+  background-color: #FFFFFF !important;
+  border-color: rgba(15, 23, 42, 0.18) !important;
+  color: #0F172A !important;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(15, 23, 42, 0.1) !important;
+}
+
+/* 4. High Contrast Borders for Cards, Frames & Inputs in Light Mode */
+html[data-theme="light"] .border-white\/5,
+html[data-theme="light"] .border-white\/10,
+html[data-theme="light"] .border-white\/20,
+html[data-theme="light"] .border-white\/30,
+html[data-theme="light"] .border-pharaohGold\/10,
+html[data-theme="light"] .border-pharaohGold\/20,
+html[data-theme="light"] .border-pharaohGold\/30 {
+  border-color: rgba(15, 23, 42, 0.22) !important;
+}
+
+/* 5. Typography Contrast in Light Mode */
+html[data-theme="light"] .text-white {
+  color: #0F172A !important;
+}
+
+html[data-theme="light"] .text-gray-300,
+html[data-theme="light"] .text-gray-400 {
+  color: #475569 !important;
+}
+
+/* 6. Navigation Bar in Light Mode */
+html[data-theme="light"] nav {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05) !important;
+}
+
+html[data-theme="light"] nav a:not(.btn-pharaoh-gold) {
+  color: #0F172A !important;
+}
+
+html[data-theme="light"] nav a:not(.btn-pharaoh-gold):hover {
+  color: #B8860B !important;
+}
+
+/* 7. Icon Buttons in Light Mode (LanguageSwitcher, Dashboard, Icon Buttons) */
+html[data-theme="light"] .btn-pharaoh-icon,
+html[data-theme="light"] .bg-\[\#0F2338\],
+html[data-theme="light"] .bg-\[\#152338\] {
+  background-color: #FFFFFF !important;
+  border-color: rgba(15, 23, 42, 0.25) !important;
+  color: #0F172A !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
+}
+
+html[data-theme="light"] .btn-pharaoh-icon:hover,
+html[data-theme="light"] .bg-\[\#0F2338\]:hover {
+  background-color: #B8860B !important;
+  border-color: #B8860B !important;
+  color: #FFFFFF !important;
+}
+
+/* 8. Buttons & Borders Contrast in Light Mode */
+html[data-theme="light"] .btn-pharaoh-glass {
+  background-color: #FFFFFF !important;
+  border-color: rgba(15, 23, 42, 0.35) !important;
+  color: #0F172A !important;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08) !important;
+}
+
+html[data-theme="light"] .btn-pharaoh-glass:hover {
+  background-color: #0F172A !important;
+  border-color: #0F172A !important;
+  color: #FFFFFF !important;
+}
+
+/* 9. Hero Section Overlays & Text in Light Mode */
+html[data-theme="light"] .heroSwiper .swiper-slide {
+  background-color: #F8FAFC !important;
+}
+
+html[data-theme="light"] .heroSwiper .bg-gradient-to-t {
+  background: linear-gradient(to top, rgba(248, 250, 252, 0.95) 0%, rgba(248, 250, 252, 0.45) 50%, rgba(248, 250, 252, 0.85) 100%) !important;
+}
+
+html[data-theme="light"] .heroSwiper h1,
+html[data-theme="light"] .heroSwiper h2 {
+  color: #0F172A !important;
+}
+
+html[data-theme="light"] .heroSwiper p {
+  color: #334155 !important;
+}

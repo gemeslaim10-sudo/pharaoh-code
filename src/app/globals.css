@@ -2,6 +2,7 @@
 
 /* Structured CSS Modules (Strict < 150 lines per module for maximum maintainability) */
 @import "../styles/theme.css";
+@import "../styles/light-theme.css";
 @import "../styles/buttons.css";
 @import "../styles/animations.css";
 @import "../styles/preloader.css";

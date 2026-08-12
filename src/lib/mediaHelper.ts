@@ -1,6 +1,7 @@
 export function isMediaVideo(url?: string): boolean {
-    if (!url) return false;
+    if (!url || typeof url !== 'string') return false;
     const cleanUrl = url.toLowerCase().split('?')[0];
+    if (!cleanUrl) return false;
     return (
         cleanUrl.endsWith('.mp4') ||
         cleanUrl.endsWith('.webm') ||

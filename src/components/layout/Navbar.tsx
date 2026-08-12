@@ -3,23 +3,33 @@
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import { useTranslation } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
 export default function Navbar({ 
   siteName = "PHARAOH CODE", 
   logoUrl,
+  logoLightUrl,
   reverseNavbarAr = true
 }: { 
   siteName?: string; 
   logoUrl?: string;
+  logoLightUrl?: string;
   reverseNavbarAr?: boolean;
 }) {
   const { user, isAdmin, logout } = useAuth();
   const { t, language, direction } = useTranslation();
+  const { theme } = useTheme();
+
   const nameParts = siteName.split(' ');
   const firstWord = nameParts[0];
   const restWords = nameParts.slice(1).join(' ');
+
+  // Compute active theme-aware logo (If Light logo is not uploaded, text logo shows in light mode)
+  const activeLogo = theme === 'light' 
+    ? (logoLightUrl || '') 
+    : (logoUrl || '');
 
   // Compute actual navigation direction based on admin setting for Arabic
   const navDirection = language === 'ar' && !reverseNavbarAr ? 'ltr' : direction;
@@ -31,8 +41,8 @@ export default function Navbar({
           {/* Logo + Dedicated Main Navigation Links Section */}
           <div className="flex items-center gap-6 lg:gap-8">
             <Link href="/" className="text-white font-black text-xl sm:block tracking-tighter uppercase flex items-center shrink-0">
-              {logoUrl ? (
-                <img src={logoUrl} alt={siteName} className="h-12 lg:h-14 max-w-[240px] w-auto object-contain drop-shadow-md py-1 transition-all" />
+              {activeLogo ? (
+                <img src={activeLogo} alt={siteName} className="h-12 lg:h-14 max-w-[240px] w-auto object-contain drop-shadow-md py-1 transition-all" />
               ) : (
                 <>
                   {firstWord} {restWords && <span className="text-pharaohGold">{restWords}</span>}
@@ -115,8 +125,8 @@ export default function Navbar({
         <div className="p-6 flex justify-between items-center border-b border-white/10">
           <div className="flex items-center gap-2">
             <span className="text-white font-black text-2xl tracking-tighter uppercase flex items-center">
-              {logoUrl ? (
-                <img src={logoUrl} alt={siteName} className="h-12 w-auto object-contain drop-shadow-md" />
+              {activeLogo ? (
+                <img src={activeLogo} alt={siteName} className="h-12 w-auto object-contain drop-shadow-md" />
               ) : (
                 <>
                   {firstWord} {restWords && <span className="text-pharaohGold">{restWords}</span>}

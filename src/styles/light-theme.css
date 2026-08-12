@@ -2,62 +2,193 @@
    COMPREHENSIVE LIGHT MODE OVERRIDES ([data-theme="light"] / .light)
    ========================================================================== */
 
-/* 1. Base Light Mode Background & Text */
-html.light,
+/* 1. Tailwind v4 CSS Theme Variable Overrides in Light Mode */
+html[data-theme="light"] {
+  --color-pharaohNavy: #F8FAFC !important;
+  --color-pharaohCard: #FFFFFF !important;
+  --color-deepNavy: #F8FAFC !important;
+}
+
+/* 2. Global Root, Body, Main & Page Containers in Light Mode */
 html[data-theme="light"],
+html.light,
+body[data-theme="light"],
 body.light {
   background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+/* 3. Section & Page Backgrounds with Crisp Visible 56px Grid Pattern */
+html[data-theme="light"] body,
+html[data-theme="light"] main,
+html[data-theme="light"] section,
+html[data-theme="light"] footer,
+html[data-theme="light"] header,
+html[data-theme="light"] [class*="bg-[#0A192F]"],
+html[data-theme="light"] [class*="bg-[#0B1D3A]"],
+html[data-theme="light"] [class*="bg-[#081426]"],
+html[data-theme="light"] [class*="bg-[#081225]"],
+html[data-theme="light"] [class*="bg-[#0B1728]"],
+html[data-theme="light"] [class*="bg-pharaohNavy"] {
+  background-color: #F8FAFC !important;
   background-image: 
-    radial-gradient(circle at 50% 0%, rgba(184, 134, 11, 0.08) 0%, transparent 65%),
-    linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px) !important;
+    radial-gradient(circle at 50% 0%, rgba(184, 134, 11, 0.1) 0%, transparent 65%),
+    linear-gradient(to right, rgba(15, 23, 42, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.06) 1px, transparent 1px) !important;
   background-size: 100% 100%, 56px 56px, 56px 56px !important;
   background-attachment: fixed !important;
   color: #0F172A !important;
 }
 
-/* 2. Section & Container Backgrounds */
-html[data-theme="light"] section,
-html[data-theme="light"] .bg-pharaohNavy {
-  background-color: #F8FAFC !important;
-  color: #0F172A !important;
+/* 4. Background Watermark Decorative Text in Light Mode - Ultra Transparent (No Clutter) */
+html[data-theme="light"] [class*="pointer-events-none"][class*="select-none"],
+html[data-theme="light"] .pointer-events-none.select-none,
+html[data-theme="light"] [class*="text-[15rem]"],
+html[data-theme="light"] [class*="text-[12rem]"],
+html[data-theme="light"] [class*="text-[10rem]"],
+html[data-theme="light"] [class*="text-9xl"] {
+  opacity: 0.015 !important;
+  color: rgba(15, 23, 42, 0.02) !important;
+  text-shadow: none !important;
+  mix-blend-mode: multiply !important;
 }
 
-/* 3. Cards & Dark Containers - Crisp White with Sharp Contrast Border */
+html[data-theme="light"] [class*="text-[#C5A16F]/[0."],
+html[data-theme="light"] [class*="text-pharaohGold/0."] {
+  color: rgba(184, 134, 11, 0.02) !important;
+}
+
+/* 5. Existing Borders Color Adjustments for Light Background (No New Outlines Added) */
+html[data-theme="light"] [class*="border-white"],
+html[data-theme="light"] [class*="border-gray-"] {
+  border-color: rgba(15, 23, 42, 0.2) !important;
+}
+
+html[data-theme="light"] [class*="border-pharaohGold"],
+html[data-theme="light"] [class*="border-[#C5A16F]"] {
+  border-color: rgba(184, 134, 11, 0.4) !important;
+}
+
+/* Existing Hover Border Color Overrides (Only for elements that already have hover:border classes) */
+html[data-theme="light"] [class*="hover:border-"]:hover,
+html[data-theme="light"] [class*="hover:border-pharaohGold"]:hover,
+html[data-theme="light"] [class*="hover:border-[#C5A16F]"]:hover {
+  border-color: #B8860B !important;
+}
+
+/* Cards, Modals & Dark Boxes -> Crisp White with Subtle Shadow (No Artificial Outline Rings) */
 html[data-theme="light"] .bg-pharaohCard,
-html[data-theme="light"] .bg-\[\#112240\],
-html[data-theme="light"] .bg-\[\#0A192F\] {
+html[data-theme="light"] [class*="bg-[#112240]"],
+html[data-theme="light"] [class*="bg-[#0D1E36]"],
+html[data-theme="light"] [class*="bg-[#0F2338]"],
+html[data-theme="light"] [class*="bg-[#152338]"],
+html[data-theme="light"] [class*="bg-white/1"],
+html[data-theme="light"] [class*="bg-white/5"],
+html[data-theme="light"] [class*="bg-white/10"],
+html[data-theme="light"] [class*="bg-white/20"],
+html[data-theme="light"] input,
+html[data-theme="light"] select,
+html[data-theme="light"] textarea {
   background-color: #FFFFFF !important;
-  border-color: rgba(15, 23, 42, 0.18) !important;
   color: #0F172A !important;
-  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(15, 23, 42, 0.1) !important;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08) !important;
 }
 
-/* 4. High Contrast Borders for Cards, Frames & Inputs in Light Mode */
-html[data-theme="light"] .border-white\/5,
-html[data-theme="light"] .border-white\/10,
-html[data-theme="light"] .border-white\/20,
-html[data-theme="light"] .border-white\/30,
-html[data-theme="light"] .border-pharaohGold\/10,
-html[data-theme="light"] .border-pharaohGold\/20,
-html[data-theme="light"] .border-pharaohGold\/30 {
+html[data-theme="light"] input,
+html[data-theme="light"] select,
+html[data-theme="light"] textarea {
   border-color: rgba(15, 23, 42, 0.22) !important;
 }
 
-/* 5. Typography Contrast in Light Mode */
-html[data-theme="light"] .text-white {
+html[data-theme="light"] input:focus,
+html[data-theme="light"] select:focus,
+html[data-theme="light"] textarea:focus {
+  border-color: #B8860B !important;
+  box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.2) !important;
+  outline: none !important;
+}
+
+/* 6. Typography Contrast in Light Mode (Excluding Hero Header Section) */
+html[data-theme="light"] body *:not(.heroSwiper *):not([class*="pointer-events-none"]) > h1,
+html[data-theme="light"] body *:not(.heroSwiper *):not([class*="pointer-events-none"]) > h2,
+html[data-theme="light"] body *:not(.heroSwiper *):not([class*="pointer-events-none"]) > h3,
+html[data-theme="light"] body *:not(.heroSwiper *):not([class*="pointer-events-none"]) > h4,
+html[data-theme="light"] h1:not(.heroSwiper *):not([class*="pointer-events-none"]),
+html[data-theme="light"] h2:not(.heroSwiper *):not([class*="pointer-events-none"]),
+html[data-theme="light"] h3:not(.heroSwiper *):not([class*="pointer-events-none"]),
+html[data-theme="light"] h4:not(.heroSwiper *):not([class*="pointer-events-none"]),
+html[data-theme="light"] h5:not(.heroSwiper *):not([class*="pointer-events-none"]),
+html[data-theme="light"] h6:not(.heroSwiper *):not([class*="pointer-events-none"]),
+html[data-theme="light"] [class*="text-white"]:not(.heroSwiper *):not([class*="pointer-events-none"]):not([class*="btn-"]):not(.btn-pharaoh-gold) {
   color: #0F172A !important;
 }
 
-html[data-theme="light"] .text-gray-300,
-html[data-theme="light"] .text-gray-400 {
-  color: #475569 !important;
+html[data-theme="light"] p:not(.heroSwiper *):not([class*="pointer-events-none"]),
+html[data-theme="light"] [class*="text-gray-300"]:not(.heroSwiper *),
+html[data-theme="light"] [class*="text-gray-400"]:not(.heroSwiper *),
+html[data-theme="light"] [class*="text-gray-500"]:not(.heroSwiper *) {
+  color: #334155 !important;
 }
 
-/* 6. Navigation Bar in Light Mode */
-html[data-theme="light"] nav {
-  background-color: rgba(255, 255, 255, 0.92) !important;
-  border-color: rgba(15, 23, 42, 0.12) !important;
+html[data-theme="light"] [class*="text-pharaohGold"]:not(.heroSwiper *):not([class*="pointer-events-none"]):not([class*="/"]),
+html[data-theme="light"] [class*="text-[#C5A16F]"]:not(.heroSwiper *):not([class*="pointer-events-none"]):not([class*="/"]) {
+  color: #B8860B !important;
+}
+
+/* 7. Hover Text & Color Contrast (Without adding new borders or outline boxes) */
+html[data-theme="light"] [class*="hover:text-white"]:not(.heroSwiper *):hover,
+html[data-theme="light"] .group:hover [class*="group-hover:text-white"]:not(.heroSwiper *) {
+  color: #0F172A !important;
+}
+
+html[data-theme="light"] .group:hover [class*="group-hover:text-[#C5A16F]"],
+html[data-theme="light"] .group:hover [class*="group-hover:text-pharaohGold"],
+html[data-theme="light"] [class*="hover:text-pharaohGold"]:hover,
+html[data-theme="light"] [class*="hover:text-[#C5A16F]"]:hover {
+  color: #B8860B !important;
+}
+
+/* Primary Pharaoh Gold Button Hover */
+html[data-theme="light"] .btn-pharaoh-gold:hover,
+html[data-theme="light"] .btn-primary-gold:hover {
+  background: #0A192F !important;
+  color: #FFFFFF !important;
+  border-color: #0A192F !important;
+  box-shadow: 0 10px 25px rgba(10, 25, 47, 0.25) !important;
+}
+
+/* Secondary & Glass Button Hover (Outside Hero) */
+html[data-theme="light"] main section:not(.heroSwiper) .btn-pharaoh-glass:hover {
+  background-color: #0F172A !important;
+  border-color: #0F172A !important;
+  color: #FFFFFF !important;
+}
+
+/* Icon Buttons Hover */
+html[data-theme="light"] .btn-pharaoh-icon:hover {
+  background-color: #B8860B !important;
+  border-color: #B8860B !important;
+  color: #FFFFFF !important;
+}
+
+/* Filter Buttons */
+html[data-theme="light"] .filter-btn.active {
+  background-color: #B8860B !important;
+  color: #FFFFFF !important;
+  border-color: #B8860B !important;
+}
+
+html[data-theme="light"] .filter-btn:not(.active):hover {
+  background-color: rgba(184, 134, 11, 0.12) !important;
+  color: #B8860B !important;
+  border-color: #B8860B !important;
+}
+
+/* 8. Navigation Bar & Headers in Light Mode */
+html[data-theme="light"] nav,
+html[data-theme="light"] header {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.12) !important;
   box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05) !important;
 }
 
@@ -69,51 +200,76 @@ html[data-theme="light"] nav a:not(.btn-pharaoh-gold):hover {
   color: #B8860B !important;
 }
 
-/* 7. Icon Buttons in Light Mode (LanguageSwitcher, Dashboard, Icon Buttons) */
-html[data-theme="light"] .btn-pharaoh-icon,
-html[data-theme="light"] .bg-\[\#0F2338\],
-html[data-theme="light"] .bg-\[\#152338\] {
-  background-color: #FFFFFF !important;
-  border-color: rgba(15, 23, 42, 0.25) !important;
-  color: #0F172A !important;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
-}
-
-html[data-theme="light"] .btn-pharaoh-icon:hover,
-html[data-theme="light"] .bg-\[\#0F2338\]:hover {
-  background-color: #B8860B !important;
-  border-color: #B8860B !important;
-  color: #FFFFFF !important;
-}
-
-/* 8. Buttons & Borders Contrast in Light Mode */
-html[data-theme="light"] .btn-pharaoh-glass {
-  background-color: #FFFFFF !important;
-  border-color: rgba(15, 23, 42, 0.35) !important;
-  color: #0F172A !important;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08) !important;
-}
-
-html[data-theme="light"] .btn-pharaoh-glass:hover {
-  background-color: #0F172A !important;
-  border-color: #0F172A !important;
-  color: #FFFFFF !important;
-}
-
-/* 9. Hero Section Overlays & Text in Light Mode */
+/* 9. Header Background Videos & Hero Section Overlays in Light Mode */
 html[data-theme="light"] .heroSwiper .swiper-slide {
-  background-color: #F8FAFC !important;
+  background-color: #0A192F !important;
+}
+
+html[data-theme="light"] video,
+html[data-theme="light"] .heroSwiper video {
+  display: block !important;
+  opacity: 0.85 !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  z-index: 1 !important;
 }
 
 html[data-theme="light"] .heroSwiper .bg-gradient-to-t {
-  background: linear-gradient(to top, rgba(248, 250, 252, 0.95) 0%, rgba(248, 250, 252, 0.45) 50%, rgba(248, 250, 252, 0.85) 100%) !important;
+  background: linear-gradient(to top, #0A192F 0%, rgba(10, 25, 47, 0.4) 50%, rgba(10, 25, 47, 0.7) 100%) !important;
 }
 
+/* Strict Light Typography & Light Buttons over Dark Hero Video Backgrounds in Light Mode */
 html[data-theme="light"] .heroSwiper h1,
-html[data-theme="light"] .heroSwiper h2 {
-  color: #0F172A !important;
+html[data-theme="light"] .heroSwiper h1 *,
+html[data-theme="light"] .heroSwiper [class*="text-white"] {
+  color: #FFFFFF !important;
 }
 
-html[data-theme="light"] .heroSwiper p {
-  color: #334155 !important;
+html[data-theme="light"] .heroSwiper p,
+html[data-theme="light"] .heroSwiper [class*="text-gray-300"] {
+  color: #E2E8F0 !important;
+}
+
+html[data-theme="light"] .heroSwiper [class*="text-pharaohGold"],
+html[data-theme="light"] .heroSwiper [class*="text-[#C5A16F]"],
+html[data-theme="light"] .heroSwiper span[class*="text-pharaohGold"] {
+  color: #C5A16F !important;
+}
+
+html[data-theme="light"] .heroSwiper .btn-pharaoh-gold,
+html[data-theme="light"] .heroSwiper .btn-primary-gold {
+  background: linear-gradient(135deg, #D4AF37 0%, #C5A16F 50%, #B38F5C 100%) !important;
+  color: #0A192F !important;
+}
+
+html[data-theme="light"] .heroSwiper .btn-pharaoh-glass {
+  background: rgba(17, 34, 64, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="light"] .heroSwiper .btn-pharaoh-glass span {
+  color: #FFFFFF !important;
+}
+
+html[data-theme="light"] .heroSwiper .btn-pharaoh-glass:hover {
+  background: #C5A16F !important;
+  border-color: #C5A16F !important;
+  color: #0A192F !important;
+}
+
+html[data-theme="light"] .heroSwiper .btn-pharaoh-glass:hover span {
+  color: #0A192F !important;
+}
+
+/* 10. Icon Controls in Light Mode */
+html[data-theme="light"] button[aria-label="Toggle language"],
+html[data-theme="light"] button[aria-label="Toggle Theme"],
+html[data-theme="light"] button[title*="Language"],
+html[data-theme="light"] button[title*="اللغة"],
+html[data-theme="light"] button[title*="English"] {
+  background-color: #FFFFFF !important;
+  border-color: rgba(15, 23, 42, 0.22) !important;
+  color: #0F172A !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06) !important;
 }

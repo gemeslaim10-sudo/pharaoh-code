@@ -14,13 +14,16 @@ export default function DashboardSettingsHeader() {
                     data-target="#sec-identity">01. الهوية الرقمية</button>
                 <button
                     className="section-tab-btn text-gray-400 border border-transparent px-5 py-3 rounded-xl font-bold text-xs whitespace-nowrap hover:text-white"
-                    data-target="#sec-security">02. الحساب والأمان</button>
+                    data-target="#sec-hero-theme">02. تخصيص الهيرو والألوان</button>
                 <button
                     className="section-tab-btn text-gray-400 border border-transparent px-5 py-3 rounded-xl font-bold text-xs whitespace-nowrap hover:text-white"
-                    data-target="#sec-social">03. السوشيال ميديا</button>
+                    data-target="#sec-security">03. الحساب والأمان</button>
                 <button
                     className="section-tab-btn text-gray-400 border border-transparent px-5 py-3 rounded-xl font-bold text-xs whitespace-nowrap hover:text-white"
-                    data-target="#sec-status">04. بث المنصة</button>
+                    data-target="#sec-social">04. السوشيال ميديا</button>
+                <button
+                    className="section-tab-btn text-gray-400 border border-transparent px-5 py-3 rounded-xl font-bold text-xs whitespace-nowrap hover:text-white"
+                    data-target="#sec-status">05. بث المنصة</button>
             </div>
         </>
     );

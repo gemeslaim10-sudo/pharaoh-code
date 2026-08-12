@@ -3,19 +3,27 @@
 import Link from "next/link";
 import FooterServices from "./FooterServices";
 import { useTranslation } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export default function Footer({ 
   siteName = "PHARAOH CODE",
+  logoUrl,
+  logoLightUrl,
   socialLinks = { fb: '#', wa: '#', ig: '#' }
 }: { 
   siteName?: string,
+  logoUrl?: string,
+  logoLightUrl?: string,
   socialLinks?: { fb?: string, wa?: string, ig?: string }
 }) {
   const { t } = useTranslation();
+  const { theme } = useTheme();
   const nameParts = siteName.split(' ');
   const firstWord = nameParts[0];
   const restWords = nameParts.slice(1).join(' ');
   
+  const activeLogo = theme === 'light' ? (logoLightUrl || '') : (logoUrl || '');
+
   return (
     <footer className="relative bg-[#0A192F] pt-24 pb-12 overflow-hidden border-t border-[#C5A16F]/10">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-5 pointer-events-none text-center">
@@ -27,8 +35,14 @@ export default function Footer({
 
                 <div className="space-y-8">
                     <div className="flex items-center gap-3">
-                        <Link href="/" className="text-white text-2xl font-black tracking-tighter uppercase">
-                            {firstWord} {restWords && <span className="text-[#C5A16F]">{restWords}</span>}
+                        <Link href="/" className="text-white text-2xl font-black tracking-tighter uppercase flex items-center">
+                            {activeLogo ? (
+                                <img src={activeLogo} alt={siteName} className="h-10 w-auto object-contain drop-shadow-md" />
+                            ) : (
+                                <>
+                                    {firstWord} {restWords && <span className="text-[#C5A16F]">{restWords}</span>}
+                                </>
+                            )}
                         </Link>
                     </div>
                     <p className="text-gray-400 leading-relaxed text-sm">

@@ -39,7 +39,7 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
       </head>
       <body
-        className={`${tajawal.variable} font-sans antialiased bg-[#0A192F]`}
+        className={`${tajawal.variable} font-sans antialiased`}
       >
         <Script src="https://code.jquery.com/jquery-3.7.1.min.js" strategy="beforeInteractive" />
         <Script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" strategy="beforeInteractive" />

@@ -18,7 +18,8 @@ export default async function FrontendLayout({
   ]);
 
   const siteName = identity?.name || "PHARAOH CODE";
-  const logoUrl = identity?.logo || "";
+  const logoUrl = identity?.logo || identity?.logo_dark || "";
+  const logoLightUrl = identity?.logo_light || "";
   const reverseNavbarAr = identity?.reverse_navbar_ar !== undefined ? identity.reverse_navbar_ar : true;
 
   if (systemStatus?.mode === 'on') {
@@ -57,13 +58,13 @@ export default async function FrontendLayout({
   return (
     <>
       <Preloader />
-      <Navbar siteName={siteName} logoUrl={logoUrl} reverseNavbarAr={reverseNavbarAr} />
+      <Navbar siteName={siteName} logoUrl={logoUrl} logoLightUrl={logoLightUrl} reverseNavbarAr={reverseNavbarAr} />
       
-      <main className="flex-grow bg-[#0A192F]">
+      <main className="flex-grow">
         <PageTransitionWrapper>{children}</PageTransitionWrapper>
       </main>
 
-      <Footer siteName={siteName} socialLinks={socialLinks} />
+      <Footer siteName={siteName} logoUrl={logoUrl} logoLightUrl={logoLightUrl} socialLinks={socialLinks} />
       <GlobalScripts />
 
     </>

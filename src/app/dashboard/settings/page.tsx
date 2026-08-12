@@ -5,6 +5,7 @@ import DashboardSettingsScriptsForms from '@/components/dashboard/settings/Dashb
 import DashboardSettingsScriptsHandlers from '@/components/dashboard/settings/DashboardSettingsScriptsHandlers';
 import DashboardSettingsHeader from '@/components/dashboard/settings/DashboardSettingsHeader';
 import SettingsIdentity from '@/components/dashboard/settings/SettingsIdentity';
+import SettingsHeroTheme from '@/components/dashboard/settings/SettingsHeroTheme';
 import SettingsSecurity from '@/components/dashboard/settings/SettingsSecurity';
 import SettingsSocial from '@/components/dashboard/settings/SettingsSocial';
 import SettingsSystem from '@/components/dashboard/settings/SettingsSystem';
@@ -18,6 +19,7 @@ export default function DashboardSettings() {
             
             <DashboardSettingsHeader />
             <SettingsIdentity />
+            <SettingsHeroTheme />
             <SettingsSecurity />
             <SettingsSocial />
             <SettingsSystem />

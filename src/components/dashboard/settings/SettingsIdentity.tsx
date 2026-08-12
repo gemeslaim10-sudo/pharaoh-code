@@ -21,17 +21,26 @@ export default function SettingsIdentity() {
         desc_en: '',
         favicon: '',
         logo: '',
+        logo_dark: '',
+        logo_light: '',
         logo_en: '',
         reverse_navbar_ar: true
     });
     const [faviconFile, setFaviconFile] = useState<File | null>(null);
     const [faviconPreview, setFaviconPreview] = useState<string | null>(null);
+
+    // Dark Mode Logo State
     const [logoFile, setLogoFile] = useState<File | null>(null);
     const [logoPreview, setLogoPreview] = useState<string | null>(null);
+
+    // Light Mode Logo State
+    const [logoLightFile, setLogoLightFile] = useState<File | null>(null);
+    const [logoLightPreview, setLogoLightPreview] = useState<string | null>(null);
 
     // Logo Cropper State
     const [isCropperOpen, setIsCropperOpen] = useState(false);
     const [cropperImageSrc, setCropperImageSrc] = useState<string | null>(null);
+    const [activeCropperTarget, setActiveCropperTarget] = useState<'dark' | 'light' | null>('dark');
 
     useEffect(() => {
         const loadData = async () => {
@@ -48,7 +57,9 @@ export default function SettingsIdentity() {
                         desc: data.desc || data.desc_ar || data.description || '',
                         desc_en: data.desc_en || data.description_en || '',
                         favicon: data.favicon || '',
-                        logo: data.logo || '',
+                        logo: data.logo || data.logo_dark || '',
+                        logo_dark: data.logo_dark || data.logo || '',
+                        logo_light: data.logo_light || '',
                         logo_en: data.logo_en || '',
                         reverse_navbar_ar: data.reverse_navbar_ar !== undefined ? data.reverse_navbar_ar : true
                     });
@@ -71,7 +82,8 @@ export default function SettingsIdentity() {
             const token = await user.getIdToken();
             
             let finalFaviconUrl = formData.favicon;
-            let finalLogoUrl = formData.logo;
+            let finalLogoUrl = formData.logo || formData.logo_dark || '';
+            let finalLogoLightUrl = formData.logo_light || '';
             
             if (faviconFile) {
                 const uploadData = new FormData();
@@ -93,6 +105,16 @@ export default function SettingsIdentity() {
                 finalLogoUrl = uploadRes.url || '';
             }
 
+            if (logoLightFile) {
+                const uploadData = new FormData();
+                uploadData.append('file', logoLightFile);
+                const uploadRes = await uploadImage(token, uploadData);
+                if (!uploadRes.success) {
+                    throw new Error(uploadRes.error);
+                }
+                finalLogoLightUrl = uploadRes.url || '';
+            }
+
             const payload = {
                 ...formData,
                 name_ar: formData.name,
@@ -100,13 +122,16 @@ export default function SettingsIdentity() {
                 keywords_ar: formData.keywords,
                 desc_ar: formData.desc,
                 favicon: finalFaviconUrl,
-                logo: finalLogoUrl
+                logo: finalLogoUrl,
+                logo_dark: finalLogoUrl,
+                logo_light: finalLogoLightUrl
             };
 
             await updateIdentity(token, payload);
             setFaviconFile(null);
             setLogoFile(null);
-            alert("تم تحديث وحفظ سجل الهوية الرقمية المعتمدة! 👑");
+            setLogoLightFile(null);
+            alert("تم تحديث وحفظ سجل الهوية وشعارات المنصة بنجاح! 👑");
         } catch (error: any) {
             console.error(error);
             alert(`حدث خطأ أثناء حفظ الهوية: ${error?.message || 'يرجى التحقق من اتصالك وإعادة المحاولة.'}`);
@@ -135,22 +160,42 @@ export default function SettingsIdentity() {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
             const objectUrl = URL.createObjectURL(file);
+            setActiveCropperTarget('dark');
             setCropperImageSrc(objectUrl);
             setIsCropperOpen(true);
         }
     };
 
-    const handleOpenLogoCropper = () => {
-        const currentSrc = logoPreview || formData.logo;
+    const handleLogoLightChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0];
+            const objectUrl = URL.createObjectURL(file);
+            setActiveCropperTarget('light');
+            setCropperImageSrc(objectUrl);
+            setIsCropperOpen(true);
+        }
+    };
+
+    const handleOpenLogoCropper = (target: 'dark' | 'light' = 'dark') => {
+        const currentSrc = target === 'light'
+            ? (logoLightPreview || formData.logo_light)
+            : (logoPreview || formData.logo || formData.logo_dark);
+
         if (currentSrc) {
+            setActiveCropperTarget(target);
             setCropperImageSrc(currentSrc);
             setIsCropperOpen(true);
         }
     };
 
     const handleCropComplete = (croppedFile: File, previewUrl: string) => {
-        setLogoFile(croppedFile);
-        setLogoPreview(previewUrl);
+        if (activeCropperTarget === 'light') {
+            setLogoLightFile(croppedFile);
+            setLogoLightPreview(previewUrl);
+        } else {
+            setLogoFile(croppedFile);
+            setLogoPreview(previewUrl);
+        }
     };
 
     if (initialLoad) return <div className="p-10 text-center text-pharaohGold">جاري تحميل بيانات الهوية...</div>;
@@ -164,6 +209,8 @@ export default function SettingsIdentity() {
                 handleFaviconChange={handleFaviconChange}
                 logoPreview={logoPreview}
                 handleLogoChange={handleLogoChange}
+                logoLightPreview={logoLightPreview}
+                handleLogoLightChange={handleLogoLightChange}
                 onOpenLogoCropper={handleOpenLogoCropper}
                 loading={loading}
                 handleSubmit={handleSubmit}

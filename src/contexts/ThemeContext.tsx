@@ -27,14 +27,26 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const applyTheme = (newTheme: Theme) => {
     const root = document.documentElement;
+    const body = document.body;
+
     if (newTheme === 'light') {
       root.setAttribute('data-theme', 'light');
       root.classList.add('light');
       root.classList.remove('dark');
+      if (body) {
+        body.setAttribute('data-theme', 'light');
+        body.classList.add('light');
+        body.classList.remove('dark');
+      }
     } else {
       root.setAttribute('data-theme', 'dark');
       root.classList.add('dark');
       root.classList.remove('light');
+      if (body) {
+        body.setAttribute('data-theme', 'dark');
+        body.classList.add('dark');
+        body.classList.remove('light');
+      }
     }
   };
 

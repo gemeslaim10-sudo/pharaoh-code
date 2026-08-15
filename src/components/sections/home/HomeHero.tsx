@@ -53,16 +53,22 @@ export default function HomeHero({ data, heroThemeConfig }: { data?: SectionData
   const heroData = data || {};
 
   // Media selection based on theme for Slide 1
+  const defaultSlide1Light = "/assets/images/hero-light-slide1.jpg";
+  const defaultSlide1Dark = "/assets/images/hero-dark-slide1.jpg";
+
   const slide1Media = theme === 'light'
-    ? (heroThemeConfig?.lightSlide1Media || heroThemeConfig?.lightSlide1Video || heroThemeConfig?.lightSlide1Image || heroThemeConfig?.darkSlide1Media || heroThemeConfig?.darkSlide1Video || heroThemeConfig?.darkSlide1Image || heroData.slides?.[0]?.videoUrl || heroData.videoUrl || "https://res.cloudinary.com/dstlpavbf/video/upload/v1780700304/120-135736520_medium_iv1x7e.mp4")
-    : (heroThemeConfig?.darkSlide1Media || heroThemeConfig?.darkSlide1Video || heroThemeConfig?.darkSlide1Image || heroData.slides?.[0]?.videoUrl || heroData.videoUrl || "https://res.cloudinary.com/dstlpavbf/video/upload/v1780700304/120-135736520_medium_iv1x7e.mp4");
+    ? (heroThemeConfig?.lightSlide1Media || heroThemeConfig?.lightSlide1Image || heroThemeConfig?.lightSlide1Video || heroData.slides?.[0]?.imageUrl || heroData.slides?.[0]?.image || defaultSlide1Light)
+    : (heroThemeConfig?.darkSlide1Media || heroThemeConfig?.darkSlide1Image || heroThemeConfig?.darkSlide1Video || heroData.slides?.[0]?.videoUrl || heroData.videoUrl || heroData.slides?.[0]?.imageUrl || heroData.slides?.[0]?.image || defaultSlide1Dark);
 
   const isSlide1Video = isMediaVideo(slide1Media);
 
   // Media selection based on theme for Slide 2
+  const defaultSlide2Light = "/assets/images/hero-light-slide2.jpg";
+  const defaultSlide2Dark = "/assets/images/hero-dark-slide2.jpg";
+
   const slide2Media = theme === 'light'
-    ? (heroThemeConfig?.lightSlide2Media || heroThemeConfig?.lightSlide2Video || heroThemeConfig?.lightSlide2Image || heroThemeConfig?.darkSlide2Media || heroThemeConfig?.darkSlide2Video || heroThemeConfig?.darkSlide2Image || heroData.slides?.[1]?.imageUrl || heroData.slides?.[1]?.image || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1920")
-    : (heroThemeConfig?.darkSlide2Media || heroThemeConfig?.darkSlide2Video || heroThemeConfig?.darkSlide2Image || heroData.slides?.[1]?.imageUrl || heroData.slides?.[1]?.image || "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1920");
+    ? (heroThemeConfig?.lightSlide2Media || heroThemeConfig?.lightSlide2Image || heroThemeConfig?.lightSlide2Video || heroData.slides?.[1]?.imageUrl || heroData.slides?.[1]?.image || defaultSlide2Light)
+    : (heroThemeConfig?.darkSlide2Media || heroThemeConfig?.darkSlide2Image || heroThemeConfig?.darkSlide2Video || heroData.slides?.[1]?.imageUrl || heroData.slides?.[1]?.image || defaultSlide2Dark);
 
   const isSlide2Video = isMediaVideo(slide2Media);
 
@@ -120,21 +126,29 @@ export default function HomeHero({ data, heroThemeConfig }: { data?: SectionData
         <div className="swiper-wrapper">
 
             {/* SLIDE 1 */}
-            <div className="swiper-slide bg-pharaohNavy">
+            <div className="swiper-slide bg-[#060E1A]">
                 {isSlide1Video ? (
-                    <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-75 sm:opacity-85">
+                    <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-85">
                         <source src={slide1Media} type="video/mp4" />
                     </video>
                 ) : (
-                    <img src={slide1Media} className="absolute inset-0 w-full h-full object-cover opacity-70 sm:opacity-80" alt="Hero Background 1" />
+                    <img src={slide1Media} className="absolute inset-0 w-full h-full object-cover opacity-90" alt="Hero Background 1" />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-pharaohNavy via-pharaohNavy/30 to-transparent"></div>
+                <div className={`absolute inset-0 ${
+                  theme === 'light'
+                    ? 'bg-gradient-to-t from-white/95 via-white/50 to-white/20'
+                    : 'bg-gradient-to-t from-[#060E1A] via-[#0A192F]/40 to-transparent'
+                }`}></div>
                 <div className="relative z-20 h-full flex items-center justify-center text-center px-6">
                     <div className="max-w-4xl content-up transition-opacity duration-700">
-                        <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-white mb-5 leading-tight tracking-tight">
+                        <h1 className={`text-3xl sm:text-5xl md:text-6xl font-black mb-5 leading-tight tracking-tight ${
+                          theme === 'light' ? 'text-slate-900' : 'text-white'
+                        }`}>
                             {slide1Title1} <span className={accentClass}>{slide1Title2}</span> {slide1Title3}
                         </h1>
-                        <p className="text-slate-200 text-sm sm:text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed font-medium">
+                        <p className={`text-sm sm:text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed font-medium ${
+                          theme === 'light' ? 'text-slate-700' : 'text-slate-200'
+                        }`}>
                             {slide1Subtitle}
                         </p>
                         {renderButtons()}
@@ -143,21 +157,29 @@ export default function HomeHero({ data, heroThemeConfig }: { data?: SectionData
             </div>
 
             {/* SLIDE 2 */}
-            <div className="swiper-slide bg-pharaohNavy">
+            <div className="swiper-slide bg-[#060E1A]">
                 {isSlide2Video ? (
-                    <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-75 sm:opacity-85">
+                    <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-85">
                         <source src={slide2Media} type="video/mp4" />
                     </video>
                 ) : (
-                    <img src={slide2Media} className="absolute inset-0 w-full h-full object-cover opacity-70 sm:opacity-80" alt="Coding" />
+                    <img src={slide2Media} className="absolute inset-0 w-full h-full object-cover opacity-90" alt="Hero Background 2" />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-pharaohNavy via-pharaohNavy/30 to-transparent"></div>
+                <div className={`absolute inset-0 ${
+                  theme === 'light'
+                    ? 'bg-gradient-to-t from-white/95 via-white/50 to-white/20'
+                    : 'bg-gradient-to-t from-[#060E1A] via-[#0A192F]/40 to-transparent'
+                }`}></div>
                 <div className="relative z-20 h-full flex items-center justify-center text-center px-6">
                     <div className="max-w-4xl content-up transition-opacity duration-700">
-                        <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-white mb-5 leading-tight tracking-tight">
+                        <h1 className={`text-3xl sm:text-5xl md:text-6xl font-black mb-5 leading-tight tracking-tight ${
+                          theme === 'light' ? 'text-slate-900' : 'text-white'
+                        }`}>
                             {slide2Title1} <span className={accentClass}>{slide2Title2}</span>
                         </h1>
-                        <p className="text-slate-200 text-sm sm:text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed font-medium">
+                        <p className={`text-sm sm:text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed font-medium ${
+                          theme === 'light' ? 'text-slate-700' : 'text-slate-200'
+                        }`}>
                             {slide2Subtitle}
                         </p>
                         {renderButtons()}

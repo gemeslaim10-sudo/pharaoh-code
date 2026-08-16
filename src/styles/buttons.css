@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SOVEREIGN PHARAOH DESIGN SYSTEM - ULTRA-LUXURY BUTTON SYSTEM
+   SOVEREIGN PHARAOH DESIGN SYSTEM - LUXURY BUTTON SYSTEM
    ========================================================================== */
 
 /* Universal Button Motion Base */
@@ -20,7 +20,7 @@ a[role="button"]:active {
   transform: scale(0.96) translateY(1px) !important;
 }
 
-/* 1. PRIMARY GOLD MASTER BUTTON (Shimmer + Gold Radiance Glow) */
+/* 1. PRIMARY GOLD MASTER BUTTON */
 .btn-pharaoh-gold,
 .btn-primary-gold {
   background: linear-gradient(135deg, #F3E0B5 0%, #D4AF37 40%, #C5A16F 80%, #A88448 100%);
@@ -36,26 +36,6 @@ a[role="button"]:active {
   justify-content: center;
 }
 
-/* Continuous Subtle Sweep Glare */
-.btn-pharaoh-gold::before,
-.btn-primary-gold::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-  transform: skewX(-25deg);
-  transition: all 0.75s ease;
-  pointer-events: none;
-}
-
-.btn-pharaoh-gold:hover::before,
-.btn-primary-gold:hover::before {
-  left: 180%;
-}
-
 .btn-pharaoh-gold:hover,
 .btn-primary-gold:hover {
   transform: translateY(-2px) scale(1.02);
@@ -63,7 +43,7 @@ a[role="button"]:active {
   filter: brightness(1.06);
 }
 
-/* 2. GLASSMORPHISM NEON BUTTON (Transparent to Solid Gold Glow) */
+/* 2. GLASSMORPHISM BUTTON */
 .btn-pharaoh-glass {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
   backdrop-filter: blur(16px);
@@ -86,7 +66,7 @@ a[role="button"]:active {
   box-shadow: 0 10px 30px rgba(197, 161, 111, 0.45);
 }
 
-/* 3. ICON ACTION BUTTON (Rotating & Scaling Spring Motion) */
+/* 3. ICON ACTION BUTTON */
 .btn-pharaoh-icon {
   width: 2.75rem;
   height: 2.75rem;
@@ -108,14 +88,6 @@ a[role="button"]:active {
   border-color: #C5A16F;
   transform: translateY(-2px) scale(1.08);
   box-shadow: 0 8px 25px rgba(197, 161, 111, 0.45);
-}
-
-.btn-pharaoh-icon svg {
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn-pharaoh-icon:hover svg {
-  transform: scale(1.15);
 }
 
 /* 4. OUTLINE ACCENT BUTTON */

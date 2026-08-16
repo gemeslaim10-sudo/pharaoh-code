@@ -1,0 +1,124 @@
+/* ==========================================================================
+   HIGH-CONTRAST LIGHT MODE - COMPONENTS, BUTTONS & DRAWER
+   ========================================================================== */
+
+/* 1. High-Contrast Icons & Badges in Light Mode */
+html[data-theme="light"] svg:not(.heroSwiper *):not([class*="btn-"]):not(.btn-pharaoh-gold *) {
+  stroke: currentColor;
+}
+
+html[data-theme="light"] [class*="bg-[#C5A16F]/10"],
+html[data-theme="light"] [class*="bg-[#C5A16F]/15"],
+html[data-theme="light"] [class*="bg-pharaohGold/10"] {
+  background-color: rgba(138, 88, 0, 0.1) !important;
+  color: #8A5800 !important;
+  border-color: rgba(138, 88, 0, 0.25) !important;
+}
+
+html[data-theme="light"] [class*="bg-[#C5A16F]/8"] {
+  background-color: rgba(138, 88, 0, 0.08) !important;
+  color: #8A5800 !important;
+  border-color: rgba(138, 88, 0, 0.2) !important;
+}
+
+/* 2. Image & Card Overlays */
+html[data-theme="light"] .absolute.inset-0[class*="bg-gradient-"] {
+  background-color: transparent !important;
+  background-image: none !important;
+  opacity: 0.1 !important;
+}
+
+html[data-theme="light"] img.grayscale {
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+/* 3. Buttons & Filters */
+html[data-theme="light"] .btn-pharaoh-gold,
+html[data-theme="light"] .btn-primary-gold {
+  background: linear-gradient(135deg, #B8860B 0%, #D4AF37 100%) !important;
+  color: #FFFFFF !important;
+  border-color: #B8860B !important;
+}
+
+html[data-theme="light"] .filter-btn.active {
+  background-color: #8A5800 !important;
+  color: #FFFFFF !important;
+  border-color: #8A5800 !important;
+}
+
+html[data-theme="light"] .filter-btn:not(.active) {
+  color: #8A5800 !important;
+  border-color: rgba(138, 88, 0, 0.35) !important;
+  background-color: #FFFFFF !important;
+}
+
+/* 4. FAQ Accordions */
+html[data-theme="light"] details {
+  background-color: #FFFFFF !important;
+  background-image: none !important;
+  border-color: rgba(15, 23, 42, 0.14) !important;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05) !important;
+}
+
+html[data-theme="light"] details summary h3 {
+  color: #0A192F !important;
+}
+
+html[data-theme="light"] details[open] summary h3 {
+  color: #8A5800 !important;
+}
+
+/* 5. Mobile Navigation Drawer */
+html[data-theme="light"] .mobile-nav-drawer {
+  background: #FFFFFF !important;
+  background-image: none !important;
+  border-color: rgba(15, 23, 42, 0.14) !important;
+  box-shadow: -20px 0 60px rgba(15, 23, 42, 0.15) !important;
+}
+
+html[data-theme="light"] .mobile-nav-drawer [class*="border-white"] {
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+html[data-theme="light"] .mobile-nav-drawer span.text-white,
+html[data-theme="light"] .mobile-nav-drawer .text-white {
+  color: #0A192F !important;
+}
+
+html[data-theme="light"] .mobile-nav-drawer a {
+  color: #1E293B !important;
+}
+
+html[data-theme="light"] .mobile-nav-drawer a:hover {
+  background-color: rgba(15, 23, 42, 0.05) !important;
+  color: #0A192F !important;
+}
+
+html[data-theme="light"] .mobile-nav-drawer a[class*="bg-[#C5A16F]"] {
+  background-color: #8A5800 !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="light"] .mobile-nav-drawer a[class*="bg-[#C5A16F]"] span {
+  color: #FFFFFF !important;
+}
+
+html[data-theme="light"] .mobile-nav-drawer a div[class*="bg-white"] {
+  background-color: rgba(15, 23, 42, 0.06) !important;
+  color: #8A5800 !important;
+}
+
+html[data-theme="light"] .mobile-nav-drawer button[class*="bg-white"] {
+  background-color: rgba(15, 23, 42, 0.06) !important;
+  border-color: rgba(15, 23, 42, 0.14) !important;
+  color: #1E293B !important;
+}
+
+/* 6. WhatsApp Button */
+html[data-theme="light"] a[href*="wa.me"],
+html[data-theme="light"] a[href*="whatsapp"],
+html[data-theme="light"] a.bg-\[\#25D366\] {
+  background-color: #25D366 !important;
+  color: #FFFFFF !important;
+}

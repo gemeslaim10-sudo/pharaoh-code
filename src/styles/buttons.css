@@ -1,130 +1,140 @@
 /* ==========================================================================
-   GLOBAL PREMIUM BUTTON SYSTEM, MOTION & INTERACTION (UI & UX ENHANCEMENTS)
+   SOVEREIGN PHARAOH DESIGN SYSTEM - ULTRA-LUXURY BUTTON SYSTEM
    ========================================================================== */
 
 /* Universal Button Motion Base */
 button,
 .btn-motion,
 a[role="button"] {
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  will-change: transform, box-shadow, background-color;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow, background;
   position: relative;
   overflow: hidden;
+  user-select: none;
+  cursor: pointer;
 }
 
 button:active,
 .btn-motion:active,
 a[role="button"]:active {
-  transform: scale(0.95) translateY(0) !important;
+  transform: scale(0.96) translateY(1px) !important;
 }
 
-/* Shimmer Light Sweep Keyframe */
-@keyframes buttonShimmer {
-  0% {
-    transform: translateX(-150%) skewX(-25deg);
-  }
-  100% {
-    transform: translateX(250%) skewX(-25deg);
-  }
-}
-
-/* Gold Glow Pulse Keyframe */
-@keyframes buttonGoldGlow {
-  0%, 100% {
-    box-shadow: 0 0 15px rgba(197, 161, 111, 0.3), 0 4px 15px rgba(0, 0, 0, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 25px rgba(197, 161, 111, 0.6), 0 8px 25px rgba(197, 161, 111, 0.25);
-  }
-}
-
-/* Primary Pharaoh Gold Button Class */
+/* 1. PRIMARY GOLD MASTER BUTTON (Shimmer + Gold Radiance Glow) */
 .btn-pharaoh-gold,
 .btn-primary-gold {
-  background: linear-gradient(135deg, #D4AF37 0%, #C5A16F 50%, #B38F5C 100%);
-  color: #0A192F;
+  background: linear-gradient(135deg, #F3E0B5 0%, #D4AF37 40%, #C5A16F 80%, #A88448 100%);
+  color: #040810 !important;
   font-weight: 800;
-  border-radius: 0.85rem;
-  box-shadow: 0 6px 20px -2px rgba(197, 161, 111, 0.35), 0 2px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(197, 161, 111, 0.3), 0 2px 6px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6);
   position: relative;
   overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.btn-pharaoh-gold::after,
-.btn-primary-gold::after {
+/* Continuous Subtle Sweep Glare */
+.btn-pharaoh-gold::before,
+.btn-primary-gold::before {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    60deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.4) 50%,
-    transparent 70%
-  );
-  transform: translateX(-150%) skewX(-25deg);
-  transition: transform 0.6s ease;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: skewX(-25deg);
+  transition: all 0.75s ease;
+  pointer-events: none;
 }
 
-.btn-pharaoh-gold:hover::after,
-.btn-primary-gold:hover::after {
-  transform: translateX(150%) skewX(-25deg);
+.btn-pharaoh-gold:hover::before,
+.btn-primary-gold:hover::before {
+  left: 180%;
 }
 
 .btn-pharaoh-gold:hover,
 .btn-primary-gold:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 28px rgba(197, 161, 111, 0.5), 0 4px 12px rgba(0, 0, 0, 0.4);
-  background: linear-gradient(135deg, #F4D068 0%, #D4AF37 50%, #C5A16F 100%);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 35px rgba(197, 161, 111, 0.55), 0 4px 15px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  filter: brightness(1.06);
 }
 
-/* Glassmorphism Dark Button Class */
+/* 2. GLASSMORPHISM NEON BUTTON (Transparent to Solid Gold Glow) */
 .btn-pharaoh-glass {
-  background: rgba(17, 34, 64, 0.7);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(197, 161, 111, 0.3);
-  color: #ffffff;
-  border-radius: 0.85rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(197, 161, 111, 0.35);
+  color: #ffffff !important;
+  font-weight: 700;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-pharaoh-glass:hover {
-  background: #C5A16F;
-  border-color: #C5A16F;
-  color: #0A192F;
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 10px 25px rgba(197, 161, 111, 0.4);
+  background: linear-gradient(135deg, #F3E0B5 0%, #D4AF37 50%, #C5A16F 100%);
+  border-color: transparent;
+  color: #040810 !important;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(197, 161, 111, 0.45);
 }
 
-/* Icon Button Motion Class */
+/* 3. ICON ACTION BUTTON (Rotating & Scaling Spring Motion) */
 .btn-pharaoh-icon {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 0.75rem;
-  display: flex;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.85rem;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(15, 35, 56, 0.8);
-  border: 1px solid rgba(197, 161, 111, 0.3);
+  background: rgba(13, 24, 46, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(197, 161, 111, 0.25);
   color: #C5A16F;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-pharaoh-icon:hover {
   background: #C5A16F;
-  color: #0A192F;
+  color: #040810;
   border-color: #C5A16F;
   transform: translateY(-2px) scale(1.08);
-  box-shadow: 0 8px 20px rgba(197, 161, 111, 0.4);
+  box-shadow: 0 8px 25px rgba(197, 161, 111, 0.45);
 }
 
 .btn-pharaoh-icon svg {
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-pharaoh-icon:hover svg {
-  transform: scale(1.15) rotate(5deg);
+  transform: scale(1.15);
+}
+
+/* 4. OUTLINE ACCENT BUTTON */
+.btn-pharaoh-outline {
+  background: transparent;
+  border: 1px solid rgba(197, 161, 111, 0.4);
+  color: #C5A16F !important;
+  font-weight: 700;
+  border-radius: 1rem;
+  padding: 0.75rem 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-pharaoh-outline:hover {
+  background: rgba(197, 161, 111, 0.12);
+  border-color: #C5A16F;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(197, 161, 111, 0.25);
 }

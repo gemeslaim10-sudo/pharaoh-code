@@ -72,6 +72,10 @@ export const ar: Translations = {
     subtitle: 'نحن لا نكتب كوداً فحسب، بل نبني حلولاً هندسية تضاعف نمو أعمالك.',
   },
   stats: {
+    subtitle: 'أرقامنا القياسية',
+    titlePart1: 'إنجازات صنعت',
+    titlePart2: 'فارقاً حقيقياً',
+    description: 'أرقام تعكس التزامنا بالتميز الهندسي وثقة شركاء النجاح حول العالم.',
     projectsCount: '+150',
     projectsLabel: 'مشروع منجز',
     clientsCount: '+80',

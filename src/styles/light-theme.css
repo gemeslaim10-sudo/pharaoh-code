@@ -24,128 +24,177 @@ html[data-theme="light"] main,
 html[data-theme="light"] section,
 html[data-theme="light"] footer,
 html[data-theme="light"] header,
+html[data-theme="light"] [class*="bg-[#050B14]"],
+html[data-theme="light"] [class*="bg-[#040810]"],
+html[data-theme="light"] [class*="bg-[#060D1A]"],
+html[data-theme="light"] [class*="bg-[#060E1A]"],
 html[data-theme="light"] [class*="bg-[#0A192F]"],
 html[data-theme="light"] [class*="bg-[#0B1D3A]"],
 html[data-theme="light"] [class*="bg-[#081426]"],
 html[data-theme="light"] [class*="bg-[#081225]"],
 html[data-theme="light"] [class*="bg-[#0B1728]"],
+html[data-theme="light"] [class*="bg-[#070F1E]"],
 html[data-theme="light"] [class*="bg-pharaohNavy"] {
   background-color: #F8FAFC !important;
   background-image: 
-    radial-gradient(circle at 50% 0%, rgba(184, 134, 11, 0.1) 0%, transparent 65%),
-    linear-gradient(to right, rgba(15, 23, 42, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 23, 42, 0.06) 1px, transparent 1px) !important;
+    radial-gradient(circle at 50% 0%, rgba(184, 134, 11, 0.08) 0%, transparent 65%),
+    linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px) !important;
   background-size: 100% 100%, 56px 56px, 56px 56px !important;
   background-attachment: fixed !important;
   color: #0F172A !important;
 }
 
-/* 4. Background Watermark Decorative Text in Light Mode - Ultra Transparent (No Clutter) */
-html[data-theme="light"] [class*="pointer-events-none"][class*="select-none"],
-html[data-theme="light"] .pointer-events-none.select-none,
+/* 4. Background Watermark Decorative Text in Light Mode - Only Giant Background Watermarks */
 html[data-theme="light"] [class*="text-[15rem]"],
 html[data-theme="light"] [class*="text-[12rem]"],
 html[data-theme="light"] [class*="text-[10rem]"],
-html[data-theme="light"] [class*="text-9xl"] {
-  opacity: 0.015 !important;
-  color: rgba(15, 23, 42, 0.02) !important;
+html[data-theme="light"] [class*="text-9xl"].pointer-events-none {
+  opacity: 0.03 !important;
+  color: rgba(15, 23, 42, 0.05) !important;
   text-shadow: none !important;
-  mix-blend-mode: multiply !important;
 }
 
-html[data-theme="light"] [class*="text-[#C5A16F]/[0."],
-html[data-theme="light"] [class*="text-pharaohGold/0."] {
-  color: rgba(184, 134, 11, 0.02) !important;
+html[data-theme="light"] [class*="text-[#C5A16F]/[0.02]"],
+html[data-theme="light"] [class*="text-[#C5A16F]/[0.03]"],
+html[data-theme="light"] [class*="text-[#C5A16F]/[0.05]"],
+html[data-theme="light"] [class*="text-pharaohGold/0.02"] {
+  color: rgba(153, 101, 21, 0.05) !important;
 }
 
 /* 5. Existing Borders Color Adjustments for Light Background (No New Outlines Added) */
 html[data-theme="light"] [class*="border-white"],
 html[data-theme="light"] [class*="border-gray-"] {
-  border-color: rgba(15, 23, 42, 0.2) !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
 }
 
 html[data-theme="light"] [class*="border-pharaohGold"],
 html[data-theme="light"] [class*="border-[#C5A16F]"] {
-  border-color: rgba(184, 134, 11, 0.4) !important;
+  border-color: rgba(184, 134, 11, 0.35) !important;
 }
 
 /* Existing Hover Border Color Overrides (Only for elements that already have hover:border classes) */
 html[data-theme="light"] [class*="hover:border-"]:hover,
 html[data-theme="light"] [class*="hover:border-pharaohGold"]:hover,
 html[data-theme="light"] [class*="hover:border-[#C5A16F]"]:hover {
-  border-color: #B8860B !important;
+  border-color: #996515 !important;
 }
 
 /* Cards, Modals & Dark Boxes -> Crisp White with Subtle Shadow (No Artificial Outline Rings) */
 html[data-theme="light"] .bg-pharaohCard,
+html[data-theme="light"] [class*="from-[#0F1E38]"],
+html[data-theme="light"] [class*="from-[#0F1F3D]"],
+html[data-theme="light"] [class*="from-[#10203C]"],
+html[data-theme="light"] [class*="from-[#122345]"],
+html[data-theme="light"] [class*="from-[#0E1E38]"],
 html[data-theme="light"] [class*="bg-[#112240]"],
+html[data-theme="light"] [class*="bg-[#10203C]"],
+html[data-theme="light"] [class*="bg-[#122345]"],
+html[data-theme="light"] [class*="bg-[#0E1E38]"],
+html[data-theme="light"] [class*="bg-[#0B1528]"],
+html[data-theme="light"] [class*="bg-[#081222]"],
+html[data-theme="light"] [class*="bg-[#091427]"],
+html[data-theme="light"] [class*="bg-[#091528]"],
+html[data-theme="light"] [class*="bg-[#0A162B]"],
+html[data-theme="light"] [class*="bg-[#0D182E]"],
 html[data-theme="light"] [class*="bg-[#0D1E36]"],
 html[data-theme="light"] [class*="bg-[#0F2338]"],
 html[data-theme="light"] [class*="bg-[#152338]"],
 html[data-theme="light"] [class*="bg-white/1"],
-html[data-theme="light"] [class*="bg-white/5"],
-html[data-theme="light"] [class*="bg-white/10"],
-html[data-theme="light"] [class*="bg-white/20"],
+html[data-theme="light"] [class*="bg-white/5"]:not(.btn-pharaoh-glass):not(button):not(a),
+html[data-theme="light"] [class*="bg-white/10"]:not(.btn-pharaoh-glass):not(button):not(a),
+html[data-theme="light"] [class*="bg-white/20"]:not(.btn-pharaoh-glass):not(button):not(a),
 html[data-theme="light"] input,
 html[data-theme="light"] select,
 html[data-theme="light"] textarea {
   background-color: #FFFFFF !important;
-  color: #0F172A !important;
-  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08) !important;
+  background-image: none !important;
+  color: #0A192F !important;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
 }
 
 html[data-theme="light"] input,
 html[data-theme="light"] select,
 html[data-theme="light"] textarea {
-  border-color: rgba(15, 23, 42, 0.22) !important;
+  border-color: rgba(15, 23, 42, 0.2) !important;
 }
 
 html[data-theme="light"] input:focus,
 html[data-theme="light"] select:focus,
 html[data-theme="light"] textarea:focus {
-  border-color: #B8860B !important;
-  box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.2) !important;
+  border-color: #996515 !important;
+  box-shadow: 0 0 0 2px rgba(153, 101, 21, 0.2) !important;
   outline: none !important;
 }
 
-/* 6. Typography Contrast in Light Mode (Excluding Hero Header Section) */
-html[data-theme="light"] body *:not(.heroSwiper *):not([class*="pointer-events-none"]) > h1,
-html[data-theme="light"] body *:not(.heroSwiper *):not([class*="pointer-events-none"]) > h2,
-html[data-theme="light"] body *:not(.heroSwiper *):not([class*="pointer-events-none"]) > h3,
-html[data-theme="light"] body *:not(.heroSwiper *):not([class*="pointer-events-none"]) > h4,
-html[data-theme="light"] h1:not(.heroSwiper *):not([class*="pointer-events-none"]),
-html[data-theme="light"] h2:not(.heroSwiper *):not([class*="pointer-events-none"]),
-html[data-theme="light"] h3:not(.heroSwiper *):not([class*="pointer-events-none"]),
-html[data-theme="light"] h4:not(.heroSwiper *):not([class*="pointer-events-none"]),
-html[data-theme="light"] h5:not(.heroSwiper *):not([class*="pointer-events-none"]),
-html[data-theme="light"] h6:not(.heroSwiper *):not([class*="pointer-events-none"]),
-html[data-theme="light"] [class*="text-white"]:not(.heroSwiper *):not([class*="pointer-events-none"]):not([class*="btn-"]):not(.btn-pharaoh-gold) {
-  color: #0F172A !important;
+/* Card Image Vignettes & Inner Containers in Light Mode */
+html[data-theme="light"] .group .bg-gradient-to-t[class*="from-[#050B14]"],
+html[data-theme="light"] .group .bg-gradient-to-t[class*="from-[#0f172a]"] {
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.2) 40%, transparent 100%) !important;
 }
 
-html[data-theme="light"] p:not(.heroSwiper *):not([class*="pointer-events-none"]),
+html[data-theme="light"] .group .relative[class*="bg-[#0B1528]"],
+html[data-theme="light"] .group .relative[class*="bg-[#070F1E]"] {
+  background-color: #F1F5F9 !important;
+}
+
+/* 6. High-Contrast Dark Typography in Light Mode */
+html[data-theme="light"] h1:not(.heroSwiper *),
+html[data-theme="light"] h2:not(.heroSwiper *),
+html[data-theme="light"] h3:not(.heroSwiper *),
+html[data-theme="light"] h4:not(.heroSwiper *),
+html[data-theme="light"] h5:not(.heroSwiper *),
+html[data-theme="light"] h6:not(.heroSwiper *) {
+  color: #0A192F !important;
+}
+
+html[data-theme="light"] [class*="text-white"]:not(.heroSwiper *):not([class*="btn-"]):not(.btn-pharaoh-gold):not(.filter-btn.active) {
+  color: #0A192F !important;
+}
+
+/* Title Gradient Text in Light Mode (Deep Luxurious Golden Amber) */
+html[data-theme="light"] .bg-clip-text:not(.heroSwiper *) {
+  background-image: linear-gradient(135deg, #996515 0%, #B8860B 50%, #784E00 100%) !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Body Text & Descriptions - DARK in light mode for readability */
+html[data-theme="light"] p:not(.heroSwiper *),
+html[data-theme="light"] li:not(.heroSwiper *),
+html[data-theme="light"] label,
+html[data-theme="light"] small,
+html[data-theme="light"] [class*="text-gray-100"]:not(.heroSwiper *),
+html[data-theme="light"] [class*="text-gray-200"]:not(.heroSwiper *),
 html[data-theme="light"] [class*="text-gray-300"]:not(.heroSwiper *),
 html[data-theme="light"] [class*="text-gray-400"]:not(.heroSwiper *),
-html[data-theme="light"] [class*="text-gray-500"]:not(.heroSwiper *) {
-  color: #334155 !important;
+html[data-theme="light"] [class*="text-gray-500"]:not(.heroSwiper *),
+html[data-theme="light"] [class*="text-gray-600"]:not(.heroSwiper *) {
+  color: #1E3A5F !important;
 }
 
-html[data-theme="light"] [class*="text-pharaohGold"]:not(.heroSwiper *):not([class*="pointer-events-none"]):not([class*="/"]),
-html[data-theme="light"] [class*="text-[#C5A16F]"]:not(.heroSwiper *):not([class*="pointer-events-none"]):not([class*="/"]) {
-  color: #B8860B !important;
+/* Secondary spans and small labels */
+html[data-theme="light"] span:not(.heroSwiper *):not([class*="btn-"]):not(.badge):not([class*="bg-[#C5A16F]"]):not(.filter-btn) {
+  color: inherit;
 }
 
-/* 7. Hover Text & Color Contrast (Without adding new borders or outline boxes) */
+/* Pharaoh Gold Accents - Deep Readable Amber */
+html[data-theme="light"] [class*="text-pharaohGold"]:not(.heroSwiper *):not([class*="/"]),
+html[data-theme="light"] [class*="text-[#C5A16F]"]:not(.heroSwiper *):not([class*="/"]) {
+  color: #996515 !important;
+}
+
+/* 7. Hover Text & Color Contrast */
 html[data-theme="light"] [class*="hover:text-white"]:not(.heroSwiper *):hover,
 html[data-theme="light"] .group:hover [class*="group-hover:text-white"]:not(.heroSwiper *) {
-  color: #0F172A !important;
+  color: #0A192F !important;
 }
 
 html[data-theme="light"] .group:hover [class*="group-hover:text-[#C5A16F]"],
 html[data-theme="light"] .group:hover [class*="group-hover:text-pharaohGold"],
 html[data-theme="light"] [class*="hover:text-pharaohGold"]:hover,
 html[data-theme="light"] [class*="hover:text-[#C5A16F]"]:hover {
-  color: #B8860B !important;
+  color: #996515 !important;
 }
 
 /* Primary Pharaoh Gold Button Hover */
@@ -184,6 +233,25 @@ html[data-theme="light"] .filter-btn:not(.active):hover {
   border-color: #B8860B !important;
 }
 
+/* Glass & Light Action Buttons / Interactive Links in Light Mode */
+html[data-theme="light"] a[class*="bg-white/5"]:not(.btn-pharaoh-gold),
+html[data-theme="light"] button[class*="bg-white/5"]:not(.btn-pharaoh-gold),
+html[data-theme="light"] a[class*="bg-white/10"]:not(.btn-pharaoh-gold),
+html[data-theme="light"] button[class*="bg-white/10"]:not(.btn-pharaoh-gold) {
+  background-color: rgba(15, 23, 42, 0.06) !important;
+  color: #0F172A !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+html[data-theme="light"] a[class*="bg-white/5"]:hover:not(.btn-pharaoh-gold),
+html[data-theme="light"] button[class*="bg-white/5"]:hover:not(.btn-pharaoh-gold),
+html[data-theme="light"] a[class*="bg-white/10"]:hover:not(.btn-pharaoh-gold),
+html[data-theme="light"] button[class*="bg-white/10"]:hover:not(.btn-pharaoh-gold) {
+  background-color: #B8860B !important;
+  color: #0A192F !important;
+  border-color: #B8860B !important;
+}
+
 /* 8. Navigation Bar & Headers in Light Mode */
 html[data-theme="light"] nav,
 html[data-theme="light"] header {
@@ -200,9 +268,9 @@ html[data-theme="light"] nav a:not(.btn-pharaoh-gold):hover {
   color: #B8860B !important;
 }
 
-/* 9. Header Background Videos & Hero Section Overlays in Light Mode */
+/* 9. Header Background & Hero Section Overlays in Light Mode */
 html[data-theme="light"] .heroSwiper .swiper-slide {
-  background-color: #0A192F !important;
+  background-color: #F8FAFC !important;
 }
 
 html[data-theme="light"] video,
@@ -215,25 +283,23 @@ html[data-theme="light"] .heroSwiper video {
 }
 
 html[data-theme="light"] .heroSwiper .bg-gradient-to-t {
-  background: linear-gradient(to top, #0A192F 0%, rgba(10, 25, 47, 0.4) 50%, rgba(10, 25, 47, 0.7) 100%) !important;
+  background: linear-gradient(to top, rgba(248, 250, 252, 0.92) 0%, rgba(248, 250, 252, 0.5) 50%, rgba(248, 250, 252, 0.2) 100%) !important;
 }
 
-/* Strict Light Typography & Light Buttons over Dark Hero Video Backgrounds in Light Mode */
+/* Light Typography & Buttons over Light Hero Backgrounds in Light Mode */
 html[data-theme="light"] .heroSwiper h1,
-html[data-theme="light"] .heroSwiper h1 *,
-html[data-theme="light"] .heroSwiper [class*="text-white"] {
-  color: #FFFFFF !important;
+html[data-theme="light"] .heroSwiper h1 * {
+  color: #0F172A !important;
 }
 
-html[data-theme="light"] .heroSwiper p,
-html[data-theme="light"] .heroSwiper [class*="text-gray-300"] {
-  color: #E2E8F0 !important;
+html[data-theme="light"] .heroSwiper p {
+  color: #334155 !important;
 }
 
 html[data-theme="light"] .heroSwiper [class*="text-pharaohGold"],
 html[data-theme="light"] .heroSwiper [class*="text-[#C5A16F]"],
 html[data-theme="light"] .heroSwiper span[class*="text-pharaohGold"] {
-  color: #C5A16F !important;
+  color: #B8860B !important;
 }
 
 html[data-theme="light"] .heroSwiper .btn-pharaoh-gold,
@@ -243,23 +309,23 @@ html[data-theme="light"] .heroSwiper .btn-primary-gold {
 }
 
 html[data-theme="light"] .heroSwiper .btn-pharaoh-glass {
-  background: rgba(17, 34, 64, 0.75) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
-  color: #FFFFFF !important;
+  background: rgba(255, 255, 255, 0.85) !important;
+  border: 1px solid rgba(15, 23, 42, 0.15) !important;
+  color: #0F172A !important;
 }
 
 html[data-theme="light"] .heroSwiper .btn-pharaoh-glass span {
-  color: #FFFFFF !important;
+  color: #0F172A !important;
 }
 
 html[data-theme="light"] .heroSwiper .btn-pharaoh-glass:hover {
-  background: #C5A16F !important;
-  border-color: #C5A16F !important;
-  color: #0A192F !important;
+  background: #0A192F !important;
+  border-color: #0A192F !important;
+  color: #FFFFFF !important;
 }
 
 html[data-theme="light"] .heroSwiper .btn-pharaoh-glass:hover span {
-  color: #0A192F !important;
+  color: #FFFFFF !important;
 }
 
 /* 10. Icon Controls in Light Mode */
@@ -273,3 +339,295 @@ html[data-theme="light"] button[title*="English"] {
   color: #0F172A !important;
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06) !important;
 }
+
+/* ==========================================================================
+   13. Mobile Navigation Drawer — Light Mode
+   ========================================================================== */
+
+/* Drawer panel itself — white background with shadow */
+html[data-theme="light"] .mobile-nav-drawer {
+  background: #FFFFFF !important;
+  background-image: none !important;
+  border-color: rgba(15, 23, 42, 0.1) !important;
+  box-shadow: -20px 0 60px rgba(15, 23, 42, 0.15) !important;
+}
+
+/* All borders inside drawer */
+html[data-theme="light"] .mobile-nav-drawer [class*="border-white"] {
+  border-color: rgba(15, 23, 42, 0.1) !important;
+}
+
+/* Brand / logo text */
+html[data-theme="light"] .mobile-nav-drawer span.text-white,
+html[data-theme="light"] .mobile-nav-drawer .text-white {
+  color: #0A192F !important;
+}
+
+/* Nav link items — default */
+html[data-theme="light"] .mobile-nav-drawer a {
+  color: #1E3A5F !important;
+}
+
+html[data-theme="light"] .mobile-nav-drawer a:hover {
+  background-color: rgba(15, 23, 42, 0.05) !important;
+  color: #0A192F !important;
+}
+
+/* Active nav link */
+html[data-theme="light"] .mobile-nav-drawer a[class*="bg-[#C5A16F]"] {
+  background-color: #B8860B !important;
+  color: #FFFFFF !important;
+}
+
+/* Active link text inside */
+html[data-theme="light"] .mobile-nav-drawer a[class*="bg-[#C5A16F]"] span {
+  color: #FFFFFF !important;
+}
+
+/* Icon boxes for links */
+html[data-theme="light"] .mobile-nav-drawer a div[class*="bg-white"] {
+  background-color: rgba(15, 23, 42, 0.06) !important;
+  color: #996515 !important;
+}
+
+/* Active icon box stays readable */
+html[data-theme="light"] .mobile-nav-drawer a[class*="bg-[#C5A16F]"] div {
+  background-color: rgba(255,255,255,0.2) !important;
+  color: #FFFFFF !important;
+}
+
+/* Close (X) button */
+html[data-theme="light"] .mobile-nav-drawer button[class*="bg-white"] {
+  background-color: rgba(15, 23, 42, 0.06) !important;
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  color: #1E3A5F !important;
+}
+
+html[data-theme="light"] .mobile-nav-drawer button[class*="bg-white"]:hover {
+  background-color: rgba(15, 23, 42, 0.12) !important;
+  color: #0A192F !important;
+}
+
+/* Dashboard link */
+html[data-theme="light"] .mobile-nav-drawer a[class*="bg-[#112240]"] {
+  background-color: #F1F5F9 !important;
+  border-color: rgba(153, 101, 21, 0.35) !important;
+  color: #7A4F00 !important;
+}
+
+/* Login link */
+html[data-theme="light"] .mobile-nav-drawer a[href="/login"] {
+  background-color: rgba(15, 23, 42, 0.04) !important;
+  border-color: rgba(15, 23, 42, 0.1) !important;
+  color: #1E3A5F !important;
+}
+
+/* CTA "Start Project" button — keeps gold gradient */
+html[data-theme="light"] .mobile-nav-drawer a[class*="from-[#C5A16F]"] {
+  background: linear-gradient(to right, #B8860B, #D4AF37, #B8860B) !important;
+  color: #FFFFFF !important;
+}
+
+/* Gray text labels inside drawer */
+html[data-theme="light"] .mobile-nav-drawer [class*="text-gray"] {
+  color: #1E3A5F !important;
+}
+
+/* Footer border top in drawer */
+html[data-theme="light"] .mobile-nav-drawer div[class*="border-t"] {
+  border-color: rgba(15, 23, 42, 0.1) !important;
+}
+
+/* Backdrop overlay stays dark */
+html[data-theme="light"] .mobile-nav-drawer ~ div[class*="bg-black"] {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+
+/* ==========================================================================
+   11. Page-specific redesigned components - Light Mode overrides
+   ========================================================================== */
+
+/* --- About, Portfolio, Team, Clients, Contact section backgrounds --- */
+html[data-theme="light"] #about-us,
+html[data-theme="light"] #vision-mission,
+html[data-theme="light"] #faq,
+html[data-theme="light"] #comments-section,
+html[data-theme="light"] #portfolio,
+html[data-theme="light"] #our-team,
+html[data-theme="light"] #our-process,
+html[data-theme="light"] #contact {
+  background-color: #F8FAFC !important;
+}
+
+/* --- Top glowing beam in light mode: subtle gold line --- */
+html[data-theme="light"] .group:hover .absolute.top-0.w-2\/3,
+html[data-theme="light"] .group:hover .absolute.top-0.left-1\/2 {
+  opacity: 0.7 !important;
+}
+
+/* --- Portfolio filter pills in light mode --- */
+html[data-theme="light"] .filter-btn:not(.active) {
+  color: #996515 !important;
+  border-color: rgba(153, 101, 21, 0.3) !important;
+  background-color: transparent !important;
+}
+
+/* --- About FAQ details/summary in light mode --- */
+html[data-theme="light"] details {
+  background-color: #FFFFFF !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+html[data-theme="light"] details summary h3 {
+  color: #0A192F !important;
+}
+
+html[data-theme="light"] details[open] summary h3 {
+  color: #996515 !important;
+}
+
+/* --- Contact Info cards compact row layout --- */
+html[data-theme="light"] #contact .lg\:col-span-4 > div {
+  background-color: #FFFFFF !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06) !important;
+}
+
+/* --- Team card grayscale in light mode keeps readable --- */
+html[data-theme="light"] .team-card img {
+  filter: grayscale(30%) !important;
+}
+
+html[data-theme="light"] .team-card:hover img {
+  filter: grayscale(0%) !important;
+}
+
+/* --- Shimmer sweep in light mode --- */
+html[data-theme="light"] .group .bg-gradient-to-r.via-white\/\[0\.03\] {
+  background: linear-gradient(to right, transparent, rgba(15, 23, 42, 0.03), transparent) !important;
+}
+
+/* --- WhatsApp button stays green always --- */
+html[data-theme="light"] a.bg-\[\#25D366\] {
+  background-color: #25D366 !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="light"] a.hover\:bg-\[\#1aad52\]:hover {
+  background-color: #1aad52 !important;
+  color: #FFFFFF !important;
+}
+
+/* --- Since badge (AboutHero) stays gold --- */
+html[data-theme="light"] .bg-\[\#C5A16F\].text-\[\#0A192F\] {
+  background-color: #B8860B !important;
+  color: #FFFFFF !important;
+}
+
+/* --- Bottom accent bar in cards --- */
+html[data-theme="light"] .group:hover .absolute.bottom-0.left-0.h-\[3px\] {
+  opacity: 0.6 !important;
+}
+
+/* --- Dot grid decorations in light mode --- */
+html[data-theme="light"] .bg-\[\#C5A16F\].rounded-full.w-1.h-1 {
+  background-color: rgba(153, 101, 21, 0.4) !important;
+}
+
+/* --- AboutHero feature mini-cards --- */
+html[data-theme="light"] .bg-\[\#112240\]\/60 {
+  background-color: #FFFFFF !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.04) !important;
+}
+
+/* --- Portfolio card image gradient override in light mode --- */
+html[data-theme="light"] .portfolio-item .bg-gradient-to-t {
+  background: linear-gradient(to top, rgba(248, 250, 252, 0.85) 0%, transparent 60%) !important;
+}
+
+/* --- Vision/Mission rounded cards (use class-based selectors) --- */
+html[data-theme="light"] .rounded-tr-\[4rem\].rounded-bl-\[4rem\],
+html[data-theme="light"] .rounded-tl-\[4rem\].rounded-br-\[4rem\] {
+  background-color: #FFFFFF !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
+  box-shadow: 0 8px 30px -5px rgba(15, 23, 42, 0.08) !important;
+}
+
+/* ==========================================================================
+   12. Redesigned gradient card backgrounds (v2 components)
+   ========================================================================== */
+
+/* Deep dark section backgrounds → light slate */
+html[data-theme="light"] [class*="bg-[#050D1A]"],
+html[data-theme="light"] [class*="bg-[#061020]"] {
+  background-color: #F8FAFC !important;
+  background-image: none !important;
+}
+
+/* Gradient cards from-[#0F1E38] to-[#081222] → crisp white */
+html[data-theme="light"] [class*="from-[#0F1E38]"][class*="to-[#081222]"],
+html[data-theme="light"] [class*="from-[#050D1A]"] {
+  background-color: #FFFFFF !important;
+  background-image: none !important;
+  box-shadow: 0 4px 24px -4px rgba(15, 23, 42, 0.08) !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+/* Ensure ALL gray text is dark in light mode */
+html[data-theme="light"] .text-gray-400:not(.heroSwiper *),
+html[data-theme="light"] .text-gray-500:not(.heroSwiper *),
+html[data-theme="light"] .text-gray-300:not(.heroSwiper *),
+html[data-theme="light"] .text-gray-200:not(.heroSwiper *),
+html[data-theme="light"] .text-gray-600:not(.heroSwiper *) {
+  color: #1E3A5F !important;
+}
+
+/* Gradient text clips in light mode → rich amber */
+html[data-theme="light"] .bg-clip-text.text-transparent:not(.heroSwiper *) {
+  background-image: linear-gradient(135deg, #7A4F00 0%, #B8860B 50%, #996515 100%) !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Team card hover overlay in light mode */
+html[data-theme="light"] .team-card .bg-gradient-to-t {
+  background: linear-gradient(to top, rgba(248,250,252,0.97) 0%, rgba(248,250,252,0.7) 40%, transparent 100%) !important;
+}
+
+html[data-theme="light"] .team-card h4.text-white,
+html[data-theme="light"] .team-card h4 {
+  color: #0A192F !important;
+}
+
+/* Role badges in team cards */
+html[data-theme="light"] .team-card span[class*="tracking-widest"] {
+  background-color: rgba(153, 101, 21, 0.12) !important;
+  border-color: rgba(153, 101, 21, 0.3) !important;
+  color: #7A4F00 !important;
+}
+
+/* Client/Portfolio card partner badge */
+html[data-theme="light"] [class*="bg-[#C5A16F]/15"] {
+  background-color: rgba(153, 101, 21, 0.1) !important;
+  color: #7A4F00 !important;
+}
+
+/* FAQ accordion details bg */
+html[data-theme="light"] details {
+  background-color: #FFFFFF !important;
+  background-image: none !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+
+/* Section backgrounds for new dark sections */
+html[data-theme="light"] section[class*="bg-[#050D1A]"],
+html[data-theme="light"] section[class*="bg-[#0A192F]"] {
+  background-color: #F8FAFC !important;
+  background-image:
+    radial-gradient(circle at 50% 0%, rgba(184, 134, 11, 0.07) 0%, transparent 65%),
+    linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px) !important;
+  background-size: 100% 100%, 56px 56px, 56px 56px !important;
+}
+

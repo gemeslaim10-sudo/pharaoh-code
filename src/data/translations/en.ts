@@ -72,6 +72,10 @@ export const en: Translations = {
     subtitle: 'We do not just write code; we engineer solutions that compound your growth.',
   },
   stats: {
+    subtitle: 'PROVEN TRACK RECORD',
+    titlePart1: 'Numbers That Define Our',
+    titlePart2: 'Impact & Legacy',
+    description: 'Metrics that reflect our dedication to software excellence and client trust worldwide.',
     projectsCount: '+150',
     projectsLabel: 'Projects Delivered',
     clientsCount: '+80',

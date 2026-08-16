@@ -77,8 +77,9 @@ html[data-theme="light"] .bg-clip-text:not(.heroSwiper *) {
   -webkit-text-fill-color: transparent !important;
 }
 
-/* 4. High-Contrast Cards & Containers (White + Slate Borders) */
+/* 4. High-Contrast Cards & Containers */
 html[data-theme="light"] .bg-pharaohCard,
+html[data-theme="light"] .team-card,
 html[data-theme="light"] [class*="from-[#0F1E38]"],
 html[data-theme="light"] [class*="from-[#0F1F3D]"],
 html[data-theme="light"] [class*="from-[#10203C]"],

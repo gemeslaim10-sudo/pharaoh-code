@@ -59,7 +59,7 @@ export default function HomeTeamGrid({ data }: HomeTeamGridProps) {
                         data-insta={member.social?.instagram}>
                         
                         <div className="w-32 h-32 mx-auto rounded-[1.5rem] overflow-hidden mb-6 border-2 border-[#C5A16F]/30 p-1 group-hover:border-[#C5A16F] transition-colors bg-[#0A192F]">
-                            <img src={member.image} alt={member.name} className="w-full h-full object-cover rounded-[1.3rem] grayscale-[50%] group-hover:grayscale-0 transition-all duration-500" />
+                            <img src={member.image} alt={member.name} className="w-full h-full object-cover rounded-[1.3rem] transition-all duration-500 transform group-hover:scale-105" />
                         </div>
                         <h4 className="text-xl font-bold text-white mb-2">{member.name}</h4>
                         <span className="text-[#C5A16F] text-xs font-medium uppercase tracking-wider block">{member.role}</span>

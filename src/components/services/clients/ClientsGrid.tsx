@@ -84,14 +84,13 @@ export default function ClientsGrid({ clients }: { clients: ClientItem[] }) {
 
                   {/* Logo / image */}
                   <Link href={`/clients/${client.id}`} className="block relative z-10">
-                    <div className="relative h-48 overflow-hidden rounded-t-3xl bg-[#061020] border-b border-white/5">
+                    <div className="relative h-48 overflow-hidden rounded-t-3xl bg-[#061020] border-b border-white/5 flex items-center justify-center p-6">
                       <img
                         src={client.logo || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=300'}
-                        className="w-full h-full object-cover opacity-50 group-hover:opacity-90 group-hover:scale-110 transition-all duration-700 ease-out"
+                        className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
                         alt={nameText}
                         loading="lazy"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F]/80 via-transparent to-transparent" />
                       {/* Floating badge */}
                       <div className="absolute top-4 left-4 bg-[#C5A16F]/15 border border-[#C5A16F]/30 text-[#C5A16F] text-[9px] font-black uppercase tracking-widest px-3 py-1 rounded-full backdrop-blur-sm">
                         {language === 'ar' ? 'شريك نجاح' : 'Success Partner'}

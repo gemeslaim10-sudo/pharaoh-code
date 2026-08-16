@@ -82,7 +82,7 @@ export default function HomeTeam({ data }: { data?: SectionData }) {
                   {memberImage ? (
                     <img 
                       src={memberImage} 
-                      className="w-full h-full object-cover grayscale-0 sm:grayscale sm:contrast-110 sm:group-hover:grayscale-0 sm:group-hover:contrast-100 transition-all duration-500 transform group-hover:scale-105" 
+                      className="w-full h-full object-cover transition-transform duration-500 transform group-hover:scale-105" 
                       alt={memberName} 
                     />
                   ) : (
@@ -90,9 +90,6 @@ export default function HomeTeam({ data }: { data?: SectionData }) {
                       {memberName.charAt(0) || '✦'}
                     </div>
                   )}
-
-                  {/* Subtle Vignette Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050B14]/80 via-transparent to-transparent opacity-70 group-hover:opacity-20 transition-opacity duration-400 pointer-events-none" />
                   
                   {/* Floating Role Pill on Mobile */}
                   <div className="absolute bottom-2.5 inset-x-2.5 sm:hidden z-10">

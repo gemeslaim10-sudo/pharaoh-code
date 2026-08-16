@@ -30,10 +30,9 @@ export function PortfolioCard({ item }: PortfolioCardProps) {
       <div className="relative h-48 overflow-hidden">
         <img
           src={item.imageUrl || item.image}
-          className="portfolio-card-img w-full h-full object-cover"
+          className="portfolio-card-img w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           alt={categoryText}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F] via-[#0A192F]/20 to-transparent pointer-events-none dark:block hidden" />
         {/* Category badge on image */}
         <div className="absolute top-3 left-3">
           <span className="text-[10px] font-bold tracking-[2px] text-[#0A192F] uppercase bg-[#C5A16F] px-2.5 py-1 rounded-lg shadow">

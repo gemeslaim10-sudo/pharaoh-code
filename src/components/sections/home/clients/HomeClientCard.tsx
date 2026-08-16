@@ -41,7 +41,7 @@ export function HomeClientCard({ client }: HomeClientCardProps) {
             {client.logo ? (
               <img 
                 src={client.logo} 
-                className="max-h-full max-w-full object-contain filter brightness-90 contrast-125 group-hover:brightness-110 group-hover:scale-105 transition-all duration-500" 
+                className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105" 
                 alt={clientName} 
                 loading="lazy"
               />

@@ -21,16 +21,16 @@ html[data-theme="light"] [class*="bg-[#C5A16F]/8"] {
   border-color: rgba(138, 88, 0, 0.2) !important;
 }
 
-/* 2. Image & Card Overlays */
-html[data-theme="light"] .absolute.inset-0[class*="bg-gradient-"] {
-  background-color: transparent !important;
-  background-image: none !important;
-  opacity: 0.1 !important;
+/* 2. Image Visibility - 100% Natural Colors & Opacity */
+img,
+html[data-theme="light"] img,
+html[data-theme="dark"] img {
+  opacity: 1 !important;
+  filter: none !important;
 }
 
-html[data-theme="light"] img.grayscale {
-  filter: none !important;
-  opacity: 1 !important;
+html[data-theme="light"] .absolute.inset-0[class*="bg-gradient-"] {
+  display: none !important;
 }
 
 /* 3. Buttons & Filters */

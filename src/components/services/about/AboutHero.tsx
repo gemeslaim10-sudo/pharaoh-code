@@ -34,11 +34,8 @@ export default function AboutHero({ data }: { data: SectionData }) {
               <img
                 src={data.imageUrl || 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1000'}
                 alt="About Pharaoh Code"
-                className="w-full h-[500px] object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100"
+                className="w-full h-[500px] object-cover transition-transform duration-1000 scale-105 group-hover:scale-100"
               />
-              {/* Gradient overlay - only for dark mode depth */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050D1A]/80 via-transparent to-transparent pointer-events-none dark:block hidden" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#050D1A]/20 to-transparent pointer-events-none dark:block hidden" />
 
               {/* Rotating icon badge */}
               <div className="absolute bottom-6 right-6 w-20 h-20 bg-white dark:bg-[#050D1A]/95 border-2 border-[#8A5800] dark:border-[#C5A16F] rounded-2xl flex items-center justify-center group-hover:rotate-[360deg] transition-all duration-1000 shadow-[0_10px_30px_rgba(15,23,42,0.15)] dark:shadow-[0_0_40px_rgba(197,161,111,0.5)] z-20">

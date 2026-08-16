@@ -63,7 +63,7 @@ export default function ServicesGrid({ data }: { data: SectionData }) {
                                 <div className="relative h-52 sm:h-60 overflow-hidden bg-[#0B1528]">
                                     <img 
                                         src={(item.imageUrl || item.image)} 
-                                        className="w-full h-full object-cover grayscale contrast-110 group-hover:grayscale-0 group-hover:contrast-100 transition-all duration-700 group-hover:scale-105" 
+                                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105" 
                                         alt={titleText} 
                                         loading="lazy"
                                     />
@@ -79,9 +79,6 @@ export default function ServicesGrid({ data }: { data: SectionData }) {
                                             {badgeLeft}
                                         </div>
                                     )}
-
-                                    {/* Bottom Vignette */}
-                                    <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-[#050B14]/30 to-transparent opacity-90 group-hover:opacity-40 transition-opacity duration-500" />
                                 </div>
 
                                 {/* Content */}

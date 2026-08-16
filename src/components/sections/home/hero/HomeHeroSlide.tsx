@@ -21,16 +21,16 @@ export function HomeHeroSlide({
   return (
     <div className="swiper-slide bg-[#060E1A]">
       {isVideo ? (
-        <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-85">
+        <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
           <source src={mediaSrc} type="video/mp4" />
         </video>
       ) : (
-        <img src={mediaSrc} className="absolute inset-0 w-full h-full object-cover opacity-90" alt="Hero Background" />
+        <img src={mediaSrc} className="absolute inset-0 w-full h-full object-cover" alt="Hero Background" />
       )}
       <div className={`absolute inset-0 ${
         theme === 'light'
-          ? 'bg-gradient-to-t from-white/95 via-white/50 to-white/20'
-          : 'bg-gradient-to-t from-[#060E1A] via-[#0A192F]/40 to-transparent'
+          ? 'bg-gradient-to-t from-white/70 via-transparent to-transparent'
+          : 'bg-gradient-to-t from-[#060E1A]/70 via-transparent to-transparent'
       }`} />
       <div className="relative z-20 h-full flex items-center justify-center text-center px-6">
         <div className="max-w-4xl content-up transition-opacity duration-700">

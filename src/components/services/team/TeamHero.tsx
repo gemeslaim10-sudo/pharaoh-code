@@ -61,7 +61,7 @@ export default function TeamHero({ data }: { data: SectionData }) {
                   {memberImg ? (
                     <img
                       src={memberImg}
-                      className="w-full h-full object-cover grayscale-0 sm:grayscale sm:group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-105"
+                      className="w-full h-full object-cover transition-all duration-500 transform group-hover:scale-105"
                       alt={name}
                     />
                   ) : (
@@ -69,9 +69,6 @@ export default function TeamHero({ data }: { data: SectionData }) {
                       {name?.charAt(0) || '✦'}
                     </div>
                   )}
-
-                  {/* Subtle Dark Vignette */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F]/80 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity duration-400 pointer-events-none" />
 
                   {/* Mobile Role Badge */}
                   <div className="absolute bottom-2.5 inset-x-2.5 sm:hidden z-10">

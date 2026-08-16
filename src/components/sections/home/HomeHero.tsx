@@ -1,15 +1,20 @@
 'use client';
 import { SectionData } from '@/types';
 import { useEffect, useRef } from 'react';
-import Link from 'next/link';
-
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 import { HeroThemeConfig } from '@/app/actions/dashboard/heroTheme';
 import { isMediaVideo } from '@/lib/mediaHelper';
+import { HomeHeroButtons } from './hero/HomeHeroButtons';
+import { HomeHeroSlide } from './hero/HomeHeroSlide';
 
-export default function HomeHero({ data, heroThemeConfig }: { data?: SectionData; heroThemeConfig?: HeroThemeConfig | null }) {
+interface HomeHeroProps {
+  data?: SectionData;
+  heroThemeConfig?: HeroThemeConfig | null;
+}
+
+export default function HomeHero({ data, heroThemeConfig }: HomeHeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const swiperRef = useRef<any>(null);
   const { t, language, direction } = useTranslation();
@@ -21,21 +26,21 @@ export default function HomeHero({ data, heroThemeConfig }: { data?: SectionData
     const initSwiper = () => {
       // @ts-ignore
       if (window.Swiper && containerRef.current) {
-        if (swiperRef.current && swiperRef.current.destroy) {
+        if (swiperRef.current?.destroy) {
           swiperRef.current.destroy(true, true);
           swiperRef.current = null;
         }
         // @ts-ignore
         swiperRef.current = new window.Swiper(containerRef.current, {
-            loop: true,
-            speed: 1000,
-            autoplay: { delay: 5000, disableOnInteraction: false },
-            pagination: { el: containerRef.current.querySelector(".swiper-pagination"), clickable: true },
-            effect: "fade",
-            fadeEffect: { crossFade: true },
+          loop: true,
+          speed: 1000,
+          autoplay: { delay: 5000, disableOnInteraction: false },
+          pagination: { el: containerRef.current.querySelector(".swiper-pagination"), clickable: true },
+          effect: "fade",
+          fadeEffect: { crossFade: true },
         });
       } else if (!window.Swiper) {
-          checkInterval = setTimeout(initSwiper, 50);
+        checkInterval = setTimeout(initSwiper, 50);
       }
     };
     
@@ -43,7 +48,7 @@ export default function HomeHero({ data, heroThemeConfig }: { data?: SectionData
 
     return () => {
       if (checkInterval) clearTimeout(checkInterval);
-      if (swiperRef.current && swiperRef.current.destroy) {
+      if (swiperRef.current?.destroy) {
         swiperRef.current.destroy(true, true);
         swiperRef.current = null;
       }
@@ -52,27 +57,18 @@ export default function HomeHero({ data, heroThemeConfig }: { data?: SectionData
 
   const heroData = data || {};
 
-  // Media selection based on theme for Slide 1
   const defaultSlide1Light = "/assets/images/hero-light-slide1.jpg";
   const defaultSlide1Dark = "/assets/images/hero-dark-slide1.jpg";
-
   const slide1Media = theme === 'light'
     ? (heroThemeConfig?.lightSlide1Media || heroThemeConfig?.lightSlide1Image || heroThemeConfig?.lightSlide1Video || heroData.slides?.[0]?.imageUrl || heroData.slides?.[0]?.image || defaultSlide1Light)
     : (heroThemeConfig?.darkSlide1Media || heroThemeConfig?.darkSlide1Image || heroThemeConfig?.darkSlide1Video || heroData.slides?.[0]?.videoUrl || heroData.videoUrl || heroData.slides?.[0]?.imageUrl || heroData.slides?.[0]?.image || defaultSlide1Dark);
 
-  const isSlide1Video = isMediaVideo(slide1Media);
-
-  // Media selection based on theme for Slide 2
   const defaultSlide2Light = "/assets/images/hero-light-slide2.jpg";
   const defaultSlide2Dark = "/assets/images/hero-dark-slide2.jpg";
-
   const slide2Media = theme === 'light'
     ? (heroThemeConfig?.lightSlide2Media || heroThemeConfig?.lightSlide2Image || heroThemeConfig?.lightSlide2Video || heroData.slides?.[1]?.imageUrl || heroData.slides?.[1]?.image || defaultSlide2Light)
     : (heroThemeConfig?.darkSlide2Media || heroThemeConfig?.darkSlide2Image || heroThemeConfig?.darkSlide2Video || heroData.slides?.[1]?.imageUrl || heroData.slides?.[1]?.image || defaultSlide2Dark);
 
-  const isSlide2Video = isMediaVideo(slide2Media);
-
-  // Active Color Preset
   const activePresetKey = theme === 'light'
     ? (heroThemeConfig?.lightPreset || 'royal_gold')
     : (heroThemeConfig?.darkPreset || 'royal_gold');
@@ -95,100 +91,34 @@ export default function HomeHero({ data, heroThemeConfig }: { data?: SectionData
   const slide2Title2 = getDynamicText(heroData.slides?.[1], 'titlePart2', language) || t('hero.slide2.titlePart2');
   const slide2Subtitle = getDynamicText(heroData.slides?.[1], 'subtitle', language) || t('hero.slide2.subtitle');
 
-  const discoverButtonText = language === 'ar' ? 'اكتشف عالمنا' : 'Discover Our World';
-  const contactButtonText = language === 'ar' ? 'تواصل معنا' : 'Contact Us';
-
-  const renderButtons = () => (
-    <div className="flex flex-wrap items-center justify-center gap-4">
-      <Link 
-        href="/services" 
-        className="btn-pharaoh-gold px-6 py-3 sm:px-7 sm:py-3.5 rounded-xl font-extrabold text-sm sm:text-base shadow-xl hover:shadow-pharaohGold/40 transition-all flex items-center gap-2 group text-pharaohNavy"
-      >
-        <span>{discoverButtonText}</span>
-        <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-        </svg>
-      </Link>
-      <Link 
-        href="/contact" 
-        className="btn-pharaoh-glass px-6 py-3 sm:px-7 sm:py-3.5 rounded-xl font-bold text-sm sm:text-base transition-all flex items-center gap-2 group border border-white/30 text-white hover:border-pharaohGold hover:text-pharaohGold bg-black/30 backdrop-blur-md"
-      >
-        <span>{contactButtonText}</span>
-        <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
-        </svg>
-      </Link>
-    </div>
+  const buttons = (
+    <HomeHeroButtons
+      discoverText={language === 'ar' ? 'اكتشف عالمنا' : 'Discover Our World'}
+      contactText={language === 'ar' ? 'تواصل معنا' : 'Contact Us'}
+    />
   );
 
   return (
     <div ref={containerRef} key={`${language}-${theme}`} dir={direction} className="swiper heroSwiper h-screen">
-        <div className="swiper-wrapper">
-
-            {/* SLIDE 1 */}
-            <div className="swiper-slide bg-[#060E1A]">
-                {isSlide1Video ? (
-                    <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-85">
-                        <source src={slide1Media} type="video/mp4" />
-                    </video>
-                ) : (
-                    <img src={slide1Media} className="absolute inset-0 w-full h-full object-cover opacity-90" alt="Hero Background 1" />
-                )}
-                <div className={`absolute inset-0 ${
-                  theme === 'light'
-                    ? 'bg-gradient-to-t from-white/95 via-white/50 to-white/20'
-                    : 'bg-gradient-to-t from-[#060E1A] via-[#0A192F]/40 to-transparent'
-                }`}></div>
-                <div className="relative z-20 h-full flex items-center justify-center text-center px-6">
-                    <div className="max-w-4xl content-up transition-opacity duration-700">
-                        <h1 className={`text-3xl sm:text-5xl md:text-6xl font-black mb-5 leading-tight tracking-tight ${
-                          theme === 'light' ? 'text-slate-900' : 'text-white'
-                        }`}>
-                            {slide1Title1} <span className={accentClass}>{slide1Title2}</span> {slide1Title3}
-                        </h1>
-                        <p className={`text-sm sm:text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed font-medium ${
-                          theme === 'light' ? 'text-slate-700' : 'text-slate-200'
-                        }`}>
-                            {slide1Subtitle}
-                        </p>
-                        {renderButtons()}
-                    </div>
-                </div>
-            </div>
-
-            {/* SLIDE 2 */}
-            <div className="swiper-slide bg-[#060E1A]">
-                {isSlide2Video ? (
-                    <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-85">
-                        <source src={slide2Media} type="video/mp4" />
-                    </video>
-                ) : (
-                    <img src={slide2Media} className="absolute inset-0 w-full h-full object-cover opacity-90" alt="Hero Background 2" />
-                )}
-                <div className={`absolute inset-0 ${
-                  theme === 'light'
-                    ? 'bg-gradient-to-t from-white/95 via-white/50 to-white/20'
-                    : 'bg-gradient-to-t from-[#060E1A] via-[#0A192F]/40 to-transparent'
-                }`}></div>
-                <div className="relative z-20 h-full flex items-center justify-center text-center px-6">
-                    <div className="max-w-4xl content-up transition-opacity duration-700">
-                        <h1 className={`text-3xl sm:text-5xl md:text-6xl font-black mb-5 leading-tight tracking-tight ${
-                          theme === 'light' ? 'text-slate-900' : 'text-white'
-                        }`}>
-                            {slide2Title1} <span className={accentClass}>{slide2Title2}</span>
-                        </h1>
-                        <p className={`text-sm sm:text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed font-medium ${
-                          theme === 'light' ? 'text-slate-700' : 'text-slate-200'
-                        }`}>
-                            {slide2Subtitle}
-                        </p>
-                        {renderButtons()}
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div className="swiper-pagination"></div>
+      <div className="swiper-wrapper">
+        <HomeHeroSlide
+          mediaSrc={slide1Media}
+          isVideo={isMediaVideo(slide1Media)}
+          theme={theme}
+          title={<>{slide1Title1} <span className={accentClass}>{slide1Title2}</span> {slide1Title3}</>}
+          subtitle={slide1Subtitle}
+          buttons={buttons}
+        />
+        <HomeHeroSlide
+          mediaSrc={slide2Media}
+          isVideo={isMediaVideo(slide2Media)}
+          theme={theme}
+          title={<>{slide2Title1} <span className={accentClass}>{slide2Title2}</span></>}
+          subtitle={slide2Subtitle}
+          buttons={buttons}
+        />
+      </div>
+      <div className="swiper-pagination" />
     </div>
   );
 }

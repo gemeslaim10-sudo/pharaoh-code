@@ -1,28 +1,7 @@
 'use client';
 
-interface Skill {
-    name: string;
-    value: string;
-}
-
-interface Stat {
-    value: string;
-    label: string;
-}
-
-export interface TeamMember {
-    id: string;
-    name: string;
-    role: string;
-    image: string;
-    description: string;
-    skills: Skill[];
-    stats: Stat[];
-    social: {
-        facebook: string;
-        instagram: string;
-    };
-}
+import { TeamMember } from './workFormTypes';
+export type { TeamMember };
 
 interface WorkFormMembersTableProps {
     loading: boolean;

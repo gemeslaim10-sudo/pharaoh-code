@@ -36,19 +36,19 @@ export default function AboutHero({ data }: { data: SectionData }) {
                 alt="About Pharaoh Code"
                 className="w-full h-[500px] object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100"
               />
-              {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050D1A]/80 via-transparent to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#050D1A]/20 to-transparent" />
+              {/* Gradient overlay - only for dark mode depth */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#050D1A]/80 via-transparent to-transparent pointer-events-none dark:block hidden" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#050D1A]/20 to-transparent pointer-events-none dark:block hidden" />
 
               {/* Rotating icon badge */}
-              <div className="absolute bottom-6 right-6 w-20 h-20 bg-[#050D1A]/95 border-2 border-[#C5A16F] rounded-2xl flex items-center justify-center group-hover:rotate-[360deg] transition-all duration-1000 shadow-[0_0_40px_rgba(197,161,111,0.5)] z-20">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-9 w-9 text-[#C5A16F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="absolute bottom-6 right-6 w-20 h-20 bg-white dark:bg-[#050D1A]/95 border-2 border-[#8A5800] dark:border-[#C5A16F] rounded-2xl flex items-center justify-center group-hover:rotate-[360deg] transition-all duration-1000 shadow-[0_10px_30px_rgba(15,23,42,0.15)] dark:shadow-[0_0_40px_rgba(197,161,111,0.5)] z-20">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-9 w-9 text-[#8A5800] dark:text-[#C5A16F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
               </div>
 
               {/* Top badge */}
-              <div className="absolute top-5 left-5 bg-[#C5A16F] text-[#050D1A] text-[10px] font-black tracking-[0.25em] px-3 py-1.5 rounded-full uppercase shadow-lg">
+              <div className="absolute top-5 left-5 bg-[#8A5800] dark:bg-[#C5A16F] text-white dark:text-[#050D1A] text-[10px] font-black tracking-[0.25em] px-3 py-1.5 rounded-full uppercase shadow-lg">
                 Since 2020
               </div>
             </div>

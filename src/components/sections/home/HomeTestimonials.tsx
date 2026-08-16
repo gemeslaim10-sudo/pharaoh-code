@@ -4,58 +4,9 @@ import { useState, useEffect } from 'react';
 import { SectionData } from '@/types';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
-
-interface TestimonialItem {
-  id?: string;
-  name?: string;
-  name_en?: string;
-  role?: string;
-  role_en?: string;
-  company?: string;
-  rating?: number | string;
-  content?: string;
-  content_en?: string;
-  text?: string;
-  imageUrl?: string;
-  image?: string;
-  verified?: boolean;
-}
-
-const FALLBACK_TESTIMONIALS: TestimonialItem[] = [
-  {
-    name: 'جمال سليم',
-    name_en: 'Gamal Sellim',
-    role: 'شريك نجاح | الرئيس التنفيذي',
-    role_en: 'Success Partner | CEO',
-    company: 'NextGen Solutions',
-    rating: 5,
-    content: 'من أفضل الفرق البرمجية التي تعاملت معها على المستوى الشخصي والمهني. دقة فائقة في المواعيد وكود نظيف بأعلى معايير الأمان وقابلية التوسع.',
-    content_en: 'One of the finest software engineering teams I have collaborated with professionally. Unmatched precision, clean code, and sovereign security.',
-    verified: true,
-  },
-  {
-    name: 'م. أحمد خالد',
-    name_en: 'Eng. Ahmed Khaled',
-    role: 'مدير قطاع التكنولوجيا',
-    role_en: 'Chief Technology Officer',
-    company: 'Apex Cloud Systems',
-    rating: 5,
-    content: 'تم تسليم منصتنا السحابية قبل الموعد المحدد بأداء فائق وتصميم استثنائي. دعمهم الفني المستمر بعد الإطلاق جعلهم شريكاً استراتيجياً حقيقياً لأعمالنا.',
-    content_en: 'Delivered our cloud platform ahead of schedule with lightning performance. Their dedicated post-launch support made them our true strategic partner.',
-    verified: true,
-  },
-  {
-    name: 'د. سارة المنصوري',
-    name_en: 'Dr. Sara Al-Mansouri',
-    role: 'مؤسس المنصة',
-    role_en: 'Platform Founder',
-    company: 'Visionary Retail Group',
-    rating: 5,
-    content: 'تجربة المستخدم التي صمموها لتطبيق الجوال ضاعفت معدل التحويل لدينا بشكل ملحوظ. اهتمامهم بالتفاصيل الدقيقة والجمالية هو ما يميزهم عن غيرهم.',
-    content_en: 'The UX design they crafted for our mobile app significantly doubled our conversion rate. Their meticulous eye for luxury aesthetics sets them apart.',
-    verified: true,
-  }
-];
+import { TestimonialItem, FALLBACK_TESTIMONIALS } from './testimonials/HomeTestimonialsData';
+import { HomeTestimonialsCard } from './testimonials/HomeTestimonialsCard';
+import { HomeTestimonialsList } from './testimonials/HomeTestimonialsList';
 
 export default function HomeTestimonials({ data }: { data?: SectionData }) {
   const { t, language, direction } = useTranslation();
@@ -64,7 +15,6 @@ export default function HomeTestimonials({ data }: { data?: SectionData }) {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [isAutoPlay, setIsAutoPlay] = useState<boolean>(true);
 
-  // Auto-cycle through reviews every 6 seconds if multiple reviews exist
   useEffect(() => {
     if (!isAutoPlay || displayItems.length <= 1) return;
     const interval = setInterval(() => {
@@ -95,7 +45,6 @@ export default function HomeTestimonials({ data }: { data?: SectionData }) {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff04_1px,transparent_1px),linear-gradient(to_bottom,#ffffff04_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] [mask-image:radial-gradient(ellipse_75%_60%_at_50%_40%,#000_60%,transparent_100%)] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-        
         {/* Section Header */}
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C5A16F]/10 border border-[#C5A16F]/30 backdrop-blur-md mb-2.5 shadow-sm">
@@ -121,111 +70,19 @@ export default function HomeTestimonials({ data }: { data?: SectionData }) {
 
         {/* Master Testimonial Showcase Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch max-w-5xl mx-auto">
-          
-          {/* MAIN HERO TESTIMONIAL DISPLAY (7 Cols) */}
-          <div className="lg:col-span-7 flex flex-col justify-between rounded-2xl p-6 sm:p-8 bg-gradient-to-br from-[#0F1E38] via-[#091528] to-[#050B14] border border-[#C5A16F]/30 shadow-[0_15px_40px_rgba(0,0,0,0.7)] relative overflow-hidden group">
-            
-            {/* Top Glowing Beam */}
-            <div className="absolute top-0 inset-x-8 h-[2px] bg-gradient-to-r from-transparent via-[#C5A16F] to-transparent shadow-[0_0_10px_#C5A16F]" />
-
-            {/* Giant Luxury Quote Mark Watermark */}
-            <span className={`absolute -top-3 ${direction === 'rtl' ? 'left-4' : 'right-4'} font-serif text-7xl sm:text-8xl font-black text-[#C5A16F]/[0.05] select-none pointer-events-none`}>
-              “
-            </span>
-
-            {/* Top Stars & Verified Status */}
-            <div className="flex items-center justify-between relative z-10 mb-5">
-              <div className="flex items-center gap-0.5 text-[#C5A16F] text-sm sm:text-base">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="drop-shadow-[0_0_6px_rgba(197,161,111,0.5)]">★</span>
-                ))}
-              </div>
-
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#C5A16F]/10 border border-[#C5A16F]/20 text-[#C5A16F] text-[10px] sm:text-[11px] font-mono">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#C5A16F]" />
-                {language === 'ar' ? 'شريك موثق' : 'Verified Partner'}
-              </span>
-            </div>
-
-            {/* Quote Content */}
-            <div className="relative z-10 my-2">
-              <p className="text-gray-200 text-sm sm:text-base leading-relaxed font-normal italic">
-                "{activeContent}"
-              </p>
-            </div>
-
-            {/* Author Details Footer */}
-            <div className="relative z-10 pt-5 mt-5 border-t border-white/10 flex items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden bg-[#112240] border border-[#C5A16F]/40 shrink-0 shadow-md">
-                  {activeImg ? (
-                    <img src={activeImg} alt={activeName} className="w-full h-full object-cover" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center font-bold text-base text-[#C5A16F]">
-                      {activeName.charAt(0) || '✦'}
-                    </div>
-                  )}
-                </div>
-
-                <div>
-                  <h4 className="text-white text-base sm:text-lg font-bold">
-                    {activeName}
-                  </h4>
-                  <p className="text-gray-400 text-xs font-light">
-                    {activeRole} {activeCompany && <span className="text-[#C5A16F]">@ {activeCompany}</span>}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          {/* SIDE LIST SELECTOR (5 Cols) */}
-          <div className="lg:col-span-5 flex flex-col justify-between gap-2.5">
-            {displayItems.map((item, idx) => {
-              const isSelected = activeIndex === idx;
-              const name = getDynamicText(item, 'name', language) || item.name || '';
-              const text = getDynamicText(item, 'content', language) || getDynamicText(item, 'text', language) || item.content || item.text || '';
-              const img = item.imageUrl || item.image || '';
-
-              return (
-                <div
-                  key={idx}
-                  onClick={() => setActiveIndex(idx)}
-                  onMouseEnter={() => setActiveIndex(idx)}
-                  className={`p-3.5 sm:p-4 rounded-xl cursor-pointer transition-all duration-300 border flex items-center gap-3 ${
-                    isSelected
-                      ? 'bg-[#10203C] border-[#C5A16F] shadow-[0_8px_20px_rgba(197,161,111,0.15)] -translate-y-0.5'
-                      : 'bg-[#091427]/70 hover:bg-[#0E1E38]/80 border-white/5 hover:border-white/15'
-                  }`}
-                >
-                  <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-lg overflow-hidden shrink-0 flex items-center justify-center font-bold text-xs ${
-                    isSelected ? 'bg-[#C5A16F] text-[#050B14]' : 'bg-[#112240] text-gray-300 border border-white/10'
-                  }`}>
-                    {img ? (
-                      <img src={img} alt={name} className="w-full h-full object-cover" />
-                    ) : (
-                      <span>{name.charAt(0) || '✦'}</span>
-                    )}
-                  </div>
-
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between gap-2 mb-0.5">
-                      <h5 className={`text-xs sm:text-sm font-bold truncate ${isSelected ? 'text-white' : 'text-gray-300'}`}>
-                        {name}
-                      </h5>
-                    </div>
-                    <p className="text-gray-400 text-[11px] truncate font-light">
-                      {text}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
+          <HomeTestimonialsCard
+            activeName={activeName}
+            activeRole={activeRole}
+            activeContent={activeContent}
+            activeCompany={activeCompany}
+            activeImg={activeImg}
+          />
+          <HomeTestimonialsList
+            items={displayItems}
+            activeIndex={activeIndex}
+            onSelect={setActiveIndex}
+          />
         </div>
-
       </div>
     </section>
   );

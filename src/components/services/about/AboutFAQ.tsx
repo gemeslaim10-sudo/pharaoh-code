@@ -2,6 +2,7 @@
 import { SectionData, SectionItem } from '@/types';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
+import { motion } from 'framer-motion';
 
 export default function AboutFAQ({ data }: { data: SectionData }) {
   const { t, language, direction } = useTranslation();
@@ -38,7 +39,13 @@ export default function AboutFAQ({ data }: { data: SectionData }) {
 
       <div className="max-w-4xl mx-auto px-6 relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
           <div className="inline-flex items-center gap-3 mb-5">
             <div className="w-8 h-[2px] bg-gradient-to-r from-transparent to-[#C5A16F]" />
             <span className="text-[#C5A16F] font-bold tracking-[0.4em] uppercase text-[11px] bg-[#C5A16F]/8 px-4 py-1.5 rounded-full border border-[#C5A16F]/20">
@@ -53,16 +60,23 @@ export default function AboutFAQ({ data }: { data: SectionData }) {
               {getDynamicText(data, 'titlePart2', language) || t('about.faqTitle2')}
             </span>
           </h2>
-        </div>
+        </motion.div>
 
-        {/* FAQ Accordion */}
+        {/* FAQ Accordion with Stagger */}
         <div className="space-y-4">
           {faqs.map((faq: SectionItem, index: number) => {
             const questionText = getDynamicText(faq, 'question', language) || faq.question;
             const answerText = getDynamicText(faq, 'answer', language) || faq.answer;
 
             return (
-              <div key={index} className="group relative">
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="group relative"
+              >
                 <details className="bg-gradient-to-b from-[#0F1E38] to-[#081222] border border-white/6 hover:border-[#C5A16F]/40 rounded-2xl overflow-hidden transition-all duration-400 shadow-xl group-hover:shadow-[0_10px_40px_-10px_rgba(197,161,111,0.2)]">
                   {/* Top beam */}
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C5A16F] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
@@ -94,7 +108,7 @@ export default function AboutFAQ({ data }: { data: SectionData }) {
                     </p>
                   </div>
                 </details>
-              </div>
+              </motion.div>
             );
           })}
         </div>

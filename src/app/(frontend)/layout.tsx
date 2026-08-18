@@ -3,6 +3,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import GlobalScripts from "@/components/layout/GlobalScripts";
 import PageTransitionWrapper from "@/components/layout/PageTransitionWrapper";
+import ScrollProgressBar from "@/components/layout/ScrollProgressBar";
+import FloatingActions from "@/components/layout/FloatingActions";
 import { getIdentity, getSocialLinks, getSystemStatus } from '@/app/actions/dashboard/settings';
 import Link from 'next/link';
 
@@ -21,6 +23,7 @@ export default async function FrontendLayout({
   const logoUrl = identity?.logo || identity?.logo_dark || "";
   const logoLightUrl = identity?.logo_light || "";
   const reverseNavbarAr = identity?.reverse_navbar_ar !== undefined ? identity.reverse_navbar_ar : true;
+  const whatsappNumber = (identity as any)?.phone || (identity as any)?.whatsapp || "+201000000000";
 
   if (systemStatus?.mode === 'on') {
     return (
@@ -57,6 +60,7 @@ export default async function FrontendLayout({
 
   return (
     <>
+      <ScrollProgressBar />
       <Preloader />
       <Navbar siteName={siteName} logoUrl={logoUrl} logoLightUrl={logoLightUrl} reverseNavbarAr={reverseNavbarAr} />
       
@@ -64,9 +68,9 @@ export default async function FrontendLayout({
         <PageTransitionWrapper>{children}</PageTransitionWrapper>
       </main>
 
+      <FloatingActions whatsappNumber={whatsappNumber} />
       <Footer siteName={siteName} logoUrl={logoUrl} logoLightUrl={logoLightUrl} socialLinks={socialLinks} />
       <GlobalScripts />
-
     </>
   );
 }

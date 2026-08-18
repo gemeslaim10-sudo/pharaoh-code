@@ -7,7 +7,7 @@ import SEOVisualIdentityIncluded from './SEOVisualIdentityIncluded';
 
 export default function SEOVisualIdentity() {
     return (
-        <section id="visual-identity" className="relative py-16 md:py-28 bg-pharaohNavy overflow-hidden" dir="rtl">
+        <section id="visual-identity" className="relative pt-28 sm:pt-36 pb-16 sm:pb-24 bg-pharaohNavy overflow-hidden" dir="rtl">
 
             <style>{`
         .pharaoh-3d-icon {

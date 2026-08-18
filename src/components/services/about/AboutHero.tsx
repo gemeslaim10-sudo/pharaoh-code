@@ -2,13 +2,14 @@
 import { SectionData, SectionItem } from '@/types';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
+import { motion } from 'framer-motion';
 
 export default function AboutHero({ data }: { data: SectionData }) {
   const { t, language, direction } = useTranslation();
   if (!data) return null;
 
   return (
-    <section id="about-us" className="relative py-24 bg-[#050D1A] overflow-hidden" dir={direction}>
+    <section id="about-us" className="relative pt-28 sm:pt-36 pb-16 sm:pb-24 bg-[#050D1A] overflow-hidden" dir={direction}>
       {/* Rich layered background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0"
@@ -26,7 +27,13 @@ export default function AboutHero({ data }: { data: SectionData }) {
         <div className="flex flex-col lg:flex-row items-center gap-14 lg:gap-20">
 
           {/* ── Image side ── */}
-          <div className="w-full lg:w-5/12 relative group flex-shrink-0">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95, x: direction === 'rtl' ? 30 : -30 }}
+            whileInView={{ opacity: 1, scale: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="w-full lg:w-5/12 relative group flex-shrink-0"
+          >
             {/* Ghost frame */}
             <div className="absolute inset-0 border-2 border-[#C5A16F]/20 rounded-tr-[5rem] rounded-bl-[5rem] translate-x-4 translate-y-4 group-hover:translate-x-1 group-hover:translate-y-1 transition-all duration-700 pointer-events-none" />
 
@@ -49,10 +56,16 @@ export default function AboutHero({ data }: { data: SectionData }) {
                 Since 2020
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* ── Text side ── */}
-          <div className="w-full lg:w-7/12 space-y-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+            className="w-full lg:w-7/12 space-y-8"
+          >
             {/* Label */}
             <div className="flex items-center gap-3">
               <div className="w-8 h-[2px] bg-gradient-to-r from-[#C5A16F] to-transparent" />
@@ -75,7 +88,7 @@ export default function AboutHero({ data }: { data: SectionData }) {
               {getDynamicText(data, 'description', language) || t('about.heroDescription')}
             </p>
 
-            {/* Feature grid — icon based, no numbers */}
+            {/* Feature grid with stagger animation */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {data.features?.map((feature: SectionItem, index: number) => {
                 const featTitle = getDynamicText(feature, 'title', language);
@@ -83,8 +96,12 @@ export default function AboutHero({ data }: { data: SectionData }) {
                 const hasValidSvg = feature.iconSvg && feature.iconSvg.includes('<svg');
 
                 return (
-                  <div key={index}
-                    className="flex items-start gap-4 p-4 bg-gradient-to-b from-[#0F1E38]/80 to-[#081222]/80 rounded-2xl border border-white/6 hover:border-[#C5A16F]/40 hover:-translate-y-1 transition-all duration-300 group/feat overflow-hidden">
+                  <motion.div 
+                    key={index}
+                    whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                    whileTap={{ scale: 0.98 }}
+                    className="flex items-start gap-4 p-4 bg-gradient-to-b from-[#0F1E38]/80 to-[#081222]/80 rounded-2xl border border-white/6 hover:border-[#C5A16F]/40 transition-all duration-300 group/feat overflow-hidden"
+                  >
                     {/* Top micro-beam */}
                     <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#C5A16F]/60 to-transparent opacity-0 group-hover/feat:opacity-100 transition-opacity" />
 
@@ -101,24 +118,26 @@ export default function AboutHero({ data }: { data: SectionData }) {
                       <h4 className="text-white font-bold text-sm mb-0.5">{featTitle}</h4>
                       <p className="text-gray-400 text-xs leading-relaxed">{featDesc}</p>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
 
             {/* CTA */}
             <div className="pt-2">
-              <a
+              <motion.a
                 href={data.buttonLink || '/portfolio'}
-                className="inline-flex items-center gap-3 bg-gradient-to-r from-[#C5A16F] to-[#B8960A] text-[#050D1A] px-8 py-4 rounded-2xl font-black hover:shadow-[0_0_50px_rgba(197,161,111,0.5)] transition-all duration-400 group/btn shadow-[0_0_30px_rgba(197,161,111,0.25)] text-sm"
+                whileHover={{ scale: 1.04, y: -2 }}
+                whileTap={{ scale: 0.96 }}
+                className="inline-flex items-center gap-3 bg-gradient-to-r from-[#C5A16F] to-[#B8960A] text-[#050D1A] px-8 py-4 rounded-2xl font-black hover:shadow-[0_0_50px_rgba(197,161,111,0.5)] transition-shadow duration-400 group/btn shadow-[0_0_30px_rgba(197,161,111,0.25)] text-sm"
               >
                 {getDynamicText(data, 'buttonText', language) || t('about.exploreWorld')}
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
-              </a>
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

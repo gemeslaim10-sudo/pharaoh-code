@@ -1,8 +1,9 @@
+import { cache } from 'react';
 import { SectionData } from '@/types';
 import { admin } from '@/lib/firebase/admin';
 import { getTeamMembers } from '@/app/actions/dashboard/team';
 
-export async function getHomePageData() {
+export const getHomePageData = cache(async function getHomePageData() {
   let docSnapData: admin.firestore.DocumentData = {};
   let reviewsDocs: admin.firestore.QueryDocumentSnapshot[] = [];
   let portfolioDocs: admin.firestore.QueryDocumentSnapshot[] = [];
@@ -133,4 +134,4 @@ export async function getHomePageData() {
   });
 
   return { data, dbClients };
-}
+});

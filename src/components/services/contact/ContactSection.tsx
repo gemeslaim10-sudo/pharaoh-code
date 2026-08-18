@@ -4,13 +4,14 @@ import ContactInfo from './ContactInfo';
 import ContactForm from './ContactForm';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
+import { motion } from 'framer-motion';
 
 export default function ContactSection({ data }: { data: SectionData }) {
   const { t, language, direction } = useTranslation();
   if (!data) return null;
 
   return (
-    <section id="contact" className="py-20 bg-[#0A192F] relative overflow-hidden" dir={direction}>
+    <section id="contact" className="pt-28 sm:pt-36 pb-16 sm:pb-24 bg-[#0A192F] relative overflow-hidden" dir={direction}>
       {/* Ambient glows */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#C5A16F]/5 blur-[150px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/4 blur-[120px] rounded-full pointer-events-none" />
@@ -20,7 +21,13 @@ export default function ContactSection({ data }: { data: SectionData }) {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header */}
-        <div className="text-center mb-14">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-14"
+        >
           <div className="inline-flex items-center gap-2 mb-4">
             <div className="w-6 h-[2px] bg-[#C5A16F]" />
             <span className="text-[#C5A16F] font-bold tracking-[0.35em] uppercase text-[11px]">
@@ -40,7 +47,7 @@ export default function ContactSection({ data }: { data: SectionData }) {
           <p className="text-gray-400 mt-4 max-w-xl mx-auto text-sm leading-relaxed">
             {getDynamicText(data, 'description', language) || t('contact.mainDesc')}
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <ContactInfo data={data} />

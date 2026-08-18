@@ -47,14 +47,14 @@ export default function HomeTestimonials({ data }: { data?: SectionData }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         {/* Section Header */}
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C5A16F]/10 border border-[#C5A16F]/30 backdrop-blur-md mb-2.5 shadow-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#C5A16F] animate-ping" />
-            <h2 className="text-[#C5A16F] font-bold tracking-[0.2em] uppercase text-[10px] sm:text-xs">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#C5A16F]/10 border border-[#C5A16F]/30 backdrop-blur-md mb-4 sm:mb-5 shadow-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C5A16F] animate-ping shrink-0" />
+            <h2 className="text-[#C5A16F] font-bold tracking-[0.15em] uppercase text-[11px] sm:text-xs leading-normal">
               {getDynamicText(data, 'subtitle', language) || t("testimonials.subtitle")}
             </h2>
           </div>
 
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white leading-tight mb-2.5 tracking-tight">
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white leading-[1.3] mb-2.5 tracking-normal pt-0.5">
             {t("testimonials.titlePart1")}{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F3E0B5] via-[#C5A16F] to-[#9E7D47] italic">
               {t("testimonials.titlePart2")}

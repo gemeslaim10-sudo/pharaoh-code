@@ -2,6 +2,7 @@
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 import { TestimonialItem } from './HomeTestimonialsData';
+import { motion } from 'framer-motion';
 
 interface HomeTestimonialsListProps {
   items: TestimonialItem[];
@@ -25,13 +26,15 @@ export function HomeTestimonialsList({
         const img = item.imageUrl || item.image || '';
 
         return (
-          <div
+          <motion.div
             key={idx}
             onClick={() => onSelect(idx)}
             onMouseEnter={() => onSelect(idx)}
-            className={`p-3.5 sm:p-4 rounded-xl cursor-pointer transition-all duration-300 border flex items-center gap-3 ${
+            whileHover={{ x: 4, transition: { duration: 0.2 } }}
+            whileTap={{ scale: 0.98 }}
+            className={`p-3.5 sm:p-4 rounded-xl cursor-pointer transition-colors duration-300 border flex items-center gap-3 relative ${
               isSelected
-                ? 'bg-[#10203C] border-[#C5A16F] shadow-[0_8px_20px_rgba(197,161,111,0.15)] -translate-y-0.5'
+                ? 'bg-[#10203C] border-[#C5A16F] shadow-[0_8px_20px_rgba(197,161,111,0.15)]'
                 : 'bg-[#091427]/70 hover:bg-[#0E1E38]/80 border-white/5 hover:border-white/15'
             }`}
           >
@@ -55,7 +58,7 @@ export function HomeTestimonialsList({
                 {text}
               </p>
             </div>
-          </div>
+          </motion.div>
         );
       })}
     </div>

@@ -1,5 +1,6 @@
 'use client';
 import { useTranslation } from '@/contexts/LanguageContext';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface HomeTestimonialsCardProps {
   activeName: string;
@@ -42,35 +43,53 @@ export function HomeTestimonialsCard({
         </span>
       </div>
 
-      {/* Quote Content */}
-      <div className="relative z-10 my-2">
-        <p className="text-gray-200 text-sm sm:text-base leading-relaxed font-normal italic">
-          "{activeContent}"
-        </p>
+      {/* Quote Content with Smooth Framer Motion Crossfade */}
+      <div className="relative z-10 my-2 min-h-[80px] flex items-center">
+        <AnimatePresence mode="wait">
+          <motion.p 
+            key={activeName + activeContent}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+            className="text-gray-200 text-sm sm:text-base leading-relaxed font-normal italic"
+          >
+            "{activeContent}"
+          </motion.p>
+        </AnimatePresence>
       </div>
 
       {/* Author Details Footer */}
       <div className="relative z-10 pt-5 mt-5 border-t border-white/10 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden bg-[#112240] border border-[#C5A16F]/40 shrink-0 shadow-md">
-            {activeImg ? (
-              <img src={activeImg} alt={activeName} className="w-full h-full object-cover" />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center font-bold text-base text-[#C5A16F]">
-                {activeName.charAt(0) || '✦'}
-              </div>
-            )}
-          </div>
+        <AnimatePresence mode="wait">
+          <motion.div 
+            key={activeName}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 10 }}
+            transition={{ duration: 0.3 }}
+            className="flex items-center gap-3"
+          >
+            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl overflow-hidden bg-[#112240] border border-[#C5A16F]/40 shrink-0 shadow-md">
+              {activeImg ? (
+                <img src={activeImg} alt={activeName} className="w-full h-full object-cover" />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center font-bold text-base text-[#C5A16F]">
+                  {activeName.charAt(0) || '✦'}
+                </div>
+              )}
+            </div>
 
-          <div>
-            <h4 className="text-white text-base sm:text-lg font-bold">
-              {activeName}
-            </h4>
-            <p className="text-gray-400 text-xs font-light">
-              {activeRole} {activeCompany && <span className="text-[#C5A16F]">@ {activeCompany}</span>}
-            </p>
-          </div>
-        </div>
+            <div>
+              <h4 className="text-white text-base sm:text-lg font-bold">
+                {activeName}
+              </h4>
+              <p className="text-gray-400 text-xs font-light">
+                {activeRole} {activeCompany && <span className="text-[#C5A16F]">@ {activeCompany}</span>}
+              </p>
+            </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   );

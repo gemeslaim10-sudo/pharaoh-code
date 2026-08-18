@@ -9,7 +9,7 @@ export const commonEn = {
     contact: 'Contact Us',
     startProject: 'Start a Project',
     dashboard: 'Dashboard',
-    login: 'Admin Login',
+    login: 'Sign In',
     logout: 'Logout',
   },
   common: {
@@ -48,8 +48,12 @@ export const commonEn = {
     filterAll: 'All',
     filterWeb: 'Web Apps',
     filterApp: 'Mobile Apps',
+    filterMobile: 'Mobile Apps',
+    filterSystems: 'Cloud Systems',
+    filterDesign: 'UI/UX Design',
     filterMotion: 'Motion Graphics',
     viewProject: 'View Project',
+    viewAllProjects: 'View Full Portfolio',
   },
   workflow: {
     titlePart1: 'Our',

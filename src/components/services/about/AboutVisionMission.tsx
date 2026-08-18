@@ -2,6 +2,7 @@
 import { SectionData } from '@/types';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
+import { motion } from 'framer-motion';
 
 export default function AboutVisionMission({ data }: { data: SectionData }) {
   const { t, language, direction } = useTranslation();
@@ -49,8 +50,16 @@ export default function AboutVisionMission({ data }: { data: SectionData }) {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {cards.map((card) => (
-            <div key={card.key} className={`group relative ${card.accent} overflow-hidden`}>
+          {cards.map((card, idx) => (
+            <motion.div 
+              key={card.key}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.15 }}
+              whileHover={{ y: -6, transition: { duration: 0.25 } }}
+              className={`group relative ${card.accent} overflow-hidden`}
+            >
               {/* Card background */}
               <div className={`absolute inset-0 bg-[#112240] ${card.accent} border border-white/5 group-hover:border-[#C5A16F]/35 transition-all duration-500 shadow-2xl`} />
 
@@ -84,7 +93,7 @@ export default function AboutVisionMission({ data }: { data: SectionData }) {
                   </p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 

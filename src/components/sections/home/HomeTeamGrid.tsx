@@ -58,11 +58,21 @@ export default function HomeTeamGrid({ data }: HomeTeamGridProps) {
                         data-fb={member.social?.facebook}
                         data-insta={member.social?.instagram}>
                         
-                        <div className="w-32 h-32 mx-auto rounded-[1.5rem] overflow-hidden mb-6 border-2 border-[#C5A16F]/30 p-1 group-hover:border-[#C5A16F] transition-colors bg-[#0A192F]">
-                            <img src={member.image} alt={member.name} className="w-full h-full object-cover rounded-[1.3rem] transition-all duration-500 transform group-hover:scale-105" />
+                        <div className="relative mx-auto mb-3.5 mt-1 w-32 h-32 sm:w-36 sm:h-36">
+                            <div className="absolute -inset-2.5 rounded-full bg-gradient-to-r from-[#C5A16F]/40 via-[#DFB77D]/25 to-[#9E7D47]/40 blur-md opacity-40 group-hover:opacity-100 group-hover:blur-lg transition-all duration-700 pointer-events-none" />
+                            <div className="relative w-full h-full rounded-full p-[3px] bg-gradient-to-tr from-[#C5A16F] via-[#DFB77D] to-[#9E7D47] group-hover:rotate-180 transition-transform duration-1000 ease-out shadow-xl">
+                                <div className="w-full h-full rounded-full p-1 overflow-hidden bg-[#081222]">
+                                    <img src={member.image} alt={member.name} className="w-full h-full object-cover rounded-full transition-transform duration-700 ease-out transform group-hover:scale-115 group-hover:brightness-105" />
+                                </div>
+                            </div>
+                            <div className="absolute bottom-0.5 end-0.5 z-10 w-8 h-8 rounded-full border-2 bg-[#070F1E] border-[#C5A16F] text-[#C5A16F] flex items-center justify-center shadow-lg group-hover:scale-115 group-hover:rotate-12 transition-all duration-300">
+                                <span className="text-sm font-serif leading-none font-bold select-none drop-shadow-[0_0_4px_rgba(197,161,111,0.6)]">
+                                    𓂀
+                                </span>
+                            </div>
                         </div>
-                        <h4 className="text-xl font-bold text-white mb-2">{member.name}</h4>
-                        <span className="text-[#C5A16F] text-xs font-medium uppercase tracking-wider block">{member.role}</span>
+                        <h4 className="text-base font-bold text-white mb-1 group-hover:text-[#C5A16F] transition-colors">{member.name}</h4>
+                        <span className="text-[#C5A16F] text-[10px] font-bold uppercase tracking-wider block bg-[#C5A16F]/10 py-0.5 px-2.5 rounded-full inline-block border border-[#C5A16F]/20">{member.role}</span>
                     </div>
                 ))}
             </div>

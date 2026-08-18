@@ -1,5 +1,6 @@
 'use server';
 
+import { cache } from 'react';
 import { admin, serializeData } from '@/lib/firebase/admin';
 
 export async function updateIdentity(token: string, data: any) {
@@ -16,7 +17,7 @@ export async function updateIdentity(token: string, data: any) {
     }
 }
 
-export async function getIdentity() {
+export const getIdentity = cache(async function getIdentity() {
     try {
         const db = admin.firestore();
         const doc = await db.collection('settings').doc('identity').get();
@@ -24,7 +25,7 @@ export async function getIdentity() {
     } catch (error: any) {
         return null;
     }
-}
+});
 
 export async function getAdmins() {
     try {
@@ -82,7 +83,7 @@ export async function checkIsAdminAction(email: string) {
     }
 }
 
-export async function getSocialLinks() {
+export const getSocialLinks = cache(async function getSocialLinks() {
     try {
         const db = admin.firestore();
         const doc = await db.collection('settings').doc('social').get();
@@ -90,7 +91,7 @@ export async function getSocialLinks() {
     } catch (error: any) {
         return { fb: '#', wa: '#', ig: '#' };
     }
-}
+});
 
 export async function updateSocialLinks(token: string, data: { fb: string; wa: string; ig: string }) {
     try {
@@ -106,7 +107,7 @@ export async function updateSocialLinks(token: string, data: { fb: string; wa: s
     }
 }
 
-export async function getSystemStatus() {
+export const getSystemStatus = cache(async function getSystemStatus() {
     try {
         const db = admin.firestore();
         const doc = await db.collection('settings').doc('system').get();
@@ -114,7 +115,7 @@ export async function getSystemStatus() {
     } catch (error: any) {
         return { mode: 'off', message: 'نحن نقوم بتحديث منصتنا حالياً، سنعود قريباً.' };
     }
-}
+});
 
 export async function updateSystemStatus(token: string, data: { mode: string; message: string }) {
     try {

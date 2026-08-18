@@ -9,7 +9,7 @@ export const commonAr = {
     contact: 'تواصل معنا',
     startProject: 'ابدأ مشروعك',
     dashboard: 'لوحة التحكم',
-    login: 'دخول الإدارة',
+    login: 'تسجيل الدخول',
     logout: 'تسجيل الخروج',
   },
   common: {
@@ -48,8 +48,12 @@ export const commonAr = {
     filterAll: 'الكل',
     filterWeb: 'تطبيقات الويب',
     filterApp: 'تطبيقات الموبايل',
+    filterMobile: 'تطبيقات الموبايل',
+    filterSystems: 'الأنظمة السحابية',
+    filterDesign: 'تصميم الواجهات',
     filterMotion: 'موشن جرافيكس',
     viewProject: 'معاينة المشروع',
+    viewAllProjects: 'عرض كافة الأعمال',
   },
   workflow: {
     titlePart1: 'منهجية',

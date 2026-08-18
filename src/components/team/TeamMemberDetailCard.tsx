@@ -22,14 +22,24 @@ export default function TeamMemberDetailCard({ member }: TeamMemberDetailCardPro
         𓂀
       </div>
       
-      {/* Header Layout - Mobile Optimized */}
+      {/* Header Layout - Mobile Optimized with Circular Avatar */}
       <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-start gap-5 sm:gap-8 border-b border-pharaohGold/10 pb-6 sm:pb-8 mb-6 sm:mb-8 relative z-10">
-        <div className="w-32 h-40 sm:w-44 sm:h-56 rounded-2xl sm:rounded-tr-[3rem] sm:rounded-bl-[3rem] overflow-hidden p-1 border-2 border-pharaohGold/40 shadow-xl shrink-0 bg-[#0A192F] group">
-          <img 
-            src={member.image || member.imageUrl} 
-            alt={name} 
-            className="w-full h-full object-cover rounded-xl sm:rounded-tr-[2.8rem] sm:rounded-bl-[2.8rem] transition-all duration-500 transform group-hover:scale-105" 
-          />
+        <div className="relative w-32 h-32 sm:w-40 sm:h-40 shrink-0 group/detail-avatar">
+          <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-[#C5A16F]/40 via-[#DFB77D]/20 to-[#9E7D47]/40 blur-md opacity-50 group-hover/detail-avatar:opacity-100 transition-all duration-700 pointer-events-none" />
+          <div className="relative w-full h-full rounded-full p-[3px] bg-gradient-to-tr from-[#C5A16F] via-[#DFB77D] to-[#9E7D47] group-hover/detail-avatar:rotate-180 transition-transform duration-1000 ease-out shadow-xl">
+            <div className="w-full h-full rounded-full p-1 overflow-hidden bg-[#0A192F]">
+              <img 
+                src={member.image || member.imageUrl} 
+                alt={name} 
+                className="w-full h-full object-cover rounded-full transition-all duration-700 transform group-hover/detail-avatar:scale-115 group-hover/detail-avatar:brightness-105" 
+              />
+            </div>
+          </div>
+          <div className="absolute bottom-1 end-1 z-10 w-8 h-8 rounded-full border-2 bg-[#070F1E] border-[#C5A16F] text-[#C5A16F] flex items-center justify-center shadow-lg group-hover/detail-avatar:scale-115 group-hover/detail-avatar:rotate-12 transition-all duration-300">
+            <span className="text-sm font-serif leading-none font-bold select-none drop-shadow-[0_0_4px_rgba(197,161,111,0.6)]">
+              𓂀
+            </span>
+          </div>
         </div>
         <div className="flex-1">
           <span className="inline-block bg-pharaohGold/10 text-pharaohGold text-[11px] sm:text-xs font-bold px-3.5 py-1 rounded-lg tracking-wider uppercase border border-pharaohGold/20 shadow-sm">

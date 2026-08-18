@@ -18,9 +18,9 @@ const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
-// Initialize Analytics conditionally (it only works in browser environments)
+// Initialize Analytics conditionally (it only works in browser environments in production)
 let analytics;
-if (typeof window !== "undefined") {
+if (typeof window !== "undefined" && process.env.NODE_ENV === "production" && firebaseConfig.measurementId) {
   isSupported().then((yes) => yes && (analytics = getAnalytics(app)));
 }
 

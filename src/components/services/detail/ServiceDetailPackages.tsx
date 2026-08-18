@@ -2,6 +2,7 @@
 
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
+import { motion } from 'framer-motion';
 
 interface Props {
     service: any;
@@ -61,15 +62,50 @@ export default function ServiceDetailPackages({ service }: Props) {
 
     const packages = service?.packages?.length > 0 ? service.packages : defaultPackages;
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.12,
+            },
+        },
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30, scale: 0.95 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            transition: {
+                duration: 0.5,
+                ease: "easeOut" as const,
+            },
+        },
+    };
+
     return (
         <section id="packages" className="py-20 relative bg-[#0A192F]" dir={direction}>
             <div className="max-w-7xl mx-auto px-6">
-                <div className="text-center mb-12">
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="text-center mb-12"
+                >
                     <h3 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tighter">{title}</h3>
                     <p className="text-gray-400 text-sm md:text-base font-medium max-w-xl mx-auto">{desc}</p>
-                </div>
+                </motion.div>
 
-                <div className="grid lg:grid-cols-3 gap-8 items-stretch">
+                <motion.div 
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    className="grid lg:grid-cols-3 gap-8 items-stretch"
+                >
                     {packages.map((pkg: any, idx: number) => {
                         const pBadge = getDynamicText(pkg, 'badge', language) || pkg.badge;
                         const pTitle = getDynamicText(pkg, 'title', language) || pkg.title;
@@ -78,9 +114,11 @@ export default function ServiceDetailPackages({ service }: Props) {
                         const pDesc = getDynamicText(pkg, 'desc', language) || getDynamicText(pkg, 'description', language) || pkg.desc;
 
                         return (
-                            <div
+                            <motion.div
                                 key={idx}
-                                className={`bg-[#112240] rounded-2xl p-8 flex flex-col justify-between relative transition-all duration-300 ${
+                                variants={itemVariants}
+                                whileHover={{ y: -8, transition: { duration: 0.25 } }}
+                                className={`bg-[#112240] rounded-2xl p-8 flex flex-col justify-between relative transition-colors duration-300 ${
                                     pkg.isPopular ? 'border-2 border-[#C5A16F] shadow-2xl scale-105' : 'border border-white/5 hover:border-[#C5A16F]/30'
                                 }`}
                             >
@@ -112,20 +150,22 @@ export default function ServiceDetailPackages({ service }: Props) {
                                         })}
                                     </ul>
                                 </div>
-                                <a
+                                <motion.a
                                     href="#start-project-form"
-                                    className={`mt-8 block text-center font-bold py-3.5 rounded-xl transition-all text-sm ${
+                                    whileHover={{ scale: 1.03 }}
+                                    whileTap={{ scale: 0.97 }}
+                                    className={`mt-8 block text-center font-bold py-3.5 rounded-xl transition-colors text-sm ${
                                         pkg.isPopular
                                             ? 'bg-[#C5A16F] text-[#0A192F] hover:bg-white shadow-lg shadow-[#C5A16F]/10'
                                             : 'bg-white/5 hover:bg-[#C5A16F] hover:text-[#0A192F] text-white'
                                     }`}
                                 >
                                     {language === 'ar' ? 'اختيار هذه الباقة' : 'Select This Package'}
-                                </a>
-                            </div>
+                                </motion.a>
+                            </motion.div>
                         );
                     })}
-                </div>
+                </motion.div>
             </div>
         </section>
     );

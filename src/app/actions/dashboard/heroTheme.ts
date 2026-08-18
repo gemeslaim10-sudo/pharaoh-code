@@ -1,5 +1,4 @@
-'use server';
-
+import { cache } from 'react';
 import { admin, serializeData } from '@/lib/firebase/admin';
 
 export interface HeroThemeConfig {
@@ -24,9 +23,7 @@ export interface HeroThemeConfig {
     lightPreset?: string; // 'royal_gold' | 'luminous_gold' | 'sovereign_silver' | 'cinematic'
 }
 
-
-
-export async function getHeroThemeConfig(): Promise<HeroThemeConfig | null> {
+export const getHeroThemeConfig = cache(async function getHeroThemeConfig(): Promise<HeroThemeConfig | null> {
     try {
         const db = admin.firestore();
         const doc = await db.collection('settings').doc('heroTheme').get();
@@ -34,7 +31,7 @@ export async function getHeroThemeConfig(): Promise<HeroThemeConfig | null> {
     } catch (error: any) {
         return null;
     }
-}
+});
 
 export async function updateHeroThemeConfig(token: string, data: HeroThemeConfig) {
     try {

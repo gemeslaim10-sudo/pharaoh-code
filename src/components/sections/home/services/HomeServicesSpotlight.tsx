@@ -2,7 +2,9 @@
 import Link from 'next/link';
 import { SectionItem } from '@/types';
 import { useTranslation } from '@/contexts/LanguageContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { stripSvgColors } from './homeServicesHelpers';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface HomeServicesSpotlightProps {
   activeItem: SectionItem;
@@ -20,55 +22,88 @@ export function HomeServicesSpotlight({
   activeTags,
 }: HomeServicesSpotlightProps) {
   const { t, language, direction } = useTranslation();
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
 
   return (
     <div className="md:col-span-5 flex flex-col">
-      <div className="relative rounded-2xl p-7 bg-gradient-to-br from-[#0F1F3D] via-[#091427] to-[#050B14] border border-[#C5A16F]/35 shadow-xl flex flex-col justify-between overflow-hidden group h-full">
+      <div className={`relative rounded-2xl p-6 sm:p-7 border shadow-xl flex flex-col justify-between overflow-hidden group h-full transition-all duration-300 ${
+        isLight
+          ? 'bg-white border-slate-200/90 shadow-slate-200/50'
+          : 'bg-gradient-to-br from-[#0F1F3D] via-[#091427] to-[#050B14] border-[#C5A16F]/35'
+      }`}>
         {/* Background Luxury Glow Orb */}
         <div className="absolute -top-10 -right-10 w-60 h-60 bg-[#C5A16F]/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* Top Bar: Icon + Enterprise Badge */}
         <div className="relative z-10 flex items-start justify-between">
-          <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#C5A16F] via-[#D4AF37] to-[#9E7D47] text-[#050B14] flex items-center justify-center p-3 shadow-md">
-            <div
-              className="w-7 h-7 flex items-center justify-center"
-              dangerouslySetInnerHTML={{ __html: stripSvgColors(activeItem?.iconSvg || '') }}
-            />
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTitle + 'icon'}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#C5A16F] via-[#D4AF37] to-[#9E7D47] text-[#050B14] flex items-center justify-center p-2.5 shadow-md"
+            >
+              <div
+                className="w-6 h-6 flex items-center justify-center"
+                dangerouslySetInnerHTML={{ __html: stripSvgColors(activeItem?.iconSvg || '') }}
+              />
+            </motion.div>
+          </AnimatePresence>
           
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-mono">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[10px] font-mono ${
+            isLight
+              ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+              : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'
+          }`}>
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             {language === 'ar' ? 'حل سيادي معتمد' : 'Enterprise Ready'}
           </span>
         </div>
 
-        {/* Middle: Title, Description & Tech Tags */}
-        <div className="relative z-10 my-5">
-          <h4 className="text-2xl font-bold text-white mb-2 leading-snug">
-            {activeTitle}
-          </h4>
-          <p className="text-gray-300 text-sm leading-relaxed mb-4 font-light line-clamp-4">
-            {activeDesc}
-          </p>
+        {/* Middle: Title, Description & Tech Tags with AnimatePresence */}
+        <div className="relative z-10 my-4 min-h-[140px] flex flex-col justify-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTitle}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+            >
+              <h4 className={`text-xl sm:text-2xl font-bold mb-2 leading-snug ${isLight ? 'text-slate-900' : 'text-white'}`}>
+                {activeTitle}
+              </h4>
+              <p className={`text-xs sm:text-sm leading-relaxed mb-4 font-light line-clamp-3 ${isLight ? 'text-slate-600' : 'text-gray-300'}`}>
+                {activeDesc}
+              </p>
 
-          {/* Tech Pills */}
-          <div className="flex flex-wrap gap-1.5">
-            {activeTags.map((tag, i) => (
-              <span 
-                key={i} 
-                className="px-2.5 py-1 text-[11px] font-medium rounded-lg bg-white/5 border border-white/10 text-gray-300"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+              {/* Tech Pills */}
+              <div className="flex flex-wrap gap-1.5">
+                {activeTags.map((tag, i) => (
+                  <span 
+                    key={i} 
+                    className={`px-2.5 py-1 text-[11px] font-medium rounded-lg border ${
+                      isLight
+                        ? 'bg-slate-100 border-slate-200 text-slate-700'
+                        : 'bg-white/5 border-white/10 text-gray-300'
+                    }`}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         {/* Bottom CTA Button */}
-        <div className="relative z-10 pt-3 border-t border-white/10">
+        <div className={`relative z-10 pt-3 border-t ${isLight ? 'border-slate-100' : 'border-white/10'}`}>
           <Link
             href={activeUrl}
-            className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#C5A16F] via-[#D4AF37] to-[#C5A16F] text-[#050B14] font-bold text-sm flex items-center justify-center gap-2 shadow-md transition-all active:scale-98"
+            className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#C5A16F] via-[#D4AF37] to-[#C5A16F] text-[#050B14] font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition-all hover:scale-[1.02] active:scale-98"
           >
             <span>{t("services.exploreBtn") || (language === 'ar' ? 'استكشف كافة التفاصيل' : 'Explore Details')}</span>
             <svg

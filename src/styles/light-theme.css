@@ -54,7 +54,7 @@ html[data-theme="light"] h4,
 html[data-theme="light"] h5,
 html[data-theme="light"] h6,
 html[data-theme="light"] .text-white,
-html[data-theme="light"] [class*="text-white"]:not(.heroSwiper *):not([class*="btn-"]):not(.btn-pharaoh-gold):not(.filter-btn.active):not(.badge) {
+html[data-theme="light"] [class*="text-white"]:not(.heroSwiper *):not([class*="btn-"]):not(.btn-pharaoh-gold):not(.filter-btn.active):not(.filter-btn.active *):not(.portfolio-filter-btn.active):not(.portfolio-filter-btn.active *):not([data-active="true"]):not([data-active="true"] *):not(.badge) {
   color: #0A192F !important;
 }
 
@@ -62,7 +62,7 @@ html[data-theme="light"] p:not(.heroSwiper *),
 html[data-theme="light"] li:not(.heroSwiper *),
 html[data-theme="light"] label,
 html[data-theme="light"] small,
-html[data-theme="light"] [class*="text-gray-"]:not(.heroSwiper *) {
+html[data-theme="light"] [class*="text-gray-"]:not(.heroSwiper *):not(.filter-btn.active *):not(.portfolio-filter-btn.active *) {
   color: #1E293B !important;
 }
 

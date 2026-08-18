@@ -1,5 +1,6 @@
 'use client';
 import { ReactNode } from 'react';
+import { motion } from 'framer-motion';
 
 interface HomeHeroSlideProps {
   mediaSrc: string;
@@ -39,11 +40,26 @@ export function HomeHeroSlide({
           }`}>
             {title}
           </h1>
-          <p className={`text-sm sm:text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed font-medium ${
-            theme === 'light' ? 'text-slate-700' : 'text-slate-200'
-          }`}>
+
+          {/* Floating Levitating Subtitle Paragraph */}
+          <motion.p
+            animate={{
+              y: [0, -6, 0],
+            }}
+            transition={{
+              duration: 3.8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className={`text-sm sm:text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed font-medium drop-shadow-sm select-none ${
+              theme === 'light' 
+                ? 'text-slate-700 drop-shadow-[0_2px_10px_rgba(255,255,255,0.8)]' 
+                : 'text-slate-200 drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]'
+            }`}
+          >
             {subtitle}
-          </p>
+          </motion.p>
+
           {buttons}
         </div>
       </div>

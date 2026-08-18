@@ -29,7 +29,7 @@ export default async function ClientDetailPage({ params }: { params: Promise<{ i
     }
     
     return (
-        <section className="relative py-32 bg-[#0A192F] overflow-hidden text-right min-h-screen flex items-center" dir="rtl">
+        <section className="relative pt-32 sm:pt-36 pb-16 sm:pb-24 bg-[#0A192F] overflow-hidden text-right min-h-screen flex items-center" dir="rtl">
             {/* Background Pattern */}
             <div className="absolute top-0 left-0 w-full h-full opacity-[0.02] pointer-events-none">
                 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">

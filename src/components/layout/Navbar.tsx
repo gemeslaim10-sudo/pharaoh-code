@@ -9,6 +9,7 @@ import { NavbarBrand } from './navbar/NavbarBrand';
 import { NavbarDesktopLinks, NavLinkItem } from './navbar/NavbarDesktopLinks';
 import { NavbarActions } from './navbar/NavbarActions';
 import { NavbarMobileDrawer } from './navbar/NavbarMobileDrawer';
+import { motion } from 'framer-motion';
 
 interface NavbarProps {
   siteName?: string;
@@ -82,21 +83,30 @@ export default function Navbar({
 
           {/* Mobile Right Bar: Quick Language + Hamburger Toggle */}
           <div className="lg:hidden flex items-center gap-2.5">
-            <LanguageSwitcher iconOnly={true} className="!w-9 !h-9 !rounded-lg" />
+            <motion.div
+              animate={{ y: [0, -2, 0] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
+              whileTap={{ scale: 0.94 }}
+            >
+              <LanguageSwitcher iconOnly={true} className="!w-9 !h-9 !rounded-xl" />
+            </motion.div>
             
-            <button 
+            <motion.button 
+              animate={{ y: [0, -2, 0] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
+              whileTap={{ scale: 0.94 }}
               onClick={() => setIsOpen(!isOpen)} 
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
-              className={`w-10 h-10 rounded-xl flex flex-col items-center justify-center gap-1.5 transition-all duration-300 border ${
+              className={`w-9.5 h-9.5 rounded-xl flex flex-col items-center justify-center gap-1.5 transition-all duration-300 border cursor-pointer ${
                 isOpen 
-                  ? 'bg-[#C5A16F] text-[#050B14] border-[#C5A16F] shadow-[0_0_20px_rgba(197,161,111,0.4)]' 
-                  : 'bg-[#0D182E] text-[#C5A16F] border-white/10'
+                  ? 'bg-[#C5A16F] text-[#050B14] border-[#C5A16F] shadow-[0_0_20px_rgba(197,161,111,0.3)]' 
+                  : 'bg-[#0D182E]/80 text-[#C5A16F] border-white/10 hover:border-[#C5A16F]/30'
               }`}
             >
-              <span className={`w-5 h-[2px] bg-current transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-[5px]' : ''}`} />
-              <span className={`w-5 h-[2px] bg-current transition-all duration-300 ${isOpen ? 'opacity-0 scale-0' : ''}`} />
-              <span className={`w-5 h-[2px] bg-current transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-[5px]' : ''}`} />
-            </button>
+              <span className={`w-4.5 h-[1.8px] bg-current transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-[4.8px]' : ''}`} />
+              <span className={`w-4.5 h-[1.8px] bg-current transition-all duration-300 ${isOpen ? 'opacity-0 scale-0' : ''}`} />
+              <span className={`w-4.5 h-[1.8px] bg-current transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-[4.8px]' : ''}`} />
+            </motion.button>
           </div>
         </div>
       </nav>

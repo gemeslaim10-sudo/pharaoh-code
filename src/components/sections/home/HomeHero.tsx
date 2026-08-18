@@ -1,4 +1,7 @@
 'use client';
+
+import Swiper from 'swiper';
+import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
 import { SectionData } from '@/types';
 import { useEffect, useRef } from 'react';
 import { useTranslation } from '@/contexts/LanguageContext';
@@ -8,6 +11,7 @@ import { HeroThemeConfig } from '@/app/actions/dashboard/heroTheme';
 import { isMediaVideo } from '@/lib/mediaHelper';
 import { HomeHeroButtons } from './hero/HomeHeroButtons';
 import { HomeHeroSlide } from './hero/HomeHeroSlide';
+import { HeroTypingTitle } from './hero/HeroTypingTitle';
 
 interface HomeHeroProps {
   data?: SectionData;
@@ -16,44 +20,35 @@ interface HomeHeroProps {
 
 export default function HomeHero({ data, heroThemeConfig }: HomeHeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const swiperRef = useRef<any>(null);
+  const swiperRef = useRef<Swiper | null>(null);
   const { t, language, direction } = useTranslation();
   const { theme } = useTheme();
 
   useEffect(() => {
-    let checkInterval: any;
-    
-    const initSwiper = () => {
-      // @ts-ignore
-      if (window.Swiper && containerRef.current) {
-        if (swiperRef.current?.destroy) {
-          swiperRef.current.destroy(true, true);
-          swiperRef.current = null;
-        }
-        // @ts-ignore
-        swiperRef.current = new window.Swiper(containerRef.current, {
-          loop: true,
-          speed: 1000,
-          autoplay: { delay: 5000, disableOnInteraction: false },
-          pagination: { el: containerRef.current.querySelector(".swiper-pagination"), clickable: true },
-          effect: "fade",
-          fadeEffect: { crossFade: true },
-        });
-      } else if (!window.Swiper) {
-        checkInterval = setTimeout(initSwiper, 50);
-      }
-    };
-    
-    initSwiper();
+    if (!containerRef.current) return;
+
+    if (swiperRef.current) {
+      swiperRef.current.destroy(true, true);
+      swiperRef.current = null;
+    }
+
+    swiperRef.current = new Swiper(containerRef.current, {
+      modules: [Autoplay, Pagination, EffectFade],
+      loop: true,
+      speed: 1000,
+      autoplay: { delay: 6000, disableOnInteraction: false },
+      pagination: { el: containerRef.current.querySelector(".swiper-pagination") as HTMLElement, clickable: true },
+      effect: "fade",
+      fadeEffect: { crossFade: true },
+    });
 
     return () => {
-      if (checkInterval) clearTimeout(checkInterval);
-      if (swiperRef.current?.destroy) {
+      if (swiperRef.current) {
         swiperRef.current.destroy(true, true);
         swiperRef.current = null;
       }
     };
-  }, [language]);
+  }, [language, theme]);
 
   const heroData = data || {};
 
@@ -82,13 +77,13 @@ export default function HomeHero({ data, heroThemeConfig }: HomeHeroProps) {
 
   const accentClass = presetAccentClasses[activePresetKey] || 'text-pharaohGold';
 
-  const slide1Title1 = getDynamicText(heroData.slides?.[0] || heroData, 'titlePart1', language) || t('hero.slide1.titlePart1');
-  const slide1Title2 = getDynamicText(heroData.slides?.[0] || heroData, 'titlePart2', language) || t('hero.slide1.titlePart2');
-  const slide1Title3 = getDynamicText(heroData.slides?.[0] || heroData, 'titlePart3', language) || t('hero.slide1.titlePart3');
+  const slide1Title1 = getDynamicText(heroData.slides?.[0] || heroData, 'titlePart1', language) || t('hero.slide1.titlePart1') || 'نبني المستقبل';
+  const slide1Title2 = getDynamicText(heroData.slides?.[0] || heroData, 'titlePart2', language) || t('hero.slide1.titlePart2') || 'الرقمي';
+  const slide1Title3 = getDynamicText(heroData.slides?.[0] || heroData, 'titlePart3', language) || t('hero.slide1.titlePart3') || 'بفكر فرعوني سيادي';
   const slide1Subtitle = getDynamicText(heroData.slides?.[0] || heroData, 'subtitle', language) || getDynamicText(heroData, 'description', language) || t('hero.slide1.subtitle');
 
-  const slide2Title1 = getDynamicText(heroData.slides?.[1], 'titlePart1', language) || t('hero.slide2.titlePart1');
-  const slide2Title2 = getDynamicText(heroData.slides?.[1], 'titlePart2', language) || t('hero.slide2.titlePart2');
+  const slide2Title1 = getDynamicText(heroData.slides?.[1], 'titlePart1', language) || t('hero.slide2.titlePart1') || 'حلول برمجية';
+  const slide2Title2 = getDynamicText(heroData.slides?.[1], 'titlePart2', language) || t('hero.slide2.titlePart2') || 'استثنائية وفارقة';
   const slide2Subtitle = getDynamicText(heroData.slides?.[1], 'subtitle', language) || t('hero.slide2.subtitle');
 
   const buttons = (
@@ -105,7 +100,18 @@ export default function HomeHero({ data, heroThemeConfig }: HomeHeroProps) {
           mediaSrc={slide1Media}
           isVideo={isMediaVideo(slide1Media)}
           theme={theme}
-          title={<>{slide1Title1} <span className={accentClass}>{slide1Title2}</span> {slide1Title3}</>}
+          title={
+            <HeroTypingTitle
+              part1={slide1Title1}
+              part2={slide1Title2}
+              part3={slide1Title3}
+              accentClass={accentClass}
+              theme={theme}
+              holdTime={1500}
+              typingSpeed={70}
+              deletingSpeed={35}
+            />
+          }
           subtitle={slide1Subtitle}
           buttons={buttons}
         />
@@ -113,7 +119,17 @@ export default function HomeHero({ data, heroThemeConfig }: HomeHeroProps) {
           mediaSrc={slide2Media}
           isVideo={isMediaVideo(slide2Media)}
           theme={theme}
-          title={<>{slide2Title1} <span className={accentClass}>{slide2Title2}</span></>}
+          title={
+            <HeroTypingTitle
+              part1={slide2Title1}
+              part2={slide2Title2}
+              accentClass={accentClass}
+              theme={theme}
+              holdTime={1500}
+              typingSpeed={70}
+              deletingSpeed={35}
+            />
+          }
           subtitle={slide2Subtitle}
           buttons={buttons}
         />

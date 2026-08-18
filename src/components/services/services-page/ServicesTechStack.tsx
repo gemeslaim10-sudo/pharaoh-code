@@ -2,6 +2,7 @@
 
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
+import { motion } from 'framer-motion';
 
 export default function ServicesTechStack({ data }: { data?: any }) {
   const { t, language, direction } = useTranslation();
@@ -60,6 +61,29 @@ export default function ServicesTechStack({ data }: { data?: any }) {
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.96 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.45,
+        ease: "easeOut" as const,
+      },
+    },
+  };
+
   return (
     <section className="py-20 sm:py-24 bg-[#050B14] text-white relative overflow-hidden select-none border-t border-white/5" dir={direction}>
         {/* Ambient lighting */}
@@ -69,13 +93,19 @@ export default function ServicesTechStack({ data }: { data?: any }) {
             <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
                 
                 {/* Left Header Column */}
-                <div className="lg:w-1/3 space-y-5">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C5A16F]/10 border border-[#C5A16F]/30 backdrop-blur-md shadow-sm">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#C5A16F] animate-ping" />
-                        <h2 className="text-[#C5A16F] font-bold tracking-[0.2em] uppercase text-[10px] sm:text-xs">{subtitle}</h2>
+                <motion.div 
+                  initial={{ opacity: 0, x: direction === 'rtl' ? 30 : -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="lg:w-1/3 space-y-5"
+                >
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#C5A16F]/10 border border-[#C5A16F]/30 backdrop-blur-md mb-4 sm:mb-5 shadow-sm">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#C5A16F] animate-ping shrink-0" />
+                        <h2 className="text-[#C5A16F] font-bold tracking-[0.15em] uppercase text-[11px] sm:text-xs leading-normal">{subtitle}</h2>
                     </div>
 
-                    <h3 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+                    <h3 className="text-3xl sm:text-4xl font-extrabold text-white leading-[1.3] pt-0.5">
                         {title1} <br /> 
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F3E0B5] via-[#C5A16F] to-[#9E7D47] italic">
                             {title2}
@@ -96,14 +126,22 @@ export default function ServicesTechStack({ data }: { data?: any }) {
                             {aesEncrypt}
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
-                {/* Right Tech Cards Grid */}
-                <div className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 w-full">
+                {/* Right Tech Cards Grid with Framer Motion */}
+                <motion.div 
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 w-full"
+                >
                     {techCards.map((card, idx) => (
-                        <div 
+                        <motion.div 
                             key={idx} 
-                            className="group relative rounded-2xl p-5 sm:p-6 bg-gradient-to-b from-[#0F1E38] via-[#091528] to-[#050B14] border border-white/5 hover:border-[#C5A16F]/40 transition-all duration-400 hover:-translate-y-1 shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex flex-col justify-between overflow-hidden"
+                            variants={itemVariants}
+                            whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                            className="group relative rounded-2xl p-5 sm:p-6 bg-gradient-to-b from-[#0F1E38] via-[#091528] to-[#050B14] border border-white/5 hover:border-[#C5A16F]/40 transition-colors duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex flex-col justify-between overflow-hidden"
                         >
                             {/* Top Glowing Beam */}
                             <div className="absolute top-0 inset-x-6 h-[2px] bg-gradient-to-r from-transparent via-[#C5A16F] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 shadow-[0_0_10px_#C5A16F]" />
@@ -126,9 +164,9 @@ export default function ServicesTechStack({ data }: { data?: any }) {
 
                             {/* Bottom dash */}
                             <div className="w-6 h-0.5 bg-[#C5A16F]/20 group-hover:w-10 group-hover:bg-[#C5A16F] rounded-full mt-4 transition-all duration-400" />
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
 
             </div>
         </div>

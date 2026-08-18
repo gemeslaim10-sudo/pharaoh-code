@@ -8,7 +8,7 @@ export default function TeamMemberDetailClient({ member }: { member: any }) {
     const { t, direction } = useTranslation();
 
     return (
-        <section className="relative py-32 bg-[#0A192F] overflow-hidden min-h-screen flex items-center" dir={direction}>
+        <section className="relative pt-32 sm:pt-36 pb-16 sm:pb-24 bg-[#0A192F] overflow-hidden min-h-screen flex items-center" dir={direction}>
             <div className="absolute top-0 left-0 w-full h-full opacity-[0.02] pointer-events-none">
                 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
                     <defs>

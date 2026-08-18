@@ -6,40 +6,21 @@ export default function GlobalScripts() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const runScript = () => {
-      // @ts-ignore
-      if (!window.$ || !window.Swiper) {
-        setTimeout(runScript, 100);
-        return;
+    // Fallback menu toggle if needed
+    const handleMenuClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (target?.closest('#open-menu, #close-menu, .m-link')) {
+        const mobileNav = document.getElementById('mobile-nav');
+        if (mobileNav) {
+          mobileNav.classList.toggle('active');
+        }
       }
-      
-      // @ts-ignore
-      const $ = window.$;
-
-      // Preloader Logic
-      const hidePreloader = () => {
-          setTimeout(function() {
-              $('#preloader').fadeOut(400, function() {
-                  $('body').css('overflow', 'auto');
-              });
-          }, 300);
-      };
-
-      hidePreloader();
-
-
-      $(document).ready(function() {
-          $('#open-menu, #close-menu, .m-link').click(function() {
-              $('#mobile-nav').toggleClass('active');
-          });
-
-          // Navigation and other global interactions can go here
-      });
-
-      // Stats Counter Logic handled natively via React in HomeStats.tsx
     };
 
-    runScript();
+    document.addEventListener('click', handleMenuClick);
+    return () => {
+      document.removeEventListener('click', handleMenuClick);
+    };
   }, []);
 
   return null;

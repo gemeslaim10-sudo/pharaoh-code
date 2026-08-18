@@ -2,6 +2,7 @@
 import { SectionData, SectionItem } from '@/types';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
+import { motion } from 'framer-motion';
 
 const PHILOSOPHY_ICONS = [
   <svg key="0" className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -30,7 +31,13 @@ export default function AboutPhilosophy({ data }: { data: SectionData }) {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Section header */}
-        <div className="text-center mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
           <div className="inline-flex items-center gap-3 mb-5">
             <div className="w-10 h-[2px] bg-gradient-to-r from-transparent to-[#C5A16F]" />
             <span className="text-[#C5A16F] font-bold tracking-[0.4em] uppercase text-[11px] bg-[#C5A16F]/8 px-4 py-1.5 rounded-full border border-[#C5A16F]/20">
@@ -46,9 +53,9 @@ export default function AboutPhilosophy({ data }: { data: SectionData }) {
             </span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-transparent via-[#C5A16F] to-transparent mx-auto mt-6 rounded-full" />
-        </div>
+        </motion.div>
 
-        {/* Cards: First one large + two small */}
+        {/* Cards: Staggered with Framer Motion */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {data.items?.map((item: SectionItem, index: number) => {
             const itemTitle = getDynamicText(item, 'title', language);
@@ -58,10 +65,14 @@ export default function AboutPhilosophy({ data }: { data: SectionData }) {
               : PHILOSOPHY_ICONS[index % 3];
 
             return (
-              <div
+              <motion.div
                 key={index}
-                className="relative group bg-gradient-to-b from-[#0F1E38] to-[#081222] rounded-3xl border border-white/8 hover:border-[#C5A16F]/50 transition-all duration-600 overflow-hidden shadow-2xl cursor-default"
-                style={{ transitionTimingFunction: 'cubic-bezier(0.16,1,0.3,1)' }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.12 }}
+                whileHover={{ y: -8, transition: { duration: 0.25 } }}
+                className="relative group bg-gradient-to-b from-[#0F1E38] to-[#081222] rounded-3xl border border-white/8 hover:border-[#C5A16F]/50 transition-colors duration-300 overflow-hidden shadow-2xl cursor-default"
               >
                 {/* Top glowing beam */}
                 <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C5A16F] to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
@@ -73,34 +84,24 @@ export default function AboutPhilosophy({ data }: { data: SectionData }) {
                 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/[0.025] to-transparent -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
 
                 <div className="relative z-10 p-8 flex flex-col h-full">
-                  {/* Icon with animated ring */}
-                  <div className="relative mb-7 self-start">
-                    <div className="w-16 h-16 bg-[#C5A16F]/10 rounded-2xl flex items-center justify-center text-[#C5A16F] group-hover:bg-[#C5A16F] group-hover:text-[#0A192F] transition-all duration-400 shadow-[0_0_0_0_rgba(197,161,111,0)] group-hover:shadow-[0_0_0_8px_rgba(197,161,111,0.12)] relative z-10">
-                      {icon}
-                    </div>
+                  <div className="w-16 h-16 bg-[#0A192F] border border-[#C5A16F]/30 rounded-2xl flex items-center justify-center text-[#C5A16F] mb-8 group-hover:scale-110 group-hover:border-[#C5A16F] group-hover:bg-[#C5A16F]/10 transition-all duration-500 shadow-xl">
+                    {icon}
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-xl font-black text-white mb-4 group-hover:text-[#C5A16F] transition-colors duration-300 leading-tight">
+                  <h3 className="text-2xl font-black text-white mb-4 group-hover:text-[#C5A16F] transition-colors">
                     {itemTitle}
                   </h3>
 
-                  {/* Description */}
-                  <p className="text-gray-400 text-sm leading-relaxed flex-1">
+                  <p className="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">
                     {itemDesc}
                   </p>
 
-                  {/* Bottom accent */}
-                  <div className="mt-6 pt-5 border-t border-white/5">
-                    <div className="flex items-center gap-2 text-[#C5A16F]/50 group-hover:text-[#C5A16F] transition-colors duration-400">
-                      <div className="w-4 h-[1px] bg-current" />
-                      <span className="text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-400 translate-x-2 group-hover:translate-x-0">
-                        {language === 'ar' ? 'اكتشف المزيد' : 'Learn More'}
-                      </span>
-                    </div>
+                  <div className="pt-6 border-t border-white/5 flex items-center justify-between text-[#C5A16F] text-xs font-mono">
+                    <span>PHARAOH STANDARD</span>
+                    <span>0{index + 1}</span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

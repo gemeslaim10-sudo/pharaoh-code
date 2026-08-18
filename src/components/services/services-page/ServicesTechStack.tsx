@@ -3,8 +3,26 @@
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 import { motion } from 'framer-motion';
+import { TechStackSidebar } from './TechStackSidebar';
+import { TechStackCard, TechCardItem } from './TechStackCard';
 
-export default function ServicesTechStack({ data }: { data?: any }) {
+interface TechCardData {
+  title?: string;
+  desc?: string;
+  description?: string;
+}
+
+interface ServicesTechStackData {
+  subtitle?: string;
+  title1?: string;
+  title2?: string;
+  description?: string;
+  cleanArch?: string;
+  aesEncrypt?: string;
+  cards?: TechCardData[];
+}
+
+export default function ServicesTechStack({ data }: { data?: ServicesTechStackData }) {
   const { t, language, direction } = useTranslation();
 
   const subtitle = getDynamicText(data, 'subtitle', language) || t('techStack.subtitle');
@@ -16,7 +34,7 @@ export default function ServicesTechStack({ data }: { data?: any }) {
 
   const cards = data?.cards || [];
 
-  const techCards = [
+  const techCards: TechCardItem[] = [
     {
       title: getDynamicText(cards[0], 'title', language) || t('techStack.backendTitle') || (language === 'ar' ? 'البنية الخلفية والسيرفرات' : 'Backend & Edge API'),
       desc: getDynamicText(cards[0], 'desc', language) || getDynamicText(cards[0], 'description', language) || t('techStack.backendDesc') || (language === 'ar' ? 'أنظمة سريعة الاستجابة بأحدث معايير الأمان وقابلية التوسع.' : 'Ultra-low latency architectures built with sovereign resilience.'),
@@ -86,90 +104,41 @@ export default function ServicesTechStack({ data }: { data?: any }) {
 
   return (
     <section className="py-20 sm:py-24 bg-[#050B14] text-white relative overflow-hidden select-none border-t border-white/5" dir={direction}>
-        {/* Ambient lighting */}
-        <div className="absolute bottom-10 right-10 w-[500px] h-[350px] bg-[#C5A16F]/6 blur-[150px] rounded-full pointer-events-none" />
+      {/* Ambient lighting */}
+      <div className="absolute bottom-10 right-10 w-[500px] h-[350px] bg-[#C5A16F]/6 blur-[150px] rounded-full pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-            <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
-                
-                {/* Left Header Column */}
-                <motion.div 
-                  initial={{ opacity: 0, x: direction === 'rtl' ? 30 : -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5 }}
-                  className="lg:w-1/3 space-y-5"
-                >
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#C5A16F]/10 border border-[#C5A16F]/30 backdrop-blur-md mb-4 sm:mb-5 shadow-sm">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#C5A16F] animate-ping shrink-0" />
-                        <h2 className="text-[#C5A16F] font-bold tracking-[0.15em] uppercase text-[11px] sm:text-xs leading-normal">{subtitle}</h2>
-                    </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
+          <TechStackSidebar
+            subtitle={subtitle}
+            title1={title1}
+            title2={title2}
+            desc={desc}
+            cleanArch={cleanArch}
+            aesEncrypt={aesEncrypt}
+            direction={direction}
+          />
 
-                    <h3 className="text-3xl sm:text-4xl font-extrabold text-white leading-[1.3] pt-0.5">
-                        {title1} <br /> 
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F3E0B5] via-[#C5A16F] to-[#9E7D47] italic">
-                            {title2}
-                        </span>
-                    </h3>
-
-                    <p className="text-gray-400 text-xs sm:text-sm md:text-base leading-relaxed font-light">
-                        {desc}
-                    </p>
-
-                    <div className="space-y-3 pt-3 border-t border-white/5">
-                        <div className="flex items-center gap-3 text-xs sm:text-sm text-gray-300 font-medium">
-                            <span className="w-6 h-6 rounded-lg bg-[#C5A16F]/10 border border-[#C5A16F]/30 flex items-center justify-center text-[#C5A16F] shrink-0">✔</span>
-                            {cleanArch}
-                        </div>
-                        <div className="flex items-center gap-3 text-xs sm:text-sm text-gray-300 font-medium">
-                            <span className="w-6 h-6 rounded-lg bg-[#C5A16F]/10 border border-[#C5A16F]/30 flex items-center justify-center text-[#C5A16F] shrink-0">✔</span>
-                            {aesEncrypt}
-                        </div>
-                    </div>
-                </motion.div>
-
-                {/* Right Tech Cards Grid with Framer Motion */}
-                <motion.div 
-                  variants={containerVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 w-full"
-                >
-                    {techCards.map((card, idx) => (
-                        <motion.div 
-                            key={idx} 
-                            variants={itemVariants}
-                            whileHover={{ y: -6, transition: { duration: 0.25 } }}
-                            className="group relative rounded-2xl p-5 sm:p-6 bg-gradient-to-b from-[#0F1E38] via-[#091528] to-[#050B14] border border-white/5 hover:border-[#C5A16F]/40 transition-colors duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.5)] flex flex-col justify-between overflow-hidden"
-                        >
-                            {/* Top Glowing Beam */}
-                            <div className="absolute top-0 inset-x-6 h-[2px] bg-gradient-to-r from-transparent via-[#C5A16F] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 shadow-[0_0_10px_#C5A16F]" />
-
-                            <div>
-                                <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 group-hover:border-[#C5A16F]/40 group-hover:bg-[#C5A16F] flex items-center justify-center mb-4 transition-all duration-400 shadow-md">
-                                    <svg className="w-6 h-6 text-[#C5A16F] group-hover:text-[#050B14] transition-colors duration-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        {card.icon}
-                                    </svg>
-                                </div>
-
-                                <h4 className="text-white font-bold text-base sm:text-lg mb-2 group-hover:text-[#C5A16F] transition-colors">
-                                    {card.title}
-                                </h4>
-
-                                <p className="text-gray-400 text-xs leading-relaxed font-light">
-                                    {card.desc}
-                                </p>
-                            </div>
-
-                            {/* Bottom dash */}
-                            <div className="w-6 h-0.5 bg-[#C5A16F]/20 group-hover:w-10 group-hover:bg-[#C5A16F] rounded-full mt-4 transition-all duration-400" />
-                        </motion.div>
-                    ))}
-                </motion.div>
-
-            </div>
+          {/* Right Tech Cards Grid */}
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 w-full"
+          >
+            {techCards.map((card, idx) => (
+              <motion.div 
+                key={idx} 
+                variants={itemVariants}
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+              >
+                <TechStackCard card={card} />
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
+      </div>
     </section>
   );
 }

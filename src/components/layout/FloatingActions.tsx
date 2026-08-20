@@ -31,7 +31,7 @@ export default function FloatingActions({ whatsappNumber = '+201000000000' }: { 
   return (
     <aside 
       aria-label="Floating Actions" 
-      className={`fixed bottom-4 sm:bottom-6 ${isRtl ? 'left-3 sm:left-6' : 'right-3 sm:right-6'} z-[90] flex flex-col items-center gap-2.5 sm:gap-3 select-none pointer-events-auto`}
+      className={`fixed bottom-20 md:bottom-6 ${isRtl ? 'left-3 sm:left-6' : 'right-3 sm:right-6'} z-[70] flex flex-col items-center gap-2.5 sm:gap-3 select-none pointer-events-auto`}
     >
       {/* Scroll To Top Button with Spring Scale */}
       <AnimatePresence>
@@ -64,7 +64,7 @@ export default function FloatingActions({ whatsappNumber = '+201000000000' }: { 
         )}
       </AnimatePresence>
 
-      {/* Floating Levitation WhatsApp / Quick Contact Action Button */}
+      {/* Floating Levitation WhatsApp / Quick Contact Action Button (Desktop only, mobile has bottom bar) */}
       <motion.div
         animate={{
           y: [0, -4, 0],
@@ -74,7 +74,7 @@ export default function FloatingActions({ whatsappNumber = '+201000000000' }: { 
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="relative group will-change-transform"
+        className="relative group will-change-transform hidden md:block"
       >
         {/* Pulsing Ambient Halo */}
         <div className={`absolute -inset-1 sm:-inset-1.5 rounded-full blur-md opacity-60 group-hover:opacity-100 transition-opacity duration-500 animate-pulse pointer-events-none ${

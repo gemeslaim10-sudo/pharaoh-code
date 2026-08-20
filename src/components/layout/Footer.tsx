@@ -26,7 +26,7 @@ export default function Footer({
 
   const nameParts = siteName.split(' ');
   const firstWord = nameParts[0];
-  const activeLogo = theme === 'light' ? (logoLightUrl || '') : (logoUrl || '');
+  const activeLogo = theme === 'light' ? (logoLightUrl || logoUrl || '') : (logoUrl || logoLightUrl || '');
 
   return (
     <footer 

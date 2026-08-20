@@ -107,8 +107,8 @@ export default function HomePortfolio({ data }: { data?: SectionData }) {
           direction={direction}
         />
         
-        {/* Portfolio Swiper Carousel */}
-        <div ref={swiperContainerRef} className="swiper portfolioSwiper overflow-hidden px-1 py-3">
+        {/* Portfolio Swiper Carousel with Anti-Clipping Padding */}
+        <div ref={swiperContainerRef} className="swiper portfolioSwiper !overflow-visible -mx-2 sm:-mx-3 px-2 sm:px-3 pt-2 pb-6 sm:pt-3 sm:pb-8">
           <div className="swiper-wrapper">
             {filteredItems.map((item: SectionItem, index: number) => (
               <div key={item.id || index} className="swiper-slide h-auto">

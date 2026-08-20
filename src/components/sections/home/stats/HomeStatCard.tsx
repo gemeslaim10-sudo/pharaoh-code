@@ -41,7 +41,7 @@ export function HomeStatCard({
       whileTap={{ scale: 0.98 }}
       className={`group relative rounded-2xl p-5 sm:p-6 border transition-colors duration-300 shadow-lg flex flex-col items-center text-center overflow-hidden h-full ${
         isLight
-          ? 'bg-white border-slate-200 hover:border-[#C5A16F] hover:shadow-[0_10px_30px_rgba(197,161,111,0.2)]'
+          ? 'bg-white border-slate-300 hover:border-[#8A5800] hover:shadow-[0_10px_30px_rgba(138,88,0,0.2)]'
           : 'bg-gradient-to-b from-[#0F1E38] via-[#0A162B] to-[#070F1E] border-white/5 hover:border-[#C5A16F]/40 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)]'
       }`}
     >
@@ -51,7 +51,7 @@ export function HomeStatCard({
       {/* Floating Glowing Icon */}
       <div className={`w-12 h-12 rounded-xl border flex items-center justify-center mb-4 transition-all duration-400 group-hover:scale-105 group-hover:bg-[#C5A16F] shadow-md ${
         isLight
-          ? 'bg-slate-100 border-slate-200 group-hover:border-[#C5A16F]/30'
+          ? 'bg-slate-100 border-slate-300 group-hover:border-[#C5A16F]/30'
           : 'bg-white/5 border-white/10 group-hover:border-[#C5A16F]/30'
       }`}>
         <div
@@ -65,7 +65,7 @@ export function HomeStatCard({
       {/* Animated Stat Value */}
       <div className="flex items-baseline justify-center gap-0.5 mb-1.5">
         {prefix && (
-          <span className="text-[#C5A16F] text-2xl sm:text-3xl font-bold font-mono">
+          <span className={`text-2xl sm:text-3xl font-bold font-mono ${isLight ? 'text-[#8A5800]' : 'text-[#C5A16F]'}`}>
             {prefix}
           </span>
         )}
@@ -75,15 +75,15 @@ export function HomeStatCard({
           <StatCounter targetValue={numVal} />
         </span>
         {suffix && (
-          <span className="text-[#C5A16F] text-2xl sm:text-3xl font-bold font-mono">
+          <span className={`text-2xl sm:text-3xl font-bold font-mono ${isLight ? 'text-[#8A5800]' : 'text-[#C5A16F]'}`}>
             {suffix}
           </span>
         )}
       </div>
 
       {/* Metric Label */}
-      <p className={`font-medium text-xs sm:text-sm tracking-wide transition-colors ${
-        isLight ? 'text-slate-600 group-hover:text-slate-900' : 'text-gray-300 group-hover:text-white'
+      <p className={`font-bold text-xs sm:text-sm tracking-wide transition-colors ${
+        isLight ? 'text-slate-800 group-hover:text-slate-950' : 'text-gray-300 group-hover:text-white'
       }`}>
         {title}
       </p>

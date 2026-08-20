@@ -9,13 +9,15 @@ interface LogoCropperModalProps {
   isOpen: boolean;
   onClose: () => void;
   onCropComplete: (croppedFile: File, previewUrl: string) => void;
+  target?: 'dark' | 'light' | null;
 }
 
 export default function LogoCropperModal({
   imageSrc,
   isOpen,
   onClose,
-  onCropComplete
+  onCropComplete,
+  target = 'dark',
 }: LogoCropperModalProps) {
   const {
     imgDimensions,
@@ -78,7 +80,7 @@ export default function LogoCropperModal({
           onEnd={() => setActiveHandle(null)}
         />
 
-        <CropperNavbarPreview previewUrl={previewUrl} />
+        <CropperNavbarPreview previewUrl={previewUrl} target={target} />
 
         <div className="flex justify-end items-center gap-3 border-t border-white/10 pt-4">
           <button type="button" onClick={onClose} className="px-5 py-2.5 rounded-xl text-xs font-bold text-gray-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition">إلغاء</button>

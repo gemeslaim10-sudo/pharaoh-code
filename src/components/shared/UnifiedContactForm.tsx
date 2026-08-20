@@ -110,7 +110,7 @@ export default function UnifiedContactForm({
             whileHover={!loading ? { scale: 1.02, y: -2 } : {}}
             whileTap={!loading ? { scale: 0.98 } : {}}
             transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            className={`w-full relative overflow-hidden py-3.5 sm:py-4 px-6 rounded-xl font-black text-sm sm:text-base flex items-center justify-center gap-2.5 transition-all duration-300 shadow-xl cursor-pointer ${
+            className={`w-full relative overflow-hidden py-3 sm:py-3.5 px-5 sm:px-6 rounded-xl font-black text-xs sm:text-sm md:text-base flex items-center justify-center gap-2 transition-all duration-300 shadow-xl cursor-pointer whitespace-nowrap shrink-0 ${
               loading 
                 ? 'bg-gray-400 text-gray-700 cursor-not-allowed' 
                 : 'bg-gradient-to-r from-[#C5A16F] via-[#DFB77D] to-[#C5A16F] hover:from-[#DFB77D] hover:to-[#C5A16F] text-[#070F1E] shadow-[#C5A16F]/25 hover:shadow-[#C5A16F]/40'
@@ -120,10 +120,10 @@ export default function UnifiedContactForm({
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out pointer-events-none" />
             )}
 
-            <span className="relative z-10">{loading ? (language === 'ar' ? 'جاري إرسال الطلب...' : 'Submitting Request...') : defaultBtnText}</span>
+            <span className="relative z-10 whitespace-nowrap shrink-0">{loading ? (language === 'ar' ? 'جاري إرسال الطلب...' : 'Submitting Request...') : defaultBtnText}</span>
             {!loading && (
               <svg
-                className={`w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 relative z-10 ${direction === 'rtl' ? 'rotate-180 group-hover:-translate-x-1' : ''}`}
+                className={`w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1 relative z-10 ${direction === 'rtl' ? 'rotate-180 group-hover:-translate-x-1' : ''}`}
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

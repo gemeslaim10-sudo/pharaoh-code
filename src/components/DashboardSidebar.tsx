@@ -6,9 +6,21 @@ import { clearSystemCache } from "@/app/actions/dashboard/cache";
 import SidebarNavLinks from "./dashboard/sidebar/SidebarNavLinks";
 import SidebarFooterActions from "./dashboard/sidebar/SidebarFooterActions";
 
-export default function DashboardSidebar({ siteName = "Pharaoh Code" }: { siteName?: string }) {
+interface DashboardSidebarProps {
+  siteName?: string;
+  logoUrl?: string;
+  logoLightUrl?: string;
+}
+
+export default function DashboardSidebar({ 
+  siteName = "Pharaoh Code",
+  logoUrl,
+  logoLightUrl,
+}: DashboardSidebarProps) {
   const { isSidebarOpen, setSidebarOpen } = useDashboard();
   const [clearingCache, setClearingCache] = useState(false);
+
+  const activeLogo = logoUrl || logoLightUrl || '';
 
   const handleClearCache = async () => {
     if (confirm("هل أنت متأكد من رغبتك في تفريغ ذاكرة الكاش؟ ستظهر جميع التعديلات الحديثة في الموقع مباشرة.")) {
@@ -35,11 +47,19 @@ export default function DashboardSidebar({ siteName = "Pharaoh Code" }: { siteNa
     >
       <div className="p-6 border-b border-pharaohGold/10 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3">
-          <h2 className="text-lg font-black tracking-wide text-white">
-            <span className="text-xl font-black tracking-tighter uppercase text-white">
-              {siteName.split(' ')[0]} <span className="text-pharaohGold">{siteName.split(' ').slice(1).join(' ')}</span>
-            </span>
-          </h2>
+          {activeLogo ? (
+            <img 
+              src={activeLogo} 
+              alt={siteName} 
+              className="h-10 max-w-[180px] w-auto object-contain drop-shadow-md" 
+            />
+          ) : (
+            <h2 className="text-lg font-black tracking-wide text-white">
+              <span className="text-xl font-black tracking-tighter uppercase text-white">
+                {siteName.split(' ')[0]} <span className="text-pharaohGold">{siteName.split(' ').slice(1).join(' ')}</span>
+              </span>
+            </h2>
+          )}
         </div>
         <button
           onClick={() => setSidebarOpen(false)}

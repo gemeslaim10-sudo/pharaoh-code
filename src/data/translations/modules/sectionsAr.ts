@@ -123,8 +123,8 @@ export const sectionsAr = {
     subtitle: 'شركاء النجاح',
     titlePart1: 'شركاء',
     titlePart2: 'النجاح',
-    projectDetails: 'تفاصيل المشروع 𓂀',
-    visitWebsite: 'زيارة الموقع 🔗',
-    viewAllClients: 'عرض جميع العملاء 𓂀',
+    projectDetails: 'التفاصيل',
+    visitWebsite: 'زيارة',
+    viewAllClients: 'عرض جميع الشركاء',
   },
 };

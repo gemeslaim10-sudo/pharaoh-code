@@ -74,13 +74,13 @@ export default function AboutVisionMission({ data }: { data: SectionData }) {
                 {card.glyph}
               </div>
 
-              <div className="relative p-10 z-10">
+              <div className="relative p-6 sm:p-10 z-10">
                 {/* Icon */}
-                <div className="flex items-center gap-5 mb-7">
-                  <div className="w-14 h-14 bg-[#0A192F] border border-[#C5A16F]/40 rounded-2xl flex items-center justify-center group-hover:bg-[#C5A16F]/10 group-hover:border-[#C5A16F]/70 transition-all duration-500 shadow-lg flex-shrink-0">
+                <div className="flex items-center gap-4 sm:gap-5 mb-5 sm:mb-7">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#0A192F] border border-[#C5A16F]/40 rounded-2xl flex items-center justify-center group-hover:bg-[#C5A16F]/10 group-hover:border-[#C5A16F]/70 transition-all duration-500 shadow-lg flex-shrink-0">
                     {card.icon}
                   </div>
-                  <h3 className="text-2xl font-black text-white">
+                  <h3 className="text-xl sm:text-2xl font-black text-white">
                     {card.title}
                   </h3>
                 </div>
@@ -88,7 +88,7 @@ export default function AboutVisionMission({ data }: { data: SectionData }) {
                 {/* Quote marks */}
                 <div className="relative">
                   <span className="absolute -top-3 -left-1 text-4xl text-[#C5A16F]/20 font-serif leading-none">&ldquo;</span>
-                  <p className="text-gray-400 text-base leading-relaxed italic pl-4 pt-2">
+                  <p className="text-gray-300 dark:text-gray-400 text-sm sm:text-base leading-relaxed italic pl-4 pt-2 font-normal">
                     {card.text}
                   </p>
                 </div>

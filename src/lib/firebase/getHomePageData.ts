@@ -12,16 +12,19 @@ export const getHomePageData = cache(async function getHomePageData() {
   let clientsDocs: admin.firestore.QueryDocumentSnapshot[] = [];
   let members: unknown[] = [];
 
+  let identityData: Record<string, any> = {};
+
   try {
     const db = admin.firestore();
-    const [docSnap, reviewsSnap, portfolioSnap, philosophySnap, servicesSnap, teamMembers, clientsSnap] = await Promise.all([
+    const [docSnap, reviewsSnap, portfolioSnap, philosophySnap, servicesSnap, teamMembers, clientsSnap, identitySnap] = await Promise.all([
       db.collection('pages').doc('home').get(),
       db.collection('reviews').get(),
       db.collection('portfolio').orderBy('createdAt', 'desc').get(),
       db.collection('philosophy').orderBy('createdAt', 'desc').get(),
       db.collection('services').orderBy('createdAt', 'desc').get(),
       getTeamMembers(),
-      db.collection('clients').orderBy('createdAt', 'desc').get().catch(() => ({ docs: [] } as any))
+      db.collection('clients').orderBy('createdAt', 'desc').get().catch(() => ({ docs: [] } as any)),
+      db.collection('settings').doc('identity').get().catch(() => ({ data: () => ({}) } as any))
     ]);
     docSnapData = docSnap.data() || {};
     reviewsDocs = reviewsSnap.docs;
@@ -30,6 +33,7 @@ export const getHomePageData = cache(async function getHomePageData() {
     servicesDocs = servicesSnap.docs;
     clientsDocs = clientsSnap.docs || [];
     members = teamMembers;
+    identityData = identitySnap?.data?.() || {};
   } catch (error) {
     console.error("Failed to fetch home page data from firebase, using fallbacks:", error);
     try {
@@ -114,8 +118,13 @@ export const getHomePageData = cache(async function getHomePageData() {
   if (!data.creative) data.creative = {};
   if (dbPhilosophy.length > 0) data.creative.items = dbPhilosophy;
 
+  const logoUrl = identityData.logo || identityData.logo_dark || '';
+  const logoLightUrl = identityData.logo_light || '';
+
   if (!data.team) data.team = {};
   data.team.members = members;
+  data.team.logoUrl = logoUrl;
+  data.team.logoLightUrl = logoLightUrl;
 
   // --- Clients ---
   const dbClients = clientsDocs.map(doc => {

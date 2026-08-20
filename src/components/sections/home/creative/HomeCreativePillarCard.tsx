@@ -36,8 +36,8 @@ export function HomeCreativePillarCard({
       className={`relative group rounded-2xl p-5 sm:p-7 transition-all duration-400 flex flex-col justify-between overflow-hidden border cursor-default h-full hover:-translate-y-2 select-none ${
         isLight
           ? isHovered
-            ? 'bg-white border-[#C5A16F] shadow-[0_20px_40px_-10px_rgba(197,161,111,0.3)]'
-            : 'bg-white border-slate-200 shadow-sm hover:border-[#C5A16F]/50'
+            ? 'bg-white border-[#8A5800] shadow-[0_20px_40px_-10px_rgba(138,88,0,0.2)]'
+            : 'bg-white border-slate-300 shadow-sm hover:border-[#8A5800]'
           : isHovered
             ? 'bg-gradient-to-b from-[#0F1E38] via-[#0A162B] to-[#070F1E] border-[#C5A16F]/70 shadow-[0_20px_45px_-10px_rgba(197,161,111,0.3)]'
             : 'bg-[#081222]/90 border-white/10 hover:border-white/20'
@@ -61,7 +61,7 @@ export function HomeCreativePillarCard({
               isHovered
                 ? 'bg-gradient-to-br from-[#C5A16F] via-[#DFB77D] to-[#9E7D47] text-[#040810] shadow-[0_6px_20px_rgba(197,161,111,0.35)] rotate-3'
                 : isLight
-                  ? 'bg-slate-100 text-[#8A5800]'
+                  ? 'bg-slate-100 border border-slate-300 text-[#8A5800]'
                   : 'bg-white/5 text-[#C5A16F] group-hover:bg-[#C5A16F]/20'
             }`}
           >
@@ -71,10 +71,10 @@ export function HomeCreativePillarCard({
             />
           </div>
 
-          <div className="text-right">
-            <span className={`text-[11px] font-mono uppercase tracking-wider font-extrabold px-2.5 py-1 rounded-lg border shadow-sm ${
+          <div className="text-right shrink-0">
+            <span className={`text-[11px] font-mono uppercase tracking-wider font-extrabold px-2.5 py-1 rounded-lg border shadow-sm whitespace-nowrap shrink-0 ${
               isLight
-                ? 'text-[#8A5800] bg-amber-50/90 border-[#C5A16F]/30'
+                ? 'text-[#8A5800] bg-amber-50 border-[#8A5800]/40'
                 : 'text-[#C5A16F] bg-[#C5A16F]/10 border-[#C5A16F]/30'
             }`}>
               {language === 'ar' ? metricData.labelAr : metricData.labelEn}
@@ -87,8 +87,8 @@ export function HomeCreativePillarCard({
         }`}>
           {itemTitle}
         </h4>
-        <p className={`text-xs sm:text-sm leading-relaxed font-light mb-4 sm:mb-6 ${
-          isLight ? 'text-slate-600' : 'text-gray-300'
+        <p className={`text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6 ${
+          isLight ? 'text-slate-800 font-normal' : 'text-gray-300 font-light'
         }`}>
           {itemDesc}
         </p>
@@ -96,7 +96,7 @@ export function HomeCreativePillarCard({
 
       {/* Bottom Metric & Accent Line */}
       <div className={`relative z-10 pt-3.5 sm:pt-4 border-t flex items-center justify-between ${
-        isLight ? 'border-slate-100' : 'border-white/5'
+        isLight ? 'border-slate-200' : 'border-white/5'
       }`}>
         <div className="flex items-baseline gap-1.5">
           <span className={`text-lg sm:text-xl font-black font-mono ${
@@ -105,7 +105,7 @@ export function HomeCreativePillarCard({
             {metricData.metric}
           </span>
           <span className={`text-[11px] font-medium ${
-            isLight ? 'text-slate-500' : 'text-gray-400'
+            isLight ? 'text-slate-800' : 'text-gray-400'
           }`}>
             {language === 'ar' ? metricData.labelAr : metricData.labelEn}
           </span>

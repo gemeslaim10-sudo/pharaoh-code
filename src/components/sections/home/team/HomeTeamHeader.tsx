@@ -66,15 +66,15 @@ export function HomeTeamHeader({
 
         <Link
           href="/team"
-          className={`inline-flex items-center justify-center gap-2 px-4 py-2 sm:py-2.5 rounded-xl font-bold text-xs border transition-all duration-300 group shadow-md ${
+          className={`inline-flex items-center justify-center gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl font-bold text-xs border transition-all duration-300 group shadow-md whitespace-nowrap shrink-0 ${
             isLight
               ? 'bg-white hover:bg-[#C5A16F] text-slate-800 hover:text-[#050B14] border-slate-200 hover:border-[#C5A16F]'
               : 'bg-white/5 hover:bg-[#C5A16F] text-gray-200 hover:text-[#050B14] border-white/10 hover:border-[#C5A16F]'
           }`}
         >
-          <span>{viewAllText}</span>
+          <span className="whitespace-nowrap shrink-0">{viewAllText}</span>
           <svg
-            className={`w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1 ${direction === 'rtl' ? 'rotate-180 group-hover:-translate-x-1' : ''}`}
+            className={`w-3.5 h-3.5 shrink-0 transition-transform duration-300 group-hover:translate-x-1 ${direction === 'rtl' ? 'rotate-180 group-hover:-translate-x-1' : ''}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

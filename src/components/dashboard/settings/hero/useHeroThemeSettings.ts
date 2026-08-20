@@ -81,7 +81,7 @@ export function useHeroThemeSettings() {
       const token = await user.getIdToken();
 
       await updateHeroThemeConfig(token, config);
-      alert("تم حفظ وتحديث ميديا وقوالب ألوان الهيرو بنجاح! 👑");
+      alert("تم حفظ وتحديث ميديا وقوالب ألوان الهيرو بنجاح!");
     } catch (error) {
       const err = error as Error;
       console.error(err);

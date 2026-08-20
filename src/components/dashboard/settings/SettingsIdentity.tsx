@@ -15,6 +15,7 @@ export default function SettingsIdentity() {
     logoLightPreview,
     isCropperOpen,
     cropperImageSrc,
+    activeCropperTarget,
     setIsCropperOpen,
     handleChange,
     handleFaviconChange,
@@ -50,6 +51,7 @@ export default function SettingsIdentity() {
         isOpen={isCropperOpen}
         onClose={() => setIsCropperOpen(false)}
         onCropComplete={handleCropComplete}
+        target={activeCropperTarget}
       />
 
       <IdentityRecordsTable formData={formData} />

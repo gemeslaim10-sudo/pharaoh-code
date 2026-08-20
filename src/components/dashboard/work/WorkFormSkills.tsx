@@ -21,8 +21,8 @@ export default function WorkFormSkills({
     return (
         <div className="bg-pharaohNavy/50 p-6 rounded-2xl border border-white/5 space-y-4">
             <div className="flex justify-between items-center mb-2">
-                <h5 className="text-pharaohGold font-bold text-xs uppercase tracking-wider">𓂀 القدرات والمهارات البرمجية والفنية</h5>
-                <button type="button" onClick={onAddSkill} className="bg-pharaohGold/10 hover:bg-pharaohGold/20 border border-pharaohGold/30 text-pharaohGold font-bold text-xs px-3 py-1.5 rounded-lg transition-all duration-300 flex items-center gap-1">
+                <h5 className="text-pharaohGold font-bold text-xs uppercase tracking-wider">القدرات والمهارات البرمجية والفنية</h5>
+                <button type="button" onClick={onAddSkill} className="bg-pharaohGold/10 hover:bg-pharaohGold/20 border border-pharaohGold/30 text-pharaohGold font-bold text-xs px-3 py-1.5 rounded-lg transition-all duration-300 flex items-center gap-1 cursor-pointer">
                     <span>+</span> إضافة مهارة أخرى
                 </button>
             </div>

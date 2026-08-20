@@ -14,6 +14,7 @@ export default function HomeTeam({ data }: { data?: SectionData }) {
   const { t, language, direction } = useTranslation();
   const { theme } = useTheme();
   const isLight = theme === 'light';
+  const activeLogo = isLight ? (data?.logoLightUrl || data?.logoUrl || '') : (data?.logoUrl || data?.logoLightUrl || '');
   const membersToRender = (data?.members || []) as SectionItem[];
 
   const swiperContainerRef = useRef<HTMLDivElement>(null);
@@ -82,8 +83,8 @@ export default function HomeTeam({ data }: { data?: SectionData }) {
           viewAllText={t("team.viewMembers") || (language === 'ar' ? 'استعرض كافة الفريق' : 'View Full Team')}
         />
 
-        {/* High-End Team Elite Cards Swiper Carousel */}
-        <div ref={swiperContainerRef} className="swiper teamSwiper overflow-hidden px-1 py-3">
+        {/* High-End Team Elite Cards Swiper Carousel with Anti-Clipping Padding */}
+        <div ref={swiperContainerRef} className="swiper teamSwiper !overflow-visible -mx-2 sm:-mx-3 px-2 sm:px-3 pt-2 pb-6 sm:pt-3 sm:pb-8">
           <div className="swiper-wrapper">
             {membersToRender.map((member: SectionItem, index: number) => {
               const memberName = getDynamicText(member, 'name', language) || member.name || '';
@@ -98,6 +99,7 @@ export default function HomeTeam({ data }: { data?: SectionData }) {
                     memberRole={memberRole}
                     memberImage={memberImage}
                     isLight={isLight}
+                    activeLogo={activeLogo}
                     direction={direction}
                     language={language}
                   />

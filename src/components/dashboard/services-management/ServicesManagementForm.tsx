@@ -26,7 +26,7 @@ export default function ServicesManagementForm({ editingService, setEditingServi
         <div className="flex items-center gap-3">
           <div className="w-2 h-6 bg-pharaohGold rounded-full" />
           <h4 id="form-mode-title" className="text-xl font-bold text-white">
-            {editingService ? "تعديل محتوى وتفاصيل الخدمة 𓂀" : "تنصيب بند خدمة جديد مع صفحة التفاصيل 𓂀"}
+            {editingService ? "تعديل محتوى وتفاصيل الخدمة" : "إضافة خدمة جديدة مع صفحة التفاصيل"}
           </h4>
         </div>
         <button 

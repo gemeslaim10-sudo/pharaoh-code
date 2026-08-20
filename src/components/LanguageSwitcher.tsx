@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface LanguageSwitcherProps {
   className?: string;
@@ -10,6 +11,8 @@ interface LanguageSwitcherProps {
 
 export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className = '', iconOnly = false }) => {
   const { language, toggleLanguage } = useLanguage();
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -21,8 +24,12 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className = 
       <button
         aria-label="Toggle language"
         className={iconOnly 
-          ? `w-10 h-10 rounded-xl border border-[#C5A16F]/20 bg-[#0F2338] text-gray-400 flex items-center justify-center opacity-50 ${className}`
-          : `px-2.5 py-1 rounded-lg border border-[#C5A16F]/20 bg-[#0F2338] text-gray-400 text-xs font-bold flex items-center gap-1.5 opacity-50 ${className}`}
+          ? `w-8 h-8 sm:w-8.5 sm:h-8.5 rounded-xl border opacity-50 flex items-center justify-center ${
+              isLight ? 'bg-white border-slate-200 text-slate-400' : 'bg-[#0F2338] border-white/10 text-gray-400'
+            } ${className}`
+          : `px-3 py-1.5 rounded-xl border opacity-50 inline-flex flex-row items-center justify-center gap-1.5 ${
+              isLight ? 'bg-white border-slate-200 text-slate-400' : 'bg-[#0F2338] border-white/10 text-gray-400'
+            } ${className}`}
       >
         <span className="w-4 h-4" />
       </button>
@@ -32,13 +39,18 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className = 
   if (iconOnly) {
     return (
       <button
+        type="button"
         onClick={toggleLanguage}
-        title={language === 'ar' ? 'English (EN)' : 'العربية (AR)'}
+        title={language === 'ar' ? 'Switch to English' : 'التحويل إلى العربية'}
         aria-label="Toggle language"
-        className={`w-10 h-10 rounded-xl border border-[#C5A16F]/30 bg-[#0F2338] text-[#C5A16F] hover:border-[#C5A16F] hover:bg-[#C5A16F] hover:text-[#0A192F] transition-all shadow-md flex items-center justify-center group ${className}`}
+        className={`w-8 h-8 sm:w-8.5 sm:h-8.5 rounded-xl border transition-all duration-300 flex items-center justify-center group cursor-pointer shadow-sm shrink-0 ${
+          isLight
+            ? 'bg-white border-slate-300 text-slate-700 hover:border-[#C5A16F] hover:text-[#8A5800] hover:bg-slate-50'
+            : 'bg-[#0F2338] border-[#C5A16F]/30 text-[#C5A16F] hover:border-[#C5A16F] hover:bg-[#112240] hover:text-white'
+        } ${className}`}
       >
         <svg
-          className="w-5 h-5 transition-transform group-hover:rotate-45 duration-300"
+          className="w-4 h-4 transition-transform group-hover:rotate-12 duration-300 shrink-0 block"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -56,12 +68,18 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className = 
 
   return (
     <button
+      type="button"
       onClick={toggleLanguage}
       aria-label="Toggle language"
-      className={`px-2.5 py-1 rounded-lg border border-[#C5A16F]/30 bg-[#0F2338] text-white hover:border-[#C5A16F] hover:bg-[#112240] transition-all text-xs font-bold flex items-center gap-1.5 ${className}`}
+      dir="ltr"
+      className={`px-3 py-1.5 rounded-xl border transition-all duration-300 text-xs font-bold inline-flex flex-row items-center justify-center gap-1.5 cursor-pointer shadow-sm ${
+        isLight
+          ? 'bg-white border-slate-300 text-slate-800 hover:border-[#8A5800] hover:text-[#8A5800] hover:bg-slate-50'
+          : 'bg-[#0F2338] border-[#C5A16F]/30 text-white hover:border-[#C5A16F] hover:bg-[#112240]'
+      } ${className}`}
     >
       <svg
-        className="w-3.5 h-3.5 text-[#C5A16F]"
+        className="w-3.5 h-3.5 text-[#C5A16F] shrink-0 block"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -74,7 +92,8 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ className = 
           d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
         />
       </svg>
-      <span className="text-[#C5A16F] font-extrabold uppercase tracking-wider">{language === 'ar' ? 'EN' : 'AR'}</span>
+      <span className="text-[#C5A16F] font-extrabold uppercase tracking-wider leading-none inline-flex items-center justify-center">{language === 'ar' ? 'English (EN)' : 'العربية (AR)'}</span>
     </button>
   );
 };
+

@@ -75,7 +75,7 @@ export default function AboutHero({ data }: { data: SectionData }) {
             </div>
 
             {/* Title */}
-            <h2 className="text-4xl md:text-6xl font-black text-white leading-[1.1]">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-black text-white leading-tight">
               {getDynamicText(data, 'titlePart1', language) || t('about.heroTitlePart1')}
               <br />
               <span className="bg-gradient-to-r from-[#C5A16F] via-[#E8C97E] to-[#C5A16F] bg-clip-text text-transparent">
@@ -84,7 +84,7 @@ export default function AboutHero({ data }: { data: SectionData }) {
             </h2>
 
             {/* Description */}
-            <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-xl">
+            <p className="text-gray-300 dark:text-gray-400 text-sm sm:text-base md:text-lg leading-relaxed max-w-xl font-normal">
               {getDynamicText(data, 'description', language) || t('about.heroDescription')}
             </p>
 

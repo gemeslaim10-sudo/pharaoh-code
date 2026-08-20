@@ -18,7 +18,7 @@ export default function HomeTeamGrid({ data }: HomeTeamGridProps) {
                     <pattern id="pharaoh-pattern" x="0" y="0" width="100"
                         height="100" patternUnits="userSpaceOnUse">
                         <text x="0" y="50" fontFamily="serif"
-                            fontSize="20" fill="#C5A16F">𓂀</text>
+                            fontSize="20" fill="#C5A16F">✦</text>
                     </pattern>
                 </defs>
                 <rect width="100%" height="100%"
@@ -31,9 +31,9 @@ export default function HomeTeamGrid({ data }: HomeTeamGridProps) {
             <div className="mb-20">
                 <h2
                     className="text-[#C5A16F] font-bold tracking-[0.4em] uppercase text-xs mb-4">{data.subtitle}</h2>
-                <h3 className="text-4xl md:text-6xl font-black text-white">{data.titlePart1} <span className="text-[#C5A16F]">{data.titlePart2}</span></h3>
+                <h3 className="text-2xl sm:text-3xl md:text-5xl font-black text-white leading-tight">{data.titlePart1} <span className="text-[#C5A16F]">{data.titlePart2}</span></h3>
                 <p
-                    className="text-gray-400 mt-6 max-w-2xl text-lg leading-relaxed border-r-4 border-[#C5A16F] pr-6">
+                    className="text-gray-300 dark:text-gray-400 mt-4 sm:mt-6 max-w-2xl text-sm sm:text-base md:text-lg leading-relaxed border-r-4 border-[#C5A16F] pr-4 sm:pr-6 font-normal">
                     {data.description}
                 </p>
             </div>
@@ -67,7 +67,7 @@ export default function HomeTeamGrid({ data }: HomeTeamGridProps) {
                             </div>
                             <div className="absolute bottom-0.5 end-0.5 z-10 w-8 h-8 rounded-full border-2 bg-[#070F1E] border-[#C5A16F] text-[#C5A16F] flex items-center justify-center shadow-lg group-hover:scale-115 group-hover:rotate-12 transition-all duration-300">
                                 <span className="text-sm font-serif leading-none font-bold select-none drop-shadow-[0_0_4px_rgba(197,161,111,0.6)]">
-                                    𓂀
+                                    ✦
                                 </span>
                             </div>
                         </div>

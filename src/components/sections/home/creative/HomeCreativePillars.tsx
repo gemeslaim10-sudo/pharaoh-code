@@ -69,7 +69,7 @@ export function HomeCreativePillars({
 
   return (
     <div className="relative">
-      <div ref={swiperContainerRef} className="swiper creativeSwiper overflow-hidden px-1 py-3">
+      <div ref={swiperContainerRef} className="swiper creativeSwiper !overflow-visible -mx-2 sm:-mx-3 px-2 sm:px-3 pt-2 pb-6 sm:pt-3 sm:pb-8">
         <div className="swiper-wrapper">
           {items.map((item: SectionItem, index: number) => {
             const isHovered = activePillar === index;

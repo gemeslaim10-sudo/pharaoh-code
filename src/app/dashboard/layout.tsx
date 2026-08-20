@@ -14,6 +14,8 @@ export default async function DashboardLayout({
 }>) {
   const identity = await getIdentity();
   const siteName = identity?.name || "Pharaoh Code";
+  const logoUrl = identity?.logo || identity?.logo_dark || "";
+  const logoLightUrl = identity?.logo_light || "";
 
   return (
     <div className="flex min-h-screen relative text-white bg-[#0A192F] text-right overflow-x-hidden" dir="rtl">
@@ -23,7 +25,7 @@ export default async function DashboardLayout({
       <DashboardProvider>
         <AdminRouteGuard>
           <DashboardSidebarOverlay />
-          <DashboardSidebar siteName={siteName} />
+          <DashboardSidebar siteName={siteName} logoUrl={logoUrl} logoLightUrl={logoLightUrl} />
           <div className="flex-1 flex flex-col min-w-0 lg:mr-72">
             <DashboardHeader />
             {/* Main Content Area */}

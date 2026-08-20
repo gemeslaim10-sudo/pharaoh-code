@@ -106,10 +106,10 @@ export function useClientsForm() {
 
       if (editingId) {
         await updateClient(token, editingId, clientData);
-        alert("تم تحديث بيانات الشريك بنجاح! 👑");
+        alert("تم تحديث بيانات الشريك بنجاح!");
       } else {
         await addClient(token, clientData);
-        alert("تم تنصيب الشريك بنجاح في صرح العملاء! 𓂀");
+        alert("تمت إضافة الشريك بنجاح!");
       }
 
       resetForm();

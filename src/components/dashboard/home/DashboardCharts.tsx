@@ -50,8 +50,8 @@ export default function DashboardCharts() {
   const activityRate = totalServiceOrders > 0 ? Math.round((activeOrdersCount / totalServiceOrders) * 100) : 0;
   let activityText = "لا يوجد نشاط حالياً";
   if (totalServiceOrders > 0) {
-    if (activityRate >= 70) activityText = "إقبال ممتاز 🔥";
-    else if (activityRate > 0) activityText = "نشاط متوسط 📈";
+    if (activityRate >= 70) activityText = "إقبال ممتاز ومرتفع";
+    else if (activityRate > 0) activityText = "نشاط إيجابي متوسط";
     else activityText = "في انتظار المعالجة";
   }
 

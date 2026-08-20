@@ -33,14 +33,14 @@ export function TeamHeroHeader({
             {subtitle}
           </span>
         </div>
-        <h2 className={`text-2xl sm:text-4xl md:text-5xl font-black leading-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
+        <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black leading-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
           {titlePart1}{' '}
           <span className="bg-gradient-to-r from-[#C5A16F] via-[#E8C97E] to-[#C5A16F] bg-clip-text text-transparent">
             {titlePart2}
           </span>
         </h2>
       </div>
-      <p className={`max-w-sm text-xs sm:text-sm leading-relaxed ${direction === 'rtl' ? 'border-r-2 sm:border-r-4 pr-3 sm:pr-4' : 'border-l-2 sm:border-l-4 pl-3 sm:pl-4'} border-[#C5A16F]/50 shrink-0 font-light ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
+      <p className={`max-w-sm text-xs sm:text-sm leading-relaxed ${direction === 'rtl' ? 'border-r-2 sm:border-r-4 pr-3 sm:pr-4' : 'border-l-2 sm:border-l-4 pl-3 sm:pl-4'} border-[#C5A16F]/50 shrink-0 font-normal ${isLight ? 'text-slate-800' : 'text-gray-300'}`}>
         {desc}
       </p>
     </motion.div>

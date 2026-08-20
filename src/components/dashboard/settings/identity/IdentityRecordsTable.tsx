@@ -8,7 +8,7 @@ interface IdentityRecordsTableProps {
 export function IdentityRecordsTable({ formData }: IdentityRecordsTableProps) {
   return (
     <div className="bg-[#112240]/40 border border-white/5 rounded-3xl p-6 lg:p-8">
-      <h4 className="text-sm font-bold text-pharaohGold mb-4">📜 السجلات المحفوظة الحالية لهوية المنصة</h4>
+      <h4 className="text-sm font-bold text-pharaohGold mb-4">السجلات المحفوظة الحالية لهوية المنصة</h4>
       <div className="overflow-x-auto">
         <table className="w-full text-right text-sm text-gray-400">
           <thead className="text-xs uppercase bg-[#0A192F] text-pharaohGold font-bold border-b border-white/10">
@@ -31,7 +31,10 @@ export function IdentityRecordsTable({ formData }: IdentityRecordsTableProps) {
               </td>
               <td className="px-6 py-4 truncate max-w-[200px]">{formData.keywords}</td>
               <td className="px-6 py-4 text-center">
-                <span className="text-xs text-pharaohGold bg-pharaohGold/10 px-3 py-1 rounded-full">السجل النشط 🟢</span>
+                <span className="inline-flex items-center gap-1.5 text-xs text-pharaohGold bg-pharaohGold/10 px-3 py-1 rounded-full border border-pharaohGold/20">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>السجل النشط</span>
+                </span>
               </td>
             </tr>
           </tbody>

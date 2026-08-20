@@ -6,9 +6,10 @@ import { LanguageProvider } from '@/contexts/LanguageContext';
 import Script from 'next/script';
 
 const tajawal = Tajawal({
-  subsets: ["arabic"],
+  subsets: ["arabic", "latin"],
   weight: ["300", "500", "700", "900"],
   variable: "--font-tajawal",
+  display: "swap",
 });
 
 import { getIdentity } from '@/app/actions/dashboard/settings';
@@ -33,9 +34,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl">
+    <html lang="ar" dir="rtl" suppressHydrationWarning>
       <body
-        className={`${tajawal.variable} font-sans antialiased`}
+        className={`${tajawal.className} ${tajawal.variable} font-sans antialiased`}
       >
         <Script src="https://code.jquery.com/jquery-3.7.1.min.js" strategy="afterInteractive" />
         <ThemeProvider>

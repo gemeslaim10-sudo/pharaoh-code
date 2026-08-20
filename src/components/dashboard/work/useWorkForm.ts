@@ -118,10 +118,10 @@ export function useWorkForm() {
       };
       if (editingId) {
         await updateTeamMember(token, editingId, memberData);
-        alert("تم تحديث بيانات الخبير بنجاح! 👑");
+        alert("تم تحديث بيانات عضو الفريق بنجاح!");
       } else {
         await addTeamMember(token, memberData);
-        alert("تم تنصيب الخبير بنجاح في صرح التيم! 𓂀");
+        alert("تمت إضافة عضو الفريق بنجاح!");
       }
       resetForm();
       await loadData();

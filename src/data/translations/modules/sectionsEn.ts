@@ -123,8 +123,8 @@ export const sectionsEn = {
     subtitle: 'SUCCESS PARTNERS',
     titlePart1: 'Our Valued',
     titlePart2: 'Partners',
-    projectDetails: 'Project Details 𓂀',
-    visitWebsite: 'Visit Website 🔗',
-    viewAllClients: 'View All Partners 𓂀',
+    projectDetails: 'Details',
+    visitWebsite: 'Visit',
+    viewAllClients: 'View All Partners',
   },
 };

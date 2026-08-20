@@ -1,14 +1,18 @@
 'use client';
 
+import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import { useAuth } from '@/contexts/AuthContext';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
+import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { NavbarBrand } from './navbar/NavbarBrand';
 import { NavbarDesktopLinks, NavLinkItem } from './navbar/NavbarDesktopLinks';
 import { NavbarActions } from './navbar/NavbarActions';
 import { NavbarMobileDrawer } from './navbar/NavbarMobileDrawer';
+import { UserProfileModal } from './profile/UserProfileModal';
 import { motion } from 'framer-motion';
 
 interface NavbarProps {
@@ -24,11 +28,14 @@ export default function Navbar({
   logoLightUrl,
   reverseNavbarAr = true,
 }: NavbarProps) {
+  const { user } = useAuth();
   const { t, language, direction } = useTranslation();
   const { theme } = useTheme();
   const pathname = usePathname();
+  const isLight = theme === 'light';
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -50,7 +57,7 @@ export default function Navbar({
     setIsOpen(false);
   }, [pathname]);
 
-  const activeLogo = theme === 'light' ? (logoLightUrl || '') : (logoUrl || '');
+  const activeLogo = theme === 'light' ? (logoLightUrl || logoUrl || '') : (logoUrl || logoLightUrl || '');
   const navDirection = language === 'ar' && !reverseNavbarAr ? 'ltr' : direction;
 
   const NAV_LINKS: NavLinkItem[] = [
@@ -68,44 +75,101 @@ export default function Navbar({
       <nav 
         className={`fixed w-full z-[100] transition-all duration-300 ${
           scrolled 
-            ? 'bg-[#050B14]/95 backdrop-blur-xl border-b border-white/10 shadow-2xl h-18 sm:h-20' 
-            : 'bg-[#060D1A]/80 backdrop-blur-md border-b border-white/5 h-20'
+            ? 'bg-[#050B14]/95 backdrop-blur-xl border-b border-white/10 shadow-2xl h-14 sm:h-16' 
+            : 'bg-[#060D1A]/80 backdrop-blur-md border-b border-white/5 h-14 sm:h-16'
         }`} 
         dir={navDirection}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-full flex justify-between items-center">
-          <div className="flex items-center gap-6 lg:gap-8">
+        <div className="w-full max-w-[1720px] mx-auto px-3 sm:px-6 lg:px-8 xl:px-10 h-full flex justify-between items-center">
+          <div className="flex items-center gap-4 lg:gap-6">
             <NavbarBrand siteName={siteName} activeLogo={activeLogo} />
             <NavbarDesktopLinks links={NAV_LINKS} pathname={pathname} />
           </div>
 
-          <NavbarActions />
+          <NavbarActions onOpenProfile={() => setIsProfileOpen(true)} />
 
-          {/* Mobile Right Bar: Quick Language + Hamburger Toggle */}
-          <div className="lg:hidden flex items-center gap-2.5">
-            <motion.div
-              animate={{ y: [0, -2, 0] }}
-              transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-              whileTap={{ scale: 0.94 }}
-            >
-              <LanguageSwitcher iconOnly={true} className="!w-9 !h-9 !rounded-xl" />
-            </motion.div>
-            
-            <motion.button 
-              animate={{ y: [0, -2, 0] }}
-              transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
-              whileTap={{ scale: 0.94 }}
-              onClick={() => setIsOpen(!isOpen)} 
-              aria-label={isOpen ? 'Close menu' : 'Open menu'}
-              className={`w-9.5 h-9.5 rounded-xl flex flex-col items-center justify-center gap-1.5 transition-all duration-300 border cursor-pointer ${
-                isOpen 
-                  ? 'bg-[#C5A16F] text-[#050B14] border-[#C5A16F] shadow-[0_0_20px_rgba(197,161,111,0.3)]' 
-                  : 'bg-[#0D182E]/80 text-[#C5A16F] border-white/10 hover:border-[#C5A16F]/30'
+          {/* Mobile Right Bar: Theme, Language, Contact Us, Login/Dashboard, and Compact Menu Toggle */}
+          <div className="lg:hidden flex items-center gap-1 sm:gap-1.5">
+            {/* 1. Theme Toggle Icon */}
+            <ThemeSwitcher className="!w-7 !h-7 sm:!w-8 sm:!h-8 !rounded-lg" />
+
+            {/* 2. Language Switcher Icon */}
+            <LanguageSwitcher iconOnly={true} className="!h-7 sm:!h-8 !px-1.5 sm:!px-2 !rounded-lg" />
+
+            {/* 3. Contact Us Quick Icon */}
+            <Link
+              href="/contact"
+              title={t("nav.contact") || "تواصل معنا"}
+              aria-label="Contact Us"
+              className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg border flex items-center justify-center transition-all cursor-pointer shrink-0 ${
+                pathname === '/contact'
+                  ? 'bg-[#C5A16F] text-[#050B14] border-[#C5A16F] shadow-[0_0_10px_rgba(197,161,111,0.4)]'
+                  : isLight
+                    ? 'bg-white text-slate-700 border-slate-300 hover:border-[#C5A16F] hover:text-[#8A5800]'
+                    : 'bg-[#0D182E]/80 text-[#C5A16F] border-white/10 hover:border-[#C5A16F]/40'
               }`}
             >
-              <span className={`w-4.5 h-[1.8px] bg-current transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-[4.8px]' : ''}`} />
-              <span className={`w-4.5 h-[1.8px] bg-current transition-all duration-300 ${isOpen ? 'opacity-0 scale-0' : ''}`} />
-              <span className={`w-4.5 h-[1.8px] bg-current transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-[4.8px]' : ''}`} />
+              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </Link>
+
+            {/* 4. Login / User Profile Modal Trigger Icon */}
+            {user ? (
+              <button
+                onClick={() => setIsProfileOpen(true)}
+                type="button"
+                title={user.displayName || (language === 'ar' ? 'الملف الشخصي' : 'Profile')}
+                aria-label="Profile"
+                className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg border flex items-center justify-center overflow-hidden transition-all cursor-pointer shrink-0 ${
+                  isLight
+                    ? 'border-[#C5A16F]/50 bg-white hover:border-[#C5A16F]'
+                    : 'border-[#C5A16F]/50 bg-[#0D182E]/80 hover:border-[#C5A16F]'
+                }`}
+              >
+                {user.photoURL ? (
+                  <img src={user.photoURL} alt="User" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                ) : (
+                  <span className="text-[10px] font-black text-[#C5A16F]">
+                    {(user.displayName || user.email || 'U').charAt(0).toUpperCase()}
+                  </span>
+                )}
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                title={t("nav.login") || "تسجيل الدخول"}
+                aria-label="Login"
+                className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg border flex items-center justify-center transition-all cursor-pointer shrink-0 ${
+                  pathname === '/login'
+                    ? 'bg-[#C5A16F] text-[#050B14] border-[#C5A16F] shadow-[0_0_10px_rgba(197,161,111,0.4)]'
+                    : isLight
+                      ? 'bg-white text-slate-700 border-slate-300 hover:border-[#C5A16F] hover:text-[#8A5800]'
+                      : 'bg-[#0D182E]/80 text-[#C5A16F] border-white/10 hover:border-[#C5A16F]/40'
+                }`}
+              >
+                <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </Link>
+            )}
+
+            {/* 5. Compact Hamburger Menu Toggle Button */}
+            <motion.button 
+              whileTap={{ scale: 0.92 }}
+              onClick={() => setIsOpen(!isOpen)} 
+              aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              className={`w-7.5 h-7.5 sm:w-8.5 sm:h-8.5 rounded-lg flex flex-col items-center justify-center gap-1 sm:gap-1.5 transition-all duration-300 border cursor-pointer shrink-0 ${
+                isOpen 
+                  ? 'bg-[#C5A16F] text-[#050B14] border-[#C5A16F] shadow-[0_0_12px_rgba(197,161,111,0.3)]' 
+                  : isLight
+                    ? 'bg-white text-slate-800 border-slate-300 hover:border-[#C5A16F]'
+                    : 'bg-[#0D182E]/80 text-[#C5A16F] border-white/10 hover:border-[#C5A16F]/30'
+              }`}
+            >
+              <span className={`w-3.5 sm:w-4 h-[1.5px] bg-current transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-[3.5px] sm:translate-y-[4.5px]' : ''}`} />
+              <span className={`w-3.5 sm:w-4 h-[1.5px] bg-current transition-all duration-300 ${isOpen ? 'opacity-0 scale-0' : ''}`} />
+              <span className={`w-3.5 sm:w-4 h-[1.5px] bg-current transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-[3.5px] sm:-translate-y-[4.5px]' : ''}`} />
             </motion.button>
           </div>
         </div>
@@ -118,6 +182,13 @@ export default function Navbar({
         activeLogo={activeLogo}
         links={NAV_LINKS}
         pathname={pathname}
+      />
+
+      <UserProfileModal
+        isOpen={isProfileOpen}
+        onClose={() => setIsProfileOpen(false)}
+        activeLogo={activeLogo}
+        siteName={siteName}
       />
     </>
   );

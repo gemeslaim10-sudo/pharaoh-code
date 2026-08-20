@@ -43,7 +43,7 @@ export default function SettingsSocial() {
             const token = await user.getIdToken();
             
             await updateSocialLinks(token, formData);
-            alert("تم تحديث وحفظ روابط السوشيال ميديا بنجاح! 🚀");
+            alert("تم تحديث وحفظ روابط التواصل الاجتماعي بنجاح!");
             await loadData();
         } catch (error) {
             console.error(error);
@@ -96,14 +96,14 @@ export default function SettingsSocial() {
                 </div>
                 <div className="mt-6 flex justify-end">
                     <button type="submit" disabled={loading}
-                        className="bg-gradient-to-r from-pharaohGold to-amber-600 text-pharaohNavy font-black text-xs uppercase tracking-widest px-8 py-3.5 rounded-xl shadow-lg hover:opacity-90 transition disabled:opacity-50">
+                        className="bg-gradient-to-r from-pharaohGold to-amber-600 text-pharaohNavy font-black text-xs uppercase tracking-widest px-8 py-3.5 rounded-xl shadow-lg hover:opacity-90 transition disabled:opacity-50 cursor-pointer">
                         {loading ? 'جاري الحفظ...' : 'تحديث وحفظ الروابط'}
                     </button>
                 </div>
             </form>
 
             <div className="bg-[#112240]/40 border border-white/5 rounded-3xl p-6 lg:p-8">
-                <h4 className="text-sm font-bold text-pharaohGold mb-4">📜 السجلات الحالية لقنوات الاتصال الرسمية</h4>
+                <h4 className="text-sm font-bold text-pharaohGold mb-4">السجلات الحالية لقنوات الاتصال الرسمية</h4>
                 <div className="overflow-x-auto">
                     <table className="w-full text-left md:text-right text-sm text-gray-400" dir="ltr">
                         <thead className="text-xs uppercase bg-[#0A192F] text-pharaohGold font-bold border-b border-white/10 text-right">

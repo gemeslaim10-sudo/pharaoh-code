@@ -68,13 +68,13 @@ export default function ServiceFormBasicInputs({
                     <option value="لوحة تحكم شاملة">لوحة تحكم شاملة (Dashboard)</option>
                     <option value="سيستم ونظام مخصص">سيستم ونظام مخصص (Custom System)</option>
                     <option value="صفحة هبوط تسويقية">صفحة هبوط تسويقية (Landing Page)</option>
-                    <option value="custom_option">✍️ كتابة نوع مخصص يدوي...</option>
+                    <option value="custom_option">كتابة نوع مخصص يدوي...</option>
                 </select>
             </div>
 
             <div id="custom-type-container" className={`${type === 'custom_option' ? 'block' : 'hidden'} animate-field-fade bg-pharaohNavy/30 p-4 rounded-xl border border-pharaohGold/20`}>
                 <div className="flex justify-between items-center mb-2">
-                    <label className="block text-pharaohGold text-xs font-medium">قم بكتابة نوع النظام المخصص الجديد 𓂀</label>
+                    <label className="block text-pharaohGold text-xs font-medium">قم بكتابة نوع النظام المخصص الجديد</label>
                     <span className="text-[10px] text-pharaohGold/70 font-mono">{typeCustom.length}/50</span>
                 </div>
                 <input type="text" id="adv-srv-type-custom" maxLength={50} value={typeCustom} onChange={e => setTypeCustom(e.target.value)} placeholder="مثال: تطبيق متجر إلكتروني متعدد التجار" className="w-full bg-pharaohNavy border border-white/10 rounded-xl p-3.5 text-white focus:border-pharaohGold outline-none transition placeholder:text-gray-600 text-xs" />
@@ -92,9 +92,9 @@ export default function ServiceFormBasicInputs({
                     <label className="block text-gray-400 text-sm mb-2.5 font-medium">شعار ووسم التميز (Badge)</label>
                     <select id="adv-srv-badge" value={badge} onChange={e => setBadge(e.target.value)} className="w-full bg-pharaohNavy border border-white/10 rounded-xl p-3.5 text-white focus:border-pharaohGold outline-none transition cursor-pointer text-xs md:text-sm">
                         <option value="">بدون وسم تعريفي</option>
-                        <option value="الأكثر طلباً 🔥">الأكثر طلباً 🔥</option>
-                        <option value="خصم لفترة محدودة ⚡">خصم لفترة محدودة ⚡</option>
-                        <option value="خدمة جديدة فريدة ✨">خدمة جديدة فريدة ✨</option>
+                        <option value="الأكثر طلباً">الأكثر طلباً</option>
+                        <option value="خصم لفترة محدودة">خصم لفترة محدودة</option>
+                        <option value="خدمة جديدة فريدة">خدمة جديدة فريدة</option>
                     </select>
                 </div>
             </div>

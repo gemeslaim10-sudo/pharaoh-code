@@ -4,6 +4,7 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth, googleProvider } from '@/lib/firebase/config';
 import { checkIsAdminAction } from '@/app/actions/dashboard/settings';
+import { recordUserLoginAction } from '@/app/actions/dashboard/users';
 
 interface AuthContextType {
   user: User | null;
@@ -35,6 +36,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       if (user?.email) {
         const adminStatus = await checkIsAdminAction(user.email);
         setIsAdmin(adminStatus);
+
+        // Record or refresh user profile record in Firestore
+        recordUserLoginAction({
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName || '',
+          photoURL: user.photoURL || '',
+          provider: user.providerData?.[0]?.providerId || 'google',
+        }).catch((err) => console.error("Error updating user record:", err));
       } else {
         setIsAdmin(false);
       }

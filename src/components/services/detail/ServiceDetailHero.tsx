@@ -56,7 +56,7 @@ export default function ServiceDetailHero({ service }: Props) {
                 </div>
 
                 {/* Main Hero Headline */}
-                <h1 className="text-3xl sm:text-4xl md:text-6xl font-black text-white leading-tight md:leading-[1.2] mb-6 tracking-tight">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight md:leading-[1.2] mb-6 tracking-tight">
                     {title1} <br />
                     <span className="text-[#C5A16F] drop-shadow-[0_2px_15px_rgba(197,161,111,0.25)]">
                         {title2}

@@ -10,7 +10,7 @@ export default function TeamModal() {
         <button id="close-team-modal" className="absolute top-4 left-4 sm:top-6 sm:left-6 z-50 w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#0A192F] border border-[#C5A16F]/30 text-[#C5A16F] hover:rotate-90 hover:bg-[#C5A16F] hover:text-[#0A192F] transition-all duration-300 flex items-center justify-center font-bold text-xs sm:text-sm shadow-md">✕</button>
         
         <div className="p-4 sm:p-8 md:p-12 overflow-y-auto custom-modal-scroll flex-1 relative">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[12rem] sm:text-[18rem] font-serif opacity-[0.015] text-[#C5A16F] select-none pointer-events-none">𓂀</div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[12rem] sm:text-[18rem] font-serif opacity-[0.015] text-[#C5A16F] select-none pointer-events-none">✦</div>
 
           <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-right gap-5 sm:gap-8 md:gap-10 border-b border-[#C5A16F]/10 pb-6 sm:pb-8 mb-6 sm:mb-8 relative z-10">
             <div className="w-32 h-40 sm:w-44 sm:h-56 rounded-2xl sm:rounded-tr-[3rem] sm:rounded-bl-[3rem] overflow-hidden p-1 border-2 border-[#C5A16F]/40 shadow-2xl shrink-0 bg-[#0A192F]">
@@ -26,7 +26,7 @@ export default function TeamModal() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 relative z-10">
             <div className="space-y-4 sm:space-y-5 bg-[#0A192F]/50 p-4 sm:p-6 rounded-2xl sm:rounded-tr-[2.5rem] sm:rounded-bl-[2.5rem] border border-white/5 shadow-inner">
               <h4 className="text-white font-bold text-xs sm:text-sm mb-3 sm:mb-4 flex items-center gap-2">
-                <span className="text-[#C5A16F] text-base">𓂀</span> المهارات والخبرات الفنية
+                <span className="text-[#C5A16F] text-base">✦</span> المهارات والخبرات الفنية
               </h4>
               <div>
                 <div className="flex justify-between text-xs text-gray-300 font-medium mb-1.5">

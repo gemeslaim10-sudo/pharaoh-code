@@ -42,7 +42,7 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ className = '' }) 
       {isDark ? (
         /* Sun Icon for switching to Light Mode */
         <svg
-          className="w-5 h-5 transition-transform group-hover:rotate-90 duration-500"
+          className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:rotate-90 duration-500"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -57,7 +57,7 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ className = '' }) 
       ) : (
         /* Moon Icon for switching to Dark Mode */
         <svg
-          className="w-5 h-5 transition-transform group-hover:-rotate-45 duration-500"
+          className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:-rotate-45 duration-500"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

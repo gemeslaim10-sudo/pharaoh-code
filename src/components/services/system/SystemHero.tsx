@@ -40,7 +40,7 @@ export default function SystemHero() {
                     </span>
                 </div>
 
-                <h1 className="text-3xl sm:text-4xl md:text-6xl font-black text-white leading-tight mb-6 tracking-tight">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-6 tracking-tight">
                     {language === 'ar' ? 'هندسة الأنظمة الإدارية و ERP Systems' : 'Engineering Enterprise ERP Systems'} <br />
                     <span className="text-[#C5A16F] drop-shadow-[0_2px_15px_rgba(197,161,111,0.25)]">
                         {language === 'ar' ? 'أتمتة ذكية تقود إمبراطورية أعمالك' : 'Intelligent Automation Leading Your Business Empire'}

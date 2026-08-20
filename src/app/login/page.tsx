@@ -1,12 +1,20 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
+import { getIdentity } from '@/app/actions/dashboard/settings';
 
 export default function LoginPage() {
   const { user, loginWithGoogle, loading, isAdmin } = useAuth();
   const router = useRouter();
+  const [identity, setIdentity] = useState<{ name?: string; logo?: string; logo_dark?: string; logo_light?: string } | null>(null);
+
+  useEffect(() => {
+    getIdentity().then(data => {
+      if (data) setIdentity(data);
+    }).catch(() => {});
+  }, []);
 
   useEffect(() => {
     if (!loading && user) {
@@ -22,12 +30,28 @@ export default function LoginPage() {
     return <div className="h-screen w-full bg-[#0A192F] flex items-center justify-center text-pharaohGold text-2xl font-bold">جاري التحميل...</div>;
   }
 
+  const logoUrl = identity?.logo || identity?.logo_dark || identity?.logo_light || '';
+  const siteName = identity?.name || 'PHARAOH CODE';
+  const nameParts = siteName.split(' ');
+  const firstWord = nameParts[0];
+  const restWords = nameParts.slice(1).join(' ');
+
   return (
     <div className="h-screen w-full bg-[#0A192F] flex items-center justify-center">
       <div className="bg-white/5 border border-white/10 p-10 rounded-3xl backdrop-blur-md max-w-md w-full text-center">
-        <h1 className="text-4xl font-black text-white mb-2 tracking-tighter">
-          PHARAOH <span className="text-[#C5A16F]">CODE</span>
-        </h1>
+        {logoUrl ? (
+          <div className="flex justify-center mb-6">
+            <img 
+              src={logoUrl} 
+              alt={siteName} 
+              className="h-14 sm:h-16 w-auto object-contain drop-shadow-[0_0_20px_rgba(197,161,111,0.3)]" 
+            />
+          </div>
+        ) : (
+          <h1 className="text-4xl font-black text-white mb-2 tracking-tighter">
+            {firstWord} {restWords && <span className="text-[#C5A16F]">{restWords}</span>}
+          </h1>
+        )}
         <p className="text-gray-400 mb-8">تسجيل الدخول إلى حسابك</p>
         
         <button 

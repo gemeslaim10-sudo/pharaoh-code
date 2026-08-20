@@ -35,7 +35,7 @@ export function PortfolioHeroFilterDock({
               key={filter}
               onClick={() => onSelectFilter(filter)}
               data-active={isActive ? "true" : "false"}
-              className={`filter-btn portfolio-filter-btn relative px-3 py-1.5 sm:px-3.5 sm:py-1.5 rounded-lg sm:rounded-full text-xs font-bold transition-colors duration-200 flex items-center gap-1.5 select-none ${
+              className={`filter-btn portfolio-filter-btn relative px-3 py-1.5 sm:px-3.5 sm:py-1.5 rounded-lg sm:rounded-full text-xs font-bold transition-colors duration-200 flex items-center gap-1.5 select-none whitespace-nowrap shrink-0 ${
                 isActive
                   ? 'active !text-[#070F1E] font-black'
                   : isLight
@@ -50,9 +50,9 @@ export function PortfolioHeroFilterDock({
                   transition={{ type: "spring", stiffness: 450, damping: 32 }}
                 />
               )}
-              <span className={`relative z-10 ${isActive ? "!text-[#070F1E] font-black" : ""}`}>{label}</span>
+              <span className={`relative z-10 whitespace-nowrap shrink-0 ${isActive ? "!text-[#070F1E] font-black" : ""}`}>{label}</span>
               {count > 0 && (
-                <span className={`relative z-10 count-badge text-[9px] px-1.5 py-0.2 rounded-full font-mono font-black transition-colors ${
+                <span className={`relative z-10 count-badge text-[9px] px-1.5 py-0.2 rounded-full font-mono font-black transition-colors whitespace-nowrap shrink-0 ${
                   isActive
                     ? 'bg-[#070F1E]/15 !text-[#070F1E]'
                     : isLight

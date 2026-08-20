@@ -35,7 +35,7 @@ export function PortfolioCard({ item }: PortfolioCardProps) {
     <article
       className={`group relative rounded-2xl overflow-hidden transition-all duration-400 hover:-translate-y-2 flex flex-col h-full border ${
         isLight
-          ? 'bg-white border-slate-200/90 shadow-sm hover:border-[#C5A16F] hover:shadow-[0_20px_40px_-10px_rgba(197,161,111,0.3)]'
+          ? 'bg-white border-slate-300 shadow-sm hover:border-[#8A5800] hover:shadow-[0_20px_40px_-10px_rgba(138,88,0,0.2)]'
           : 'bg-gradient-to-b from-[#0F1E38] via-[#091528] to-[#050C18] border-white/10 hover:border-[#C5A16F]/70 shadow-lg hover:shadow-[0_20px_45px_-10px_rgba(197,161,111,0.3)]'
       }`}
     >
@@ -67,8 +67,8 @@ export function PortfolioCard({ item }: PortfolioCardProps) {
             {itemTitle}
           </h3>
 
-          <p className={`mt-1.5 text-xs leading-relaxed line-clamp-2 font-light ${
-            isLight ? 'text-slate-600' : 'text-gray-300'
+          <p className={`mt-1.5 text-xs leading-relaxed line-clamp-2 ${
+            isLight ? 'text-slate-800 font-normal' : 'text-gray-300 font-light'
           }`}>
             {itemDesc}
           </p>
@@ -76,12 +76,12 @@ export function PortfolioCard({ item }: PortfolioCardProps) {
 
         {/* Footer / CTA Bar */}
         <div className={`mt-4 pt-3 border-t flex items-center justify-between gap-2 text-xs ${
-          isLight ? 'border-slate-100' : 'border-white/5'
+          isLight ? 'border-slate-200' : 'border-white/5'
         }`}>
           {/* Status Dot */}
           <div className="inline-flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
-            <span className={`text-[11px] font-semibold ${isLight ? 'text-slate-600' : 'text-gray-300'}`}>
+            <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)]" />
+            <span className={`text-[11px] font-bold ${isLight ? 'text-slate-800' : 'text-gray-300'}`}>
               {language === 'ar' ? 'مشروع معتمد' : 'Verified'}
             </span>
           </div>
@@ -92,19 +92,19 @@ export function PortfolioCard({ item }: PortfolioCardProps) {
               href={liveUrl || appUrl || '#'}
               target="_blank"
               rel="noopener noreferrer"
-              className={`inline-flex items-center gap-1 px-3 py-1 rounded-lg font-bold text-xs transition-all duration-300 border shadow-sm ${
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold text-xs transition-all duration-300 border shadow-sm whitespace-nowrap shrink-0 ${
                 isLight 
                   ? 'bg-amber-50/80 border-[#C5A16F]/40 text-[#8A5800] hover:bg-[#C5A16F] hover:text-[#050B14]' 
                   : 'bg-[#C5A16F]/10 border-[#C5A16F]/30 text-[#C5A16F] hover:bg-[#C5A16F] hover:text-[#050B14]'
               }`}
             >
-              <span>{language === 'ar' ? 'عرض المشروع' : 'View Project'}</span>
-              <span className={`transition-transform duration-300 ${direction === 'rtl' ? 'group-hover:-translate-x-0.5' : 'group-hover:translate-x-0.5'}`}>
+              <span className="whitespace-nowrap shrink-0">{language === 'ar' ? 'عرض المشروع' : 'View Project'}</span>
+              <span className={`shrink-0 transition-transform duration-300 ${direction === 'rtl' ? 'group-hover:-translate-x-0.5' : 'group-hover:translate-x-0.5'}`}>
                 ↗
               </span>
             </a>
           ) : (
-            <span className={`text-[11px] font-mono italic ${isLight ? 'text-slate-400' : 'text-gray-500'}`}>
+            <span className={`text-[11px] font-mono italic whitespace-nowrap shrink-0 ${isLight ? 'text-slate-400' : 'text-gray-500'}`}>
               {language === 'ar' ? 'سيادي ✦' : 'Enterprise ✦'}
             </span>
           )}

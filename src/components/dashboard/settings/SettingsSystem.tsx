@@ -95,7 +95,7 @@ export default function SettingsSystem() {
             </form>
 
             <div className="bg-[#112240]/40 border border-white/5 rounded-3xl p-6 lg:p-8">
-                <h4 className="text-sm font-bold text-pharaohGold mb-4">📜 السجل المعتمد لحالة البث وأنظمة الصيانة والتحكم</h4>
+                <h4 className="text-sm font-bold text-pharaohGold mb-4">السجل المعتمد لحالة البث وأنظمة الصيانة والتحكم</h4>
                 <div className="overflow-x-auto">
                     <table className="w-full text-right text-sm text-gray-400">
                         <thead className="text-xs uppercase bg-[#0A192F] text-pharaohGold font-bold border-b border-white/10">

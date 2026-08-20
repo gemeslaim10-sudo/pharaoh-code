@@ -95,8 +95,8 @@ export default function HomeServices({ data }: { data?: SectionData }) {
           viewAllText={language === 'ar' ? 'عرض كافة الخدمات' : 'View All Services'}
         />
 
-        {/* High-End Services Swiper Carousel */}
-        <div ref={swiperContainerRef} className="swiper servicesSwiper overflow-hidden px-1 py-3">
+        {/* High-End Services Swiper Carousel with Anti-Clipping Padding */}
+        <div ref={swiperContainerRef} className="swiper servicesSwiper !overflow-visible -mx-2 sm:-mx-3 px-2 sm:px-3 pt-2 pb-6 sm:pt-3 sm:pb-8">
           <div className="swiper-wrapper">
             {itemsToRender.map((item: SectionItem, index: number) => {
               const titleText = getDynamicText(item, 'title', language) || item.title || '';

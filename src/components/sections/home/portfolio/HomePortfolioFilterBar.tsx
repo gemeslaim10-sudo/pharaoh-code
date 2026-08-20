@@ -25,13 +25,13 @@ export function HomePortfolioFilterBar({
           <button
             key={tab.filter}
             onClick={() => onSelectFilter(tab.filter)}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer ${
+            className={`px-3 sm:px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all duration-300 cursor-pointer whitespace-nowrap shrink-0 ${
               activeFilter === tab.filter
                 ? 'bg-[#C5A16F] text-[#050B14] shadow-md shadow-[#C5A16F]/20'
                 : 'bg-white/5 text-gray-300 hover:bg-white/10 border border-white/5'
             }`}
           >
-            {tab.label}
+            <span className="whitespace-nowrap shrink-0">{tab.label}</span>
           </button>
         ))}
       </div>

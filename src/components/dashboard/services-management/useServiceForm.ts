@@ -116,10 +116,10 @@ export function useServiceForm(
 
       if (editingService && editingService.id) {
         await updateService(token, editingService.id, serviceData);
-        alert('تم تعديل الخدمة بنجاح 𓂀');
+        alert('تم تعديل الخدمة بنجاح!');
       } else {
         await addService(token, serviceData);
-        alert('تمت إضافة الخدمة بنجاح 𓂀');
+        alert('تمت إضافة الخدمة بنجاح!');
       }
 
       setEditingService(null);

@@ -16,7 +16,7 @@ export default function PrivacyHeroSection() {
             <h2 className="text-[#C5A16F] font-bold tracking-[0.2em] uppercase text-xs mb-3">
                 Pharaoh Code Privacy & Security Core
             </h2>
-            <h1 className="text-4xl md:text-5xl font-black text-white leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight">
                 {language === 'ar' ? 'سياسة الخصوصية ' : 'Privacy Policy & '}
                 <span className="text-[#C5A16F] italic">
                     {language === 'ar' ? 'وسرية المعلومات' : 'Data Confidentiality'}

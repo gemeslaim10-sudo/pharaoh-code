@@ -62,7 +62,7 @@ export function useSettingsIdentity() {
       setFaviconFile(null);
       setLogoFile(null);
       setLogoLightFile(null);
-      alert("تم تحديث وحفظ سجل الهوية وشعارات المنصة بنجاح! 👑");
+      alert("تم تحديث وحفظ سجل الهوية وشعارات المنصة بنجاح!");
     } catch (error) {
       const err = error as Error;
       console.error(err);
@@ -127,7 +127,7 @@ export function useSettingsIdentity() {
 
   return {
     loading, initialLoad, formData, faviconPreview, logoPreview, logoLightPreview,
-    isCropperOpen, cropperImageSrc, setIsCropperOpen, handleChange, handleFaviconChange,
+    isCropperOpen, cropperImageSrc, activeCropperTarget, setIsCropperOpen, handleChange, handleFaviconChange,
     handleLogoChange, handleLogoLightChange, handleOpenLogoCropper, handleCropComplete, handleSubmit
   };
 }

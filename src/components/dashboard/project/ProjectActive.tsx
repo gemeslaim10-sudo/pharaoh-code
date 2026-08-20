@@ -18,7 +18,12 @@ export default function ProjectActive({ projects, onDelete }: { projects: any[],
         <section id="active-projects-section" className="bg-pharaohCard p-5 md:p-7 rounded-3xl border border-white/5 shadow-2xl space-y-6 scroll-mt-6">
             <div className="border-b border-white/5 pb-5">
                 <h4 className="font-black text-base md:text-lg text-white flex items-center gap-2.5">
-                    <span className="text-xl">🚀</span> المشاريع الجارية قيد التنفيذ
+                    <div className="w-7 h-7 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <span>المشاريع الجارية قيد التنفيذ</span>
                 </h4>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -28,7 +33,10 @@ export default function ProjectActive({ projects, onDelete }: { projects: any[],
                             <div className="flex justify-between items-start">
                                 <div>
                                     <h5 className="active-client-title text-sm font-black text-white">{project.name}</h5>
-                                    <p className="text-[10px] text-emerald-400 font-mono mt-0.5">🟢 حالة المشروع: جاري العمل</p>
+                                    <p className="text-[10px] text-emerald-400 font-mono mt-0.5 flex items-center gap-1">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                                        <span>حالة المشروع: جاري العمل</span>
+                                    </p>
                                 </div>
                                 <span className="bg-emerald-500/10 text-emerald-400 text-[10px] font-bold px-2.5 py-1 rounded-lg border border-emerald-500/25">{project.service}</span>
                             </div>
@@ -42,12 +50,17 @@ export default function ProjectActive({ projects, onDelete }: { projects: any[],
                             </div>
                         </div>
                         <div className="flex gap-2 mt-5">
-                            <button onClick={() => handleWhatsApp(project.phone, project.name)} className="w-full flex-1 bg-green-600/10 hover:bg-green-600 text-green-400 hover:text-white font-bold py-2.5 px-3 rounded-xl text-xs transition-all flex items-center justify-center gap-1.5 border border-green-600/20">
-                                💬 متابعة سير العمل عبر واتساب
+                            <button onClick={() => handleWhatsApp(project.phone, project.name)} className="w-full flex-1 bg-green-600/10 hover:bg-green-600 text-green-400 hover:text-white font-bold py-2.5 px-3 rounded-xl text-xs transition-all flex items-center justify-center gap-1.5 border border-green-600/20 cursor-pointer">
+                                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.836.815 2.796.815 3.183 0 5.768-2.586 5.769-5.766.001-3.182-2.585-5.769-5.769-5.769zm3.435 8.167c-.145.409-.844.757-1.181.808-.337.051-.772.072-2.453-.585-2.022-.79-3.328-2.85-3.429-2.986-.1-.137-.819-1.089-.819-2.077 0-.987.519-1.474.703-1.677.185-.203.404-.254.538-.254.135 0 .27.001.387.007.124.006.29-.047.452.342.166.399.569 1.388.619 1.489.05.102.083.221.016.356-.067.135-.1.22-.2.338-.1.119-.21.265-.3.356-.1.102-.205.213-.088.414.117.202.52 8.57 1.272 1.529.967.863 1.782 1.131 2.036 1.258.254.127.404.11.554-.067.15-.178.643-.746.813-1.002.17-.254.34-.213.573-.127.234.085 1.482.699 1.736.826.254.127.424.19.487.297.063.107.063.621-.082 1.03z"/>
+                                </svg>
+                                <span>متابعة سير العمل عبر واتساب</span>
                             </button>
                             {onDelete && (
-                                <button onClick={() => onDelete(project)} className="project-delete-btn flex-none bg-red-500/10 hover:bg-red-500/20 text-red-500 hover:text-red-400 font-bold px-3 py-2.5 rounded-xl text-xs transition-all border border-red-500/20 hover:border-red-500/40" title="حذف نهائي">
-                                    🗑️
+                                <button onClick={() => onDelete(project)} className="project-delete-btn flex-none bg-red-500/10 hover:bg-red-500/20 text-red-500 hover:text-red-400 font-bold px-3 py-2.5 rounded-xl text-xs transition-all border border-red-500/20 hover:border-red-500/40 cursor-pointer" title="حذف نهائي">
+                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
                                 </button>
                             )}
                         </div>

@@ -12,6 +12,7 @@ export default function TeamHero({ data }: { data: SectionData }) {
   const { t, language, direction } = useTranslation();
   const { theme } = useTheme();
   const isLight = theme === 'light';
+  const activeLogo = isLight ? (data.logoLightUrl || data.logoUrl || '') : (data.logoUrl || data.logoLightUrl || '');
 
   if (!data) return null;
 
@@ -86,6 +87,7 @@ export default function TeamHero({ data }: { data: SectionData }) {
                   role={role}
                   memberImg={memberImg}
                   isLight={isLight}
+                  activeLogo={activeLogo}
                   direction={direction}
                   language={language}
                 />

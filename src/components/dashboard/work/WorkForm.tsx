@@ -42,12 +42,12 @@ export default function WorkForm() {
                         <div className="flex items-center gap-3">
                             <div className="w-2 h-6 bg-pharaohGold rounded-full"></div>
                             <h4 className="text-xl font-bold text-white">
-                                {editingId ? `تعديل بيانات الخبير: ${name} 𓂀` : "استمارة تنصيب خبير جديد 𓂀"}
+                                {editingId ? `تعديل بيانات العضو: ${name}` : "استمارة إضافة عضو جديد"}
                             </h4>
                         </div>
                         {editingId && (
-                            <button onClick={resetForm} className="text-xs text-gray-400 bg-white/5 px-3 py-1.5 rounded-lg hover:bg-white/10 transition">
-                                إلغاء التعديل ✕
+                            <button onClick={resetForm} className="text-xs text-gray-400 bg-white/5 px-3 py-1.5 rounded-lg hover:bg-white/10 transition cursor-pointer">
+                                إلغاء التعديل
                             </button>
                         )}
                     </div>
@@ -90,8 +90,8 @@ export default function WorkForm() {
                         />
 
                         <div className="flex justify-end pt-4">
-                            <button type="submit" disabled={submitLoading} className="w-full bg-pharaohGold text-pharaohNavy font-black px-8 py-4 rounded-xl hover:bg-white hover:scale-[1.01] active:scale-[0.99] transition-all duration-300 shadow-[0_10px_20px_rgba(197,161,111,0.15)] disabled:opacity-50">
-                                {submitLoading ? "جاري الحفظ والرفع على السيرفر... 𓂀" : editingId ? "حفظ التعديلات في صرح التيم 𓂀" : "تنصيب الخبير في صرح التيم 𓂀"}
+                            <button type="submit" disabled={submitLoading} className="w-full bg-pharaohGold text-pharaohNavy font-black px-8 py-4 rounded-xl hover:bg-white hover:scale-[1.01] active:scale-[0.99] transition-all duration-300 shadow-[0_10px_20px_rgba(197,161,111,0.15)] disabled:opacity-50 cursor-pointer">
+                                {submitLoading ? "جاري الحفظ والرفع..." : editingId ? "حفظ التعديلات" : "إضافة العضو لفريق العمل"}
                             </button>
                         </div>
                     </form>

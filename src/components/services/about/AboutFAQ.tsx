@@ -53,7 +53,7 @@ export default function AboutFAQ({ data }: { data: SectionData }) {
             </span>
             <div className="w-8 h-[2px] bg-gradient-to-l from-transparent to-[#C5A16F]" />
           </div>
-          <h2 className="text-4xl md:text-6xl font-black text-white leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight">
             {getDynamicText(data, 'titlePart1', language) || t('about.faqTitle1')}
             <br />
             <span className="bg-gradient-to-r from-[#C5A16F] via-[#E8C97E] to-[#C5A16F] bg-clip-text text-transparent">
@@ -63,7 +63,7 @@ export default function AboutFAQ({ data }: { data: SectionData }) {
         </motion.div>
 
         {/* FAQ Accordion with Stagger */}
-        <div className="space-y-4">
+        <div className="space-y-3.5 sm:space-y-4">
           {faqs.map((faq: SectionItem, index: number) => {
             const questionText = getDynamicText(faq, 'question', language) || faq.question;
             const answerText = getDynamicText(faq, 'answer', language) || faq.answer;
@@ -77,33 +77,33 @@ export default function AboutFAQ({ data }: { data: SectionData }) {
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 className="group relative"
               >
-                <details className="bg-gradient-to-b from-[#0F1E38] to-[#081222] border border-white/6 hover:border-[#C5A16F]/40 rounded-2xl overflow-hidden transition-all duration-400 shadow-xl group-hover:shadow-[0_10px_40px_-10px_rgba(197,161,111,0.2)]">
+                <details className="bg-gradient-to-b from-[#0F1E38] to-[#081222] border border-white/8 hover:border-[#C5A16F]/40 rounded-2xl overflow-hidden transition-all duration-400 shadow-xl group-hover:shadow-[0_10px_40px_-10px_rgba(197,161,111,0.2)]">
                   {/* Top beam */}
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C5A16F] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
 
-                  <summary className="flex items-center justify-between p-7 cursor-pointer list-none outline-none select-none gap-4">
-                    {/* Icon */}
-                    <div className="flex items-center gap-5 flex-1 min-w-0">
-                      <div className="w-10 h-10 bg-[#C5A16F]/10 rounded-xl flex items-center justify-center flex-shrink-0 group-open:bg-[#C5A16F] transition-colors duration-400">
-                        <svg className="w-5 h-5 text-[#C5A16F] group-open:text-[#0A192F] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <summary className="flex items-center justify-between p-4 sm:p-6 sm:p-7 cursor-pointer list-none outline-none select-none gap-3 sm:gap-4">
+                    {/* Icon + Title */}
+                    <div className="flex items-center gap-3 sm:gap-5 flex-1 min-w-0">
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#C5A16F]/10 rounded-xl flex items-center justify-center flex-shrink-0 group-open:bg-[#C5A16F] transition-colors duration-400 border border-[#C5A16F]/20">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#C5A16F] group-open:text-[#0A192F] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                       </div>
-                      <h3 className="text-white text-base md:text-lg font-bold group-hover:text-[#C5A16F] transition-colors leading-snug truncate">
+                      <h3 className="text-white text-sm sm:text-base md:text-lg font-bold group-hover:text-[#C5A16F] transition-colors leading-snug">
                         {questionText}
                       </h3>
                     </div>
 
                     {/* Chevron */}
-                    <div className="w-9 h-9 rounded-xl border border-[#C5A16F]/25 flex items-center justify-center flex-shrink-0 group-open:bg-[#C5A16F] group-open:border-[#C5A16F] transition-all duration-400">
-                      <svg className="w-4 h-4 text-[#C5A16F] group-open:text-[#0A192F] group-open:rotate-180 transition-all duration-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-xl border border-[#C5A16F]/25 flex items-center justify-center flex-shrink-0 group-open:bg-[#C5A16F] group-open:border-[#C5A16F] transition-all duration-400">
+                      <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C5A16F] group-open:text-[#0A192F] group-open:rotate-180 transition-all duration-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7" />
                       </svg>
                     </div>
                   </summary>
 
-                  <div className="px-7 pb-7 border-t border-white/5 pt-5">
-                    <p className="text-gray-400 text-sm leading-relaxed">
+                  <div className="px-4 pb-4 sm:px-7 sm:pb-7 border-t border-white/5 pt-3.5 sm:pt-5">
+                    <p className="text-gray-300 dark:text-gray-400 text-xs sm:text-sm md:text-base leading-relaxed font-normal">
                       {answerText}
                     </p>
                   </div>

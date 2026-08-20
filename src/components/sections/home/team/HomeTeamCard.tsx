@@ -9,6 +9,7 @@ interface HomeTeamCardProps {
   memberRole: string;
   memberImage: string;
   isLight: boolean;
+  activeLogo?: string;
   direction: 'rtl' | 'ltr';
   language: string;
 }
@@ -19,6 +20,7 @@ export function HomeTeamCard({
   memberRole,
   memberImage,
   isLight,
+  activeLogo,
   direction,
   language,
 }: HomeTeamCardProps) {
@@ -27,7 +29,7 @@ export function HomeTeamCard({
       href={`/team/${member.id}`} 
       className={`team-card group relative flex flex-col justify-between h-full rounded-2xl p-5 sm:p-6 border transition-all duration-300 overflow-hidden text-center block hover:-translate-y-1.5 select-none ${
         isLight
-          ? 'bg-white border-slate-200/90 shadow-sm hover:border-[#C5A16F] hover:shadow-[0_16px_36px_-8px_rgba(197,161,111,0.25)]'
+          ? 'bg-white border-slate-300 shadow-sm hover:border-[#8A5800] hover:shadow-[0_16px_36px_-8px_rgba(138,88,0,0.2)]'
           : 'bg-gradient-to-b from-[#0F1E38] via-[#091528] to-[#050B14] border-white/10 hover:border-[#C5A16F]/70 shadow-[0_10px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_16px_36px_-8px_rgba(197,161,111,0.25)]'
       }`}
     >
@@ -60,25 +62,29 @@ export function HomeTeamCard({
           </div>
         </div>
 
-        {/* Pharaoh Logo Emblem Badge */}
-        <div className={`absolute bottom-0.5 end-0.5 z-20 w-8.5 h-8.5 rounded-full border-2 flex items-center justify-center shadow-lg group-hover:scale-108 transition-transform duration-300 ${
+        {/* Dynamic Logo Emblem Badge */}
+        <div className={`absolute bottom-0.5 end-0.5 z-20 w-8.5 h-8.5 rounded-full border-2 flex items-center justify-center shadow-lg group-hover:scale-108 transition-transform duration-300 p-1.5 overflow-hidden ${
           isLight 
-            ? 'bg-white border-[#C5A16F] text-[#8A5800] shadow-[#C5A16F]/30' 
-            : 'bg-[#070F1E] border-[#C5A16F] text-[#C5A16F] shadow-black/80'
+            ? 'bg-white border-[#8A5800] shadow-[#8A5800]/20' 
+            : 'bg-[#070F1E] border-[#C5A16F] shadow-black/80'
         }`}>
-          <span className="text-sm font-serif leading-none font-bold select-none drop-shadow-[0_0_4px_rgba(197,161,111,0.6)]">
-            𓂀
-          </span>
+          {activeLogo ? (
+            <img src={activeLogo} alt="Logo" className="w-full h-full object-contain select-none" />
+          ) : (
+            <svg className="w-3.5 h-3.5 text-[#C5A16F]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          )}
         </div>
       </div>
 
       {/* Member Info */}
       <div className="flex flex-col justify-between flex-grow relative z-10">
         <div>
-          <div className="mb-2">
-            <span className={`inline-block text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider px-3 py-0.5 rounded-full border shadow-sm ${
+          <div className="mb-2 flex items-center justify-center">
+            <span className={`inline-flex items-center justify-center text-center text-[10px] sm:text-[11px] font-black uppercase tracking-wider px-3 py-1 min-h-[22px] leading-none rounded-full border shadow-sm ${
               isLight
-                ? 'text-[#8A5800] bg-amber-50/90 border-[#C5A16F]/30'
+                ? 'text-[#8A5800] bg-amber-50 border-[#8A5800]/40'
                 : 'text-[#C5A16F] bg-[#C5A16F]/10 border-[#C5A16F]/20'
             }`}>
               {memberRole}
@@ -95,23 +101,23 @@ export function HomeTeamCard({
         </div>
 
         {/* Action Button */}
-        <div className="pt-3 border-t border-white/5 mt-auto">
-          <div className={`relative overflow-hidden w-full py-2.5 px-3.5 rounded-xl transition-all duration-300 flex items-center justify-between text-xs font-bold ${
+        <div className={`pt-3 border-t mt-auto ${isLight ? 'border-slate-200' : 'border-white/5'}`}>
+          <div className={`relative overflow-hidden w-full py-2 sm:py-2.5 px-3 sm:px-3.5 rounded-xl transition-all duration-300 flex items-center justify-between text-xs font-bold whitespace-nowrap shrink-0 ${
             isLight
-              ? 'bg-slate-100/90 text-slate-800 border border-slate-200/80 group-hover:border-[#C5A16F] group-hover:bg-gradient-to-r group-hover:from-[#C5A16F] group-hover:via-[#DFB77D] group-hover:to-[#C5A16F] group-hover:text-[#070F1E] group-hover:shadow-[0_4px_16px_rgba(197,161,111,0.35)]'
+              ? 'bg-slate-100 text-slate-900 border border-slate-300 group-hover:border-[#8A5800] group-hover:bg-[#8A5800] group-hover:text-white group-hover:shadow-[0_4px_16px_rgba(138,88,0,0.3)]'
               : 'bg-white/[0.04] text-gray-200 border border-white/10 group-hover:border-[#C5A16F]/60 group-hover:bg-gradient-to-r group-hover:from-[#C5A16F] group-hover:via-[#DFB77D] group-hover:to-[#C5A16F] group-hover:text-[#070F1E] group-hover:shadow-[0_4px_18px_rgba(197,161,111,0.4)]'
           }`}>
-            <span className="font-extrabold text-xs tracking-wide relative z-10 transition-colors">
+            <span className="font-extrabold text-xs tracking-wide relative z-10 transition-colors whitespace-nowrap shrink-0">
               {language === 'ar' ? 'عرض الملف الشخصي' : 'View Profile'}
             </span>
 
-            <div className={`w-6 h-6 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-sm relative z-10 ${
+            <div className={`w-5.5 h-5.5 sm:w-6 sm:h-6 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-sm relative z-10 shrink-0 ${
               isLight
                 ? 'bg-white text-slate-800 group-hover:bg-[#070F1E] group-hover:text-[#C5A16F]'
                 : 'bg-white/10 text-gray-200 group-hover:bg-[#070F1E] group-hover:text-[#C5A16F]'
             }`}>
               <svg
-                className={`w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 ${direction === 'rtl' ? 'rotate-180 group-hover:-translate-x-0.5' : ''}`}
+                className={`w-3.5 h-3.5 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 ${direction === 'rtl' ? 'rotate-180 group-hover:-translate-x-0.5' : ''}`}
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

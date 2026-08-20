@@ -21,11 +21,16 @@ export function DashboardMetricCards({
     <div className="bg-pharaohCard p-5 md:p-6 rounded-3xl border border-white/5 shadow-xl">
       <div className="flex items-center justify-between mb-6 pb-3 border-b border-white/10">
         <h4 className="font-black text-sm md:text-base text-white flex items-center gap-2">
-          <span className="text-pharaohGold text-lg">📈</span>
+          <div className="w-7 h-7 rounded-lg bg-pharaohGold/10 text-pharaohGold flex items-center justify-center">
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+            </svg>
+          </div>
           معدل الإقبال والطلبات الشهري
         </h4>
-        <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-pharaohGold/10 text-pharaohGold border border-pharaohGold/30">
-          محدث الآن ⚡
+        <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-pharaohGold/10 text-pharaohGold border border-pharaohGold/30 flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <span>محدث الآن</span>
         </span>
       </div>
 

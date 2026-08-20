@@ -20,7 +20,7 @@ export default function HomeTeamModal() {
 
           <div className="p-4 sm:p-8 md:p-12 overflow-y-auto custom-modal-scroll flex-1 relative">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[12rem] sm:text-[18rem] font-serif opacity-[0.015] text-[#C5A16F] select-none pointer-events-none">
-              𓂀
+              ✦
             </div>
 
             {/* Header section */}
@@ -52,7 +52,7 @@ export default function HomeTeamModal() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 relative z-10">
               <div className="space-y-4 sm:space-y-5 bg-[#0A192F]/50 p-4 sm:p-6 rounded-2xl sm:rounded-tr-[2.5rem] sm:rounded-bl-[2.5rem] border border-white/5 shadow-inner">
                 <h4 className="text-white font-bold text-xs sm:text-sm mb-3 sm:mb-4 flex items-center gap-2">
-                  <span className="text-[#C5A16F] text-base">𓂀</span>
+                  <span className="text-[#C5A16F] text-base">✦</span>
                   المهارات والخبرات الفنية
                 </h4>
                 <div>

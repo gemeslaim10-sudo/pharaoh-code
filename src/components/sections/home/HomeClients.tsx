@@ -80,8 +80,8 @@ export default function HomeClients({ clients = [] }: { clients?: ClientItem[] }
           viewAllText={t("clients.viewAllClients") || (language === 'ar' ? 'عرض كافة الشركاء' : 'View All Partners')}
         />
 
-        {/* High-End Partners Showcase Swiper Carousel */}
-        <div ref={swiperContainerRef} className="swiper clientsSwiper overflow-hidden px-1 py-3">
+        {/* High-End Partners Showcase Swiper Carousel with Anti-Clipping Padding */}
+        <div ref={swiperContainerRef} className="swiper clientsSwiper !overflow-visible -mx-2 sm:-mx-3 px-2 sm:px-3 pt-2 pb-6 sm:pt-3 sm:pb-8">
           <div className="swiper-wrapper">
             {clients.map((client) => (
               <div key={client.id} className="swiper-slide h-auto">

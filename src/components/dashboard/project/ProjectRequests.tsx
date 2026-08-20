@@ -4,7 +4,12 @@ export default function ProjectRequests({ projects, onAccept, onReject, onDelete
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/5 pb-5">
                 <div className="space-y-1">
                     <h4 className="font-black text-base md:text-lg text-white flex items-center gap-2.5">
-                        <span className="text-xl">📥</span> طلبات المشاريع الواردة (Project Requests)
+                        <div className="w-7 h-7 rounded-lg bg-pharaohGold/10 text-pharaohGold flex items-center justify-center">
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                            </svg>
+                        </div>
+                        <span>طلبات المشاريع الواردة (Project Requests)</span>
                     </h4>
                 </div>
                 <span className="bg-amber-500/10 text-amber-400 text-xs font-black px-4 py-2 rounded-xl border border-amber-500/20">
@@ -33,15 +38,20 @@ export default function ProjectRequests({ projects, onAccept, onReject, onDelete
                             </div>
                         </div>
                         <div className="flex gap-2 mt-5">
-                            <button onClick={() => onAccept(project)} className="project-accept-btn flex-1 bg-emerald-500 hover:bg-emerald-400 text-white font-bold py-2.5 rounded-xl text-xs transition-all flex items-center justify-center gap-1">
-                                ✓ قبول للتنفيذ
+                            <button onClick={() => onAccept(project)} className="project-accept-btn flex-1 bg-emerald-500 hover:bg-emerald-400 text-white font-bold py-2.5 rounded-xl text-xs transition-all flex items-center justify-center gap-1 cursor-pointer">
+                                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
+                                </svg>
+                                <span>قبول للتنفيذ</span>
                             </button>
-                            <button onClick={() => onReject(project)} className="project-reject-btn flex-1 bg-white/5 hover:bg-red-500/20 text-gray-400 hover:text-red-400 font-bold py-2.5 rounded-xl text-xs transition-all border border-white/5 hover:border-red-500/30">
-                                ✕ رفض مؤقت
+                            <button onClick={() => onReject(project)} className="project-reject-btn flex-1 bg-white/5 hover:bg-red-500/20 text-gray-400 hover:text-red-400 font-bold py-2.5 rounded-xl text-xs transition-all border border-white/5 hover:border-red-500/30 cursor-pointer">
+                                <span>رفض مؤقت</span>
                             </button>
                             {onDelete && (
-                                <button onClick={() => onDelete(project)} className="project-delete-btn flex-none bg-red-500/10 hover:bg-red-500/20 text-red-500 hover:text-red-400 font-bold px-3 py-2.5 rounded-xl text-xs transition-all border border-red-500/20 hover:border-red-500/40" title="حذف نهائي">
-                                    🗑️
+                                <button onClick={() => onDelete(project)} className="project-delete-btn flex-none bg-red-500/10 hover:bg-red-500/20 text-red-500 hover:text-red-400 font-bold px-3 py-2.5 rounded-xl text-xs transition-all border border-red-500/20 hover:border-red-500/40 cursor-pointer" title="حذف نهائي">
+                                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
                                 </button>
                             )}
                         </div>

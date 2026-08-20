@@ -33,12 +33,12 @@ export default function AboutComments({ data }: { data: SectionData }) {
             </span>
             <div className="w-5 h-[2px] bg-[#C5A16F]" />
           </div>
-          <h2 className="text-3xl md:text-4xl font-black text-white">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-white leading-tight">
             {getDynamicText(data, 'titlePart1', language) || t('about.leaveDigitalMark')}
             {' '}
             <span className="text-[#C5A16F]">{getDynamicText(data, 'titlePart2', language) || ''}</span>
           </h2>
-          <p className="text-gray-400 mt-2 text-sm max-w-md mx-auto">
+          <p className="text-gray-300 dark:text-gray-400 mt-2 text-xs sm:text-sm max-w-md mx-auto font-normal">
             {getDynamicText(data, 'description', language) || t('about.commentsDesc')}
           </p>
         </div>
@@ -48,7 +48,7 @@ export default function AboutComments({ data }: { data: SectionData }) {
           {/* Top glowing beam */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-[2px] bg-gradient-to-r from-transparent via-[#C5A16F] to-transparent opacity-60 rounded-full z-10" />
 
-          <div className="bg-[#112240]/70 backdrop-blur-md border border-white/5 hover:border-[#C5A16F]/25 p-8 rounded-2xl shadow-xl transition-all duration-500">
+          <div className="bg-[#112240]/70 backdrop-blur-md border border-white/8 hover:border-[#C5A16F]/25 p-5 sm:p-8 rounded-2xl shadow-xl transition-all duration-500">
             <AboutCommentsForm formTitle={formTitle} />
           </div>
         </div>

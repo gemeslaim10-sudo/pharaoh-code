@@ -37,8 +37,8 @@ export default function ServiceFormDescriptions({
             </div>
 
             <div className="flex justify-end pt-4">
-                <button type="submit" disabled={loading} id="submit-form-btn" className="w-full bg-pharaohGold text-pharaohNavy font-black px-8 py-4 rounded-xl hover:bg-white hover:scale-[1.01] active:scale-[0.99] transition-all duration-300 shadow-[0_10px_20px_rgba(197,161,111,0.15)] disabled:opacity-50">
-                    {loading ? "جاري التثبيت وحفظ التغيرات..." : (editingService ? "حفظ وتثبيت تعديلات الخدمة 𓂀" : "تثبيت ونشر الخدمة الجديدة 𓂀")}
+                <button type="submit" disabled={loading} id="submit-form-btn" className="w-full bg-pharaohGold text-pharaohNavy font-black px-8 py-4 rounded-xl hover:bg-white hover:scale-[1.01] active:scale-[0.99] transition-all duration-300 shadow-[0_10px_20px_rgba(197,161,111,0.15)] disabled:opacity-50 cursor-pointer">
+                    {loading ? "جاري التثبيت وحفظ التغييرات..." : (editingService ? "حفظ وتثبيت تعديلات الخدمة" : "تثبيت ونشر الخدمة الجديدة")}
                 </button>
             </div>
         </>

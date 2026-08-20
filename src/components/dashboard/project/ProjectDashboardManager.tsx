@@ -115,7 +115,11 @@ export default function ProjectDashboardManager() {
             {toastMessage && (
                 <div id="go-to-project-toast" className="fixed bottom-5 left-5 bg-pharaohCard border-2 border-pharaohGold p-4 rounded-2xl shadow-2xl z-50 max-w-sm space-y-3 transition-all duration-300">
                     <div className="flex items-center gap-3">
-                        <span className="text-xl">⚙️</span>
+                        <div className="w-8 h-8 rounded-xl bg-pharaohGold/10 text-pharaohGold flex items-center justify-center shrink-0">
+                            <svg className="w-4.5 h-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
                         <div>
                             <h6 className="text-xs font-black text-white">تم قبول ونقل المشروع للتنفيذ!</h6>
                             <p className="text-[11px] text-gray-400">{toastMessage}</p>
@@ -123,9 +127,12 @@ export default function ProjectDashboardManager() {
                     </div>
                     <button 
                         onClick={() => document.getElementById('active-projects-section')?.scrollIntoView({ behavior: 'smooth' })}
-                        className="w-full bg-pharaohGold hover:bg-white text-pharaohNavy font-bold py-1.5 rounded-xl text-xs transition-all"
+                        className="w-full bg-pharaohGold hover:bg-white text-pharaohNavy font-bold py-2 rounded-xl text-xs transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
                     >
-                        🎯 اذهب لمتابعة التنفيذ الآن
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                        <span>اذهب لمتابعة التنفيذ الآن</span>
                     </button>
                 </div>
             )}

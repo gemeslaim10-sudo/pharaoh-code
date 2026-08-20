@@ -35,7 +35,11 @@ export function FooterBrand({
           <img src={activeLogo} alt={siteName} className="h-10 sm:h-12 w-auto object-contain drop-shadow-md py-1 transition-transform group-hover:scale-105" />
         ) : (
           <div className="flex items-center gap-2 text-2xl font-black tracking-tight">
-            <span className="text-[#C5A16F] text-2xl">𓂀</span>
+            <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-[#C5A16F] to-[#DFB77D] p-0.5 shadow-[0_0_10px_rgba(197,161,111,0.4)] flex items-center justify-center">
+              <svg className="w-4 h-4 text-[#050B14]" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z"/>
+              </svg>
+            </div>
             <span className={isLight ? "text-slate-900" : "text-white"}>{firstWord}</span>
             {restWords && <span className="text-[#C5A16F]">{restWords}</span>}
           </div>

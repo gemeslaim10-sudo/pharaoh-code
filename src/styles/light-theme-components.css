@@ -1,4 +1,9 @@
-/* 1. High-Contrast Icons & Badges in Light Mode */
+/* ==========================================================================
+   SOVEREIGN HIGH-CONTRAST LIGHT MODE - COMPONENT OVERRIDES
+   Crisp Definition, Defined Outlines, Deep Typography & High Readability
+   ========================================================================== */
+
+/* 1. High-Contrast Icons & SVG Elements in Light Mode */
 html[data-theme="light"] svg:not(.heroSwiper *):not([class*="btn-"]):not(.btn-pharaoh-gold *):not(.footer-social-btn *):not([data-social-icon] *) {
   stroke: currentColor;
 }
@@ -12,13 +17,13 @@ html[data-theme="light"] [data-social-icon] svg {
 /* Footer Social Buttons Light Mode */
 html[data-theme="light"] .footer-social-btn {
   background-color: #FFFFFF !important;
-  border-color: rgba(15, 23, 42, 0.14) !important;
-  color: #334155 !important;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06) !important;
+  border-color: #94A3B8 !important;
+  color: #1E293B !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
 }
 
 html[data-theme="light"] .footer-social-btn:hover {
-  transform: translateY(-6px) scale(1.04) !important;
+  transform: translateY(-4px) scale(1.04) !important;
 }
 
 html[data-theme="light"] .footer-social-btn.social-fb:hover {
@@ -64,18 +69,15 @@ html[data-theme="light"] .footer-social-btn.social-youtube:hover {
   box-shadow: 0 10px 25px rgba(255, 0, 0, 0.35) !important;
 }
 
+/* Category & Section Subtitle Badges */
 html[data-theme="light"] [class*="bg-[#C5A16F]/10"],
 html[data-theme="light"] [class*="bg-[#C5A16F]/15"],
+html[data-theme="light"] [class*="bg-[#C5A16F]/8"],
 html[data-theme="light"] [class*="bg-pharaohGold/10"] {
   background-color: rgba(138, 88, 0, 0.1) !important;
   color: #8A5800 !important;
-  border-color: rgba(138, 88, 0, 0.25) !important;
-}
-
-html[data-theme="light"] [class*="bg-[#C5A16F]/8"] {
-  background-color: rgba(138, 88, 0, 0.08) !important;
-  color: #8A5800 !important;
-  border-color: rgba(138, 88, 0, 0.2) !important;
+  border-color: #8A5800 !important;
+  font-weight: 700 !important;
 }
 
 /* 2. Image Visibility - 100% Natural Colors & Opacity */
@@ -86,30 +88,67 @@ html[data-theme="dark"] img {
   filter: none !important;
 }
 
-html[data-theme="light"] .absolute.inset-0[class*="bg-gradient-"] {
-  display: none !important;
-}
-
-/* 3. Buttons & Filters */
+/* 3. Universal Buttons System in Light Mode */
 html[data-theme="light"] .btn-pharaoh-gold,
 html[data-theme="light"] .btn-primary-gold {
   background: linear-gradient(135deg, #B8860B 0%, #D4AF37 100%) !important;
   color: #FFFFFF !important;
-  border-color: #B8860B !important;
+  border-color: #8A5800 !important;
+  box-shadow: 0 4px 14px rgba(138, 88, 0, 0.3) !important;
+}
+
+html[data-theme="light"] .btn-pharaoh-glass {
+  background: #FFFFFF !important;
+  border-color: #8A5800 !important;
+  color: #0A192F !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
+}
+
+html[data-theme="light"] .btn-pharaoh-glass:hover {
+  background: linear-gradient(135deg, #B8860B 0%, #D4AF37 100%) !important;
+  color: #FFFFFF !important;
+  border-color: #8A5800 !important;
+}
+
+html[data-theme="light"] .btn-pharaoh-outline {
+  background: transparent !important;
+  border-color: #8A5800 !important;
+  color: #8A5800 !important;
+  font-weight: 700 !important;
+}
+
+html[data-theme="light"] .btn-pharaoh-outline:hover {
+  background: rgba(138, 88, 0, 0.1) !important;
+  color: #8A5800 !important;
+}
+
+html[data-theme="light"] .btn-pharaoh-icon {
+  background: #FFFFFF !important;
+  border-color: #94A3B8 !important;
+  color: #8A5800 !important;
+}
+
+html[data-theme="light"] .btn-pharaoh-icon:hover {
+  background: #8A5800 !important;
+  border-color: #8A5800 !important;
+  color: #FFFFFF !important;
 }
 
 /* Filter Buttons in Light Mode */
 html[data-theme="light"] .filter-btn,
 html[data-theme="light"] .portfolio-filter-btn {
-  color: #334155 !important;
-  background-color: transparent !important;
-  border-color: transparent !important;
+  color: #1E293B !important;
+  background-color: #FFFFFF !important;
+  border-color: #94A3B8 !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.05) !important;
 }
 
 html[data-theme="light"] .filter-btn:hover,
 html[data-theme="light"] .portfolio-filter-btn:hover {
-  color: #0F172A !important;
-  background-color: rgba(255, 255, 255, 0.9) !important;
+  color: #0A192F !important;
+  border-color: #8A5800 !important;
+  background-color: #F1F5F9 !important;
 }
 
 html[data-theme="light"] .filter-btn.active,
@@ -119,7 +158,8 @@ html[data-theme="light"] .portfolio-filter-btn[data-active="true"] {
   background: linear-gradient(135deg, #C5A16F 0%, #DFB77D 100%) !important;
   background-color: #C5A16F !important;
   color: #070F1E !important;
-  border-color: #C5A16F !important;
+  border-color: #8A5800 !important;
+  font-weight: 800 !important;
   box-shadow: 0 4px 14px rgba(197, 161, 111, 0.4) !important;
 }
 
@@ -140,38 +180,47 @@ html[data-theme="light"] .portfolio-filter-btn[data-active="true"] .count-badge 
   color: #070F1E !important;
 }
 
-html[data-theme="light"] .filter-btn:not(.active):not([data-active="true"]) {
-  color: #334155 !important;
-  border-color: transparent !important;
-  background-color: transparent !important;
-}
-
-/* 4. FAQ Accordions */
+/* 4. FAQ Accordions in Light Mode */
 html[data-theme="light"] details {
   background-color: #FFFFFF !important;
   background-image: none !important;
-  border-color: rgba(15, 23, 42, 0.14) !important;
-  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05) !important;
+  border-color: #94A3B8 !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06) !important;
+}
+
+html[data-theme="light"] details[open] {
+  border-color: #8A5800 !important;
+  box-shadow: 0 6px 20px rgba(138, 88, 0, 0.12) !important;
 }
 
 html[data-theme="light"] details summary h3 {
   color: #0A192F !important;
+  font-weight: 700 !important;
 }
 
 html[data-theme="light"] details[open] summary h3 {
   color: #8A5800 !important;
 }
 
-/* 5. Mobile Navigation Drawer */
+html[data-theme="light"] details p {
+  color: #1E293B !important;
+}
+
+html[data-theme="light"] details .border-t {
+  border-color: #CBD5E1 !important;
+}
+
+/* 5. Mobile Navigation Drawer in Light Mode */
 html[data-theme="light"] .mobile-nav-drawer {
   background: #FFFFFF !important;
   background-image: none !important;
-  border-color: rgba(15, 23, 42, 0.14) !important;
+  border-color: #94A3B8 !important;
   box-shadow: -20px 0 60px rgba(15, 23, 42, 0.15) !important;
 }
 
-html[data-theme="light"] .mobile-nav-drawer [class*="border-white"] {
-  border-color: rgba(15, 23, 42, 0.12) !important;
+html[data-theme="light"] .mobile-nav-drawer [class*="border-white"],
+html[data-theme="light"] .mobile-nav-drawer [class*="border-slate-"] {
+  border-color: #CBD5E1 !important;
 }
 
 html[data-theme="light"] .mobile-nav-drawer span.text-white,
@@ -180,12 +229,12 @@ html[data-theme="light"] .mobile-nav-drawer .text-white {
 }
 
 html[data-theme="light"] .mobile-nav-drawer a {
-  color: #1E293B !important;
+  color: #0F172A !important;
 }
 
 html[data-theme="light"] .mobile-nav-drawer a:hover {
   background-color: rgba(15, 23, 42, 0.05) !important;
-  color: #0A192F !important;
+  color: #8A5800 !important;
 }
 
 html[data-theme="light"] .mobile-nav-drawer a[class*="bg-[#C5A16F]"] {
@@ -204,7 +253,7 @@ html[data-theme="light"] .mobile-nav-drawer a div[class*="bg-white"] {
 
 html[data-theme="light"] .mobile-nav-drawer button[class*="bg-white"] {
   background-color: rgba(15, 23, 42, 0.06) !important;
-  border-color: rgba(15, 23, 42, 0.14) !important;
+  border-color: #94A3B8 !important;
   color: #1E293B !important;
 }
 
@@ -214,4 +263,13 @@ html[data-theme="light"] a[href*="whatsapp"],
 html[data-theme="light"] a.bg-\[\#25D366\] {
   background-color: #25D366 !important;
   color: #FFFFFF !important;
+}
+
+/* 7. Modal Windows & Popups in Light Mode */
+html[data-theme="light"] [role="dialog"],
+html[data-theme="light"] .modal-content,
+html[data-theme="light"] #team-modal > div {
+  background-color: #FFFFFF !important;
+  border-color: #94A3B8 !important;
+  color: #0F172A !important;
 }

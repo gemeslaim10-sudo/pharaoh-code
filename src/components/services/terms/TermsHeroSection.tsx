@@ -14,7 +14,7 @@ export default function TermsHeroSection() {
                 className="text-[#C5A16F] font-bold tracking-[0.2em] uppercase text-xs mb-3">Pharaoh
                 Code Terms & Conditions</h2>
             <h1
-                className="text-4xl md:text-5xl font-black text-white leading-tight">
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight">
                 الشروط <span className="text-[#C5A16F] italic">والأحكام
                     العامة</span>
             </h1>

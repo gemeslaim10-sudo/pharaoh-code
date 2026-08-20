@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslation } from '@/contexts/LanguageContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { NavLinkItem } from './NavbarDesktopLinks';
 import { NavbarMobileDrawerFooter } from './NavbarMobileDrawerFooter';
 import { NavbarMobileDrawerHeader } from './NavbarMobileDrawerHeader';
@@ -25,6 +26,8 @@ export function NavbarMobileDrawer({
   pathname,
 }: NavbarMobileDrawerProps) {
   const { direction } = useTranslation();
+  const { theme } = useTheme();
+  const isLight = theme === 'light';
 
   const drawerVariants = {
     closed: {
@@ -57,7 +60,7 @@ export function NavbarMobileDrawer({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[110] lg:hidden" dir={direction}>
+        <div className="fixed inset-0 z-[110] lg:hidden select-none" dir={direction}>
           {/* Backdrop overlay */}
           <motion.div 
             initial={{ opacity: 0 }}
@@ -65,7 +68,7 @@ export function NavbarMobileDrawer({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={() => setIsOpen(false)}
-            className="absolute inset-0 bg-black/80 backdrop-blur-xl" 
+            className="absolute inset-0 bg-black/75 backdrop-blur-md" 
           />
 
           {/* Drawer container */}
@@ -74,7 +77,13 @@ export function NavbarMobileDrawer({
             initial="closed"
             animate="open"
             exit="exit"
-            className={`absolute top-0 bottom-0 ${direction === 'rtl' ? 'left-0' : 'right-0'} w-full sm:max-w-md bg-gradient-to-b from-[#0B1528] via-[#070F1E] to-[#040810] border-l border-white/10 shadow-2xl flex flex-col justify-between p-6 overflow-y-auto mobile-nav-drawer`}
+            className={`absolute top-0 bottom-0 ${
+              direction === 'rtl' ? 'left-0' : 'right-0'
+            } w-full sm:max-w-md border-l shadow-2xl flex flex-col justify-between p-6 overflow-y-auto mobile-nav-drawer z-10 ${
+              isLight
+                ? 'bg-white/95 backdrop-blur-2xl border-slate-200 text-slate-900 shadow-[0_20px_60px_rgba(0,0,0,0.15)]'
+                : 'bg-gradient-to-b from-[#0B1528] via-[#070F1E] to-[#040810] border-white/10 text-white shadow-2xl'
+            }`}
           >
             <div>
               <NavbarMobileDrawerHeader

@@ -75,9 +75,9 @@ export default function SettingsHeroTheme() {
           <button
             type="submit"
             disabled={loading}
-            className="bg-gradient-to-r from-pharaohGold to-amber-600 text-pharaohNavy font-black text-xs uppercase tracking-widest px-8 py-4 rounded-xl shadow-lg hover:opacity-90 transition disabled:opacity-50"
+            className="bg-gradient-to-r from-pharaohGold to-amber-600 text-pharaohNavy font-black text-xs uppercase tracking-widest px-8 py-4 rounded-xl shadow-lg hover:opacity-90 transition disabled:opacity-50 cursor-pointer"
           >
-            {loading ? 'جاري الحفظ...' : 'حفظ وتطبيق إعدادات الهيرو والألوان 👑'}
+            {loading ? 'جاري الحفظ...' : 'حفظ وتطبيق إعدادات الهيرو والألوان'}
           </button>
         </div>
       </form>

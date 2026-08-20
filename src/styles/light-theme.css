@@ -1,5 +1,6 @@
 /* ==========================================================================
-   HIGH-CONTRAST LIGHT MODE - BASE, TYPOGRAPHY, CARDS & INPUTS
+   SOVEREIGN HIGH-CONTRAST LIGHT MODE SYSTEM
+   Deep Typography, Crisp Dark Borders, Defined Outlines & Rich Accents
    ========================================================================== */
 
 /* 1. Root & Base Tokens in Light Mode */
@@ -8,6 +9,7 @@ html.light {
   --color-pharaohNavy: #F8FAFC !important;
   --color-pharaohCard: #FFFFFF !important;
   --color-deepNavy: #F8FAFC !important;
+  --color-premiumBeige: #8A5800 !important;
   background-color: #F8FAFC !important;
   color: #0F172A !important;
 }
@@ -18,7 +20,7 @@ body.light {
   color: #0F172A !important;
 }
 
-/* 2. Global Page & Section Backgrounds (Subtle Grid on Slate #F8FAFC) */
+/* 2. Global Page & Section Backgrounds (Subtle Architectural Grid on Crisp Slate #F8FAFC) */
 html[data-theme="light"] body,
 html[data-theme="light"] main,
 html[data-theme="light"] section,
@@ -54,23 +56,37 @@ html[data-theme="light"] h4,
 html[data-theme="light"] h5,
 html[data-theme="light"] h6,
 html[data-theme="light"] .text-white,
-html[data-theme="light"] [class*="text-white"]:not(.heroSwiper *):not([class*="btn-"]):not(.btn-pharaoh-gold):not(.filter-btn.active):not(.filter-btn.active *):not(.portfolio-filter-btn.active):not(.portfolio-filter-btn.active *):not([data-active="true"]):not([data-active="true"] *):not(.badge) {
+html[data-theme="light"] [class*="text-white"]:not(.heroSwiper *):not([class*="btn-"]):not(.btn-pharaoh-gold):not(.filter-btn.active):not(.filter-btn.active *):not(.portfolio-filter-btn.active):not(.portfolio-filter-btn.active *):not([data-active="true"]):not([data-active="true"] *):not(.badge):not(.btn-primary-gold *) {
   color: #0A192F !important;
 }
 
-html[data-theme="light"] p:not(.heroSwiper *),
+/* Body paragraphs, sub-headers, descriptions, labels, list items */
+html[data-theme="light"] p:not(.heroSwiper *):not(.btn-pharaoh-gold *):not(.filter-btn.active *),
 html[data-theme="light"] li:not(.heroSwiper *),
 html[data-theme="light"] label,
 html[data-theme="light"] small,
-html[data-theme="light"] [class*="text-gray-"]:not(.heroSwiper *):not(.filter-btn.active *):not(.portfolio-filter-btn.active *) {
+html[data-theme="light"] [class*="text-gray-"]:not(.heroSwiper *):not(.filter-btn.active *):not(.portfolio-filter-btn.active *):not(.btn-pharaoh-gold *),
+html[data-theme="light"] [class*="text-slate-"]:not(.heroSwiper *):not(.filter-btn.active *):not(.portfolio-filter-btn.active *):not(.btn-pharaoh-gold *),
+html[data-theme="light"] [class*="text-zinc-"]:not(.heroSwiper *):not(.filter-btn.active *):not(.portfolio-filter-btn.active *),
+html[data-theme="light"] [class*="text-neutral-"]:not(.heroSwiper *):not(.filter-btn.active *):not(.portfolio-filter-btn.active *) {
   color: #1E293B !important;
 }
 
-html[data-theme="light"] [class*="text-pharaohGold"]:not(.heroSwiper *):not([class*="/"]),
-html[data-theme="light"] [class*="text-[#C5A16F]"]:not(.heroSwiper *):not([class*="/"]) {
+/* Specific contrast enhancement for secondary text and notes */
+html[data-theme="light"] .text-gray-500,
+html[data-theme="light"] .text-slate-500,
+html[data-theme="light"] .text-gray-400,
+html[data-theme="light"] .text-slate-400 {
+  color: #334155 !important;
+}
+
+/* Deep Bronze / Gold Text Accents */
+html[data-theme="light"] [class*="text-pharaohGold"]:not(.heroSwiper *):not([class*="/"]):not(.btn-pharaoh-gold *),
+html[data-theme="light"] [class*="text-[#C5A16F]"]:not(.heroSwiper *):not([class*="/"]):not(.btn-pharaoh-gold *) {
   color: #8A5800 !important;
 }
 
+/* Gradient Text in Light Mode - Deep Royal Gold */
 html[data-theme="light"] .bg-clip-text.text-transparent:not(.heroSwiper *),
 html[data-theme="light"] .bg-clip-text:not(.heroSwiper *) {
   background-image: linear-gradient(135deg, #78350F 0%, #B8860B 50%, #78350F 100%) !important;
@@ -93,23 +109,30 @@ html[data-theme="light"] [class*="bg-[#081222]"],
 html[data-theme="light"] [class*="bg-[#0D182E]"],
 html[data-theme="light"] [class*="bg-[#0D1E36]"],
 html[data-theme="light"] [class*="bg-[#0F2338]"],
-html[data-theme="light"] [class*="bg-[#152338]"] {
+html[data-theme="light"] [class*="bg-[#152338]"],
+html[data-theme="light"] [class*="bg-[#091528]"],
+html[data-theme="light"] [class*="bg-[#091427]"],
+html[data-theme="light"] [class*="bg-[#0A162B]"] {
   background-color: #FFFFFF !important;
   background-image: none !important;
   color: #0A192F !important;
-  border-color: rgba(15, 23, 42, 0.16) !important;
+  border-color: #94A3B8 !important;
   box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04) !important;
 }
 
-/* 5. Borders Everywhere */
+/* 5. Crisp Dark Borders & Outlines */
 html[data-theme="light"] [class*="border-white"],
-html[data-theme="light"] [class*="border-gray-"] {
-  border-color: rgba(15, 23, 42, 0.16) !important;
+html[data-theme="light"] [class*="border-gray-"],
+html[data-theme="light"] [class*="border-slate-"],
+html[data-theme="light"] [class*="border-zinc-"],
+html[data-theme="light"] [class*="border-neutral-"],
+html[data-theme="light"] [class*="border-border"] {
+  border-color: #94A3B8 !important;
 }
 
 html[data-theme="light"] [class*="border-pharaohGold"],
 html[data-theme="light"] [class*="border-[#C5A16F]"] {
-  border-color: rgba(138, 88, 0, 0.35) !important;
+  border-color: #8A5800 !important;
 }
 
 html[data-theme="light"] [class*="hover:border-"]:hover,
@@ -117,18 +140,41 @@ html[data-theme="light"] [class*="hover:border-[#C5A16F]"]:hover {
   border-color: #8A5800 !important;
 }
 
-/* 6. Form Inputs */
+/* Internal Section & Card Dividers */
+html[data-theme="light"] [class*="border-t"],
+html[data-theme="light"] [class*="border-b"],
+html[data-theme="light"] [class*="border-y"],
+html[data-theme="light"] [class*="border-x"],
+html[data-theme="light"] [class*="divide-"] {
+  border-color: #CBD5E1 !important;
+}
+
+/* Outlines & Focus States */
+html[data-theme="light"] [class*="outline-"],
+html[data-theme="light"] [class*="ring-"] {
+  outline-color: #8A5800 !important;
+}
+
+/* 6. Form Inputs & Selects & Textareas */
 html[data-theme="light"] input,
 html[data-theme="light"] select,
 html[data-theme="light"] textarea {
   background-color: #FFFFFF !important;
   color: #0A192F !important;
-  border-color: rgba(15, 23, 42, 0.22) !important;
+  border-color: #64748B !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05) !important;
 }
 
 html[data-theme="light"] input:focus,
 html[data-theme="light"] select:focus,
 html[data-theme="light"] textarea:focus {
   border-color: #8A5800 !important;
-  box-shadow: 0 0 0 2px rgba(138, 88, 0, 0.2) !important;
+  box-shadow: 0 0 0 3px rgba(138, 88, 0, 0.25) !important;
+  outline: none !important;
+}
+
+html[data-theme="light"] input::placeholder,
+html[data-theme="light"] textarea::placeholder {
+  color: #64748B !important;
+  opacity: 1 !important;
 }

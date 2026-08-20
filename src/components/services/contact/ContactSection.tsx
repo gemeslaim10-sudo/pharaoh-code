@@ -35,7 +35,7 @@ export default function ContactSection({ data }: { data: SectionData }) {
             </span>
             <div className="w-6 h-[2px] bg-[#C5A16F]" />
           </div>
-          <h2 className="text-3xl md:text-5xl font-black text-white leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight">
             {getDynamicText(data, 'titlePart1', language) || t('contact.mainTitle1')}
             {' '}
             <span className="text-[#C5A16F]">
@@ -44,7 +44,7 @@ export default function ContactSection({ data }: { data: SectionData }) {
             {' '}
             {getDynamicText(data, 'titlePart3', language) || t('contact.mainTitle3')}
           </h2>
-          <p className="text-gray-400 mt-4 max-w-xl mx-auto text-sm leading-relaxed">
+          <p className="text-gray-300 dark:text-gray-400 mt-3 sm:mt-4 max-w-xl mx-auto text-xs sm:text-sm md:text-base leading-relaxed font-normal">
             {getDynamicText(data, 'description', language) || t('contact.mainDesc')}
           </p>
         </motion.div>

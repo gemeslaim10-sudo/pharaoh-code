@@ -32,7 +32,7 @@ export function HomeWorkflowCard({
     <div 
       className={`group relative rounded-2xl p-5 sm:p-6 border transition-all duration-400 shadow-xl flex flex-col justify-between overflow-hidden h-full hover:-translate-y-2 select-none ${
         isLight
-          ? 'bg-white border-slate-200/90 hover:border-[#C5A16F] hover:shadow-[0_20px_40px_-10px_rgba(197,161,111,0.3)]'
+          ? 'bg-white border-slate-300 hover:border-[#8A5800] hover:shadow-[0_20px_40px_-10px_rgba(138,88,0,0.2)]'
           : 'bg-gradient-to-b from-[#0F1E38] via-[#091528] to-[#050B14] border-white/10 hover:border-[#C5A16F]/70 hover:shadow-[0_20px_45px_-10px_rgba(197,161,111,0.3)]'
       }`}
     >
@@ -47,11 +47,11 @@ export function HomeWorkflowCard({
         <div className="flex items-center justify-between mb-4 sm:mb-5">
           <div className={`w-12 h-12 rounded-xl border flex items-center justify-center transition-all duration-400 shadow-md group-hover:scale-108 ${
             isLight
-              ? 'bg-slate-100 border-slate-200 group-hover:bg-[#C5A16F] group-hover:border-[#C5A16F]'
+              ? 'bg-slate-100 border-slate-300 group-hover:bg-[#8A5800] group-hover:border-[#8A5800]'
               : 'bg-white/5 border-white/10 group-hover:bg-[#C5A16F] group-hover:border-[#C5A16F]'
           }`}>
             <div 
-              className={`transition-colors duration-400 group-hover:text-[#050B14] ${
+              className={`transition-colors duration-400 group-hover:text-white ${
                 isLight ? 'text-[#8A5800]' : 'text-[#C5A16F]'
               }`}
               dangerouslySetInnerHTML={{ __html: stripSvgColors(step.iconSvg || '') }} 
@@ -60,7 +60,7 @@ export function HomeWorkflowCard({
 
           <span className={`font-mono text-xs font-black px-2.5 py-1 rounded-lg border transition-all duration-300 shadow-sm ${
             isLight
-              ? 'bg-amber-50/80 border-[#C5A16F]/30 text-[#8A5800] group-hover:bg-[#C5A16F] group-hover:text-[#050B14]'
+              ? 'bg-amber-50 border-[#8A5800]/40 text-[#8A5800] group-hover:bg-[#8A5800] group-hover:text-white'
               : 'bg-white/5 border-[#C5A16F]/30 text-[#C5A16F] group-hover:bg-[#C5A16F] group-hover:text-[#050B14]'
           }`}>
             0{index + 1}
@@ -74,8 +74,8 @@ export function HomeWorkflowCard({
         }`}>
           {stepTitle}
         </h4>
-        <p className={`text-xs leading-relaxed font-light line-clamp-3 ${
-          isLight ? 'text-slate-600' : 'text-gray-300'
+        <p className={`text-xs leading-relaxed line-clamp-3 ${
+          isLight ? 'text-slate-800 font-normal' : 'text-gray-300 font-light'
         }`}>
           {stepDesc}
         </p>
@@ -83,7 +83,7 @@ export function HomeWorkflowCard({
 
       {/* Bottom Progress Accent */}
       <div className={`mt-5 pt-3.5 border-t flex items-center justify-between relative z-10 ${
-        isLight ? 'border-slate-100' : 'border-white/5'
+        isLight ? 'border-slate-200' : 'border-white/5'
       }`}>
         <span className="w-2 h-2 rounded-full bg-[#C5A16F]/50 group-hover:bg-[#C5A16F] group-hover:shadow-[0_0_8px_#C5A16F] transition-all" />
         <div className="h-0.5 flex-1 mx-2.5 bg-white/5 group-hover:bg-[#C5A16F]/40 rounded-full transition-all duration-500" />

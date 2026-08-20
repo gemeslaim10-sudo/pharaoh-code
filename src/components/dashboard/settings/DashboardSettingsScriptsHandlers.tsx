@@ -20,7 +20,7 @@ export default function DashboardSettingsScriptsHandlers() {
             window.$('#site-desc').val(item['desc'] ?? '');
 
             window.editIdentityIdx = index;
-            window.$('#btn-save-identity').text("حفظ التعديل الحالي للسجل ✏️");
+            window.$('#btn-save-identity').text("حفظ التعديل الحالي للسجل");
             const offset = window.$('#form-identity').offset();
             window.$('html, body').animate({ scrollTop: (offset?.top ?? 100) - 100 }, 400);
         });
@@ -48,7 +48,7 @@ export default function DashboardSettingsScriptsHandlers() {
             window.$('#admin-role').val(item['role'] ?? '');
 
             window.editSecurityIdx = index;
-            window.$('#btn-save-security').text("حفظ تعديل بيانات الحساب ✏️");
+            window.$('#btn-save-security').text("حفظ تعديل بيانات الحساب");
             const offset = window.$('#form-security').offset();
             window.$('html, body').animate({ scrollTop: (offset?.top ?? 100) - 100 }, 400);
         });
@@ -76,7 +76,7 @@ export default function DashboardSettingsScriptsHandlers() {
             window.$('#social-gh').val(item['gh'] ?? '');
 
             window.editSocialIdx = index;
-            window.$('#btn-save-social').text("حفظ تعديل قنوات التواصل ✏️");
+            window.$('#btn-save-social').text("حفظ تعديل قنوات التواصل");
             const offset = window.$('#form-social').offset();
             window.$('html, body').animate({ scrollTop: (offset?.top ?? 100) - 100 }, 400);
         });
@@ -102,7 +102,7 @@ export default function DashboardSettingsScriptsHandlers() {
             window.$('#maintenance-msg').val(item['msg'] ?? '');
 
             window.editSystemIdx = index;
-            window.$('#btn-save-system').text("حفظ تعديل حالة البث الحالية ✏️").removeClass('from-red-500').addClass('from-amber-600');
+            window.$('#btn-save-system').text("حفظ تعديل حالة البث الحالية").removeClass('from-red-500').addClass('from-amber-600');
             const offset = window.$('#form-system').offset();
             window.$('html, body').animate({ scrollTop: (offset?.top ?? 100) - 100 }, 400);
         });

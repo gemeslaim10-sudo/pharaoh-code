@@ -36,7 +36,7 @@ export default function DashboardServicesManagement() {
       const token = await user.getIdToken();
       await deleteService(token, id);
       setServices(prev => prev.filter(s => s.id !== id));
-      alert('تم حذف الخدمة بنجاح 𓂀');
+      alert('تم حذف الخدمة بنجاح!');
     } catch (error: any) {
       console.error(error);
       alert(error.message || 'حدث خطأ أثناء حذف الخدمة.');

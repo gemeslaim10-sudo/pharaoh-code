@@ -65,23 +65,79 @@ body {
   background-attachment: fixed;
 }
 
-/* Global Scrollbars */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #0A192F; }
-::-webkit-scrollbar-thumb { background: rgba(197, 161, 111, 0.2); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #C5A16F; }
+/* Global Window Scrollbar (Hidden by default, enableable via class) */
+html, body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none;
+  width: 0px;
+  height: 0px;
+}
 
-.custom-modal-scroll::-webkit-scrollbar { width: 6px; }
+.enable-side-scrollbar, body.enable-side-scrollbar {
+  scrollbar-width: thin;
+}
+.enable-side-scrollbar::-webkit-scrollbar, body.enable-side-scrollbar::-webkit-scrollbar {
+  display: block;
+  width: 6px;
+  height: 6px;
+}
+.enable-side-scrollbar::-webkit-scrollbar-track, body.enable-side-scrollbar::-webkit-scrollbar-track { background: #0A192F; }
+.enable-side-scrollbar::-webkit-scrollbar-thumb, body.enable-side-scrollbar::-webkit-scrollbar-thumb { background: rgba(197, 161, 111, 0.2); border-radius: 4px; }
+.enable-side-scrollbar::-webkit-scrollbar-thumb:hover, body.enable-side-scrollbar::-webkit-scrollbar-thumb:hover { background: #C5A16F; }
+
+/* Internal Custom Container & Modal Scrollbars */
+.custom-scrollbar::-webkit-scrollbar,
+.custom-modal-scroll::-webkit-scrollbar { width: 6px; height: 6px; display: block; }
+.custom-scrollbar::-webkit-scrollbar-track,
 .custom-modal-scroll::-webkit-scrollbar-track { background: #112240; }
+.custom-scrollbar::-webkit-scrollbar-thumb,
 .custom-modal-scroll::-webkit-scrollbar-thumb { background: rgba(197, 161, 111, 0.3); border-radius: 10px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover,
 .custom-modal-scroll::-webkit-scrollbar-thumb:hover { background: #C5A16F; }
 
-/* Swiper Content Animation & Utilities */
+/* Swiper Content Animation & Anti-Crop Utilities */
 .swiper-slide-active .content-up { animation: fadeInUp 1s ease forwards 0.3s; }
 .portfolio-item { transition: opacity 0.5s ease, transform 0.5s ease; }
 .filter-btn { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 .mobile-menu { transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); }
 .mobile-menu.active { transform: translateX(0); }
+
+/* Sovereign Swiper Carousel Headroom & Anti-Crop System */
+.swiper {
+  overflow: visible !important;
+  clip-path: none !important;
+}
+
+.swiper-wrapper {
+  align-items: stretch !important;
+}
+
+.swiper-slide {
+  height: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  padding-top: 14px;
+  padding-bottom: 20px;
+  box-sizing: border-box;
+}
+
+/* Universal Button Non-Breaking Wrap & Compact Safety */
+button,
+a[role="button"],
+.btn-pharaoh-gold,
+.btn-primary-gold,
+.btn-pharaoh-glass,
+.btn-pharaoh-outline,
+.filter-btn,
+.portfolio-filter-btn {
+  white-space: nowrap !important;
+  text-wrap: nowrap !important;
+  word-break: keep-all;
+  flex-shrink: 0;
+}
 
 /* Buttons System */
 @import "../styles/buttons.css";

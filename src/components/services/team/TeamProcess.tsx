@@ -59,7 +59,7 @@ export default function TeamProcess() {
             </span>
             <div className="w-6 sm:w-10 h-[2px] bg-gradient-to-l from-transparent to-[#C5A16F]" />
           </div>
-          <h2 className="text-2xl sm:text-4xl md:text-6xl font-black text-white leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight">
             {t('team.processTitle1')}{' '}
             <span className="bg-gradient-to-r from-[#C5A16F] via-[#E8C97E] to-[#C5A16F] bg-clip-text text-transparent">
               {t('team.processTitle2')}

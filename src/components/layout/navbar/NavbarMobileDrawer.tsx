@@ -31,68 +31,79 @@ export function NavbarMobileDrawer({
 
   const drawerVariants = {
     closed: {
-      x: direction === 'rtl' ? '-100%' : '100%',
-      opacity: 0.8,
+      x: direction === 'rtl' ? '-105%' : '105%',
+      opacity: 0.85,
     },
     open: {
       x: 0,
       opacity: 1,
       transition: {
         type: 'spring' as const,
-        stiffness: 350,
-        damping: 35,
-        staggerChildren: 0.05,
-        delayChildren: 0.1,
+        stiffness: 320,
+        damping: 32,
+        staggerChildren: 0.04,
+        delayChildren: 0.08,
       },
     },
     exit: {
-      x: direction === 'rtl' ? '-100%' : '100%',
+      x: direction === 'rtl' ? '-105%' : '105%',
       opacity: 0,
-      transition: { duration: 0.25, ease: 'easeInOut' as const },
+      transition: { duration: 0.28, ease: 'easeInOut' as const },
     },
   };
 
   const itemVariants = {
-    closed: { opacity: 0, x: direction === 'rtl' ? -15 : 15 },
-    open: { opacity: 1, x: 0, transition: { duration: 0.3 } },
+    closed: { opacity: 0, x: direction === 'rtl' ? -14 : 14 },
+    open: { opacity: 1, x: 0, transition: { duration: 0.28 } },
   };
 
   return (
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[110] lg:hidden select-none" dir={direction}>
-          {/* Backdrop overlay */}
-          <motion.div 
+          {/* Backdrop */}
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={() => setIsOpen(false)}
-            className="absolute inset-0 bg-black/75 backdrop-blur-md" 
+            className="absolute inset-0 bg-black/65 backdrop-blur-md"
           />
 
-          {/* Drawer container */}
-          <motion.div 
+          {/* Drawer panel */}
+          <motion.div
             variants={drawerVariants}
             initial="closed"
             animate="open"
             exit="exit"
-            className={`absolute top-0 bottom-0 ${
-              direction === 'rtl' ? 'left-0' : 'right-0'
-            } w-full sm:max-w-md border-l shadow-2xl flex flex-col justify-between p-6 overflow-y-auto mobile-nav-drawer z-10 ${
-              isLight
-                ? 'bg-white/95 backdrop-blur-2xl border-slate-200 text-slate-900 shadow-[0_20px_60px_rgba(0,0,0,0.15)]'
-                : 'bg-gradient-to-b from-[#0B1528] via-[#070F1E] to-[#040810] border-white/10 text-white shadow-2xl'
-            }`}
+            className={`
+              absolute top-0 bottom-0 ${direction === 'rtl' ? 'left-0' : 'right-0'}
+              w-full sm:max-w-[380px]
+              flex flex-col justify-between
+              overflow-y-auto overflow-x-hidden
+              z-10
+              ${isLight
+                ? 'bg-white/97 backdrop-blur-2xl border-e border-slate-100 shadow-[20px_0_80px_rgba(0,0,0,0.12)]'
+                : 'bg-gradient-to-b from-[#070F1F] via-[#060D1B] to-[#040A15] border-e border-white/[0.06] shadow-[-20px_0_80px_rgba(0,0,0,0.8)]'
+              }
+            `}
           >
-            <div>
+            {/* Top ambient glow */}
+            {!isLight && (
+              <>
+                <div className="absolute top-0 inset-x-0 h-64 bg-gradient-to-b from-[#C5A16F]/06 to-transparent pointer-events-none" />
+                <div className="absolute top-1/3 -end-16 w-40 h-40 rounded-full bg-[#C5A16F]/05 blur-3xl pointer-events-none" />
+              </>
+            )}
+
+            <div className="relative p-5 sm:p-6">
               <NavbarMobileDrawerHeader
                 siteName={siteName}
                 activeLogo={activeLogo}
                 onClose={() => setIsOpen(false)}
               />
 
-              {/* Navigation Links List */}
               <NavbarMobileDrawerLinks
                 links={links}
                 pathname={pathname}
@@ -102,7 +113,9 @@ export function NavbarMobileDrawer({
               />
             </div>
 
-            <NavbarMobileDrawerFooter onClose={() => setIsOpen(false)} />
+            <div className={`relative p-5 sm:p-6 border-t ${isLight ? 'border-slate-100' : 'border-white/[0.06]'}`}>
+              <NavbarMobileDrawerFooter onClose={() => setIsOpen(false)} />
+            </div>
           </motion.div>
         </div>
       )}

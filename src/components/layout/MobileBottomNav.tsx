@@ -102,14 +102,14 @@ export default function MobileBottomNav({
       {/* Dock Bar Container */}
       <nav
         aria-label="Mobile Navigation"
-        className={`relative flex items-center justify-around px-2 h-16 transition-colors duration-300 border-t ${
+        className={`relative flex items-center justify-around px-2 h-[68px] transition-all duration-300 border-t ${
           isLight
-            ? 'bg-white/95 backdrop-blur-2xl border-slate-200/90 shadow-[0_-8px_30px_rgba(0,0,0,0.06)]'
-            : 'bg-[#070F1E]/95 backdrop-blur-2xl border-[#C5A16F]/20 shadow-[0_-10px_35px_rgba(0,0,0,0.7)]'
+            ? 'bg-white/97 backdrop-blur-3xl border-slate-200/80 shadow-[0_-12px_40px_rgba(0,0,0,0.08),0_-2px_8px_rgba(0,0,0,0.04)]'
+            : 'bg-[#05101E]/97 backdrop-blur-3xl border-[#C5A16F]/15 shadow-[0_-12px_50px_rgba(0,0,0,0.85),0_-2px_8px_rgba(197,161,111,0.06)]'
         }`}
       >
-        {/* Top subtle golden shimmer line */}
-        <div className="absolute top-0 inset-x-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#C5A16F]/60 to-transparent pointer-events-none" />
+        {/* Top gold accent shimmer line */}
+        <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#C5A16F]/70 to-transparent pointer-events-none" />
 
         {/* 1. First Item: Home */}
         <NavItem item={homeItem} isLight={isLight} />
@@ -148,9 +148,9 @@ export default function MobileBottomNav({
                   className="w-full h-full object-contain drop-shadow-sm transition-transform duration-300 group-hover:scale-110 select-none" 
                 />
               ) : (
-                <span className="text-xl font-serif font-black leading-none select-none text-[#C5A16F]">
-                  👑
-                </span>
+                <svg viewBox="0 0 24 24" className="w-6 h-6 text-[#C5A16F] drop-shadow-[0_0_6px_rgba(197,161,111,0.5)]" fill="currentColor">
+                  <path d="M12 2L2 22h20L12 2zm0 4.5l6.5 13.5h-13L12 6.5z" />
+                </svg>
               )}
             </motion.div>
           </Link>

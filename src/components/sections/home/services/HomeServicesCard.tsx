@@ -52,7 +52,7 @@ export function HomeServicesCard({
               : 'bg-white/5 border-white/10 group-hover:bg-gradient-to-br group-hover:from-[#C5A16F] group-hover:to-[#9E7D47] group-hover:border-[#C5A16F]'
           }`}>
             <div 
-              className={`transition-colors duration-400 group-hover:text-white ${
+              className={`w-7 h-7 flex items-center justify-center [&_svg]:w-6 [&_svg]:h-6 [&_svg]:max-w-full [&_svg]:max-h-full transition-colors duration-400 group-hover:text-white ${
                 isLight ? 'text-[#8A5800]' : 'text-[#C5A16F]'
               }`}
               dangerouslySetInnerHTML={{ __html: stripSvgColors(item.iconSvg || '') }} 

@@ -40,9 +40,9 @@ export default function Navbar({
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 15);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -72,65 +72,89 @@ export default function Navbar({
 
   return (
     <>
-      <nav 
-        className={`fixed w-full z-[100] transition-all duration-300 ${
-          scrolled 
-            ? 'bg-[#050B14]/95 backdrop-blur-xl border-b border-white/10 shadow-2xl h-14 sm:h-16' 
-            : 'bg-[#060D1A]/80 backdrop-blur-md border-b border-white/5 h-14 sm:h-16'
-        }`} 
+      {/* Top dual-layer radiant laser beam */}
+      <div className="fixed top-0 left-0 right-0 z-[102] h-[2px] bg-gradient-to-r from-transparent via-[#F3E0B5] via-[#C5A16F] via-[#A88448] to-transparent shadow-[0_0_12px_rgba(197,161,111,0.8)] pointer-events-none" />
+
+      <header
         dir={navDirection}
+        className={`
+          fixed w-full z-[100] transition-all duration-500 select-none
+          ${scrolled
+            ? isLight
+              ? 'bg-white/95 backdrop-blur-2xl border-b border-slate-200/90 shadow-[0_8px_30px_rgba(0,0,0,0.06),0_1px_2px_rgba(0,0,0,0.04)] h-[72px]'
+              : 'bg-[#030914]/92 backdrop-blur-2xl border-b border-[#C5A16F]/20 shadow-[0_8px_35px_rgba(0,0,0,0.85),0_1px_0_rgba(197,161,111,0.12)] h-[72px]'
+            : isLight
+              ? 'bg-white/80 backdrop-blur-xl border-b border-slate-200/50 h-[84px]'
+              : 'bg-[#040C1B]/75 backdrop-blur-xl border-b border-white/[0.07] h-[84px]'
+          }
+        `}
       >
-        <div className="w-full max-w-[1720px] mx-auto px-3 sm:px-6 lg:px-8 xl:px-10 h-full flex justify-between items-center">
-          <div className="flex items-center gap-4 lg:gap-6">
+        {/* Dynamic ambient background glow */}
+        {!isLight && (
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-0 start-1/4 w-96 h-20 bg-[#C5A16F]/06 blur-3xl rounded-full" />
+            <div className="absolute top-0 end-1/4 w-96 h-20 bg-blue-500/05 blur-3xl rounded-full" />
+          </div>
+        )}
+
+        <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 h-full flex justify-between items-center gap-4 relative z-10">
+          
+          {/* 1. Brand Logo & Center Desktop Links */}
+          <div className="flex items-center gap-6 lg:gap-8 min-w-0">
             <NavbarBrand siteName={siteName} activeLogo={activeLogo} />
             <NavbarDesktopLinks links={NAV_LINKS} pathname={pathname} />
           </div>
 
+          {/* 2. Desktop Actions Suite */}
           <NavbarActions onOpenProfile={() => setIsProfileOpen(true)} />
 
-          {/* Mobile Right Bar: Theme, Language, Contact Us, Login/Dashboard, and Compact Menu Toggle */}
-          <div className="lg:hidden flex items-center gap-1 sm:gap-1.5">
-            {/* 1. Theme Toggle Icon */}
-            <ThemeSwitcher className="!w-7 !h-7 sm:!w-8 sm:!h-8 !rounded-lg" />
+          {/* 3. Mobile Header Quick Access Bar */}
+          <div className="lg:hidden flex items-center gap-1.5 sm:gap-2 shrink-0">
+            {/* Theme Switcher Button */}
+            <ThemeSwitcher />
 
-            {/* 2. Language Switcher Icon */}
-            <LanguageSwitcher iconOnly={true} className="!h-7 sm:!h-8 !px-1.5 sm:!px-2 !rounded-lg" />
+            {/* Language Switcher Button */}
+            <LanguageSwitcher iconOnly={true} />
 
-            {/* 3. Contact Us Quick Icon */}
+            {/* Quick Contact Icon Button */}
             <Link
               href="/contact"
               title={t("nav.contact") || "تواصل معنا"}
               aria-label="Contact Us"
-              className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg border flex items-center justify-center transition-all cursor-pointer shrink-0 ${
-                pathname === '/contact'
-                  ? 'bg-[#C5A16F] text-[#050B14] border-[#C5A16F] shadow-[0_0_10px_rgba(197,161,111,0.4)]'
+              className={`
+                relative w-10 h-10 rounded-xl border flex items-center justify-center transition-all duration-300 cursor-pointer shrink-0 active:scale-95 group/quick-contact
+                ${pathname === '/contact'
+                  ? 'bg-[#C5A16F] text-[#040A15] border-[#C5A16F] shadow-[0_0_20px_rgba(197,161,111,0.6)]'
                   : isLight
-                    ? 'bg-white text-slate-700 border-slate-300 hover:border-[#C5A16F] hover:text-[#8A5800]'
-                    : 'bg-[#0D182E]/80 text-[#C5A16F] border-white/10 hover:border-[#C5A16F]/40'
-              }`}
+                    ? 'bg-white text-slate-700 border-slate-200 hover:border-amber-500 hover:text-amber-700 hover:bg-amber-50 shadow-sm'
+                    : 'bg-[#0A1A30]/80 text-[#C5A16F] border-[#C5A16F]/30 hover:border-[#C5A16F] hover:bg-[#C5A16F] hover:text-[#040A15] shadow-[0_2px_10px_rgba(0,0,0,0.3)] hover:shadow-[0_0_20px_rgba(197,161,111,0.5)]'
+                }
+              `}
             >
-              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+              <svg className="w-4 h-4 transition-transform duration-300 group-hover/quick-contact:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             </Link>
 
-            {/* 4. Login / User Profile Modal Trigger Icon */}
+            {/* Quick Login / Profile Modal Trigger */}
             {user ? (
               <button
                 onClick={() => setIsProfileOpen(true)}
                 type="button"
                 title={user.displayName || (language === 'ar' ? 'الملف الشخصي' : 'Profile')}
                 aria-label="Profile"
-                className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg border flex items-center justify-center overflow-hidden transition-all cursor-pointer shrink-0 ${
-                  isLight
-                    ? 'border-[#C5A16F]/50 bg-white hover:border-[#C5A16F]'
-                    : 'border-[#C5A16F]/50 bg-[#0D182E]/80 hover:border-[#C5A16F]'
-                }`}
+                className={`
+                  w-10 h-10 rounded-xl border flex items-center justify-center overflow-hidden transition-all duration-300 cursor-pointer shrink-0 active:scale-95
+                  ${isLight
+                    ? 'border-amber-300 bg-white hover:border-[#C5A16F] shadow-sm'
+                    : 'border-[#C5A16F]/40 bg-[#0A1A30]/80 hover:border-[#C5A16F] shadow-[0_2px_10px_rgba(0,0,0,0.3)] hover:shadow-[0_0_15px_rgba(197,161,111,0.4)]'
+                  }
+                `}
               >
                 {user.photoURL ? (
                   <img src={user.photoURL} alt="User" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                 ) : (
-                  <span className="text-[10px] font-black text-[#C5A16F]">
+                  <span className="text-xs font-black text-[#C5A16F]">
                     {(user.displayName || user.email || 'U').charAt(0).toUpperCase()}
                   </span>
                 )}
@@ -140,41 +164,46 @@ export default function Navbar({
                 href="/login"
                 title={t("nav.login") || "تسجيل الدخول"}
                 aria-label="Login"
-                className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg border flex items-center justify-center transition-all cursor-pointer shrink-0 ${
-                  pathname === '/login'
-                    ? 'bg-[#C5A16F] text-[#050B14] border-[#C5A16F] shadow-[0_0_10px_rgba(197,161,111,0.4)]'
+                className={`
+                  relative w-10 h-10 rounded-xl border flex items-center justify-center transition-all duration-300 cursor-pointer shrink-0 active:scale-95 group/quick-login
+                  ${pathname === '/login'
+                    ? 'bg-[#C5A16F] text-[#040A15] border-[#C5A16F] shadow-[0_0_20px_rgba(197,161,111,0.6)]'
                     : isLight
-                      ? 'bg-white text-slate-700 border-slate-300 hover:border-[#C5A16F] hover:text-[#8A5800]'
-                      : 'bg-[#0D182E]/80 text-[#C5A16F] border-white/10 hover:border-[#C5A16F]/40'
-                }`}
+                      ? 'bg-white text-slate-700 border-slate-200 hover:border-amber-500 hover:text-amber-700 hover:bg-amber-50 shadow-sm'
+                      : 'bg-[#0A1A30]/80 text-[#C5A16F] border-[#C5A16F]/30 hover:border-[#C5A16F] hover:bg-[#C5A16F] hover:text-[#040A15] shadow-[0_2px_10px_rgba(0,0,0,0.3)] hover:shadow-[0_0_20px_rgba(197,161,111,0.5)]'
+                  }
+                `}
               >
-                <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <svg className="w-4 h-4 transition-transform duration-300 group-hover/quick-login:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
               </Link>
             )}
 
-            {/* 5. Compact Hamburger Menu Toggle Button */}
-            <motion.button 
+            {/* Hamburger Animated Morphing Toggle */}
+            <motion.button
               whileTap={{ scale: 0.92 }}
-              onClick={() => setIsOpen(!isOpen)} 
+              onClick={() => setIsOpen(!isOpen)}
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
-              className={`w-7.5 h-7.5 sm:w-8.5 sm:h-8.5 rounded-lg flex flex-col items-center justify-center gap-1 sm:gap-1.5 transition-all duration-300 border cursor-pointer shrink-0 ${
-                isOpen 
-                  ? 'bg-[#C5A16F] text-[#050B14] border-[#C5A16F] shadow-[0_0_12px_rgba(197,161,111,0.3)]' 
+              className={`
+                w-10 h-10 rounded-xl flex flex-col items-center justify-center gap-[5.5px] transition-all duration-300 border cursor-pointer shrink-0
+                ${isOpen
+                  ? 'bg-gradient-to-br from-[#F3E0B5] via-[#D4AF37] to-[#C5A16F] border-[#F3E0B5] text-[#040A15] shadow-[0_0_25px_rgba(197,161,111,0.6)]'
                   : isLight
-                    ? 'bg-white text-slate-800 border-slate-300 hover:border-[#C5A16F]'
-                    : 'bg-[#0D182E]/80 text-[#C5A16F] border-white/10 hover:border-[#C5A16F]/30'
-              }`}
+                    ? 'bg-white border-slate-200 text-slate-800 hover:border-amber-500 hover:bg-amber-50 shadow-sm'
+                    : 'bg-[#0A1A30]/80 border-[#C5A16F]/30 text-[#C5A16F] hover:border-[#C5A16F] hover:bg-[#C5A16F] hover:text-[#040A15] shadow-[0_2px_10px_rgba(0,0,0,0.3)] hover:shadow-[0_0_20px_rgba(197,161,111,0.5)]'
+                }
+              `}
             >
-              <span className={`w-3.5 sm:w-4 h-[1.5px] bg-current transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-[3.5px] sm:translate-y-[4.5px]' : ''}`} />
-              <span className={`w-3.5 sm:w-4 h-[1.5px] bg-current transition-all duration-300 ${isOpen ? 'opacity-0 scale-0' : ''}`} />
-              <span className={`w-3.5 sm:w-4 h-[1.5px] bg-current transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-[3.5px] sm:-translate-y-[4.5px]' : ''}`} />
+              <span className={`h-[2.2px] rounded-full transition-all duration-300 ${isOpen ? 'w-4.5 bg-[#040A15] rotate-45 translate-y-[3.5px]' : `w-4.5 ${isLight ? 'bg-slate-800' : 'bg-current'}`}`} />
+              <span className={`h-[2.2px] rounded-full transition-all duration-300 ${isOpen ? 'w-0 opacity-0' : `w-3 ${isLight ? 'bg-slate-800' : 'bg-current'}`}`} />
+              <span className={`h-[2.2px] rounded-full transition-all duration-300 ${isOpen ? 'w-4.5 bg-[#040A15] -rotate-45 -translate-y-[4px]' : `w-4.5 ${isLight ? 'bg-slate-800' : 'bg-current'}`}`} />
             </motion.button>
           </div>
         </div>
-      </nav>
+      </header>
 
+      {/* Mobile Side Drawer Menu */}
       <NavbarMobileDrawer
         isOpen={isOpen}
         setIsOpen={setIsOpen}
@@ -184,6 +213,7 @@ export default function Navbar({
         pathname={pathname}
       />
 
+      {/* User Profile Modal */}
       <UserProfileModal
         isOpen={isProfileOpen}
         onClose={() => setIsProfileOpen(false)}

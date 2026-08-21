@@ -96,9 +96,13 @@ export default function PortfolioServices({ data }: { data?: SectionData }) {
                   {/* Top golden beam */}
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C5A16F] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                  <div className="w-10 h-10 bg-[#C5A16F]/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-[#C5A16F] transition-colors duration-200">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-all duration-300 shadow-md ${
+                    isLight
+                      ? 'bg-amber-50 border border-amber-200/80 text-[#8A5800] group-hover:bg-[#8A5800] group-hover:text-white group-hover:border-[#8A5800] group-hover:shadow-[0_4px_16px_rgba(138,88,0,0.25)]'
+                      : 'bg-white/5 border border-[#C5A16F]/25 text-[#C5A16F] group-hover:bg-gradient-to-br group-hover:from-[#C5A16F] group-hover:to-[#9E7D47] group-hover:text-[#050B14] group-hover:border-[#C5A16F] group-hover:shadow-[0_4px_20px_rgba(197,161,111,0.35)]'
+                  }`}>
                     <div 
-                      className={`w-5 h-5 transition-colors duration-200 ${isLight ? 'text-[#8A5800] group-hover:text-[#0A192F]' : 'text-[#C5A16F] group-hover:text-[#0A192F]'}`}
+                      className="w-6 h-6 flex items-center justify-center [&_svg]:w-6 [&_svg]:h-6 [&_svg]:max-w-full [&_svg]:max-h-full transition-colors duration-200"
                       dangerouslySetInnerHTML={{ __html: item.iconSvg || item.icon }} 
                     />
                   </div>

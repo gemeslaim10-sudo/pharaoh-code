@@ -19,7 +19,7 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ className = '' }) 
     return (
       <button
         aria-label="Toggle theme"
-        className={`w-10 h-10 rounded-xl border border-[#C5A16F]/20 bg-[#0F2338] text-gray-400 flex items-center justify-center opacity-50 ${className}`}
+        className={`w-10 h-10 rounded-xl border border-white/10 bg-white/5 opacity-50 flex items-center justify-center ${className}`}
       >
         <span className="w-5 h-5" />
       </button>
@@ -30,19 +30,26 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ className = '' }) 
 
   return (
     <button
+      type="button"
       onClick={toggleTheme}
       title={isDark ? 'التحويل إلى الوضع الفاتح (Light Mode)' : 'التحويل إلى الوضع الداكن (Dark Mode)'}
       aria-label="Toggle Theme"
-      className={`w-10 h-10 rounded-xl border transition-all shadow-md flex items-center justify-center group ${
-        isDark
-          ? 'border-[#C5A16F]/30 bg-[#0F2338] text-[#C5A16F] hover:border-[#C5A16F] hover:bg-[#C5A16F] hover:text-[#0A192F]'
-          : 'border-slate-300 bg-white text-amber-600 hover:bg-amber-500 hover:text-white hover:border-amber-500 shadow-slate-200'
-      } ${className}`}
+      className={`
+        relative w-10 h-10 rounded-xl border flex items-center justify-center cursor-pointer select-none
+        transition-all duration-300 active:scale-95 group/theme
+        ${isDark
+          ? 'bg-[#0A1A30]/80 border-[#C5A16F]/30 text-[#C5A16F] shadow-[0_2px_10px_rgba(0,0,0,0.3)] hover:bg-[#C5A16F] hover:border-[#F3E0B5] hover:text-[#040A15] hover:shadow-[0_0_20px_rgba(197,161,111,0.55)] hover:-translate-y-0.5'
+          : 'bg-white border-slate-200 text-amber-600 shadow-sm hover:bg-gradient-to-br hover:from-amber-500 hover:to-amber-600 hover:border-amber-600 hover:text-white hover:shadow-[0_4px_16px_rgba(217,119,6,0.35)] hover:-translate-y-0.5'
+        } ${className}
+      `}
     >
+      {/* Subtle pulse ring on hover */}
+      <span className="absolute inset-0 rounded-xl ring-1 ring-transparent group-hover/theme:ring-white/20 transition-all duration-300" />
+
       {isDark ? (
-        /* Sun Icon for switching to Light Mode */
+        /* Sun Icon (Switch to Light) */
         <svg
-          className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:rotate-90 duration-500"
+          className="w-4 h-4 transition-transform duration-500 group-hover/theme:rotate-90 group-hover/theme:scale-110 shrink-0"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -50,14 +57,14 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ className = '' }) 
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth={2}
+            strokeWidth={2.2}
             d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
           />
         </svg>
       ) : (
-        /* Moon Icon for switching to Dark Mode */
+        /* Moon Icon (Switch to Dark) */
         <svg
-          className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:-rotate-45 duration-500"
+          className="w-4 h-4 transition-transform duration-500 group-hover/theme:-rotate-45 group-hover/theme:scale-110 shrink-0"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -65,7 +72,7 @@ export const ThemeSwitcher: React.FC<ThemeSwitcherProps> = ({ className = '' }) 
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth={2}
+            strokeWidth={2.2}
             d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
           />
         </svg>

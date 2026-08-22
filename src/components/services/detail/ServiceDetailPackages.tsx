@@ -94,6 +94,9 @@ export default function ServiceDetailPackages({ service }: Props) {
     },
   };
 
+  const serviceTitle = getDynamicText(service, 'title', language) || (service as any)?.name || '';
+  const whatsappNumber = (service as any)?.whatsappNumber || '+201000000000';
+
   return (
     <section id="packages" className="py-20 relative bg-[#0A192F]" dir={direction}>
       <div className="max-w-7xl mx-auto px-6">
@@ -119,6 +122,8 @@ export default function ServiceDetailPackages({ service }: Props) {
             <ServiceDetailPackageCard
               key={idx}
               pkg={pkg}
+              serviceTitle={serviceTitle}
+              whatsappNumber={whatsappNumber}
               language={language}
               itemVariants={itemVariants}
             />

@@ -19,6 +19,10 @@ export interface IdentityFormData {
   logo_dark?: string;
   logo_light?: string;
   logo_en?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+  address_en?: string;
   reverse_navbar_ar?: boolean;
   show_scroll_progress?: boolean;
   show_side_scrollbar?: boolean;

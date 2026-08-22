@@ -21,6 +21,28 @@ export function IdentityMetaFields({ formData, handleChange }: IdentityMetaField
       </div>
 
       <div>
+        <label className="block text-xs font-bold text-gray-400 mb-2">البريد الإلكتروني الرسمي للتواصل (Email)</label>
+        <input type="email" id="site-email" value={formData.email || ''} onChange={handleChange}
+          className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-pharaohGold transition" placeholder="info@pharaohcode.com" dir="ltr" />
+      </div>
+      <div>
+        <label className="block text-xs font-bold text-gray-400 mb-2">رقم الهاتف / الواتساب الرئيسي (Phone)</label>
+        <input type="text" id="site-phone" value={formData.phone || ''} onChange={handleChange}
+          className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-pharaohGold transition" placeholder="+201000000000" dir="ltr" />
+      </div>
+
+      <div>
+        <label className="block text-xs font-bold text-gray-400 mb-2">عنوان ومقر الشركة (بالعربية)</label>
+        <input type="text" id="site-address" value={formData.address || ''} onChange={handleChange}
+          className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-pharaohGold transition" placeholder="القاهرة، جمهورية مصر العربية" />
+      </div>
+      <div>
+        <label className="block text-xs font-bold text-gray-400 mb-2">عنوان ومقر الشركة (EN - Address)</label>
+        <input type="text" id="site-address_en" value={formData.address_en || ''} onChange={handleChange}
+          className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-pharaohGold transition" placeholder="Cairo, Egypt" dir="ltr" />
+      </div>
+
+      <div>
         <label className="block text-xs font-bold text-gray-400 mb-2">عنوان الموقع الوصفي (SEO Title - بالعربية)</label>
         <input type="text" id="site-title" required value={formData.title} onChange={handleChange}
           className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-pharaohGold transition" placeholder="مثال: فرعون للبرمجيات - أنظمة برمجية أسطورية" />

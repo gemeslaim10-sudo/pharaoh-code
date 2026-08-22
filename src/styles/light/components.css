@@ -80,9 +80,9 @@ html[data-theme="light"] .mobile-nav-drawer button[class*="bg-white"] {
 }
 
 /* 6. WhatsApp Button */
-html[data-theme="light"] a[href*="wa.me"],
-html[data-theme="light"] a[href*="whatsapp"],
-html[data-theme="light"] a.bg-\[\#25D366\] {
+html[data-theme="light"] .btn-whatsapp-floating,
+html[data-theme="light"] .whatsapp-pill-btn,
+html[data-theme="light"] a.whatsapp-cta-btn {
   background-color: #25D366 !important;
   color: #FFFFFF !important;
 }

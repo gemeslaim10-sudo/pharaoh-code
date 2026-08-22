@@ -77,12 +77,27 @@ export default function HomePortfolio({ data }: { data?: SectionData }) {
     };
   }, [language, filteredItems.length]);
 
-  const filterOptions = [
-    { label: t("portfolio.filterAll") || 'الكل', filter: 'all' },
-    { label: t("portfolio.filterWeb") || 'تطبيقات الويب', filter: 'web' },
-    { label: t("portfolio.filterApp") || 'تطبيقات الموبايل', filter: 'app' },
-    { label: t("portfolio.filterMotion") || 'موشن جرافيكس', filter: 'motion' },
-  ];
+  const filterOptions = useMemo(() => {
+    const options = [
+      { label: t("portfolio.filterAll") || (language === 'ar' ? 'الكل' : 'All'), filter: 'all' },
+    ];
+    const dbCats = (data as any)?.categories as Array<{ id: string; nameAr: string; nameEn: string; slug: string }> | undefined;
+    if (dbCats && dbCats.length > 0) {
+      dbCats.forEach(c => {
+        options.push({
+          label: language === 'ar' ? (c.nameAr || c.nameEn) : (c.nameEn || c.nameAr),
+          filter: (c.slug || c.id).toLowerCase(),
+        });
+      });
+      return options;
+    }
+    return [
+      { label: t("portfolio.filterAll") || (language === 'ar' ? 'الكل' : 'All'), filter: 'all' },
+      { label: t("portfolio.filterWeb") || 'تطبيقات الويب', filter: 'web' },
+      { label: t("portfolio.filterApp") || 'تطبيقات الموبايل', filter: 'app' },
+      { label: t("portfolio.filterMotion") || 'موشن جرافيكس', filter: 'motion' },
+    ];
+  }, [data, language, t]);
 
   return (
     <section id="portfolio" className="relative py-12 sm:py-20 bg-[#0A192F] overflow-hidden" dir={direction}>

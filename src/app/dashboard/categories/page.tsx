@@ -1,9 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import { CategoryEditModal } from '@/components/dashboard/categories/CategoryEditModal';
 import { CategoryAddForm } from '@/components/dashboard/categories/CategoryAddForm';
 import { CategoryListGrid } from '@/components/dashboard/categories/CategoryListGrid';
 import { useDashboardCategories } from '@/components/dashboard/categories/useDashboardCategories';
+import { DashboardAccordionGroup } from '@/components/dashboard/layout/DashboardAccordionGroup';
 
 export default function DashboardCategoriesPage() {
   const {
@@ -21,38 +23,76 @@ export default function DashboardCategoriesPage() {
     setSlug,
     handleAdd,
     handleUpdate,
-    handleDelete
+    handleDelete,
   } = useDashboardCategories();
 
+  const [openAdd, setOpenAdd] = useState(true);
+  const [openList, setOpenList] = useState(true);
+
   return (
-    <div className="space-y-8 max-w-6xl mx-auto pb-12">
+    <div className="space-y-6 max-w-6xl mx-auto pb-12 text-right" dir="rtl">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-pharaohGold/10 pb-6">
         <div>
-          <h1 className="text-3xl font-black text-white">إدارة تصنيفات العمل الرقمي</h1>
-          <p className="text-gray-400 text-sm mt-1">إضافة، تعديل، وحذف تصنيفات المشاريع والأعمال الرقمية المتاحة للاختيار المتعدد</p>
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl sm:text-3xl font-black text-white">إدارة تصنيفات العمل الرقمي</h1>
+            <span className="px-3 py-1 rounded-full text-xs font-bold bg-pharaohGold/15 text-pharaohGold border border-pharaohGold/30">
+              {categories.length} تصنيف
+            </span>
+          </div>
+          <p className="text-gray-400 text-sm mt-1">إضافة، تعديل، وحذف تصنيفات المشاريع والأعمال الرقمية التي تنعكس تلقائياً في كافة صفحات الموقع</p>
         </div>
       </div>
 
       {message && (
-        <div className={`p-4 rounded-xl text-sm font-bold flex items-center gap-3 ${message.type === 'success' ? 'bg-green-500/10 border border-green-500/30 text-green-400' : 'bg-red-500/10 border border-red-500/30 text-red-400'}`}>
+        <div className={`p-4 rounded-xl text-sm font-bold flex items-center gap-3 ${
+          message.type === 'success' ? 'bg-green-500/10 border border-green-500/30 text-green-400' : 'bg-red-500/10 border border-red-500/30 text-red-400'
+        }`}>
           <span>{message.type === 'success' ? '✓' : '⚠️'}</span>
           {message.text}
         </div>
       )}
 
-      <CategoryAddForm
-        nameAr={nameAr} setNameAr={setNameAr}
-        nameEn={nameEn} setNameEn={setNameEn}
-        slug={slug} setSlug={setSlug}
-        submitting={submitting}
-        onAdd={handleAdd}
+      {/* Group 1: Add Category */}
+      <DashboardAccordionGroup
+        group={{
+          id: 'category-add',
+          title: 'إضافة تصنيف عمل جديد (Add New Category)',
+          description: 'إنشاء تصنيف جديد بالعربية والإنجليزية مع الـ Slug الخاص به',
+          icon: <span className="text-base">➕</span>,
+          badge: 'جديد',
+          children: (
+            <CategoryAddForm
+              nameAr={nameAr} setNameAr={setNameAr}
+              nameEn={nameEn} setNameEn={setNameEn}
+              slug={slug} setSlug={setSlug}
+              submitting={submitting}
+              onAdd={handleAdd}
+            />
+          ),
+        }}
+        isOpen={openAdd}
+        onToggle={() => setOpenAdd(!openAdd)}
       />
 
-      <CategoryListGrid
-        categories={categories}
-        loading={loading}
-        onEdit={setEditingCategory}
-        onDelete={handleDelete}
+      {/* Group 2: Categories List */}
+      <DashboardAccordionGroup
+        group={{
+          id: 'category-list',
+          title: 'قائمة التصنيفات النشطة في المنصة',
+          description: 'استعراض كافة التصنيفات الحالية مع إمكانية التعديل السريع أو الحذف',
+          icon: <span className="text-base">📁</span>,
+          badge: `${categories.length} متاح`,
+          children: (
+            <CategoryListGrid
+              categories={categories}
+              loading={loading}
+              onEdit={setEditingCategory}
+              onDelete={handleDelete}
+            />
+          ),
+        }}
+        isOpen={openList}
+        onToggle={() => setOpenList(!openList)}
       />
 
       {editingCategory && (

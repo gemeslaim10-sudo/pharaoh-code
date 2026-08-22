@@ -3,14 +3,15 @@
    ========================================================================== */
 
 /* 1. High-Contrast Icons & SVG Elements in Light Mode */
-html[data-theme="light"] svg:not(.heroSwiper *):not([class*="btn-"]):not(.btn-pharaoh-gold *):not(.footer-social-btn *):not([data-social-icon] *) {
+html[data-theme="light"] svg:not(.heroSwiper *):not([class*="btn-"]):not(.btn-pharaoh-gold *):not(.footer-social-btn *):not([data-social-icon] *):not([fill="currentColor"]):not([class*="whatsapp"]):not([class*="text-[#25D366]"]) {
   stroke: currentColor;
 }
 
 html[data-theme="light"] .footer-social-btn svg,
-html[data-theme="light"] [data-social-icon] svg {
+html[data-theme="light"] [data-social-icon] svg,
+html[data-theme="light"] [class*="whatsapp"] svg,
+html[data-theme="light"] svg[fill="currentColor"] {
   stroke: none !important;
-  fill: currentColor !important;
 }
 
 /* Footer Social Buttons Light Mode */

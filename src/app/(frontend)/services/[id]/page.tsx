@@ -23,34 +23,36 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
   try {
     const db = admin.firestore();
-    const doc = await db.collection('services').doc(id).get();
+    const [doc, socialDoc, identityDoc] = await Promise.all([
+      db.collection('services').doc(id).get(),
+      db.collection('settings').doc('social').get().catch(() => ({ data: () => ({}) } as any)),
+      db.collection('settings').doc('identity').get().catch(() => ({ data: () => ({}) } as any)),
+    ]);
+
+    const socialData = socialDoc?.data?.() || {};
+    const identityData = identityDoc?.data?.() || {};
+    const whatsappNumber = socialData.wa || identityData.whatsapp || identityData.phone || '+201000000000';
+
     if (doc.exists) {
-      service = serializeData({ id: doc.id, ...doc.data() });
+      service = serializeData({ id: doc.id, ...doc.data(), whatsappNumber });
+    } else {
+      const snap = await db.collection('services').where('slug', '==', id).limit(1).get();
+      if (!snap.empty && snap.docs[0]) {
+        service = serializeData({ id: snap.docs[0].id, ...snap.docs[0].data(), whatsappNumber });
+      }
     }
   } catch (error) {
     console.error("Error fetching service detail page:", error);
   }
 
   if (!service) {
-    // Attempt fallback query by slug/title if direct doc ID was not matched
-    try {
-      const db = admin.firestore();
-      const snap = await db.collection('services').where('slug', '==', id).limit(1).get();
-      if (!snap.empty && snap.docs[0]) {
-        const doc = snap.docs[0];
-        service = serializeData({ id: doc.id, ...doc.data() });
-      }
-    } catch (e) {}
-  }
-
-  if (!service) {
-    // Provide default fallback service structure if database doc is not found
     service = {
       id: id,
       title_ar: 'تفاصيل الخدمة البرمجية',
       title_en: 'Software Service Details',
       desc_ar: 'خدمات برمجية سيادية مخصصة لتلبية أرقى معايير التكنولوجيا.',
-      desc_en: 'Sovereign custom software services tailored to top technology standards.'
+      desc_en: 'Sovereign custom software services tailored to top technology standards.',
+      whatsappNumber: '+201000000000',
     };
   }
 

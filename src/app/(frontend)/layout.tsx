@@ -25,8 +25,8 @@ export default async function FrontendLayout({
   const logoLightUrl = identity?.logo_light || "";
   const reverseNavbarAr = identity?.reverse_navbar_ar !== undefined ? identity.reverse_navbar_ar : true;
   const showScrollProgress = identity?.show_scroll_progress === true;
-  const showSideScrollbar = identity?.show_side_scrollbar === true;
-  const whatsappNumber = (identity as any)?.phone || (identity as any)?.whatsapp || "+201000000000";
+  const showSideScrollbar = identity?.show_side_scrollbar !== false;
+  const whatsappNumber = socialLinks?.wa || (identity as any)?.whatsapp || (identity as any)?.phone || "+201000000000";
 
   if (systemStatus?.mode === 'on') {
     return (

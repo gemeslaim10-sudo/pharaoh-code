@@ -6,6 +6,8 @@ export interface FeatureItem {
 }
 
 export interface PackageItem {
+  level_ar?: string;
+  level_en?: string;
   badge_ar?: string;
   badge_en?: string;
   title_ar?: string;
@@ -15,6 +17,10 @@ export interface PackageItem {
   period_en?: string;
   desc_ar?: string;
   desc_en?: string;
+  features_heading_ar?: string;
+  features_heading_en?: string;
+  features_list_ar?: string[];
+  features_list_en?: string[];
   isPopular?: boolean;
 }
 
@@ -50,9 +56,30 @@ export const DEFAULT_FEATURES: FeatureItem[] = [
 ];
 
 export const DEFAULT_PACKAGES: PackageItem[] = [
-  { badge_ar: '', badge_en: '', title_ar: '', title_en: '', price: '', period_ar: '', period_en: '', desc_ar: '', desc_en: '', isPopular: false },
-  { badge_ar: '', badge_en: '', title_ar: '', title_en: '', price: '', period_ar: '', period_en: '', desc_ar: '', desc_en: '', isPopular: true },
-  { badge_ar: '', badge_en: '', title_ar: '', title_en: '', price: '', period_ar: '', period_en: '', desc_ar: '', desc_en: '', isPopular: false },
+  {
+    level_ar: 'المستوى الأول', level_en: 'Level 1 - Starter',
+    title_ar: '', title_en: '', price: '', period_ar: '', period_en: '',
+    desc_ar: '', desc_en: '',
+    features_heading_ar: 'المميزات المضمنة:', features_heading_en: 'Included Features:',
+    features_list_ar: [''], features_list_en: [''],
+    isPopular: false
+  },
+  {
+    level_ar: 'المستوى الثاني', level_en: 'Level 2 - Professional',
+    title_ar: '', title_en: '', price: '', period_ar: '', period_en: '',
+    desc_ar: '', desc_en: '',
+    features_heading_ar: 'المميزات المضمنة:', features_heading_en: 'Included Features:',
+    features_list_ar: [''], features_list_en: [''],
+    isPopular: true
+  },
+  {
+    level_ar: 'المستوى الثالث', level_en: 'Level 3 - Enterprise',
+    title_ar: '', title_en: '', price: '', period_ar: '', period_en: '',
+    desc_ar: '', desc_en: '',
+    features_heading_ar: 'المميزات المضمنة:', features_heading_en: 'Included Features:',
+    features_list_ar: [''], features_list_en: [''],
+    isPopular: false
+  },
 ];
 
 export const DEFAULT_ROADMAP_STEPS: RoadmapStepItem[] = [

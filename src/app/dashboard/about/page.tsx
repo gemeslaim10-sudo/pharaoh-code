@@ -5,11 +5,27 @@ import { AboutTabHero } from '@/components/dashboard/about/AboutTabHero';
 import { AboutTabVisionMission } from '@/components/dashboard/about/AboutTabVisionMission';
 import { AboutTabPhilosophy } from '@/components/dashboard/about/AboutTabPhilosophy';
 import { AboutTabFaq } from '@/components/dashboard/about/AboutTabFaq';
+import { DashboardSectionNavbar } from '@/components/dashboard/layout/DashboardSectionNavbar';
+import { DashboardSectionConfig } from '@/types/dashboardLayout';
 
 export default function DashboardAboutPage() {
   const {
-    loading, saving, activeTab, setActiveTab, message, form, setForm, handleSave
+    loading,
+    saving,
+    activeTab,
+    setActiveTab,
+    message,
+    form,
+    setForm,
+    handleSave,
   } = useAboutDashboardForm();
+
+  const sections: DashboardSectionConfig[] = [
+    { id: 'hero', label: 'القسم الرئيسي (Hero)', icon: <span>🏛️</span> },
+    { id: 'vision', label: 'الرؤية والرسالة (Vision & Mission)', icon: <span>🎯</span> },
+    { id: 'philosophy', label: 'فلسفة التشييد (Philosophy)', icon: <span>💎</span> },
+    { id: 'faq', label: 'الأسئلة الشائعة (FAQ)', icon: <span>❓</span> },
+  ];
 
   if (loading) {
     return (
@@ -23,16 +39,17 @@ export default function DashboardAboutPage() {
   }
 
   return (
-    <div className="space-y-8 max-w-6xl mx-auto pb-12">
+    <div className="space-y-6 max-w-6xl mx-auto pb-12 text-right" dir="rtl">
+      {/* Header & Save Action */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-pharaohGold/10 pb-6">
         <div>
-          <h1 className="text-3xl font-black text-white">إدارة محتوى صفحة (من نحن)</h1>
+          <h1 className="text-2xl sm:text-3xl font-black text-white">إدارة محتوى صفحة (من نحن)</h1>
           <p className="text-gray-400 text-sm mt-1">تعديل النصوص العربية والإنجليزية لصفحة About Us مع الحفاظ على القيم الافتراضية</p>
         </div>
         <button
           onClick={handleSave}
           disabled={saving}
-          className="bg-pharaohGold text-[#0A192F] px-8 py-3 rounded-xl font-bold hover:bg-white transition-all shadow-lg flex items-center justify-center gap-2 disabled:opacity-50"
+          className="bg-pharaohGold text-[#0A192F] px-8 py-3 rounded-xl font-bold hover:bg-white transition-all shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
         >
           {saving ? (
             <>
@@ -44,33 +61,23 @@ export default function DashboardAboutPage() {
       </div>
 
       {message && (
-        <div className={`p-4 rounded-xl text-sm font-bold flex items-center gap-3 ${message.type === 'success' ? 'bg-green-500/10 border border-green-500/30 text-green-400' : 'bg-red-500/10 border border-red-500/30 text-red-400'}`}>
+        <div className={`p-4 rounded-xl text-sm font-bold flex items-center gap-3 ${
+          message.type === 'success' ? 'bg-green-500/10 border border-green-500/30 text-green-400' : 'bg-red-500/10 border border-red-500/30 text-red-400'
+        }`}>
           <span>{message.type === 'success' ? '✓' : '⚠️'}</span>
           {message.text}
         </div>
       )}
 
-      {/* Tabs Header */}
-      <div className="flex border-b border-white/10 gap-2 overflow-x-auto custom-scrollbar pb-1">
-        {[
-          { id: 'hero', label: 'القسم الرئيسي (Hero)' },
-          { id: 'vision', label: 'الرؤية والرسالة (Vision & Mission)' },
-          { id: 'philosophy', label: 'فلسفة التشييد (Philosophy)' },
-          { id: 'faq', label: 'الأسئلة الشائعة (FAQ)' },
-        ].map(tab => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id as typeof activeTab)}
-            className={`px-6 py-3 rounded-xl font-bold text-sm transition-all whitespace-nowrap ${
-              activeTab === tab.id ? 'bg-pharaohGold text-pharaohNavy shadow-md' : 'text-gray-400 hover:text-white bg-white/5'
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
+      {/* Top Section Navbar */}
+      <DashboardSectionNavbar
+        sections={sections}
+        activeSectionId={activeTab}
+        onSelectSection={(id) => setActiveTab(id as typeof activeTab)}
+      />
 
-      <form onSubmit={handleSave} className="space-y-8">
+      {/* Single Section Content Display */}
+      <form onSubmit={handleSave} className="space-y-6">
         {activeTab === 'hero' && <AboutTabHero form={form} setForm={setForm} />}
         {activeTab === 'vision' && <AboutTabVisionMission form={form} setForm={setForm} />}
         {activeTab === 'philosophy' && <AboutTabPhilosophy form={form} setForm={setForm} />}
@@ -80,7 +87,7 @@ export default function DashboardAboutPage() {
           <button
             type="submit"
             disabled={saving}
-            className="bg-pharaohGold text-[#0A192F] px-10 py-4 rounded-xl font-black text-sm hover:bg-white transition-all shadow-xl disabled:opacity-50"
+            className="bg-pharaohGold text-[#0A192F] px-10 py-4 rounded-xl font-black text-sm hover:bg-white transition-all shadow-xl disabled:opacity-50 cursor-pointer"
           >
             {saving ? 'جاري الحفظ والرفع...' : 'حفظ التغيرات ونشر التحديثات'}
           </button>

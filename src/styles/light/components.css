@@ -1,0 +1,97 @@
+/* ==========================================================================
+   SOVEREIGN HIGH-CONTRAST LIGHT MODE - UI COMPONENTS & OVERLAYS
+   ========================================================================== */
+
+/* 4. FAQ Accordions in Light Mode */
+html[data-theme="light"] details {
+  background-color: #FFFFFF !important;
+  background-image: none !important;
+  border-color: #94A3B8 !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06) !important;
+}
+
+html[data-theme="light"] details[open] {
+  border-color: #8A5800 !important;
+  box-shadow: 0 6px 20px rgba(138, 88, 0, 0.12) !important;
+}
+
+html[data-theme="light"] details summary h3 {
+  color: #0A192F !important;
+  font-weight: 700 !important;
+}
+
+html[data-theme="light"] details[open] summary h3 {
+  color: #8A5800 !important;
+}
+
+html[data-theme="light"] details p {
+  color: #1E293B !important;
+}
+
+html[data-theme="light"] details .border-t {
+  border-color: #CBD5E1 !important;
+}
+
+/* 5. Mobile Navigation Drawer in Light Mode */
+html[data-theme="light"] .mobile-nav-drawer {
+  background: #FFFFFF !important;
+  background-image: none !important;
+  border-color: #94A3B8 !important;
+  box-shadow: -20px 0 60px rgba(15, 23, 42, 0.15) !important;
+}
+
+html[data-theme="light"] .mobile-nav-drawer [class*="border-white"],
+html[data-theme="light"] .mobile-nav-drawer [class*="border-slate-"] {
+  border-color: #CBD5E1 !important;
+}
+
+html[data-theme="light"] .mobile-nav-drawer span.text-white,
+html[data-theme="light"] .mobile-nav-drawer .text-white {
+  color: #0A192F !important;
+}
+
+html[data-theme="light"] .mobile-nav-drawer a {
+  color: #0F172A !important;
+}
+
+html[data-theme="light"] .mobile-nav-drawer a:hover {
+  background-color: rgba(15, 23, 42, 0.05) !important;
+  color: #8A5800 !important;
+}
+
+html[data-theme="light"] .mobile-nav-drawer a[class*="bg-[#C5A16F]"] {
+  background-color: #8A5800 !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="light"] .mobile-nav-drawer a[class*="bg-[#C5A16F]"] span {
+  color: #FFFFFF !important;
+}
+
+html[data-theme="light"] .mobile-nav-drawer a div[class*="bg-white"] {
+  background-color: rgba(15, 23, 42, 0.06) !important;
+  color: #8A5800 !important;
+}
+
+html[data-theme="light"] .mobile-nav-drawer button[class*="bg-white"] {
+  background-color: rgba(15, 23, 42, 0.06) !important;
+  border-color: #94A3B8 !important;
+  color: #1E293B !important;
+}
+
+/* 6. WhatsApp Button */
+html[data-theme="light"] a[href*="wa.me"],
+html[data-theme="light"] a[href*="whatsapp"],
+html[data-theme="light"] a.bg-\[\#25D366\] {
+  background-color: #25D366 !important;
+  color: #FFFFFF !important;
+}
+
+/* 7. Modal Windows & Popups in Light Mode */
+html[data-theme="light"] [role="dialog"],
+html[data-theme="light"] .modal-content,
+html[data-theme="light"] #team-modal > div {
+  background-color: #FFFFFF !important;
+  border-color: #94A3B8 !important;
+  color: #0F172A !important;
+}

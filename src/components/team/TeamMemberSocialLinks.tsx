@@ -4,9 +4,9 @@ import { motion } from 'framer-motion';
 
 interface TeamMemberSocialLinksProps {
   social?: {
-    facebook?: string;
-    instagram?: string;
-  };
+    facebook?: string | undefined;
+    instagram?: string | undefined;
+  } | undefined;
   isLight: boolean;
   contactTitle?: string;
 }

@@ -1,0 +1,89 @@
+/* ==========================================================================
+   SOVEREIGN HIGH-CONTRAST LIGHT MODE SYSTEM - CARDS & INPUTS
+   ========================================================================== */
+
+/* 4. High-Contrast Cards & Containers */
+html[data-theme="light"] .bg-pharaohCard,
+html[data-theme="light"] .team-card,
+html[data-theme="light"] [class*="from-[#0F1E38]"],
+html[data-theme="light"] [class*="from-[#0F1F3D]"],
+html[data-theme="light"] [class*="from-[#10203C]"],
+html[data-theme="light"] [class*="from-[#122345]"],
+html[data-theme="light"] [class*="bg-[#112240]"],
+html[data-theme="light"] [class*="bg-[#10203C]"],
+html[data-theme="light"] [class*="bg-[#122345]"],
+html[data-theme="light"] [class*="bg-[#0E1E38]"],
+html[data-theme="light"] [class*="bg-[#0B1528]"],
+html[data-theme="light"] [class*="bg-[#081222]"],
+html[data-theme="light"] [class*="bg-[#0D182E]"],
+html[data-theme="light"] [class*="bg-[#0D1E36]"],
+html[data-theme="light"] [class*="bg-[#0F2338]"],
+html[data-theme="light"] [class*="bg-[#152338]"],
+html[data-theme="light"] [class*="bg-[#091528]"],
+html[data-theme="light"] [class*="bg-[#091427]"],
+html[data-theme="light"] [class*="bg-[#0A162B]"] {
+  background-color: #FFFFFF !important;
+  background-image: none !important;
+  color: #0A192F !important;
+  border-color: #94A3B8 !important;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+
+/* 5. Crisp Dark Borders & Outlines */
+html[data-theme="light"] [class*="border-white"],
+html[data-theme="light"] [class*="border-gray-"],
+html[data-theme="light"] [class*="border-slate-"],
+html[data-theme="light"] [class*="border-zinc-"],
+html[data-theme="light"] [class*="border-neutral-"],
+html[data-theme="light"] [class*="border-border"] {
+  border-color: #94A3B8 !important;
+}
+
+html[data-theme="light"] [class*="border-pharaohGold"],
+html[data-theme="light"] [class*="border-[#C5A16F]"] {
+  border-color: #8A5800 !important;
+}
+
+html[data-theme="light"] [class*="hover:border-"]:hover,
+html[data-theme="light"] [class*="hover:border-[#C5A16F]"]:hover {
+  border-color: #8A5800 !important;
+}
+
+/* Internal Section & Card Dividers */
+html[data-theme="light"] [class*="border-t"],
+html[data-theme="light"] [class*="border-b"],
+html[data-theme="light"] [class*="border-y"],
+html[data-theme="light"] [class*="border-x"],
+html[data-theme="light"] [class*="divide-"] {
+  border-color: #CBD5E1 !important;
+}
+
+/* Outlines & Focus States */
+html[data-theme="light"] [class*="outline-"],
+html[data-theme="light"] [class*="ring-"] {
+  outline-color: #8A5800 !important;
+}
+
+/* 6. Form Inputs & Selects & Textareas */
+html[data-theme="light"] input,
+html[data-theme="light"] select,
+html[data-theme="light"] textarea {
+  background-color: #FFFFFF !important;
+  color: #0A192F !important;
+  border-color: #64748B !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05) !important;
+}
+
+html[data-theme="light"] input:focus,
+html[data-theme="light"] select:focus,
+html[data-theme="light"] textarea:focus {
+  border-color: #8A5800 !important;
+  box-shadow: 0 0 0 3px rgba(138, 88, 0, 0.25) !important;
+  outline: none !important;
+}
+
+html[data-theme="light"] input::placeholder,
+html[data-theme="light"] textarea::placeholder {
+  color: #64748B !important;
+  opacity: 1 !important;
+}

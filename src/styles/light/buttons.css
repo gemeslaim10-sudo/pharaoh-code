@@ -1,0 +1,95 @@
+/* ==========================================================================
+   SOVEREIGN HIGH-CONTRAST LIGHT MODE - BUTTONS & FILTERS
+   ========================================================================== */
+
+/* Universal Buttons System in Light Mode */
+html[data-theme="light"] .btn-pharaoh-gold,
+html[data-theme="light"] .btn-primary-gold {
+  background: linear-gradient(135deg, #B8860B 0%, #D4AF37 100%) !important;
+  color: #FFFFFF !important;
+  border-color: #8A5800 !important;
+  box-shadow: 0 4px 14px rgba(138, 88, 0, 0.3) !important;
+}
+
+html[data-theme="light"] .btn-pharaoh-glass {
+  background: #FFFFFF !important;
+  border-color: #8A5800 !important;
+  color: #0A192F !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08) !important;
+}
+
+html[data-theme="light"] .btn-pharaoh-glass:hover {
+  background: linear-gradient(135deg, #B8860B 0%, #D4AF37 100%) !important;
+  color: #FFFFFF !important;
+  border-color: #8A5800 !important;
+}
+
+html[data-theme="light"] .btn-pharaoh-outline {
+  background: transparent !important;
+  border-color: #8A5800 !important;
+  color: #8A5800 !important;
+  font-weight: 700 !important;
+}
+
+html[data-theme="light"] .btn-pharaoh-outline:hover {
+  background: rgba(138, 88, 0, 0.1) !important;
+  color: #8A5800 !important;
+}
+
+html[data-theme="light"] .btn-pharaoh-icon {
+  background: #FFFFFF !important;
+  border-color: #94A3B8 !important;
+  color: #8A5800 !important;
+}
+
+html[data-theme="light"] .btn-pharaoh-icon:hover {
+  background: #8A5800 !important;
+  border-color: #8A5800 !important;
+  color: #FFFFFF !important;
+}
+
+/* Filter Buttons in Light Mode */
+html[data-theme="light"] .filter-btn,
+html[data-theme="light"] .portfolio-filter-btn {
+  color: #1E293B !important;
+  background-color: #FFFFFF !important;
+  border-color: #94A3B8 !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.05) !important;
+}
+
+html[data-theme="light"] .filter-btn:hover,
+html[data-theme="light"] .portfolio-filter-btn:hover {
+  color: #0A192F !important;
+  border-color: #8A5800 !important;
+  background-color: #F1F5F9 !important;
+}
+
+html[data-theme="light"] .filter-btn.active,
+html[data-theme="light"] .portfolio-filter-btn.active,
+html[data-theme="light"] .filter-btn[data-active="true"],
+html[data-theme="light"] .portfolio-filter-btn[data-active="true"] {
+  background: linear-gradient(135deg, #C5A16F 0%, #DFB77D 100%) !important;
+  background-color: #C5A16F !important;
+  color: #070F1E !important;
+  border-color: #8A5800 !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 14px rgba(197, 161, 111, 0.4) !important;
+}
+
+html[data-theme="light"] .filter-btn.active *,
+html[data-theme="light"] .portfolio-filter-btn.active *,
+html[data-theme="light"] .filter-btn.active span,
+html[data-theme="light"] .portfolio-filter-btn.active span,
+html[data-theme="light"] .filter-btn[data-active="true"] *,
+html[data-theme="light"] .portfolio-filter-btn[data-active="true"] * {
+  color: #070F1E !important;
+}
+
+html[data-theme="light"] .filter-btn.active .count-badge,
+html[data-theme="light"] .portfolio-filter-btn.active .count-badge,
+html[data-theme="light"] .filter-btn[data-active="true"] .count-badge,
+html[data-theme="light"] .portfolio-filter-btn[data-active="true"] .count-badge {
+  background-color: rgba(7, 15, 30, 0.15) !important;
+  color: #070F1E !important;
+}

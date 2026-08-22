@@ -21,38 +21,66 @@ export default function ServicesManagementForm({ editingService, setEditingServi
   const form = useServiceForm(editingService, setEditingService, onSuccess);
 
   return (
-    <div className="max-w-6xl mx-auto bg-[#112240] p-6 md:p-10 rounded-[2.5rem] border border-white/5 hover:border-[#C5A16F]/20 shadow-2xl transition-all duration-500 mb-20">
-      <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-6">
+    <div className="max-w-6xl mx-auto bg-white dark:bg-[#112240] p-6 md:p-10 rounded-[2.5rem] border border-slate-200 dark:border-white/5 hover:border-pharaohGold/30 shadow-md dark:shadow-2xl transition-all duration-500 mb-6">
+      {/* Edit Mode Alert Banner */}
+      {editingService && (
+        <div className="mb-6 p-4 rounded-2xl bg-amber-500/10 dark:bg-pharaohGold/15 border border-amber-500/30 dark:border-pharaohGold/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-amber-500/20 dark:bg-pharaohGold/20 text-amber-900 dark:text-pharaohGold flex items-center justify-center font-black text-base shrink-0">
+              ✏️
+            </div>
+            <div>
+              <p className="text-xs text-amber-800 dark:text-pharaohGold font-bold">أنت الآن في وضع تعديل خدمة قائمة:</p>
+              <h5 className="text-sm sm:text-base font-black text-slate-900 dark:text-white">
+                {editingService.title || editingService.title_ar || 'خدمة محددة'}
+              </h5>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => setEditingService(null)}
+            className="text-xs text-red-600 dark:text-red-400 hover:text-white hover:bg-red-500 border border-red-500/30 px-3.5 py-1.5 rounded-xl bg-red-500/10 transition-all font-bold cursor-pointer shrink-0"
+          >
+            ✕ إلغاء التعديل والعودة لإضافة خدمة جديدة
+          </button>
+        </div>
+      )}
+
+      <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/5 pb-4 mb-6">
         <div className="flex items-center gap-3">
           <div className="w-2 h-6 bg-pharaohGold rounded-full" />
-          <h4 id="form-mode-title" className="text-xl font-bold text-white">
-            {editingService ? "تعديل محتوى وتفاصيل الخدمة" : "إضافة خدمة جديدة مع صفحة التفاصيل"}
+          <h4 id="form-mode-title" className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+            {editingService ? "تعديل محتوى وتفاصيل وباقات الخدمة" : "إضافة خدمة جديدة مع صفحة التفاصيل والباقات"}
           </h4>
         </div>
-        <button 
-          type="button" 
-          id="cancel-edit-btn" 
-          onClick={() => setEditingService(null)}
-          className={`${editingService ? "block" : "hidden"} text-xs text-red-400 hover:text-red-500 border border-red-500/20 px-3 py-1 rounded-lg bg-red-500/5 transition`}
-        >
-          إلغاء التعديل
-        </button>
+        {editingService && (
+          <button 
+            type="button" 
+            id="cancel-edit-btn" 
+            onClick={() => setEditingService(null)}
+            className="text-xs text-red-600 dark:text-red-400 hover:text-red-700 border border-red-500/20 px-3 py-1 rounded-lg bg-red-500/5 transition cursor-pointer"
+          >
+            إلغاء التعديل
+          </button>
+        )}
       </div>
 
       {/* Form Section Tabs */}
-      <div className="flex border-b border-white/10 gap-2 overflow-x-auto custom-scrollbar pb-3 mb-6">
+      <div className="flex border-b border-slate-200 dark:border-white/10 gap-2 overflow-x-auto custom-scrollbar pb-3 mb-6">
         {[
           { id: 'basic', label: '1. الأساسيات والهيرو (Basic & Hero)' },
           { id: 'overview', label: '2. النظرة العامة والمميزات (Overview & Features)' },
-          { id: 'packages', label: '3. باقات التسعير (Pricing Packages)' },
-          { id: 'roadmap', label: '4. خطوات ومراحل العمل (Work Roadmap)' },
+          { id: 'packages', label: '3. باقات التسعير الثلاث (Pricing Packages)' },
+          { id: 'roadmap', label: '4. مراحل وخطوات العمل (Work Roadmap)' },
         ].map(tab => (
           <button
             key={tab.id}
             type="button"
             onClick={() => setActiveTab(tab.id as typeof activeTab)}
-            className={`px-5 py-2.5 rounded-xl font-bold text-xs transition-all whitespace-nowrap ${
-              activeTab === tab.id ? 'bg-pharaohGold text-pharaohNavy shadow-md' : 'text-gray-400 hover:text-white bg-white/5'
+            className={`px-4 sm:px-5 py-2.5 rounded-xl font-bold text-xs transition-all whitespace-nowrap cursor-pointer ${
+              activeTab === tab.id
+                ? 'bg-pharaohGold text-[#0A192F] shadow-sm font-black'
+                : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/5'
             }`}
           >
             {tab.label}
@@ -82,7 +110,6 @@ export default function ServicesManagementForm({ editingService, setEditingServi
             <ServiceFormDescriptions
               desc={form.desc} setDesc={form.setDesc}
               descEn={form.descEn} setDescEn={form.setDescEn}
-              loading={form.loading} editingService={editingService}
             />
 
             <ServiceFormHeroFields
@@ -121,13 +148,32 @@ export default function ServicesManagementForm({ editingService, setEditingServi
           />
         )}
 
-        <div className="pt-6 border-t border-white/10 flex justify-end">
+        <div className="pt-6 border-t border-slate-200 dark:border-white/10 flex flex-wrap items-center justify-between gap-4">
+          {editingService ? (
+            <button
+              type="button"
+              onClick={() => setEditingService(null)}
+              className="px-6 py-3.5 rounded-xl border border-red-500/30 text-red-600 dark:text-red-400 bg-red-500/10 hover:bg-red-500 hover:text-white transition-all font-bold text-xs cursor-pointer"
+            >
+              ✕ إلغاء التعديل
+            </button>
+          ) : <div />}
+
           <button
             type="submit"
             disabled={form.loading}
-            className="bg-pharaohGold text-[#0A192F] px-10 py-4 rounded-xl font-black text-sm hover:bg-white transition-all shadow-xl disabled:opacity-50"
+            className="bg-pharaohGold text-[#0A192F] px-8 sm:px-10 py-3.5 sm:py-4 rounded-xl font-black text-xs sm:text-sm hover:bg-white transition-all shadow-xl disabled:opacity-50 cursor-pointer flex items-center gap-2"
           >
-            {form.loading ? 'جاري التنصيب والحفظ...' : 'حفظ التغيرات ونشر تفاصيل الخدمة'}
+            {form.loading ? (
+              <>
+                <div className="w-4 h-4 border-2 border-[#0A192F] border-t-transparent rounded-full animate-spin" />
+                <span>جاري الحفظ والتثبيت...</span>
+              </>
+            ) : editingService ? (
+              <span>✓ حفظ التعديلات على الخدمة</span>
+            ) : (
+              <span>+ حفظ ونشر الخدمة الجديدة</span>
+            )}
           </button>
         </div>
       </form>

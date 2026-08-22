@@ -18,7 +18,7 @@ export default async function DashboardLayout({
   const logoLightUrl = identity?.logo_light || "";
 
   return (
-    <div className="flex min-h-screen relative text-white bg-[#0A192F] text-right overflow-x-hidden" dir="rtl">
+    <div className="flex min-h-screen relative text-slate-900 dark:text-white bg-slate-50 dark:bg-[#0A192F] text-right overflow-x-hidden transition-colors" dir="rtl">
       {/* Load Chart.js globally for the dashboard */}
       <Script src="https://cdn.jsdelivr.net/npm/chart.js" strategy="afterInteractive" />
       
@@ -33,7 +33,7 @@ export default async function DashboardLayout({
               {children}
             </main>
             
-            <footer className="bg-pharaohCard border-t border-pharaohGold/5 py-4 px-6 text-center text-xs text-gray-500">
+            <footer className="bg-white dark:bg-pharaohCard border-t border-slate-200 dark:border-pharaohGold/5 py-4 px-6 text-center text-xs text-slate-500 dark:text-gray-500 transition-colors">
               <p>&copy; {new Date().getFullYear()} {siteName}. جميع الحقوق محفوظة.</p>
             </footer>
           </div>

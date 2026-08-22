@@ -56,13 +56,13 @@ export default function SettingsIdentityForm({
   handleSubmit
 }: SettingsIdentityFormProps) {
   return (
-    <form id="form-identity" onSubmit={handleSubmit} className="bg-pharaohCard border border-white/5 rounded-3xl p-6 lg:p-10 shadow-2xl relative">
-      <div className="absolute top-0 right-10 transform -translate-y-1/2 bg-pharaohGold text-pharaohNavy font-black text-[10px] uppercase tracking-[3px] px-4 py-1.5 rounded-full shadow-lg">
+    <form id="form-identity" onSubmit={handleSubmit} className="bg-white dark:bg-[#112240] border border-slate-200 dark:border-white/5 rounded-3xl p-6 lg:p-10 shadow-md dark:shadow-2xl relative">
+      <div className="absolute top-0 right-10 transform -translate-y-1/2 bg-pharaohGold text-[#0A192F] font-black text-[10px] uppercase tracking-[3px] px-4 py-1.5 rounded-full shadow-md">
         IDENTITY ENGINE
       </div>
-      <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-3 text-pharaohGold">
+      <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
         <span className="w-2 h-2 bg-pharaohGold rounded-full" />
-        تحديث وحفظ بيانات الهوية (باللغتين العربية والإنجليزية)
+        <span className="text-amber-800 dark:text-pharaohGold">تحديث وحفظ بيانات الهوية (باللغتين العربية والإنجليزية)</span>
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <IdentityMetaFields formData={formData} handleChange={handleChange} />

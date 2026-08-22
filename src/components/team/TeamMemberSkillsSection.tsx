@@ -56,7 +56,9 @@ export default function TeamMemberSkillsSection({
               <div className={`flex justify-between text-xs font-medium ${
                 isLight ? 'text-slate-700' : 'text-gray-300'
               }`}>
-                <span className="font-semibold">{getDynamicText(skill, 'name', language) || skill.name}</span>
+                <span className="font-semibold">
+                  {getDynamicText(skill, 'name', language) || (language === 'en' ? (skill.name_en || skill.name) : (skill.name_ar || skill.name))}
+                </span>
                 <span className={`font-bold font-mono ${isLight ? 'text-[#8A5800]' : 'text-pharaohGold'}`}>{valStr}</span>
               </div>
               <div className={`w-full h-2 rounded-full overflow-hidden ${

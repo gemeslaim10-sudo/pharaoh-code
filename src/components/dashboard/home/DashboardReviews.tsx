@@ -85,27 +85,27 @@ export default function DashboardReviews() {
     const approvedCount = reviews.filter(r => r.status === 'approved').length;
 
     return (
-        <section className="py-16 bg-[#0A192F] border-t border-white/5 relative overflow-hidden mt-6" dir="rtl">
-            <div className="max-w-7xl mx-auto px-6 relative z-10">
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-10 border-b border-white/5 pb-6">
+        <section className="py-12 bg-white dark:bg-[#0A192F] border-t border-slate-200 dark:border-white/5 relative overflow-hidden mt-6" dir="rtl">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-10 border-b border-slate-200 dark:border-white/5 pb-6">
                     <div>
-                        <h3 className="text-2xl md:text-3xl font-black text-white">لوحة تحكم تعليقات العملاء</h3>
-                        <p className="text-gray-400 text-sm mt-1">تواصل مباشر مع أصحاب التعليقات عبر واتساب، واقبل أو احذف الآراء بنقرة واحدة.</p>
+                        <h3 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">لوحة تحكم تعليقات العملاء</h3>
+                        <p className="text-slate-600 dark:text-gray-400 text-sm mt-1">تواصل مباشر مع أصحاب التعليقات عبر واتساب، واقبل أو احذف الآراء بنقرة واحدة.</p>
                     </div>
-                    <div className="flex gap-3 text-xs font-bold select-none">
-                        <span id="pending-counter" className="bg-orange-500/10 text-orange-400 px-4 py-2 rounded-xl border border-orange-500/20 transition-all">
+                    <div className="flex flex-wrap gap-2 sm:gap-3 text-xs font-bold select-none">
+                        <span id="pending-counter" className="bg-orange-500/10 text-orange-600 dark:text-orange-400 px-4 py-2 rounded-xl border border-orange-500/20 transition-all">
                             بإنتظار المراجعة ({pendingCount})
                         </span>
-                        <span id="approved-counter" className="bg-green-500/10 text-green-400 px-4 py-2 rounded-xl border border-green-500/20 transition-all">
+                        <span id="approved-counter" className="bg-green-500/10 text-green-600 dark:text-green-400 px-4 py-2 rounded-xl border border-green-500/20 transition-all">
                             تم نشرها ({approvedCount})
                         </span>
                     </div>
                 </div>
 
                 {loading ? (
-                    <div className="text-center py-10 text-pharaohGold font-bold">جاري تحميل التعليقات...</div>
+                    <div className="text-center py-10 text-amber-800 dark:text-pharaohGold font-bold">جاري تحميل التعليقات...</div>
                 ) : reviews.length === 0 ? (
-                    <div className="text-center py-10 text-gray-500">لا توجد تعليقات حتى الآن.</div>
+                    <div className="text-center py-10 text-slate-400 dark:text-gray-500 bg-slate-50 dark:bg-[#112240] rounded-2xl border border-slate-200 dark:border-white/5">لا توجد تعليقات حتى الآن.</div>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="admin-reviews-container">
                         {reviews.map(review => (

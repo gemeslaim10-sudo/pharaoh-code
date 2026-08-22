@@ -20,15 +20,15 @@ export default function DashboardTechStackPage() {
 
   return (
     <div className="space-y-8 max-w-6xl mx-auto pb-12">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-pharaohGold/10 pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-pharaohGold/10 pb-6">
         <div>
-          <h1 className="text-3xl font-black text-white">إدارة محتوى قسم التقنيات (Tech Stack)</h1>
-          <p className="text-gray-400 text-sm mt-1">تعديل النصوص العربية والإنجليزية لقسم التقنيات مع الحفاظ على القيم الافتراضية</p>
+          <h1 className="text-3xl font-black text-slate-900 dark:text-white">إدارة محتوى قسم التقنيات (Tech Stack)</h1>
+          <p className="text-slate-600 dark:text-gray-400 text-sm mt-1">تعديل النصوص العربية والإنجليزية لقسم التقنيات مع الحفاظ على القيم الافتراضية</p>
         </div>
         <button
           onClick={handleSave}
           disabled={saving}
-          className="bg-pharaohGold text-[#0A192F] px-8 py-3 rounded-xl font-bold hover:bg-white transition-all shadow-lg flex items-center justify-center gap-2 disabled:opacity-50"
+          className="bg-pharaohGold text-[#0A192F] px-8 py-3 rounded-xl font-bold hover:bg-white transition-all shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
         >
           {saving ? (
             <>

@@ -68,8 +68,26 @@ export function useWorkForm() {
     setFbUrl(member.social?.facebook || '');
     setInstaUrl(member.social?.instagram || '');
     setExistingImage(member.image || '');
-    statsHook.setSkills(member.skills && member.skills.length > 0 ? member.skills : [{ name: '', value: '' }]);
-    statsHook.setStats(member.stats && member.stats.length > 0 ? member.stats : [{ value: '', label: '' }]);
+    statsHook.setSkills(
+      member.skills && member.skills.length > 0 
+        ? member.skills.map((s: any) => ({
+            name: s.name || s.name_ar || '',
+            name_ar: s.name_ar || s.name || '',
+            name_en: s.name_en || (s.name && !/[\u0600-\u06FF]/.test(s.name) ? s.name : ''),
+            value: s.value || ''
+          }))
+        : [{ name: '', name_en: '', value: '' }]
+    );
+    statsHook.setStats(
+      member.stats && member.stats.length > 0 
+        ? member.stats.map((st: any) => ({
+            value: st.value || '',
+            label: st.label || st.label_ar || '',
+            label_ar: st.label_ar || st.label || '',
+            label_en: st.label_en || (st.label && !/[\u0600-\u06FF]/.test(st.label) ? st.label : '')
+          }))
+        : [{ value: '', label: '', label_en: '' }]
+    );
     setFile(null);
     setFileStatusText('تغيير الصورة الحالية (اختياري)...');
     document.getElementById('team-management-section')?.scrollIntoView({ behavior: 'smooth' });
@@ -110,10 +128,32 @@ export function useWorkForm() {
         imageUrl = uploadRes.url || '';
       }
       const memberData = {
-        name, name_ar: name, name_en: nameEn, role, role_ar: role, role_en: roleEn,
-        image: imageUrl, description, description_ar: description, description_en: descriptionEn,
-        skills: statsHook.skills.filter(s => s.name && s.value),
-        stats: statsHook.stats.filter(s => s.value && s.label),
+        name,
+        name_ar: name,
+        name_en: nameEn || name,
+        role,
+        role_ar: role,
+        role_en: roleEn || role,
+        image: imageUrl,
+        description,
+        description_ar: description,
+        description_en: descriptionEn || description,
+        skills: statsHook.skills
+          .filter(s => (s.name || s.name_en) && s.value)
+          .map(s => ({
+            name: s.name || s.name_en || '',
+            name_ar: s.name || s.name_en || '',
+            name_en: s.name_en || s.name || '',
+            value: s.value
+          })),
+        stats: statsHook.stats
+          .filter(s => s.value && (s.label || s.label_en))
+          .map(st => ({
+            value: st.value,
+            label: st.label || st.label_en || '',
+            label_ar: st.label || st.label_en || '',
+            label_en: st.label_en || st.label || ''
+          })),
         social: { facebook: fbUrl, instagram: instaUrl }
       };
       if (editingId) {

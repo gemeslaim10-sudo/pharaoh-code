@@ -15,7 +15,7 @@ export default function SidebarNavLinks({ onNavigate }: SidebarNavLinksProps) {
           key={item.href}
           href={item.href}
           onClick={onNavigate}
-          className="flex items-center gap-4 px-4 py-3.5 bg-[#112240] text-pharaohGold rounded-xl font-bold text-sm border border-pharaohGold/20 hover:border-pharaohGold/50 transition-all"
+          className="flex items-center gap-4 px-4 py-3.5 bg-slate-100/90 dark:bg-[#112240] text-amber-900 dark:text-pharaohGold rounded-xl font-bold text-sm border border-slate-200 dark:border-pharaohGold/20 hover:border-pharaohGold/60 hover:bg-amber-500/10 dark:hover:bg-[#15274d] transition-all shadow-xs"
         >
           {item.icon}
           {item.label}
@@ -25,7 +25,7 @@ export default function SidebarNavLinks({ onNavigate }: SidebarNavLinksProps) {
       <Link
         href="/"
         onClick={onNavigate}
-        className="flex items-center gap-4 px-4 py-3.5 bg-pharaohGold/10 text-white rounded-xl font-bold text-sm border border-pharaohGold hover:bg-pharaohGold hover:text-[#0A192F] transition-all mt-4"
+        className="flex items-center gap-4 px-4 py-3.5 bg-amber-500/10 dark:bg-pharaohGold/10 text-amber-900 dark:text-white rounded-xl font-bold text-sm border border-amber-600/40 dark:border-pharaohGold hover:bg-pharaohGold hover:text-[#0A192F] transition-all mt-4"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" />

@@ -52,34 +52,34 @@ export default function CreativityThinkForm({ onSuccess }: Props) {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="db-form-content bg-pharaohCard border border-white/5 rounded-3xl p-6 lg:p-10 shadow-2xl relative">
-            <div className="absolute top-0 left-10 transform -translate-y-1/2 bg-pharaohGold text-pharaohNavy font-black text-[10px] uppercase tracking-[3px] px-4 py-1.5 rounded-full shadow-lg">PHILOSOPHY AND CORE VALUE</div>
+        <form onSubmit={handleSubmit} className="db-form-content bg-white dark:bg-[#112240] border border-slate-200 dark:border-white/5 rounded-3xl p-6 lg:p-10 shadow-md dark:shadow-2xl relative">
+            <div className="absolute top-0 left-10 transform -translate-y-1/2 bg-pharaohGold text-[#0A192F] font-black text-[10px] uppercase tracking-[3px] px-4 py-1.5 rounded-full shadow-lg">PHILOSOPHY AND CORE VALUE</div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                    <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">عنوان الفلسفة (بالعربية)</label>
-                    <input type="text" required value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition" placeholder="مثال: الشفرة النظيفة الفخمة" />
+                    <label className="block text-xs font-bold text-amber-800 dark:text-pharaohGold uppercase tracking-wider mb-2">عنوان الفلسفة (بالعربية)</label>
+                    <input type="text" required value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition" placeholder="مثال: الشفرة النظيفة الفخمة" />
                 </div>
                 <div>
-                    <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">عنوان الفلسفة (بالإنجليزية - Title EN)</label>
-                    <input type="text" value={titleEn} onChange={e => setTitleEn(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition" placeholder="e.g. Luxurious Clean Code" dir="ltr" />
+                    <label className="block text-xs font-bold text-amber-800 dark:text-pharaohGold uppercase tracking-wider mb-2">عنوان الفلسفة (بالإنجليزية - Title EN)</label>
+                    <input type="text" value={titleEn} onChange={e => setTitleEn(e.target.value)} className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition" placeholder="e.g. Luxurious Clean Code" dir="ltr" />
                 </div>
 
                 <div className="md:col-span-2">
-                    <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">كود أيقونة الـ SVG البرمجية</label>
-                    <input type="text" required value={icon} onChange={e => setIcon(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition font-mono text-left" placeholder="<svg />...</svg>" />
+                    <label className="block text-xs font-bold text-amber-800 dark:text-pharaohGold uppercase tracking-wider mb-2">كود أيقونة الـ SVG البرمجية</label>
+                    <input type="text" required value={icon} onChange={e => setIcon(e.target.value)} className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition font-mono text-left" placeholder="<svg />...</svg>" />
                 </div>
 
                 <div>
-                    <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">مضمون الفلسفة (بالعربية)</label>
-                    <textarea rows={4} required value={desc} onChange={e => setDesc(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition resize-none" placeholder="اشرح طريقتكم في تحقيق هذه الميزة البرمجية وكيف تبنونها..."></textarea>
+                    <label className="block text-xs font-bold text-amber-800 dark:text-pharaohGold uppercase tracking-wider mb-2">مضمون الفلسفة (بالعربية)</label>
+                    <textarea rows={4} required value={desc} onChange={e => setDesc(e.target.value)} className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition resize-none" placeholder="اشرح طريقتكم في تحقيق هذه الميزة البرمجية وكيف تبنونها..."></textarea>
                 </div>
                 <div>
-                    <label className="block text-xs font-bold text-pharaohGold uppercase tracking-wider mb-2">مضمون الفلسفة (بالإنجليزية - Description EN)</label>
-                    <textarea rows={4} value={descEn} onChange={e => setDescEn(e.target.value)} className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition resize-none" placeholder="Explain your method to build this software feature in English..." dir="ltr"></textarea>
+                    <label className="block text-xs font-bold text-amber-800 dark:text-pharaohGold uppercase tracking-wider mb-2">مضمون الفلسفة (بالإنجليزية - Description EN)</label>
+                    <textarea rows={4} value={descEn} onChange={e => setDescEn(e.target.value)} className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition resize-none" placeholder="Explain your method to build this software feature in English..." dir="ltr"></textarea>
                 </div>
             </div>
             <div className="mt-8 flex justify-end">
-                <button type="submit" disabled={loading} className="bg-gradient-to-r from-pharaohGold to-amber-600 text-pharaohNavy font-black text-xs uppercase tracking-widest px-8 py-4 rounded-xl shadow-xl shadow-pharaohGold/10 hover:opacity-90 transition disabled:opacity-50">
+                <button type="submit" disabled={loading} className="bg-gradient-to-r from-pharaohGold to-amber-600 text-pharaohNavy font-black text-xs uppercase tracking-widest px-8 py-4 rounded-xl shadow-xl shadow-pharaohGold/10 hover:opacity-90 transition disabled:opacity-50 cursor-pointer">
                     {loading ? 'جاري التحديث...' : 'تحديث الفلسفة الرقمية'}
                 </button>
             </div>

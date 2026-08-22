@@ -14,10 +14,10 @@ export default function SidebarFooterActions({
     const { logout } = useAuth();
 
     return (
-        <div className="p-4 border-t border-pharaohGold/10 bg-[#0A192F]/60 shrink-0 space-y-2.5">
+        <div className="p-4 border-t border-slate-200 dark:border-pharaohGold/10 bg-slate-50/80 dark:bg-[#0A192F]/60 shrink-0 space-y-2.5 transition-colors">
           {/* Quick Theme & Language Row */}
-          <div className="flex items-center justify-between gap-2 p-2 rounded-xl bg-white/[0.03] border border-white/5">
-            <span className="text-[11px] text-gray-400 font-bold pr-1">المظهر واللغة:</span>
+          <div className="flex items-center justify-between gap-2 p-2 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/5 shadow-xs">
+            <span className="text-[11px] text-slate-600 dark:text-gray-400 font-bold pr-1">المظهر واللغة:</span>
             <div className="flex items-center gap-1.5">
               <ThemeSwitcher className="!w-8 !h-8 !rounded-lg" />
               <LanguageSwitcher iconOnly={true} className="!h-8 !rounded-lg" />

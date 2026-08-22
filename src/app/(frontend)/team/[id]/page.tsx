@@ -22,7 +22,32 @@ export default async function TeamMemberPage({ params }: { params: Promise<{ id:
             getIdentity()
         ]);
         if (doc.exists) {
-            member = doc.data() || null;
+            const data = doc.data() || {};
+            member = {
+                id: doc.id,
+                ...data,
+                name: data.name || data.name_ar || '',
+                name_ar: data.name_ar || data.name || '',
+                name_en: data.name_en || data.name || '',
+                role: data.role || data.role_ar || '',
+                role_ar: data.role_ar || data.role || '',
+                role_en: data.role_en || data.role || '',
+                description: data.description || data.description_ar || '',
+                description_ar: data.description_ar || data.description || '',
+                description_en: data.description_en || data.description || '',
+                skills: (data.skills || []).map((s: any) => ({
+                    name: s.name_ar || s.name || '',
+                    name_ar: s.name_ar || s.name || '',
+                    name_en: s.name_en || (s.name && !/[\u0600-\u06FF]/.test(s.name) ? s.name : ''),
+                    value: s.value || ''
+                })),
+                stats: (data.stats || []).map((st: any) => ({
+                    value: st.value || '',
+                    label: st.label_ar || st.label || '',
+                    label_ar: st.label_ar || st.label || '',
+                    label_en: st.label_en || (st.label && !/[\u0600-\u06FF]/.test(st.label) ? st.label : '')
+                }))
+            };
         }
         identity = identityData;
     } catch (error) {
@@ -36,5 +61,5 @@ export default async function TeamMemberPage({ params }: { params: Promise<{ id:
     const logoUrl = identity?.logo || identity?.logo_dark || '';
     const logoLightUrl = identity?.logo_light || '';
     
-    return <TeamMemberDetailClient member={member} logoUrl={logoUrl} logoLightUrl={logoLightUrl} />;
+    return <TeamMemberDetailClient member={member as any} logoUrl={logoUrl} logoLightUrl={logoLightUrl} />;
 }

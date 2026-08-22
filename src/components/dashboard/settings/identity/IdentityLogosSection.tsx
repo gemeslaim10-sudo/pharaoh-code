@@ -25,42 +25,42 @@ export function IdentityLogosSection({
   return (
     <>
       {/* Favicon Upload Section */}
-      <div className="md:col-span-2 bg-[#112240] border border-white/5 p-6 rounded-2xl">
-        <label className="block text-sm font-bold text-white mb-4">أيقونة الموقع (Favicon) <span className="text-pharaohGold text-xs">(المقاس الموصى به: 32x32 أو 64x64 بكسل)</span></label>
+      <div className="md:col-span-2 bg-slate-50 dark:bg-[#112240] border border-slate-200 dark:border-white/5 p-6 rounded-2xl shadow-xs">
+        <label className="block text-sm font-bold text-slate-900 dark:text-white mb-4">أيقونة الموقع (Favicon) <span className="text-amber-800 dark:text-pharaohGold text-xs">(المقاس الموصى به: 32x32 أو 64x64 بكسل)</span></label>
         <div className="flex items-center gap-6">
-          <div className="w-16 h-16 shrink-0 bg-[#0A192F] rounded-xl border border-white/10 flex items-center justify-center overflow-hidden">
+          <div className="w-16 h-16 shrink-0 bg-white dark:bg-[#0A192F] rounded-xl border border-slate-200 dark:border-white/10 flex items-center justify-center overflow-hidden">
             {(faviconPreview || formData.favicon) ? (
               <img src={faviconPreview || formData.favicon} alt="Favicon Preview" className="w-full h-full object-contain p-2" />
             ) : (
-              <span className="text-gray-500 text-xs">لا يوجد</span>
+              <span className="text-slate-400 dark:text-gray-500 text-xs">لا يوجد</span>
             )}
           </div>
           <div className="flex-1">
             <input type="file" id="site-favicon" accept="image/png, image/jpeg, image/x-icon, image/svg+xml" onChange={handleFaviconChange} className="hidden" />
-            <label htmlFor="site-favicon" className="cursor-pointer inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white text-xs font-bold px-4 py-2 rounded-lg border border-white/10 transition-colors">
+            <label htmlFor="site-favicon" className="cursor-pointer inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-800 dark:text-white text-xs font-bold px-4 py-2 rounded-lg border border-slate-300 dark:border-white/10 transition-colors">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
               اختر صورة من جهازك
             </label>
-            <p className="text-[11px] text-gray-400 mt-2">يفضل أن تكون الصورة مربعة بصيغة PNG أو ICO.</p>
+            <p className="text-[11px] text-slate-500 dark:text-gray-400 mt-2">يفضل أن تكون الصورة مربعة بصيغة PNG أو ICO.</p>
           </div>
         </div>
       </div>
 
       {/* Dark Mode Logo Upload Section */}
-      <div className="md:col-span-2 bg-[#112240] border border-white/5 p-6 rounded-2xl">
-        <label className="block text-sm font-bold text-white mb-4">🌙 شعار الوضع الداكن (Dark Mode Logo) <span className="text-pharaohGold text-xs">(يظهر عندما تكون الخلفية داكنة)</span></label>
+      <div className="md:col-span-2 bg-slate-50 dark:bg-[#112240] border border-slate-200 dark:border-white/5 p-6 rounded-2xl shadow-xs">
+        <label className="block text-sm font-bold text-slate-900 dark:text-white mb-4">🌙 شعار الوضع الداكن (Dark Mode Logo) <span className="text-amber-800 dark:text-pharaohGold text-xs">(يظهر عندما تكون الخلفية داكنة)</span></label>
         <div className="flex items-center gap-6">
-          <div className="h-16 px-4 shrink-0 bg-[#0A192F] rounded-xl border border-white/10 flex items-center justify-center overflow-hidden">
+          <div className="h-16 px-4 shrink-0 bg-[#0A192F] rounded-xl border border-slate-300 dark:border-white/10 flex items-center justify-center overflow-hidden">
             {(logoPreview || formData.logo || formData.logo_dark) ? (
               <img src={logoPreview || formData.logo || formData.logo_dark} alt="Dark Logo Preview" className="max-h-12 w-auto object-contain" />
             ) : (
-              <span className="text-gray-500 text-xs">نصي (PHARAOH CODE)</span>
+              <span className="text-gray-400 text-xs">نصي (PHARAOH CODE)</span>
             )}
           </div>
           <div className="flex-1">
             <input type="file" id="site-logo" accept="image/png, image/jpeg, image/svg+xml, image/webp" onChange={handleLogoChange} className="hidden" />
             <div className="flex flex-wrap items-center gap-3">
-              <label htmlFor="site-logo" className="cursor-pointer inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white text-xs font-bold px-4 py-2 rounded-lg border border-white/10 transition-colors">
+              <label htmlFor="site-logo" className="cursor-pointer inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-800 dark:text-white text-xs font-bold px-4 py-2 rounded-lg border border-slate-300 dark:border-white/10 transition-colors">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
                 رفع شعار الوضع الداكن
               </label>
@@ -68,32 +68,32 @@ export function IdentityLogosSection({
                 <button
                   type="button"
                   onClick={() => onOpenLogoCropper('dark')}
-                  className="inline-flex items-center gap-2 bg-pharaohGold/10 hover:bg-pharaohGold/20 text-pharaohGold text-xs font-bold px-4 py-2 rounded-lg border border-pharaohGold/30 transition-colors shadow-sm"
+                  className="inline-flex items-center gap-2 bg-amber-500/10 hover:bg-amber-500/20 dark:bg-pharaohGold/10 dark:hover:bg-pharaohGold/20 text-amber-800 dark:text-pharaohGold text-xs font-bold px-4 py-2 rounded-lg border border-amber-500/30 dark:border-pharaohGold/30 transition-colors shadow-xs cursor-pointer"
                 >
                   ✂️ قص وتعديل حجم شعار الدارك مود
                 </button>
               )}
             </div>
-            <p className="text-[11px] text-gray-400 mt-2">الشعار المصمم خصيصاً ليظهر بوضوح فوق الخلفيات الداكنة.</p>
+            <p className="text-[11px] text-slate-500 dark:text-gray-400 mt-2">الشعار المصمم خصيصاً ليظهر بوضوح فوق الخلفيات الداكنة.</p>
           </div>
         </div>
       </div>
 
       {/* Light Mode Logo Upload Section */}
-      <div className="md:col-span-2 bg-[#112240] border border-white/5 p-6 rounded-2xl">
-        <label className="block text-sm font-bold text-white mb-4">☀️ شعار الوضع الفاتح (Light Mode Logo) <span className="text-pharaohGold text-xs">(يظهر عندما تكون الخلفية بيضاء أو فاتحة)</span></label>
+      <div className="md:col-span-2 bg-slate-50 dark:bg-[#112240] border border-slate-200 dark:border-white/5 p-6 rounded-2xl shadow-xs">
+        <label className="block text-sm font-bold text-slate-900 dark:text-white mb-4">☀️ شعار الوضع الفاتح (Light Mode Logo) <span className="text-amber-800 dark:text-pharaohGold text-xs">(يظهر عندما تكون الخلفية بيضاء أو فاتحة)</span></label>
         <div className="flex items-center gap-6">
-          <div className="h-16 px-4 shrink-0 bg-[#F8FAFC] rounded-xl border border-gray-300 flex items-center justify-center overflow-hidden">
+          <div className="h-16 px-4 shrink-0 bg-[#F8FAFC] rounded-xl border border-slate-300 flex items-center justify-center overflow-hidden">
             {(logoLightPreview || formData.logo_light) ? (
               <img src={logoLightPreview || formData.logo_light} alt="Light Logo Preview" className="max-h-12 w-auto object-contain" />
             ) : (
-              <span className="text-gray-400 text-xs">نصي (PHARAOH CODE)</span>
+              <span className="text-slate-500 text-xs">نصي (PHARAOH CODE)</span>
             )}
           </div>
           <div className="flex-1">
             <input type="file" id="site-logo_light" accept="image/png, image/jpeg, image/svg+xml, image/webp" onChange={handleLogoLightChange} className="hidden" />
             <div className="flex flex-wrap items-center gap-3">
-              <label htmlFor="site-logo_light" className="cursor-pointer inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white text-xs font-bold px-4 py-2 rounded-lg border border-white/10 transition-colors">
+              <label htmlFor="site-logo_light" className="cursor-pointer inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-800 dark:text-white text-xs font-bold px-4 py-2 rounded-lg border border-slate-300 dark:border-white/10 transition-colors">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
                 رفع شعار الوضع الفاتح
               </label>
@@ -101,13 +101,13 @@ export function IdentityLogosSection({
                 <button
                   type="button"
                   onClick={() => onOpenLogoCropper('light')}
-                  className="inline-flex items-center gap-2 bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 text-xs font-bold px-4 py-2 rounded-lg border border-amber-500/30 transition-colors shadow-sm"
+                  className="inline-flex items-center gap-2 bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 dark:text-amber-400 text-xs font-bold px-4 py-2 rounded-lg border border-amber-500/30 transition-colors shadow-xs cursor-pointer"
                 >
                   ✂️ قص وتعديل حجم شعار اللايت مود
                 </button>
               )}
             </div>
-            <p className="text-[11px] text-gray-400 mt-2">الشعار الداكن أو الملون المخصص للظهور بشكل ممتاز فوق الخلفيات البيضاء.</p>
+            <p className="text-[11px] text-slate-500 dark:text-gray-400 mt-2">الشعار الداكن أو الملون المخصص للظهور بشكل ممتاز فوق الخلفيات البيضاء.</p>
           </div>
         </div>
       </div>

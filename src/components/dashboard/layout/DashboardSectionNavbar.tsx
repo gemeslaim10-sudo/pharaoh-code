@@ -17,7 +17,7 @@ export function DashboardSectionNavbar({
   return (
     <nav
       aria-label="Page Sections Navigation"
-      className="flex gap-2 overflow-x-auto custom-scrollbar pb-2 pt-1 border-b border-white/10 select-none"
+      className="flex gap-2 overflow-x-auto custom-scrollbar pb-2 pt-1 border-b border-slate-200 dark:border-white/10 select-none"
     >
       {sections.map((section, idx) => {
         const isActive = activeSectionId === section.id;
@@ -34,8 +34,8 @@ export function DashboardSectionNavbar({
             className={`
               relative px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm whitespace-nowrap transition-all duration-300 flex items-center gap-2 shrink-0 cursor-pointer
               ${isActive
-                ? 'bg-[#112240] text-pharaohGold border border-pharaohGold/60 shadow-[0_0_15px_rgba(197,161,111,0.2)]'
-                : 'text-gray-400 hover:text-white bg-white/[0.03] border border-white/5 hover:border-white/20 hover:bg-white/[0.06]'
+                ? 'bg-white dark:bg-[#112240] text-amber-800 dark:text-pharaohGold border border-pharaohGold/60 shadow-[0_2px_12px_rgba(197,161,111,0.15)] dark:shadow-[0_0_15px_rgba(197,161,111,0.2)]'
+                : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white bg-slate-100/80 dark:bg-white/[0.03] border border-slate-200 dark:border-white/5 hover:border-slate-300 dark:hover:border-white/20 hover:bg-slate-200/60 dark:hover:bg-white/[0.06]'
               }
             `}
           >
@@ -52,7 +52,7 @@ export function DashboardSectionNavbar({
             {section.icon ? (
               <span className="shrink-0">{section.icon}</span>
             ) : (
-              <span className={`text-[10px] font-mono font-black ${isActive ? 'text-pharaohGold' : 'text-gray-500'}`}>
+              <span className={`text-[10px] font-mono font-black ${isActive ? 'text-amber-800 dark:text-pharaohGold' : 'text-slate-400 dark:text-gray-500'}`}>
                 {indexNumber}.
               </span>
             )}
@@ -64,7 +64,7 @@ export function DashboardSectionNavbar({
             {section.badge !== undefined && (
               <span className={`
                 px-2 py-0.5 rounded-full text-[10px] font-mono font-bold
-                ${isActive ? 'bg-pharaohGold/20 text-pharaohGold' : 'bg-white/10 text-gray-400'}
+                ${isActive ? 'bg-amber-100 dark:bg-pharaohGold/20 text-amber-800 dark:text-pharaohGold' : 'bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-gray-400'}
               `}>
                 {section.badge}
               </span>

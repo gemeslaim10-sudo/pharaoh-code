@@ -26,10 +26,10 @@ export default function SettingsHeroTheme() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Background info tip */}
-      <div className="bg-[#0A192F] border border-pharaohGold/30 p-4 rounded-2xl flex items-center gap-4 text-xs text-gray-300 shadow-md">
+      <div className="bg-amber-500/10 dark:bg-[#0A192F] border border-amber-500/30 dark:border-pharaohGold/30 p-4 rounded-2xl flex items-center gap-4 text-xs text-slate-700 dark:text-gray-300 shadow-xs">
         <div className="text-2xl">🎬</div>
         <div>
-          <span className="font-bold text-pharaohGold block">فيديوهات الخلفية الافتراضية:</span>
+          <span className="font-bold text-amber-800 dark:text-pharaohGold block">فيديوهات الخلفية الافتراضية:</span>
           إذا تركْتَ حقول الفيديوهات فارغة، ستقوم المنصة باستخدام الفيديوهات الافتراضية السريعة تلقائياً.
         </div>
       </div>

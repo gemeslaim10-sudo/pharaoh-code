@@ -64,17 +64,17 @@ export default function SettingsSystem() {
           badge: statusData.mode === 'off' ? 'بث حي' : 'صيانة',
           children: (
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="flex flex-col md:flex-row md:items-center justify-between p-6 bg-[#0A192F] border border-white/10 rounded-2xl gap-4">
+              <div className="flex flex-col md:flex-row md:items-center justify-between p-6 bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-2xl gap-4 shadow-xs">
                 <div>
-                  <h4 className="text-sm font-bold text-white mb-1">الوضع المعتمد حالياً لمنصتكم البصرية:</h4>
-                  <p className="text-xs text-gray-400">اختيار تفعيل الصيانة يمنع الزوار تلقائياً من استعراض معرض الأعمال والمشاريع.</p>
+                  <h4 className="text-sm font-bold text-slate-900 dark:text-white mb-1">الوضع المعتمد حالياً لمنصتكم البصرية:</h4>
+                  <p className="text-xs text-slate-500 dark:text-gray-400">اختيار تفعيل الصيانة يمنع الزوار تلقائياً من استعراض معرض الأعمال والمشاريع.</p>
                 </div>
                 <div>
                   <select
                     id="maintenance-mode"
                     value={statusData.mode}
                     onChange={(e) => setStatusData({ ...statusData, mode: e.target.value })}
-                    className="bg-[#112240] border border-pharaohGold/40 rounded-xl px-4 py-2.5 text-xs text-pharaohGold font-bold focus:outline-none cursor-pointer"
+                    className="bg-white dark:bg-[#112240] border border-amber-500/40 dark:border-pharaohGold/40 rounded-xl px-4 py-2.5 text-xs text-amber-800 dark:text-pharaohGold font-bold focus:outline-none cursor-pointer"
                   >
                     <option value="off">🟢 البث حي ونشط للجميع (Live Mode)</option>
                     <option value="on">🔴 تفعيل بوابة الصيانة المغلقة (Maintenance Mode)</option>
@@ -82,14 +82,14 @@ export default function SettingsSystem() {
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-bold text-gray-400 mb-2">نص رسالة الإغلاق المعروضة للجمهور</label>
+                <label className="block text-xs font-bold text-slate-700 dark:text-gray-400 mb-2">نص رسالة الإغلاق المعروضة للجمهور</label>
                 <textarea
                   id="maintenance-msg"
                   rows={3}
                   required
                   value={statusData.message}
                   onChange={(e) => setStatusData({ ...statusData, message: e.target.value })}
-                  className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-pharaohGold transition resize-none"
+                  className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-pharaohGold transition resize-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
                 />
               </div>
               <div className="flex justify-end pt-2">
@@ -118,8 +118,8 @@ export default function SettingsSystem() {
           badge: 'حالة الخادم',
           children: (
             <div className="overflow-x-auto">
-              <table className="w-full text-right text-sm text-gray-400">
-                <thead className="text-xs uppercase bg-[#0A192F] text-pharaohGold font-bold border-b border-white/10">
+              <table className="w-full text-right text-sm text-slate-600 dark:text-gray-400">
+                <thead className="text-xs uppercase bg-slate-100 dark:bg-[#0A192F] text-amber-800 dark:text-pharaohGold font-bold border-b border-slate-200 dark:border-white/10">
                   <tr>
                     <th className="px-6 py-4">حالة البث الحالية للموقع</th>
                     <th className="px-6 py-4">نص رسالة الصيانة</th>
@@ -127,13 +127,13 @@ export default function SettingsSystem() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="border-b border-white/5 hover:bg-white/5 transition">
-                    <td className="px-6 py-4 font-bold text-white">
+                  <tr className="border-b border-slate-200 dark:border-white/5 hover:bg-slate-50 dark:hover:bg-white/5 transition">
+                    <td className="px-6 py-4 font-bold text-slate-900 dark:text-white">
                       {statusData.mode === 'off' ? '🟢 نشط (Live)' : '🔴 مغلق (Maintenance)'}
                     </td>
                     <td className="px-6 py-4 truncate max-w-[250px]">{statusData.message}</td>
                     <td className="px-6 py-4 text-center">
-                      <span className="text-xs text-pharaohGold bg-pharaohGold/10 px-3 py-1 rounded-full">الحالة الحالية النشطة</span>
+                      <span className="text-xs text-amber-800 dark:text-pharaohGold bg-amber-500/10 dark:bg-pharaohGold/10 px-3 py-1 rounded-full border border-amber-500/20 dark:border-pharaohGold/20 font-bold">الحالة الحالية النشطة</span>
                     </td>
                   </tr>
                 </tbody>

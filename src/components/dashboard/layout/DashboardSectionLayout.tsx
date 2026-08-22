@@ -33,20 +33,20 @@ export function DashboardSectionLayout({
   return (
     <div className="space-y-6 max-w-7xl mx-auto pb-16 text-right" dir="rtl">
       {/* ── 1. PAGE HEADER & GENERAL ACTIONS ── */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/5 pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-white/5 pb-6">
         <div>
           <div className="flex items-center gap-3 flex-wrap">
-            <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
               {title}
             </h1>
             {badge && (
-              <span className="px-3 py-1 rounded-full text-xs font-black bg-pharaohGold/15 text-pharaohGold border border-pharaohGold/30 shadow-sm">
+              <span className="px-3 py-1 rounded-full text-xs font-black bg-amber-500/10 dark:bg-pharaohGold/15 text-amber-800 dark:text-pharaohGold border border-amber-500/30 dark:border-pharaohGold/30 shadow-sm">
                 {badge}
               </span>
             )}
           </div>
           {subtitle && (
-            <p className="text-gray-400 text-sm mt-1.5 max-w-3xl leading-relaxed">
+            <p className="text-slate-600 dark:text-gray-400 text-sm mt-1.5 max-w-3xl leading-relaxed">
               {subtitle}
             </p>
           )}
@@ -84,8 +84,8 @@ export function DashboardSectionLayout({
           >
             {/* Optional Section Description */}
             {currentSection.description && (
-              <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 text-xs text-gray-400 flex items-center gap-2">
-                <span className="text-pharaohGold font-bold">ℹ️ ملاحظة:</span>
+              <div className="p-4 rounded-xl bg-slate-100 dark:bg-white/[0.02] border border-slate-200 dark:border-white/5 text-xs text-slate-600 dark:text-gray-400 flex items-center gap-2">
+                <span className="text-amber-800 dark:text-pharaohGold font-bold">ℹ️ ملاحظة:</span>
                 <span>{currentSection.description}</span>
               </div>
             )}

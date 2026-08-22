@@ -12,10 +12,10 @@ export function IdentityTogglesSection({ formData, handleChange }: IdentityToggl
   return (
     <>
       {/* Reverse Navbar Option */}
-      <div className="md:col-span-2 bg-[#112240] border border-white/5 p-6 rounded-2xl flex items-center justify-between gap-4">
+      <div className="md:col-span-2 bg-slate-50 dark:bg-[#112240] border border-slate-200 dark:border-white/5 p-6 rounded-2xl flex items-center justify-between gap-4 shadow-xs">
         <div>
-          <label className="block text-sm font-bold text-white mb-1">عكس اتجاه الناف بار في اللغة العربية (RTL Navbar)</label>
-          <p className="text-xs text-gray-400">تفعيل هذا الخيار يجعل اللوجو على اليمين والروابط/الأزرار على اليسار عند تصفح الموقع باللغة العربية.</p>
+          <label className="block text-sm font-bold text-slate-900 dark:text-white mb-1">عكس اتجاه الناف بار في اللغة العربية (RTL Navbar)</label>
+          <p className="text-xs text-slate-500 dark:text-gray-400">تفعيل هذا الخيار يجعل اللوجو على اليمين والروابط/الأزرار على اليسار عند تصفح الموقع باللغة العربية.</p>
         </div>
         <label className="relative inline-flex items-center cursor-pointer">
           <input
@@ -30,15 +30,15 @@ export function IdentityTogglesSection({ formData, handleChange }: IdentityToggl
             }}
             className="sr-only peer"
           />
-          <div className="w-14 h-7 bg-[#0A192F] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-pharaohGold" />
+          <div className="w-14 h-7 bg-slate-300 dark:bg-[#0A192F] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-pharaohGold" />
         </label>
       </div>
 
       {/* Top Scroll Progress Bar Option */}
-      <div className="md:col-span-2 bg-[#112240] border border-white/5 p-6 rounded-2xl flex items-center justify-between gap-4">
+      <div className="md:col-span-2 bg-slate-50 dark:bg-[#112240] border border-slate-200 dark:border-white/5 p-6 rounded-2xl flex items-center justify-between gap-4 shadow-xs">
         <div>
-          <label className="block text-sm font-bold text-white mb-1">إظهار شريط تقدم التمرير العلوي (Top Scroll Progress Bar)</label>
-          <p className="text-xs text-gray-400">شريط ذهبي رفيع في أعلى الشاشة يتقدم أثناء التمرير في الصفحة. (الوضع الافتراضي: مخفي).</p>
+          <label className="block text-sm font-bold text-slate-900 dark:text-white mb-1">إظهار شريط تقدم التمرير العلوي (Top Scroll Progress Bar)</label>
+          <p className="text-xs text-slate-500 dark:text-gray-400">شريط ذهبي رفيع في أعلى الشاشة يتقدم أثناء التمرير في الصفحة. (الوضع الافتراضي: مخفي).</p>
         </div>
         <label className="relative inline-flex items-center cursor-pointer">
           <input
@@ -53,15 +53,15 @@ export function IdentityTogglesSection({ formData, handleChange }: IdentityToggl
             }}
             className="sr-only peer"
           />
-          <div className="w-14 h-7 bg-[#0A192F] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-pharaohGold" />
+          <div className="w-14 h-7 bg-slate-300 dark:bg-[#0A192F] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-pharaohGold" />
         </label>
       </div>
 
       {/* Side Scrollbar & Floating Controls Option */}
-      <div className="md:col-span-2 bg-[#112240] border border-white/5 p-6 rounded-2xl flex items-center justify-between gap-4">
+      <div className="md:col-span-2 bg-slate-50 dark:bg-[#112240] border border-slate-200 dark:border-white/5 p-6 rounded-2xl flex items-center justify-between gap-4 shadow-xs">
         <div>
-          <label className="block text-sm font-bold text-white mb-1">إظهار شريط وأزرار التمرير الجانبية (Side Scrollbar & Floating Controls)</label>
-          <p className="text-xs text-gray-400">تفعيل شريط التمرير المخصص وزر العودة للأعلى العائم على جانب الشاشة. (الوضع الافتراضي: مخفي).</p>
+          <label className="block text-sm font-bold text-slate-900 dark:text-white mb-1">إظهار شريط وأزرار التمرير الجانبية (Side Scrollbar & Floating Controls)</label>
+          <p className="text-xs text-slate-500 dark:text-gray-400">تفعيل شريط التمرير المخصص وزر العودة للأعلى العائم على جانب الشاشة. (الوضع الافتراضي: مخفي).</p>
         </div>
         <label className="relative inline-flex items-center cursor-pointer">
           <input
@@ -76,7 +76,7 @@ export function IdentityTogglesSection({ formData, handleChange }: IdentityToggl
             }}
             className="sr-only peer"
           />
-          <div className="w-14 h-7 bg-[#0A192F] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-pharaohGold" />
+          <div className="w-14 h-7 bg-slate-300 dark:bg-[#0A192F] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-pharaohGold" />
         </label>
       </div>
     </>

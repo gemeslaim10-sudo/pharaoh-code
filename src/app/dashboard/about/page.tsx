@@ -41,10 +41,10 @@ export default function DashboardAboutPage() {
   return (
     <div className="space-y-6 max-w-6xl mx-auto pb-12 text-right" dir="rtl">
       {/* Header & Save Action */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-pharaohGold/10 pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-pharaohGold/10 pb-6">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-white">إدارة محتوى صفحة (من نحن)</h1>
-          <p className="text-gray-400 text-sm mt-1">تعديل النصوص العربية والإنجليزية لصفحة About Us مع الحفاظ على القيم الافتراضية</p>
+          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">إدارة محتوى صفحة (من نحن)</h1>
+          <p className="text-slate-600 dark:text-gray-400 text-sm mt-1">تعديل النصوص العربية والإنجليزية لصفحة About Us مع الحفاظ على القيم الافتراضية</p>
         </div>
         <button
           onClick={handleSave}

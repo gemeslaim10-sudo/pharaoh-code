@@ -53,15 +53,15 @@ export default function DashboardServicesManagement() {
 
   return (
     <div className="space-y-6 max-w-6xl mx-auto pb-16 text-right" dir="rtl">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-pharaohGold/10 pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-pharaohGold/10 pb-6">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl sm:text-3xl font-black text-white">إدارة الخدمات وباقات التسعير</h1>
-            <span className="px-3 py-1 rounded-full text-xs font-bold bg-pharaohGold/15 text-pharaohGold border border-pharaohGold/30">
+            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">إدارة الخدمات وباقات التسعير</h1>
+            <span className="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 dark:bg-pharaohGold/15 text-amber-800 dark:text-pharaohGold border border-amber-500/30 dark:border-pharaohGold/30">
               {services.length} خدمة
             </span>
           </div>
-          <p className="text-gray-400 text-sm mt-1">تعديل وإضافة الخدمات، الباقات الثلاث، والنظرة العامة، وخطوات التنفيذ المنعكسة في الموقع</p>
+          <p className="text-slate-600 dark:text-gray-400 text-sm mt-1">تعديل وإضافة الخدمات، الباقات الثلاث، والنظرة العامة، وخطوات التنفيذ المنعكسة في الموقع</p>
         </div>
       </div>
 

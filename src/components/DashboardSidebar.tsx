@@ -43,9 +43,9 @@ export default function DashboardSidebar({
   return (
     <aside
       id="sidebar"
-      className={`w-72 bg-pharaohCard border-l border-pharaohGold/10 fixed top-0 right-0 h-screen z-50 transition-transform duration-300 transform flex flex-col shadow-2xl shrink-0 ${isSidebarOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"}`}
+      className={`w-72 bg-white dark:bg-pharaohCard border-l border-slate-200 dark:border-pharaohGold/10 fixed top-0 right-0 h-screen z-50 transition-transform duration-300 transform flex flex-col shadow-xl dark:shadow-2xl shrink-0 ${isSidebarOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0"}`}
     >
-      <div className="p-6 border-b border-pharaohGold/10 flex items-center justify-between shrink-0">
+      <div className="p-6 border-b border-slate-200 dark:border-pharaohGold/10 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3">
           {activeLogo ? (
             <img 
@@ -54,16 +54,16 @@ export default function DashboardSidebar({
               className="h-10 max-w-[180px] w-auto object-contain drop-shadow-md" 
             />
           ) : (
-            <h2 className="text-lg font-black tracking-wide text-white">
-              <span className="text-xl font-black tracking-tighter uppercase text-white">
-                {siteName.split(' ')[0]} <span className="text-pharaohGold">{siteName.split(' ').slice(1).join(' ')}</span>
+            <h2 className="text-lg font-black tracking-wide text-slate-900 dark:text-white">
+              <span className="text-xl font-black tracking-tighter uppercase text-slate-900 dark:text-white">
+                {siteName.split(' ')[0]} <span className="text-amber-700 dark:text-pharaohGold">{siteName.split(' ').slice(1).join(' ')}</span>
               </span>
             </h2>
           )}
         </div>
         <button
           onClick={() => setSidebarOpen(false)}
-          className="lg:hidden text-gray-400 hover:text-pharaohGold text-xl p-1"
+          className="lg:hidden text-slate-500 dark:text-gray-400 hover:text-pharaohGold text-xl p-1 cursor-pointer"
         >
           ✕
         </button>

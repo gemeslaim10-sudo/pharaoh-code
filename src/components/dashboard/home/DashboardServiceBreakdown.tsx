@@ -77,35 +77,35 @@ export function DashboardServiceBreakdown({
   ];
 
   return (
-    <div className="bg-pharaohCard p-5 md:p-6 rounded-3xl border border-white/5 shadow-xl">
-      <div className="flex items-center justify-between mb-6 pb-3 border-b border-white/10">
-        <h4 className="font-black text-sm md:text-base text-white flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-pharaohGold/10 text-pharaohGold flex items-center justify-center">
+    <div className="bg-white dark:bg-pharaohCard p-5 md:p-6 rounded-3xl border border-slate-200 dark:border-white/5 shadow-md dark:shadow-xl">
+      <div className="flex items-center justify-between mb-6 pb-3 border-b border-slate-200 dark:border-white/10">
+        <h4 className="font-black text-sm md:text-base text-slate-900 dark:text-white flex items-center gap-2">
+          <div className="w-7 h-7 rounded-lg bg-amber-500/10 dark:bg-pharaohGold/10 text-amber-800 dark:text-pharaohGold flex items-center justify-center">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
           </div>
           توزيع الطلبات حسب نوع الخدمة
         </h4>
-        <span className="text-[11px] text-gray-400 font-medium">
-          إجمالي: <strong className="text-white">{totalServiceOrders} طلب</strong>
+        <span className="text-[11px] text-slate-600 dark:text-gray-400 font-medium">
+          إجمالي: <strong className="text-slate-900 dark:text-white">{totalServiceOrders} طلب</strong>
         </span>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {serviceItems.map((item, idx) => (
-          <div key={idx} className={`bg-[#0A192F] p-4 rounded-2xl border ${item.border} space-y-3`}>
+          <div key={idx} className={`bg-slate-50 dark:bg-[#0A192F] p-4 rounded-2xl border border-slate-200 dark:${item.border} space-y-3 shadow-xs`}>
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
                 <span className={`p-2 rounded-xl ${item.bgIcon} ${item.textCol}`}>{item.icon}</span>
-                <span className="text-xs font-bold text-gray-200">{item.title}</span>
+                <span className="text-xs font-bold text-slate-800 dark:text-gray-200">{item.title}</span>
               </div>
               <div className="text-right">
                 <span className={`text-lg font-black ${item.textCol}`}>{item.count}</span>
-                <span className="text-[10px] text-gray-400 mr-1">طلب ({item.pct}%)</span>
+                <span className="text-[10px] text-slate-500 dark:text-gray-400 mr-1">طلب ({item.pct}%)</span>
               </div>
             </div>
-            <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+            <div className="w-full h-2 bg-slate-200 dark:bg-white/5 rounded-full overflow-hidden">
               <div className={`h-full ${item.color} rounded-full transition-all duration-500`} style={{ width: `${item.pct}%` }} />
             </div>
           </div>

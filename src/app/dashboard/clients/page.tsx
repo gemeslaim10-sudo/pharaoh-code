@@ -24,21 +24,19 @@ export default function DashboardClients() {
     } = useClientsForm();
 
     return (
-        <section id="client-management-section" className="py-10 bg-pharaohNavy relative overflow-hidden text-right" dir="rtl">
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-pharaohGold/5 rounded-full blur-[120px] pointer-events-none"></div>
-
+        <section id="client-management-section" className="py-6 relative overflow-hidden text-right" dir="rtl">
             <div className="max-w-6xl mx-auto px-4 relative z-10">
-                <div className="bg-[#112240] p-8 rounded-[2.5rem] border border-white/5 hover:border-pharaohGold/20 shadow-2xl transition-all duration-500">
+                <div className="bg-white dark:bg-[#112240] p-6 md:p-8 rounded-[2.5rem] border border-slate-200 dark:border-white/5 hover:border-pharaohGold/30 shadow-md dark:shadow-2xl transition-all duration-500">
 
-                    <div className="flex items-center justify-between border-b border-white/5 pb-4 mb-8">
+                    <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/5 pb-4 mb-8">
                         <div className="flex items-center gap-3">
                             <div className="w-2 h-6 bg-pharaohGold rounded-full"></div>
-                            <h4 className="text-xl font-bold text-white">
+                            <h4 className="text-xl font-bold text-slate-900 dark:text-white">
                                 {editingId ? `تعديل بيانات الشريك: ${name}` : "استمارة إضافة شريك نجاح جديد"}
                             </h4>
                         </div>
                         {editingId && (
-                            <button onClick={resetForm} className="text-xs text-gray-400 bg-white/5 px-3 py-1.5 rounded-lg hover:bg-white/10 transition cursor-pointer">
+                            <button onClick={resetForm} className="text-xs text-slate-600 dark:text-gray-400 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 px-3 py-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-white/10 transition cursor-pointer">
                                 إلغاء التعديل
                             </button>
                         )}

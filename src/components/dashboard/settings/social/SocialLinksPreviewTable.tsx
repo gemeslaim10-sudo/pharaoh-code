@@ -9,8 +9,8 @@ export function SocialLinksPreviewTable({ formData }: SocialLinksPreviewTablePro
 
   return (
     <div className="overflow-x-auto">
-      <table className="w-full text-right text-sm text-gray-400">
-        <thead className="text-xs uppercase bg-[#0A192F] text-pharaohGold font-bold border-b border-white/10">
+      <table className="w-full text-right text-sm text-slate-600 dark:text-gray-400">
+        <thead className="text-xs uppercase bg-slate-100 dark:bg-[#0A192F] text-amber-800 dark:text-pharaohGold font-bold border-b border-slate-200 dark:border-white/10">
           <tr>
             <th className="px-6 py-4">فيسبوك (Facebook)</th>
             <th className="px-6 py-4">واتساب (WhatsApp)</th>
@@ -18,10 +18,10 @@ export function SocialLinksPreviewTable({ formData }: SocialLinksPreviewTablePro
           </tr>
         </thead>
         <tbody>
-          <tr className="border-b border-white/5 hover:bg-white/5 transition">
+          <tr className="border-b border-slate-200 dark:border-white/5 hover:bg-slate-50 dark:hover:bg-white/5 transition">
             <td className="px-6 py-4 truncate max-w-[200px]">
               {formData.fb ? (
-                <a href={formData.fb} target="_blank" rel="noopener noreferrer" className="text-[#C5A16F] hover:underline">
+                <a href={formData.fb} target="_blank" rel="noopener noreferrer" className="text-amber-800 dark:text-pharaohGold hover:underline font-bold">
                   {formData.fb}
                 </a>
               ) : (
@@ -30,7 +30,7 @@ export function SocialLinksPreviewTable({ formData }: SocialLinksPreviewTablePro
             </td>
             <td className="px-6 py-4 truncate max-w-[200px]">
               {formData.wa ? (
-                <a href={`https://wa.me/${cleanWa}`} target="_blank" rel="noopener noreferrer" className="text-[#C5A16F] hover:underline">
+                <a href={`https://wa.me/${cleanWa}`} target="_blank" rel="noopener noreferrer" className="text-amber-800 dark:text-pharaohGold hover:underline font-bold">
                   {formData.wa}
                 </a>
               ) : (
@@ -39,7 +39,7 @@ export function SocialLinksPreviewTable({ formData }: SocialLinksPreviewTablePro
             </td>
             <td className="px-6 py-4 truncate max-w-[200px]">
               {formData.ig ? (
-                <a href={formData.ig} target="_blank" rel="noopener noreferrer" className="text-[#C5A16F] hover:underline">
+                <a href={formData.ig} target="_blank" rel="noopener noreferrer" className="text-amber-800 dark:text-pharaohGold hover:underline font-bold">
                   {formData.ig}
                 </a>
               ) : (

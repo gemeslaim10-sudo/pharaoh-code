@@ -10,18 +10,18 @@ interface AddAdminFormProps {
 export function AddAdminForm({ email, setEmail, loading, onSubmit }: AddAdminFormProps) {
   return (
     <form onSubmit={onSubmit} className="space-y-6">
-      <p className="text-gray-400 text-xs leading-relaxed">
+      <p className="text-slate-600 dark:text-gray-400 text-xs leading-relaxed">
         قم بإضافة البريد الإلكتروني للشخص الذي ترغب في منحه صلاحيات إدارة لوحة التحكم. يمكنه الدخول مباشرة بحسابه على جوجل دون الحاجة لإنشاء حساب جديد.
       </p>
       <div>
-        <label className="block text-xs font-bold text-gray-400 mb-2">البريد الإلكتروني (Gmail)</label>
+        <label className="block text-xs font-bold text-slate-700 dark:text-gray-400 mb-2">البريد الإلكتروني (Gmail)</label>
         <input
           type="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="example@gmail.com"
-          className="w-full bg-[#0A192F] border border-white/10 rounded-xl px-4 py-3.5 text-sm text-white focus:outline-none focus:border-pharaohGold transition"
+          className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-pharaohGold transition placeholder:text-slate-400 dark:placeholder:text-gray-600"
         />
       </div>
       <div className="flex justify-end pt-2">

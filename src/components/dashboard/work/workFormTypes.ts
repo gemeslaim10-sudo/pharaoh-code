@@ -1,11 +1,15 @@
 export interface Skill {
   name: string;
+  name_ar?: string;
+  name_en?: string;
   value: string;
 }
 
 export interface Stat {
   value: string;
   label: string;
+  label_ar?: string;
+  label_en?: string;
 }
 
 export interface TeamMember {

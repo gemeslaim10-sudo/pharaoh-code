@@ -14,11 +14,27 @@ export async function getTeamMembers() {
                 const docRef = db.collection('team_members').doc(member.id);
                 const data = {
                     name: member.name,
+                    name_ar: member.name_ar || member.name,
+                    name_en: member.name_en || member.name,
                     role: member.role,
+                    role_ar: member.role_ar || member.role,
+                    role_en: member.role_en || member.role,
                     image: member.image,
                     description: member.description,
-                    skills: member.skills || [],
-                    stats: member.stats || [],
+                    description_ar: member.description_ar || member.description,
+                    description_en: member.description_en || member.description,
+                    skills: (member.skills || []).map((s: any) => ({
+                        name: s.name_ar || s.name,
+                        name_ar: s.name_ar || s.name,
+                        name_en: s.name_en || s.name,
+                        value: s.value
+                    })),
+                    stats: (member.stats || []).map((st: any) => ({
+                        value: st.value,
+                        label: st.label_ar || st.label,
+                        label_ar: st.label_ar || st.label,
+                        label_en: st.label_en || st.label
+                    })),
                     social: member.social || { facebook: '', instagram: '' },
                     createdAt: new Date(Date.now() + index * 1000).toISOString()
                 };
@@ -28,7 +44,31 @@ export async function getTeamMembers() {
             await batch.commit();
             return serializeData(seededMembers);
         }
-        return snap.docs.map(doc => serializeData({ id: doc.id, ...doc.data() }));
+        return snap.docs.map(doc => {
+            const data = doc.data();
+            return serializeData({
+                id: doc.id,
+                ...data,
+                name_ar: data.name_ar || data.name || '',
+                name_en: data.name_en || data.name || '',
+                role_ar: data.role_ar || data.role || '',
+                role_en: data.role_en || data.role || '',
+                description_ar: data.description_ar || data.description || '',
+                description_en: data.description_en || data.description || '',
+                skills: (data.skills || []).map((s: any) => ({
+                    name: s.name_ar || s.name || '',
+                    name_ar: s.name_ar || s.name || '',
+                    name_en: s.name_en || (s.name && !/[\u0600-\u06FF]/.test(s.name) ? s.name : ''),
+                    value: s.value || ''
+                })),
+                stats: (data.stats || []).map((st: any) => ({
+                    value: st.value || '',
+                    label: st.label_ar || st.label || '',
+                    label_ar: st.label_ar || st.label || '',
+                    label_en: st.label_en || (st.label && !/[\u0600-\u06FF]/.test(st.label) ? st.label : '')
+                }))
+            });
+        });
     } catch (error: any) {
         console.error("Failed to get team members:", error);
         return [];

@@ -52,7 +52,7 @@ export default function TeamMemberStatsSection({
           <span className={`text-[11px] sm:text-xs font-semibold ${
             isLight ? 'text-slate-500' : 'text-gray-400'
           }`}>
-            {getDynamicText(stat, 'label', language) || stat.label}
+            {getDynamicText(stat, 'label', language) || (language === 'en' ? (stat.label_en || stat.label) : (stat.label_ar || stat.label))}
           </span>
         </motion.div>
       ))}

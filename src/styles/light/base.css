@@ -21,23 +21,41 @@ body.light {
 
 /* 2. Global Page & Section Backgrounds */
 html[data-theme="light"] body,
+html.light body,
 html[data-theme="light"] main,
+html.light main,
 html[data-theme="light"] section,
+html.light section,
 html[data-theme="light"] footer,
+html.light footer,
 html[data-theme="light"] header,
+html.light header,
 html[data-theme="light"] [class*="bg-[#050B14]"],
+html.light [class*="bg-[#050B14]"],
 html[data-theme="light"] [class*="bg-[#040810]"],
+html.light [class*="bg-[#040810]"],
 html[data-theme="light"] [class*="bg-[#060D1A]"],
+html.light [class*="bg-[#060D1A]"],
 html[data-theme="light"] [class*="bg-[#060E1A]"],
+html.light [class*="bg-[#060E1A]"],
 html[data-theme="light"] [class*="bg-[#0A192F]"],
+html.light [class*="bg-[#0A192F]"],
 html[data-theme="light"] [class*="bg-[#050D1A]"],
+html.light [class*="bg-[#050D1A]"],
 html[data-theme="light"] [class*="bg-[#061020]"],
+html.light [class*="bg-[#061020]"],
 html[data-theme="light"] [class*="bg-[#0B1D3A]"],
+html.light [class*="bg-[#0B1D3A]"],
 html[data-theme="light"] [class*="bg-[#081426]"],
+html.light [class*="bg-[#081426]"],
 html[data-theme="light"] [class*="bg-[#081225]"],
+html.light [class*="bg-[#081225]"],
 html[data-theme="light"] [class*="bg-[#0B1728]"],
+html.light [class*="bg-[#0B1728]"],
 html[data-theme="light"] [class*="bg-[#070F1E]"],
-html[data-theme="light"] [class*="bg-pharaohNavy"] {
+html.light [class*="bg-[#070F1E]"],
+html[data-theme="light"] [class*="bg-pharaohNavy"],
+html.light [class*="bg-pharaohNavy"] {
   background-color: #F8FAFC !important;
   background-image: 
     radial-gradient(circle at 50% 0%, rgba(184, 134, 11, 0.08) 0%, transparent 65%),
@@ -49,45 +67,69 @@ html[data-theme="light"] [class*="bg-pharaohNavy"] {
 
 /* 3. High-Contrast Typography */
 html[data-theme="light"] h1,
+html.light h1,
 html[data-theme="light"] h2,
+html.light h2,
 html[data-theme="light"] h3,
+html.light h3,
 html[data-theme="light"] h4,
+html.light h4,
 html[data-theme="light"] h5,
+html.light h5,
 html[data-theme="light"] h6,
+html.light h6,
 html[data-theme="light"] .text-white,
-html[data-theme="light"] [class*="text-white"]:not(.heroSwiper *):not([class*="btn-"]):not(.btn-pharaoh-gold):not(.filter-btn.active):not(.filter-btn.active *):not(.portfolio-filter-btn.active):not(.portfolio-filter-btn.active *):not([data-active="true"]):not([data-active="true"] *):not(.badge):not(.btn-primary-gold *) {
+html.light .text-white,
+html[data-theme="light"] [class*="text-white"]:not(.heroSwiper *):not([class*="btn-"]):not(.btn-pharaoh-gold):not(.filter-btn.active):not(.filter-btn.active *):not(.portfolio-filter-btn.active):not(.portfolio-filter-btn.active *):not([data-active="true"]):not([data-active="true"] *):not(.badge):not(.btn-primary-gold *),
+html.light [class*="text-white"]:not(.heroSwiper *):not([class*="btn-"]):not(.btn-pharaoh-gold):not(.filter-btn.active):not(.filter-btn.active *):not(.portfolio-filter-btn.active):not(.portfolio-filter-btn.active *):not([data-active="true"]):not([data-active="true"] *):not(.badge):not(.btn-primary-gold *) {
   color: #0A192F !important;
 }
 
 /* Body paragraphs, sub-headers, descriptions, labels, list items */
 html[data-theme="light"] p:not(.heroSwiper *):not(.btn-pharaoh-gold *):not(.filter-btn.active *),
+html.light p:not(.heroSwiper *):not(.btn-pharaoh-gold *):not(.filter-btn.active *),
 html[data-theme="light"] li:not(.heroSwiper *),
+html.light li:not(.heroSwiper *),
 html[data-theme="light"] label,
+html.light label,
 html[data-theme="light"] small,
+html.light small,
 html[data-theme="light"] [class*="text-gray-"]:not(.heroSwiper *):not(.filter-btn.active *):not(.portfolio-filter-btn.active *):not(.btn-pharaoh-gold *),
+html.light [class*="text-gray-"]:not(.heroSwiper *):not(.filter-btn.active *):not(.portfolio-filter-btn.active *):not(.btn-pharaoh-gold *),
 html[data-theme="light"] [class*="text-slate-"]:not(.heroSwiper *):not(.filter-btn.active *):not(.portfolio-filter-btn.active *):not(.btn-pharaoh-gold *),
+html.light [class*="text-slate-"]:not(.heroSwiper *):not(.filter-btn.active *):not(.portfolio-filter-btn.active *):not(.btn-pharaoh-gold *),
 html[data-theme="light"] [class*="text-zinc-"]:not(.heroSwiper *):not(.filter-btn.active *):not(.portfolio-filter-btn.active *),
-html[data-theme="light"] [class*="text-neutral-"]:not(.heroSwiper *):not(.filter-btn.active *):not(.portfolio-filter-btn.active *) {
+html.light [class*="text-zinc-"]:not(.heroSwiper *):not(.filter-btn.active *):not(.portfolio-filter-btn.active *),
+html[data-theme="light"] [class*="text-neutral-"]:not(.heroSwiper *):not(.filter-btn.active *):not(.portfolio-filter-btn.active *),
+html.light [class*="text-neutral-"]:not(.heroSwiper *):not(.filter-btn.active *):not(.portfolio-filter-btn.active *) {
   color: #1E293B !important;
 }
 
 /* Specific contrast enhancement for secondary text and notes */
 html[data-theme="light"] .text-gray-500,
+html.light .text-gray-500,
 html[data-theme="light"] .text-slate-500,
+html.light .text-slate-500,
 html[data-theme="light"] .text-gray-400,
-html[data-theme="light"] .text-slate-400 {
+html.light .text-gray-400,
+html[data-theme="light"] .text-slate-400,
+html.light .text-slate-400 {
   color: #334155 !important;
 }
 
 /* Deep Bronze / Gold Text Accents */
 html[data-theme="light"] [class*="text-pharaohGold"]:not(.heroSwiper *):not([class*="/"]):not(.btn-pharaoh-gold *),
-html[data-theme="light"] [class*="text-[#C5A16F]"]:not(.heroSwiper *):not([class*="/"]):not(.btn-pharaoh-gold *) {
+html.light [class*="text-pharaohGold"]:not(.heroSwiper *):not([class*="/"]):not(.btn-pharaoh-gold *),
+html[data-theme="light"] [class*="text-[#C5A16F]"]:not(.heroSwiper *):not([class*="/"]):not(.btn-pharaoh-gold *),
+html.light [class*="text-[#C5A16F]"]:not(.heroSwiper *):not([class*="/"]):not(.btn-pharaoh-gold *) {
   color: #8A5800 !important;
 }
 
 /* Gradient Text in Light Mode */
 html[data-theme="light"] .bg-clip-text.text-transparent:not(.heroSwiper *),
-html[data-theme="light"] .bg-clip-text:not(.heroSwiper *) {
+html.light .bg-clip-text.text-transparent:not(.heroSwiper *),
+html[data-theme="light"] .bg-clip-text:not(.heroSwiper *),
+html.light .bg-clip-text:not(.heroSwiper *) {
   background-image: linear-gradient(135deg, #78350F 0%, #B8860B 50%, #78350F 100%) !important;
   -webkit-text-fill-color: transparent !important;
 }

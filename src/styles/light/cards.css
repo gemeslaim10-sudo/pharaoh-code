@@ -4,116 +4,168 @@
 
 /* 4. High-Contrast Cards & Containers */
 html[data-theme="light"] .bg-pharaohCard,
+html.light .bg-pharaohCard,
 html[data-theme="light"] .team-card,
+html.light .team-card,
 html[data-theme="light"] [class*="from-[#0F1E38]"],
+html.light [class*="from-[#0F1E38]"],
 html[data-theme="light"] [class*="from-[#0F1F3D]"],
+html.light [class*="from-[#0F1F3D]"],
 html[data-theme="light"] [class*="from-[#10203C]"],
+html.light [class*="from-[#10203C]"],
 html[data-theme="light"] [class*="from-[#122345]"],
+html.light [class*="from-[#122345]"],
 html[data-theme="light"] [class*="bg-[#112240]"],
+html.light [class*="bg-[#112240]"],
 html[data-theme="light"] [class*="bg-[#10203C]"],
+html.light [class*="bg-[#10203C]"],
 html[data-theme="light"] [class*="bg-[#122345]"],
+html.light [class*="bg-[#122345]"],
 html[data-theme="light"] [class*="bg-[#0E1E38]"],
+html.light [class*="bg-[#0E1E38]"],
 html[data-theme="light"] [class*="bg-[#0B1528]"],
+html.light [class*="bg-[#0B1528]"],
 html[data-theme="light"] [class*="bg-[#081222]"],
+html.light [class*="bg-[#081222]"],
 html[data-theme="light"] [class*="bg-[#0D182E]"],
+html.light [class*="bg-[#0D182E]"],
 html[data-theme="light"] [class*="bg-[#0D1E36]"],
+html.light [class*="bg-[#0D1E36]"],
 html[data-theme="light"] [class*="bg-[#0F2338]"],
+html.light [class*="bg-[#0F2338]"],
 html[data-theme="light"] [class*="bg-[#152338]"],
+html.light [class*="bg-[#152338]"],
 html[data-theme="light"] [class*="bg-[#091528]"],
+html.light [class*="bg-[#091528]"],
 html[data-theme="light"] [class*="bg-[#091427]"],
-html[data-theme="light"] [class*="bg-[#0A162B]"] {
+html.light [class*="bg-[#091427]"],
+html[data-theme="light"] [class*="bg-[#0A162B]"],
+html.light [class*="bg-[#0A162B]"] {
   background-color: #FFFFFF !important;
   background-image: none !important;
   color: #0A192F !important;
-  border-color: #94A3B8 !important;
-  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+  border-color: #CBD5E1 !important;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04) !important;
 }
 
 /* 5. Crisp Dark Borders & Outlines */
 html[data-theme="light"] [class*="border-white"],
+html.light [class*="border-white"],
 html[data-theme="light"] [class*="border-gray-"],
+html.light [class*="border-gray-"],
 html[data-theme="light"] [class*="border-slate-"],
+html.light [class*="border-slate-"],
 html[data-theme="light"] [class*="border-zinc-"],
+html.light [class*="border-zinc-"],
 html[data-theme="light"] [class*="border-neutral-"],
-html[data-theme="light"] [class*="border-border"] {
-  border-color: #94A3B8 !important;
+html.light [class*="border-neutral-"],
+html[data-theme="light"] [class*="border-border"],
+html.light [class*="border-border"] {
+  border-color: #CBD5E1 !important;
 }
 
 html[data-theme="light"] [class*="border-pharaohGold"],
-html[data-theme="light"] [class*="border-[#C5A16F]"] {
-  border-color: #8A5800 !important;
+html.light [class*="border-pharaohGold"],
+html[data-theme="light"] [class*="border-[#C5A16F]"],
+html.light [class*="border-[#C5A16F]"] {
+  border-color: #B8860B !important;
 }
 
 html[data-theme="light"] [class*="hover:border-"]:hover,
-html[data-theme="light"] [class*="hover:border-[#C5A16F]"]:hover {
+html.light [class*="hover:border-"]:hover,
+html[data-theme="light"] [class*="hover:border-[#C5A16F]"]:hover,
+html.light [class*="hover:border-[#C5A16F]"]:hover {
   border-color: #8A5800 !important;
 }
 
 /* Internal Section & Card Dividers */
 html[data-theme="light"] [class*="border-t"],
+html.light [class*="border-t"],
 html[data-theme="light"] [class*="border-b"],
+html.light [class*="border-b"],
 html[data-theme="light"] [class*="border-y"],
+html.light [class*="border-y"],
 html[data-theme="light"] [class*="border-x"],
-html[data-theme="light"] [class*="divide-"] {
-  border-color: #CBD5E1 !important;
+html.light [class*="border-x"],
+html[data-theme="light"] [class*="divide-"],
+html.light [class*="divide-"] {
+  border-color: #E2E8F0 !important;
 }
 
 /* Outlines & Focus States */
 html[data-theme="light"] [class*="outline-"],
-html[data-theme="light"] [class*="ring-"] {
+html.light [class*="outline-"],
+html[data-theme="light"] [class*="ring-"],
+html.light [class*="ring-"] {
   outline-color: #8A5800 !important;
 }
 
 /* 6. Form Inputs & Selects & Textareas */
 html[data-theme="light"] input:not([type="checkbox"]):not([type="radio"]),
+html.light input:not([type="checkbox"]):not([type="radio"]),
 html[data-theme="light"] select,
-html[data-theme="light"] textarea {
+html.light select,
+html[data-theme="light"] textarea,
+html.light textarea {
   background-color: #FFFFFF !important;
   color: #0A192F !important;
-  border-color: #94A3B8 !important;
+  border-color: #CBD5E1 !important;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05) !important;
 }
 
 html[data-theme="light"] input:focus,
+html.light input:focus,
 html[data-theme="light"] select:focus,
-html[data-theme="light"] textarea:focus {
+html.light select:focus,
+html[data-theme="light"] textarea:focus,
+html.light textarea:focus {
   border-color: #8A5800 !important;
-  box-shadow: 0 0 0 3px rgba(138, 88, 0, 0.2) !important;
+  box-shadow: 0 0 0 3px rgba(138, 88, 0, 0.15) !important;
   outline: none !important;
 }
 
 html[data-theme="light"] input::placeholder,
-html[data-theme="light"] textarea::placeholder {
+html.light input::placeholder,
+html[data-theme="light"] textarea::placeholder,
+html.light textarea::placeholder {
   color: #64748B !important;
   opacity: 1 !important;
 }
 
 /* 7. Dashboard Tables & Record Lists */
 html[data-theme="light"] thead,
-html[data-theme="light"] thead th {
-  background-color: #F1F5F9 !important;
+html.light thead,
+html[data-theme="light"] thead th,
+html.light thead th {
+  background-color: #F8FAFC !important;
   color: #78350F !important;
   border-color: #CBD5E1 !important;
 }
 
-html[data-theme="light"] tbody tr {
+html[data-theme="light"] tbody tr,
+html.light tbody tr {
   border-color: #E2E8F0 !important;
 }
 
-html[data-theme="light"] tbody tr:hover {
-  background-color: #F8FAFC !important;
+html[data-theme="light"] tbody tr:hover,
+html.light tbody tr:hover {
+  background-color: #F1F5F9 !important;
 }
 
 /* 8. Dashboard Badges & Micro-elements */
 html[data-theme="light"] [class*="bg-white/10"],
-html[data-theme="light"] [class*="bg-white/5"] {
+html.light [class*="bg-white/10"],
+html[data-theme="light"] [class*="bg-white/5"],
+html.light [class*="bg-white/5"] {
   background-color: #F1F5F9 !important;
   color: #334155 !important;
   border-color: #CBD5E1 !important;
 }
 
 html[data-theme="light"] [class*="bg-pharaohGold/15"],
-html[data-theme="light"] [class*="bg-pharaohGold/10"] {
+html.light [class*="bg-pharaohGold/15"],
+html[data-theme="light"] [class*="bg-pharaohGold/10"],
+html.light [class*="bg-pharaohGold/10"] {
   background-color: rgba(184, 134, 11, 0.12) !important;
   color: #78350F !important;
   border-color: rgba(184, 134, 11, 0.3) !important;
@@ -124,105 +176,134 @@ html[data-theme="light"] [class*="bg-pharaohGold/10"] {
    ========================================================================== */
 
 /* Dashboard Sidebar */
-html[data-theme="light"] #sidebar {
+html[data-theme="light"] #sidebar,
+html.light #sidebar {
   background-color: #FFFFFF !important;
   border-color: #CBD5E1 !important;
 }
 
 html[data-theme="light"] #sidebar a,
-html[data-theme="light"] #sidebar nav a {
-  background-color: #F1F5F9 !important;
+html.light #sidebar a,
+html[data-theme="light"] #sidebar nav a,
+html.light #sidebar nav a {
+  background-color: #F8FAFC !important;
   color: #78350F !important;
-  border-color: #CBD5E1 !important;
+  border-color: #E2E8F0 !important;
 }
 
 html[data-theme="light"] #sidebar a:hover,
-html[data-theme="light"] #sidebar nav a:hover {
+html.light #sidebar a:hover,
+html[data-theme="light"] #sidebar nav a:hover,
+html.light #sidebar nav a:hover {
   background-color: rgba(184, 134, 11, 0.1) !important;
   border-color: #8A5800 !important;
 }
 
 /* Dashboard Accordion Groups */
-html[data-theme="light"] .dashboard-accordion {
+html[data-theme="light"] .dashboard-accordion,
+html.light .dashboard-accordion {
   background-color: #FFFFFF !important;
   border-color: #CBD5E1 !important;
 }
 
-html[data-theme="light"] .dashboard-accordion [role="button"] {
+html[data-theme="light"] .dashboard-accordion [role="button"],
+html.light .dashboard-accordion [role="button"] {
   color: #0A192F !important;
 }
 
-html[data-theme="light"] .dashboard-accordion [role="button"] h3 {
+html[data-theme="light"] .dashboard-accordion [role="button"] h3,
+html.light .dashboard-accordion [role="button"] h3 {
   color: #0A192F !important;
 }
 
-html[data-theme="light"] .dashboard-accordion [role="button"] p {
+html[data-theme="light"] .dashboard-accordion [role="button"] p,
+html.light .dashboard-accordion [role="button"] p {
   color: #475569 !important;
 }
 
 /* Dashboard Accordion Body - inner content area */
-html[data-theme="light"] .dashboard-accordion .overflow-hidden > div[class*="bg-"] {
+html[data-theme="light"] .dashboard-accordion .overflow-hidden > div[class*="bg-"],
+html.light .dashboard-accordion .overflow-hidden > div[class*="bg-"] {
   background-color: #F8FAFC !important;
 }
 
 /* Dashboard Form Content Areas */
-html[data-theme="light"] .db-form-content {
+html[data-theme="light"] .db-form-content,
+html.light .db-form-content {
   background-color: #FFFFFF !important;
   border-color: #CBD5E1 !important;
 }
 
 html[data-theme="light"] .db-form-content h1,
+html.light .db-form-content h1,
 html[data-theme="light"] .db-form-content h2,
+html.light .db-form-content h2,
 html[data-theme="light"] .db-form-content h3,
+html.light .db-form-content h3,
 html[data-theme="light"] .db-form-content h4,
+html.light .db-form-content h4,
 html[data-theme="light"] .db-form-content h5,
+html.light .db-form-content h5,
 html[data-theme="light"] .db-form-content p,
+html.light .db-form-content p,
 html[data-theme="light"] .db-form-content label,
-html[data-theme="light"] .db-form-content span {
+html.light .db-form-content label,
+html[data-theme="light"] .db-form-content span,
+html.light .db-form-content span {
   color: #0A192F !important;
 }
 
 html[data-theme="light"] .db-form-content input,
+html.light .db-form-content input,
 html[data-theme="light"] .db-form-content textarea,
-html[data-theme="light"] .db-form-content select {
+html.light .db-form-content textarea,
+html[data-theme="light"] .db-form-content select,
+html.light .db-form-content select {
   background-color: #FFFFFF !important;
   color: #0A192F !important;
-  border-color: #94A3B8 !important;
+  border-color: #CBD5E1 !important;
 }
 
 /* bg-pharaohNavy/50 used in panels */
-html[data-theme="light"] [class*="bg-pharaohNavy/"] {
+html[data-theme="light"] [class*="bg-pharaohNavy/"],
+html.light [class*="bg-pharaohNavy/"] {
   background-color: #F8FAFC !important;
   border-color: #CBD5E1 !important;
 }
 
-/* Creativity "floating label" badge - Gold pill at top of card - keep it gold in light mode */
-html[data-theme="light"] [class*="bg-pharaohGold"][class*="text-[#0A192F]"] {
+/* Creativity floating label badge */
+html[data-theme="light"] [class*="bg-pharaohGold"][class*="text-[#0A192F]"],
+html.light [class*="bg-pharaohGold"][class*="text-[#0A192F]"] {
   background-color: #B8860B !important;
   color: #FFFFFF !important;
 }
 
 /* Dashboard Review Cards */
-html[data-theme="light"] .review-card {
+html[data-theme="light"] .review-card,
+html.light .review-card {
   background-color: #FFFFFF !important;
   border-color: #CBD5E1 !important;
 }
 
 /* Colors for project loading state */
-html[data-theme="light"] [class*="text-gray-400"]:not(svg) {
-  color: #64748B !important;
+html[data-theme="light"] [class*="text-gray-400"]:not(svg),
+html.light [class*="text-gray-400"]:not(svg) {
+  color: #475569 !important;
 }
 
 /* bg-[#0A192F]/70 patterns for dark inner panels in skills/stats form */
 html[data-theme="light"] [class*="bg-[#060D1A]"],
+html.light [class*="bg-[#060D1A]"],
 html[data-theme="light"] [class*="bg-[#091528]/70"],
-html[data-theme="light"] [class*="bg-[#091528]"] {
+html.light [class*="bg-[#091528]/70"],
+html[data-theme="light"] [class*="bg-[#091528]"],
+html.light [class*="bg-[#091528]"] {
   background-color: #F8FAFC !important;
   border-color: #CBD5E1 !important;
 }
 
 /* Dashboard skill/stat progress bars in light mode */
-html[data-theme="light"] [class*="bg-[#091528]"] {
+html[data-theme="light"] [class*="bg-[#091528]"],
+html.light [class*="bg-[#091528]"] {
   background-color: #E2E8F0 !important;
 }
-

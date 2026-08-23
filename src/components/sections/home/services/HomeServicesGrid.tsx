@@ -68,7 +68,7 @@ export function HomeServicesGrid({
                 />
               </div>
 
-              <span className={`text-[10px] font-mono font-black px-2 py-0.5 rounded-md border ${
+              <span className={`inline-flex items-center leading-none text-[10px] font-mono font-black px-2 py-0.5 rounded-md border ${
                 isSelected
                   ? isLight
                     ? 'bg-amber-50 text-[#8A5800] border-[#C5A16F]/40'

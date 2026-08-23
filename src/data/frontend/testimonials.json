@@ -1,26 +1,56 @@
 [
-    {
-        "id": "testimonial_01",
-        "name": "أحمد الشريف",
-        "role": "مدير تسويق - شركة النخبة العقارية",
-        "quote": "\"Pharaoh Code حرفياً بنى لنا صرح رقمي. الموقع سريع جداً والتصميم فاق كل توقعاتنا. زادت مبيعاتنا بنسبة كبيرة بعد الإطلاق.\"",
-        "stars": "★★★★☆",
-        "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150"
-    },
-    {
-        "id": "testimonial_02",
-        "name": "محمد خالد",
-        "role": "CEO - تطبيق \"دليفري مصر\"",
-        "quote": "\"تطبيقنا صار من أفضل التطبيقات في السوق بفضل شغلهم. الـ UI/UX احترافي جداً والأداء ممتاز على كل الأجهزة.\"",
-        "stars": "★★★★★",
-        "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150"
-    },
-    {
-        "id": "testimonial_03",
-        "name": "سارة إبراهيم",
-        "role": "صاحبة متجر \"لولو هوم\"",
-        "quote": "\"موقع المتجر صار يجيب لنا عملاء يومياً. التصميم أنيق والـ checkout سلس جداً. خدمة ما بعد البيع ممتازة.\"",
-        "stars": "★★★★★",
-        "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150"
-    }
+  {
+    "id": "testimonial_01",
+    "name": "أحمد الشريف",
+    "role": "مدير تسويق - شركة النخبة العقارية",
+    "quote": "\"Pharaoh Code حرفياً بنى لنا صرح رقمي. الموقع سريع جداً والتصميم فاق كل توقعاتنا. زادت مبيعاتنا بنسبة كبيرة بعد الإطلاق.\"",
+    "stars": "★★★★☆",
+    "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
+    "name_ar": "أحمد الشريف",
+    "name_en": "Ahmed Al-Sherif",
+    "role_ar": "مدير تسويق - شركة النخبة العقارية",
+    "role_en": "Marketing Director - Al Nokhba Real Estate",
+    "quote_ar": "\"Pharaoh Code حرفياً بنى لنا صرح رقمي. الموقع سريع جداً والتصميم فاق كل توقعاتنا. زادت مبيعاتنا بنسبة كبيرة بعد الإطلاق.\"",
+    "quote_en": "\"Pharaoh Code literally forged a digital monolith for us. The site is blazing fast and the UI exceeded all expectations. Our sales increased significantly post-launch.\"",
+    "content_ar": "\"Pharaoh Code حرفياً بنى لنا صرح رقمي. الموقع سريع جداً والتصميم فاق كل توقعاتنا. زادت مبيعاتنا بنسبة كبيرة بعد الإطلاق.\"",
+    "content_en": "\"Pharaoh Code literally forged a digital monolith for us. The site is blazing fast and the UI exceeded all expectations. Our sales increased significantly post-launch.\"",
+    "text_ar": "\"Pharaoh Code حرفياً بنى لنا صرح رقمي. الموقع سريع جداً والتصميم فاق كل توقعاتنا. زادت مبيعاتنا بنسبة كبيرة بعد الإطلاق.\"",
+    "text_en": "\"Pharaoh Code literally forged a digital monolith for us. The site is blazing fast and the UI exceeded all expectations. Our sales increased significantly post-launch.\""
+  },
+  {
+    "id": "testimonial_02",
+    "name": "محمد خالد",
+    "role": "CEO - تطبيق \"دليفري مصر\"",
+    "quote": "\"تطبيقنا صار من أفضل التطبيقات في السوق بفضل شغلهم. الـ UI/UX احترافي جداً والأداء ممتاز على كل الأجهزة.\"",
+    "stars": "★★★★★",
+    "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150",
+    "name_ar": "محمد خالد",
+    "name_en": "Mohammed Khaled",
+    "role_ar": "الرئيس التنفيذي - تطبيق دليفري مصر",
+    "role_en": "CEO - Delivery Egypt App",
+    "quote_ar": "\"تطبيقنا صار من أفضل التطبيقات في السوق بفضل شغلهم. الـ UI/UX احترافي جداً والأداء ممتاز على كل الأجهزة.\"",
+    "quote_en": "\"Our application has become one of the top platforms in the market thanks to their engineering. Flawless UI/UX and superb performance on all devices.\"",
+    "content_ar": "\"تطبيقنا صار من أفضل التطبيقات في السوق بفضل شغلهم. الـ UI/UX احترافي جداً والأداء ممتاز على كل الأجهزة.\"",
+    "content_en": "\"Our application has become one of the top platforms in the market thanks to their engineering. Flawless UI/UX and superb performance on all devices.\"",
+    "text_ar": "\"تطبيقنا صار من أفضل التطبيقات في السوق بفضل شغلهم. الـ UI/UX احترافي جداً والأداء ممتاز على كل الأجهزة.\"",
+    "text_en": "\"Our application has become one of the top platforms in the market thanks to their engineering. Flawless UI/UX and superb performance on all devices.\""
+  },
+  {
+    "id": "testimonial_03",
+    "name": "سارة إبراهيم",
+    "role": "صاحبة متجر \"لولو هوم\"",
+    "quote": "\"موقع المتجر صار يجيب لنا عملاء يومياً. التصميم أنيق والـ checkout سلس جداً. خدمة ما بعد البيع ممتازة.\"",
+    "stars": "★★★★★",
+    "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150",
+    "name_ar": "سارة إبراهيم",
+    "name_en": "Sara Ibrahim",
+    "role_ar": "صاحبة متجر لولو هوم",
+    "role_en": "Owner - Lulu Home Decor",
+    "quote_ar": "\"موقع المتجر صار يجيب لنا عملاء يومياً. التصميم أنيق والـ checkout سلس جداً. خدمة ما بعد البيع ممتازة.\"",
+    "quote_en": "\"Our online store generates daily customer leads. Elegant aesthetic, seamless checkout experience, and stellar post-launch support.\"",
+    "content_ar": "\"موقع المتجر صار يجيب لنا عملاء يومياً. التصميم أنيق والـ checkout سلس جداً. خدمة ما بعد البيع ممتازة.\"",
+    "content_en": "\"Our online store generates daily customer leads. Elegant aesthetic, seamless checkout experience, and stellar post-launch support.\"",
+    "text_ar": "\"موقع المتجر صار يجيب لنا عملاء يومياً. التصميم أنيق والـ checkout سلس جداً. خدمة ما بعد البيع ممتازة.\"",
+    "text_en": "\"Our online store generates daily customer leads. Elegant aesthetic, seamless checkout experience, and stellar post-launch support.\""
+  }
 ]

@@ -84,12 +84,12 @@ export default function CreativityRecords({ activeTab, refreshKey }: Props) {
                             {activeTab === 'portfolio' && (
                                 <div className="space-y-3">
                                      <div className="flex flex-wrap gap-2 items-center">
-                                         <span className="text-xs bg-amber-500/10 dark:bg-pharaohGold/10 text-amber-800 dark:text-pharaohGold px-3 py-1 rounded-full border border-amber-500/20 dark:border-pharaohGold/20 font-bold">{record.category}</span>
+                                         <span className="text-xs bg-amber-500/10 dark:bg-pharaohGold/10 text-amber-800 dark:text-pharaohGold px-3 py-1 rounded-full border border-amber-500/20 dark:border-pharaohGold/20 font-bold inline-flex items-center justify-center leading-none">{record.category}</span>
                                          {record.link && (
-                                             <a href={record.link} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 dark:text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full hover:bg-blue-500/20 transition-colors">رابط الموقع</a>
+                                             <a href={record.link} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 dark:text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full hover:bg-blue-500/20 transition-colors inline-flex items-center justify-center leading-none">رابط الموقع</a>
                                          )}
                                          {record.appLink && (
-                                             <a href={record.appLink} target="_blank" rel="noopener noreferrer" className="text-xs text-green-600 dark:text-green-400 bg-green-500/10 px-3 py-1 rounded-full hover:bg-green-500/20 transition-colors flex items-center gap-1">📱 رابط التطبيق</a>
+                                             <a href={record.appLink} target="_blank" rel="noopener noreferrer" className="text-xs text-green-600 dark:text-green-400 bg-green-500/10 px-3 py-1 rounded-full hover:bg-green-500/20 transition-colors flex items-center gap-1 leading-none">📱 رابط التطبيق</a>
                                          )}
                                      </div>
                                     <p className="text-slate-600 dark:text-gray-400 text-xs line-clamp-2">{record.desc || record.description || record.desc_ar}</p>
@@ -108,7 +108,7 @@ export default function CreativityRecords({ activeTab, refreshKey }: Props) {
                                 <div className="space-y-3">
                                     <div className="text-amber-800 dark:text-pharaohGold w-10 h-10" dangerouslySetInnerHTML={{ __html: record.icon }} />
                                     <p className="text-slate-600 dark:text-gray-400 text-xs line-clamp-3">{record.desc || record.description || record.desc_ar}</p>
-                                    <span className="text-xs text-blue-600 dark:text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full mt-2 inline-block border border-blue-500/20">{record.btnText}</span>
+                                    <span className="text-xs text-blue-600 dark:text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full mt-2 inline-flex items-center justify-center leading-none border border-blue-500/20">{record.btnText}</span>
                                 </div>
                             )}
                         </div>

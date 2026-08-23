@@ -72,7 +72,7 @@ export function HomeCreativePillarCard({
           </div>
 
           <div className="text-right shrink-0">
-            <span className={`text-[11px] font-mono uppercase tracking-wider font-extrabold px-2.5 py-1 rounded-lg border shadow-sm whitespace-nowrap shrink-0 ${
+            <span className={`inline-flex items-center justify-center leading-none text-[11px] font-mono uppercase tracking-wider font-extrabold px-2.5 py-1 rounded-lg border shadow-sm whitespace-nowrap shrink-0 ${
               isLight
                 ? 'text-[#8A5800] bg-amber-50 border-[#8A5800]/40'
                 : 'text-[#C5A16F] bg-[#C5A16F]/10 border-[#C5A16F]/30'

@@ -21,6 +21,8 @@ export default async function FrontendLayout({
   ]);
 
   const siteName = identity?.name || "PHARAOH CODE";
+  const siteNameAr = identity?.name_ar || identity?.name || "PHARAOH CODE";
+  const siteNameEn = identity?.name_en || "PHARAOH CODE";
   const logoUrl = identity?.logo || identity?.logo_dark || "";
   const logoLightUrl = identity?.logo_light || "";
   const reverseNavbarAr = identity?.reverse_navbar_ar !== undefined ? identity.reverse_navbar_ar : true;
@@ -71,7 +73,7 @@ export default async function FrontendLayout({
     <>
       {showScrollProgress && <ScrollProgressBar />}
       <Preloader siteName={siteName} logoUrl={logoUrl} logoLightUrl={logoLightUrl} />
-      <Navbar siteName={siteName} logoUrl={logoUrl} logoLightUrl={logoLightUrl} reverseNavbarAr={reverseNavbarAr} />
+      <Navbar siteName={siteName} siteNameAr={siteNameAr} siteNameEn={siteNameEn} logoUrl={logoUrl} logoLightUrl={logoLightUrl} reverseNavbarAr={reverseNavbarAr} />
       
       <main className="flex-grow pb-16 md:pb-0">
         <PageTransitionWrapper>{children}</PageTransitionWrapper>
@@ -79,7 +81,7 @@ export default async function FrontendLayout({
 
       {showSideScrollbar && <FloatingActions whatsappNumber={whatsappNumber} />}
       <MobileBottomNav whatsappNumber={whatsappNumber} logoUrl={logoUrl} logoLightUrl={logoLightUrl} />
-      <Footer siteName={siteName} logoUrl={logoUrl} logoLightUrl={logoLightUrl} socialLinks={socialLinks} />
+      <Footer siteName={siteName} siteNameAr={siteNameAr} siteNameEn={siteNameEn} logoUrl={logoUrl} logoLightUrl={logoLightUrl} socialLinks={socialLinks} />
       <GlobalScripts />
     </>
   );

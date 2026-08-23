@@ -1,13 +1,18 @@
 {
-    "lastUpdated": "يناير 2024",
-    "sections": [
-        {
-            "title": "قبول الشروط",
-            "content": "باستخدامك لموقعنا، فإنك توافق على هذه الشروط..."
-        },
-        {
-            "title": "حقوق الملكية الفكرية",
-            "content": "جميع حقوق الملكية الفكرية للمحتوى تابعة لشركة Pharaoh Code."
-        }
-    ]
+  "lastUpdated_ar": "2026",
+  "lastUpdated_en": "2026",
+  "sections": [
+    {
+      "title_ar": "نطاق الخدمات والتعاقدات",
+      "title_en": "Scope of Services & Contracts",
+      "content_ar": "تلتزم Pharaoh Code بتنفيذ المشاريع البرمجية وفقاً لوثيقة المتطلبات الفنية المتفق عليها والموقعة مع العميل مسبقاً.",
+      "content_en": "Pharaoh Code commits to developing software projects according to the agreed Scope of Work signed with the client."
+    },
+    {
+      "title_ar": "حقوق الملكية الفكرية البرمجية",
+      "title_en": "Intellectual Property Rights",
+      "content_ar": "يحصل العميل على كامل حقوق الملكية الفكرية والأكواد المصدرية لمشروعه فور سداد المستحقات المالية المتفق عليها.",
+      "content_en": "The client receives complete intellectual property rights and source code for their project upon settlement of agreed dues."
+    }
+  ]
 }

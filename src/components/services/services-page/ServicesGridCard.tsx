@@ -62,12 +62,12 @@ export function ServicesGridCard({
         {(badgeRight || badgeLeft) && (
           <div className="absolute top-2.5 inset-x-2.5 flex items-center justify-between pointer-events-none z-10 gap-1.5">
             {badgeRight && (
-              <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#070F1E]/85 backdrop-blur-md text-[#C5A16F] border border-[#C5A16F]/30 shadow-sm">
+              <span className="inline-flex items-center text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#070F1E]/85 backdrop-blur-md text-[#C5A16F] border border-[#C5A16F]/30 shadow-sm leading-none">
                 {badgeRight}
               </span>
             )}
             {badgeLeft && (
-              <span className="text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md bg-emerald-950/80 backdrop-blur-md text-emerald-300 border border-emerald-500/30 shadow-sm ms-auto">
+              <span className="inline-flex items-center text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md bg-emerald-950/80 backdrop-blur-md text-emerald-300 border border-emerald-500/30 shadow-sm ms-auto leading-none">
                 {badgeLeft}
               </span>
             )}

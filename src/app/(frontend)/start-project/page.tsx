@@ -2,8 +2,10 @@
 
 import { useState } from 'react';
 import { submitProjectRequest } from '@/app/actions/frontend';
+import { useTranslation } from '@/contexts/LanguageContext';
 
 export default function StartProjectPage() {
+  const { language, direction } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -19,7 +21,7 @@ export default function StartProjectPage() {
       setSuccess(true);
       (e.target as HTMLFormElement).reset();
     } else {
-      window.alert(result.error || 'حدث خطأ أثناء إرسال الطلب.');
+      window.alert(result.error || (language === 'ar' ? 'حدث خطأ أثناء إرسال الطلب.' : 'An error occurred while submitting request.'));
     }
     
     setLoading(false);
@@ -27,14 +29,26 @@ export default function StartProjectPage() {
 
   return (
     <>
-      <section className="relative pt-32 pb-20 px-6 bg-gradient-to-b from-[#0A192F] to-[#0D1B2A]">
+      <section className="relative pt-32 pb-20 px-6 bg-gradient-to-b from-[#0A192F] to-[#0D1B2A]" dir={direction}>
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                 
                 <div className="lg:col-span-4 space-y-10">
                     <div className="space-y-4">
-                        <h2 className="text-pharaohGold font-bold tracking-[0.3em] uppercase text-xs">Contact Information</h2>
-                        <h3 className="text-4xl md:text-5xl font-black text-white leading-tight">تواصل مع <br /><span className="text-pharaohGold">صرح فرعون</span></h3>
-                        <p className="text-gray-400 text-lg">نحن هنا لنبني لك مستقبلك الرقمي. اترك تفاصيل مشروعك وسنتواصل معك فوراً.</p>
+                        <h2 className="text-pharaohGold font-bold tracking-[0.3em] uppercase text-xs">
+                          {language === 'ar' ? 'معلومات التواصل' : 'Contact Information'}
+                        </h2>
+                        <h3 className="text-4xl md:text-5xl font-black text-white leading-tight">
+                          {language === 'ar' ? (
+                            <>تواصل مع <br /><span className="text-pharaohGold">صرح فرعون</span></>
+                          ) : (
+                            <>Connect with <br /><span className="text-pharaohGold">Pharaoh Monolith</span></>
+                          )}
+                        </h3>
+                        <p className="text-gray-400 text-lg">
+                          {language === 'ar' 
+                            ? 'نحن هنا لنبني لك مستقبلك الرقمي. اترك تفاصيل مشروعك وسنتواصل معك فوراً.'
+                            : 'We engineer your digital future. Share your project requirements and our team will contact you promptly.'}
+                        </p>
                     </div>
 
                     <div className="space-y-6">
@@ -43,18 +57,18 @@ export default function StartProjectPage() {
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
                             </div>
                             <div>
-                                <h4 className="text-white font-bold">اتصل بنا</h4>
-                                <p className="text-gray-400 text-sm" dir="ltr">+20 123 456 7890</p>
+                                <h4 className="text-white font-bold">{language === 'ar' ? 'اتصل بنا' : 'Call Us'}</h4>
+                                <p className="text-gray-400 text-sm" dir="ltr">+20 112 695 2232</p>
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-5 p-6 bg-deepBlue/40 border border-white/5 rounded-3xl group hover:border-pharaohGold/30 transition-all text-right">
+                        <div className="flex items-center gap-5 p-6 bg-deepBlue/40 border border-white/5 rounded-3xl group hover:border-pharaohGold/30 transition-all">
                             <div className="w-12 h-12 bg-pharaohGold/10 rounded-2xl flex items-center justify-center text-pharaohGold">
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
                             </div>
                             <div>
-                                <h4 className="text-white font-bold">مقر الشركة</h4>
-                                <p className="text-gray-400 text-sm">القاهرة، التجمع الخامس</p>
+                                <h4 className="text-white font-bold">{language === 'ar' ? 'مقر الشركة' : 'Headquarters'}</h4>
+                                <p className="text-gray-400 text-sm">{language === 'ar' ? 'القاهرة، جمهورية مصر العربية' : 'Cairo, Egypt'}</p>
                             </div>
                         </div>
                     </div>
@@ -68,45 +82,57 @@ export default function StartProjectPage() {
                             <div className="w-20 h-20 bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6">
                                 <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
                             </div>
-                            <h3 className="text-2xl font-black text-white mb-2">تم إرسال طلبك بنجاح!</h3>
-                            <p className="text-gray-400">سنتواصل معك في أقرب وقت لمناقشة التفاصيل.</p>
+                            <h3 className="text-2xl font-black text-white mb-2">
+                              {language === 'ar' ? 'تم إرسال طلبك بنجاح!' : 'Your Request Has Been Sent!'}
+                            </h3>
+                            <p className="text-gray-400">
+                              {language === 'ar' ? 'سنتواصل معك في أقرب وقت لمناقشة التفاصيل.' : 'Our engineers will connect with you promptly to discuss details.'}
+                            </p>
                         </div>
                     ) : (
-                        <form id="contactForm" className="space-y-8 text-right" onSubmit={handleSubmit}>
+                        <form id="contactForm" className="space-y-8" onSubmit={handleSubmit}>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div className="space-y-2">
-                                    <label className="text-gray-400 text-xs font-bold mr-2 uppercase tracking-widest">اسمك الكريم</label>
-                                    <input type="text" name="name" placeholder="مثال: أحمد فرعون" required className="w-full bg-pharaohNavy border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-pharaohGold outline-none transition-all input-glow placeholder:text-gray-700" />
+                                    <label className="text-gray-400 text-xs font-bold mr-2 uppercase tracking-widest">
+                                      {language === 'ar' ? 'اسمك الكريم' : 'Full Name'}
+                                    </label>
+                                    <input type="text" name="name" placeholder={language === 'ar' ? "مثال: أحمد فرعون" : "e.g. Ahmed Pharaoh"} required className="w-full bg-pharaohNavy border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-pharaohGold outline-none transition-all input-glow placeholder:text-gray-700" />
                                 </div>
                                 <div className="space-y-2">
-                                    <label className="text-gray-400 text-xs font-bold mr-2 uppercase tracking-widest">رقم الواتساب</label>
-                                    <input type="tel" name="phone" placeholder="01xxxxxxxxx" required className="w-full bg-pharaohNavy border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-pharaohGold outline-none transition-all input-glow text-left placeholder:text-gray-700" dir="ltr" />
+                                    <label className="text-gray-400 text-xs font-bold mr-2 uppercase tracking-widest">
+                                      {language === 'ar' ? 'رقم الواتساب / الهاتف' : 'WhatsApp / Phone'}
+                                    </label>
+                                    <input type="tel" name="phone" placeholder="+20 1xxxxxxxxx" required className="w-full bg-pharaohNavy border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-pharaohGold outline-none transition-all input-glow placeholder:text-gray-700" dir="ltr" />
                                 </div>
                             </div>
                             <div className="space-y-2">
-                                <label className="text-gray-400 text-xs font-bold mr-2 uppercase tracking-widest">نوع الخدمة المطلوبة</label>
+                                <label className="text-gray-400 text-xs font-bold mr-2 uppercase tracking-widest">
+                                  {language === 'ar' ? 'نوع الخدمة المطلوبة' : 'Requested Service Type'}
+                                </label>
                                 <select name="service" className="w-full bg-pharaohNavy border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-pharaohGold outline-none transition-all appearance-none cursor-pointer">
-                                    <option value="تطبيق موبايل">تطبيق موبايل (iOS / Android)</option>
-                                    <option value="موقع إلكتروني">موقع إلكتروني احترافي</option>
-                                    <option value="نظام ERP">نظام إداري ERP</option>
-                                    <option value="تصميم UI/UX">تصميم هوية بصرية UI/UX</option>
+                                    <option value="تطبيق موبايل">{language === 'ar' ? 'تطبيق موبايل (iOS / Android)' : 'Mobile Application (iOS / Android)'}</option>
+                                    <option value="موقع إلكتروني">{language === 'ar' ? 'موقع إلكتروني احترافي' : 'Professional Web Platform'}</option>
+                                    <option value="نظام ERP">{language === 'ar' ? 'نظام إداري وسحابي ERP' : 'Enterprise Cloud ERP System'}</option>
+                                    <option value="تصميم UI/UX">{language === 'ar' ? 'تصميم هوية بصرية و UI/UX' : 'Brand Identity & UI/UX Design'}</option>
                                 </select>
                             </div>
                             <div className="space-y-2">
-                                <label className="text-gray-400 text-xs font-bold mr-2 uppercase tracking-widest">تفاصيل فكرتك</label>
-                                <textarea name="details" rows={5} placeholder="اشرح لنا ملامح مشروعك..." className="w-full bg-pharaohNavy border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-pharaohGold outline-none transition-all resize-none input-glow placeholder:text-gray-700"></textarea>
+                                <label className="text-gray-400 text-xs font-bold mr-2 uppercase tracking-widest">
+                                  {language === 'ar' ? 'تفاصيل فكرتك' : 'Project Scope & Details'}
+                                </label>
+                                <textarea name="details" rows={5} placeholder={language === 'ar' ? "اشرح لنا ملامح مشروعك وأهدافك التقنية..." : "Describe your system features and strategic goals..."} className="w-full bg-pharaohNavy border border-white/10 rounded-2xl px-6 py-4 text-white focus:border-pharaohGold outline-none transition-all resize-none input-glow placeholder:text-gray-700"></textarea>
                             </div>
-                            <button type="submit" disabled={loading} className={`w-full ${loading ? 'bg-gray-500' : 'bg-pharaohGold hover:bg-white'} text-pharaohNavy font-black text-xl py-5 rounded-2xl flex items-center justify-center gap-4 transition-all transform active:scale-95 shadow-xl shadow-pharaohGold/10`}>
-                                <span>{loading ? 'جاري الإرسال...' : 'إرسال البيانات للصرح'}</span>
+                            <button type="submit" disabled={loading} className={`w-full ${loading ? 'bg-gray-500' : 'bg-pharaohGold hover:bg-white'} text-pharaohNavy font-black text-xl py-5 rounded-2xl flex items-center justify-center gap-4 transition-all transform active:scale-95 shadow-xl shadow-pharaohGold/10 cursor-pointer`}>
+                                <span>{loading ? (language === 'ar' ? 'جاري الإرسال...' : 'Sending...') : (language === 'ar' ? 'إرسال البيانات للصرح' : 'Submit Project Brief')}</span>
                                 {!loading && (
-                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={direction === 'rtl' ? "M13 7l5 5m0 0l-5 5m5-5H6" : "M14 5l7 7m0 0l-7 7m7-7H3"}></path></svg>
                                 )}
                             </button>
                         </form>
                     )}
                 </div>
             </div>
-        </section>
+      </section>
     </>
   );
 }

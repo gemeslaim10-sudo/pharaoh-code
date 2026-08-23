@@ -63,7 +63,7 @@ export function DashboardSectionNavbar({
             {/* Optional Counter / Badge */}
             {section.badge !== undefined && (
               <span className={`
-                px-2 py-0.5 rounded-full text-[10px] font-mono font-bold
+                inline-flex items-center leading-none px-2 py-0.5 rounded-full text-[10px] font-mono font-bold
                 ${isActive ? 'bg-amber-100 dark:bg-pharaohGold/20 text-amber-800 dark:text-pharaohGold' : 'bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-gray-400'}
               `}>
                 {section.badge}

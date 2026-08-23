@@ -40,7 +40,7 @@ export function DashboardSectionLayout({
               {title}
             </h1>
             {badge && (
-              <span className="px-3 py-1 rounded-full text-xs font-black bg-amber-500/10 dark:bg-pharaohGold/15 text-amber-800 dark:text-pharaohGold border border-amber-500/30 dark:border-pharaohGold/30 shadow-sm">
+              <span className="inline-flex items-center leading-none px-3 py-1 rounded-full text-xs font-black bg-amber-500/10 dark:bg-pharaohGold/15 text-amber-800 dark:text-pharaohGold border border-amber-500/30 dark:border-pharaohGold/30 shadow-sm">
                 {badge}
               </span>
             )}

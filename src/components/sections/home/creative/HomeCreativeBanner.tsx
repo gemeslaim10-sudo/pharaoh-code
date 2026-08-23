@@ -14,7 +14,7 @@ export function HomeCreativeBanner() {
             : 'Every line of code undergoes rigorous performance benchmarks and security audits.'}
         </p>
       </div>
-      <span className="text-[10px] font-mono font-bold tracking-wider text-[#C5A16F] uppercase px-2.5 py-1 rounded-md bg-[#C5A16F]/10 border border-[#C5A16F]/20 shrink-0">
+      <span className="inline-flex items-center justify-center leading-none text-[10px] font-mono font-bold tracking-wider text-[#C5A16F] uppercase px-2.5 py-1 rounded-md bg-[#C5A16F]/10 border border-[#C5A16F]/20 shrink-0">
         PHARAOH ARCHITECTURE
       </span>
     </div>

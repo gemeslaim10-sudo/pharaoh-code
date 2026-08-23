@@ -1,13 +1,18 @@
 {
-    "lastUpdated": "يناير 2024",
-    "sections": [
-        {
-            "title": "جمع البيانات",
-            "content": "نحن نقوم بجمع بعض البيانات الضرورية لتحسين الخدمة..."
-        },
-        {
-            "title": "استخدام البيانات",
-            "content": "نستخدم البيانات لتوفير تجربة مستخدم أفضل..."
-        }
-    ]
+  "lastUpdated_ar": "2026",
+  "lastUpdated_en": "2026",
+  "sections": [
+    {
+      "title_ar": "نوعية البيانات التي نجمعها",
+      "title_en": "Data We Collect",
+      "content_ar": "تقتصر البيانات التي نطلبها في Pharaoh Code على البيانات الفنية والتعاقدية الأساسية لضمان دقة التنفيذ البرمجي.",
+      "content_en": "Data requested at Pharaoh Code is strictly limited to essential technical and contractual details ensuring engineering excellence."
+    },
+    {
+      "title_ar": "سرية الشيفرة المصدرية (Source Code)",
+      "title_en": "Source Code Confidentiality",
+      "content_ar": "الشيفرات البرمجية التي يتم تطويرها لمشروعكم هي ملكية فكرية مطلقة وحصرية لكم فور إتمام التعاقد.",
+      "content_en": "Source code engineered for your applications remains your exclusive intellectual property upon contract fulfillment."
+    }
+  ]
 }

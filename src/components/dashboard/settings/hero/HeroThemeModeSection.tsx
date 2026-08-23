@@ -40,7 +40,7 @@ export function HeroThemeModeSection({
           <div className="flex items-center justify-between mb-2">
             <label className="block text-xs font-bold text-slate-700 dark:text-gray-300">ميديا السلايد الأول (صورة 🖼️ أو فيديو 🎬)</label>
             {slide1Media && (
-              <span className="text-[10px] text-amber-800 dark:text-pharaohGold bg-amber-500/10 dark:bg-pharaohGold/10 px-2 py-0.5 rounded-full font-bold">
+              <span className="inline-flex items-center leading-none text-[10px] text-amber-800 dark:text-pharaohGold bg-amber-500/10 dark:bg-pharaohGold/10 px-2 py-0.5 rounded-full font-bold">
                 {isVideo(slide1Media) ? '🎬 فيديو' : '🖼️ صورة'}
               </span>
             )}
@@ -65,7 +65,7 @@ export function HeroThemeModeSection({
           <div className="flex items-center justify-between mb-2">
             <label className="block text-xs font-bold text-slate-700 dark:text-gray-300">ميديا السلايد الثاني (صورة 🖼️ أو فيديو 🎬)</label>
             {slide2Media && (
-              <span className="text-[10px] text-amber-800 dark:text-pharaohGold bg-amber-500/10 dark:bg-pharaohGold/10 px-2 py-0.5 rounded-full font-bold">
+              <span className="inline-flex items-center leading-none text-[10px] text-amber-800 dark:text-pharaohGold bg-amber-500/10 dark:bg-pharaohGold/10 px-2 py-0.5 rounded-full font-bold">
                 {isVideo(slide2Media) ? '🎬 فيديو' : '🖼️ صورة'}
               </span>
             )}

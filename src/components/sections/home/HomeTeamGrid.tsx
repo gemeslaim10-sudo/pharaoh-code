@@ -72,7 +72,7 @@ export default function HomeTeamGrid({ data }: HomeTeamGridProps) {
                             </div>
                         </div>
                         <h4 className="text-base font-bold text-white mb-1 group-hover:text-[#C5A16F] transition-colors">{member.name}</h4>
-                        <span className="text-[#C5A16F] text-[10px] font-bold uppercase tracking-wider block bg-[#C5A16F]/10 py-0.5 px-2.5 rounded-full inline-block border border-[#C5A16F]/20">{member.role}</span>
+                        <span className="inline-flex items-center leading-none text-[#C5A16F] text-[10px] font-bold uppercase tracking-wider bg-[#C5A16F]/10 py-0.5 px-2.5 rounded-full border border-[#C5A16F]/20">{member.role}</span>
                     </div>
                 ))}
             </div>

@@ -29,7 +29,7 @@ export function TeamHeroHeader({
       <div className="max-w-2xl">
         <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
           <div className="w-5 sm:w-6 h-[2px] bg-gradient-to-r from-[#C5A16F] to-transparent" />
-          <span className="text-[#C5A16F] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase text-[10px] sm:text-[11px] bg-[#C5A16F]/10 px-3 py-1 rounded-full border border-[#C5A16F]/20">
+          <span className="text-[#C5A16F] font-bold tracking-[0.2em] sm:tracking-[0.3em] uppercase text-[10px] sm:text-[11px] bg-[#C5A16F]/10 px-3 py-1 rounded-full border border-[#C5A16F]/20 inline-flex items-center justify-center leading-none">
             {subtitle}
           </span>
         </div>

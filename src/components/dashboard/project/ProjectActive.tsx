@@ -38,7 +38,7 @@ export default function ProjectActive({ projects, onDelete }: { projects: any[],
                                         <span>حالة المشروع: جاري العمل</span>
                                     </p>
                                 </div>
-                                <span className="bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold px-2.5 py-1 rounded-lg border border-emerald-500/25">{project.service}</span>
+                                <span className="bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-[10px] font-bold px-2.5 py-1 rounded-lg border border-emerald-500/25 inline-flex items-center justify-center leading-none">{project.service}</span>
                             </div>
                             <div className="bg-white dark:bg-[#112240]/60 p-3 rounded-xl border border-slate-200 dark:border-white/5 space-y-2 text-xs">
                                 <div className="flex justify-between items-center"><span className="text-slate-500 dark:text-gray-400">الميزانية المعتمدة:</span><span className="font-black text-emerald-700 dark:text-emerald-400 font-mono">{project.budget}</span></div>

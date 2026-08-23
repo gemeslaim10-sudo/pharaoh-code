@@ -1,11 +1,14 @@
 'use client';
 import { TermItem } from './termsData';
+import { useTranslation } from '@/contexts/LanguageContext';
 
 interface TermsCardProps {
   item: TermItem;
 }
 
 export function TermsCard({ item }: TermsCardProps) {
+  const { language } = useTranslation();
+
   return (
     <div className="group p-8 rounded-[2rem] bg-[#112240] border border-white/5 hover:border-[#C5A16F]/30 transition-all duration-500 shadow-xl flex flex-col justify-between">
       <div>
@@ -14,11 +17,11 @@ export function TermsCard({ item }: TermsCardProps) {
             {item.num}
           </div>
           <h3 className="text-white text-xl font-bold">
-            {item.title}
+            {language === 'ar' ? (item.titleAr || item.title) : (item.titleEn || item.title)}
           </h3>
         </div>
         <p className="text-gray-400 text-sm leading-relaxed">
-          {item.desc}
+          {language === 'ar' ? (item.descAr || item.desc) : (item.descEn || item.desc)}
         </p>
       </div>
     </div>

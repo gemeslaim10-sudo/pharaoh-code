@@ -26,7 +26,7 @@ export default function ProjectRequests({ projects, onAccept, onReject, onDelete
                                     <h5 className="client-title text-sm font-black text-slate-900 dark:text-white group-hover:text-amber-800 dark:group-hover:text-pharaohGold transition-colors">{project.name}</h5>
                                     <p className="text-[10px] text-slate-500 dark:text-gray-400 mt-0.5" dir="ltr">{project.date}</p>
                                 </div>
-                                <span className="project-type-badge bg-amber-500/10 dark:bg-pharaohGold/10 text-amber-800 dark:text-pharaohGold text-[10px] font-bold px-2.5 py-1 rounded-lg border border-amber-500/20 dark:border-pharaohGold/20">{project.service}</span>
+                                <span className="project-type-badge bg-amber-500/10 dark:bg-pharaohGold/10 text-amber-800 dark:text-pharaohGold text-[10px] font-bold px-2.5 py-1 rounded-lg border border-amber-500/20 dark:border-pharaohGold/20 inline-flex items-center justify-center leading-none">{project.service}</span>
                             </div>
                             <div className="bg-white dark:bg-[#112240]/60 p-3 rounded-xl border border-slate-200 dark:border-white/5 space-y-2 text-xs">
                                 <div className="flex justify-between items-center"><span className="text-slate-500 dark:text-gray-400">الميزانية المطروحة:</span><span className="project-budget font-black text-amber-800 dark:text-amber-500 font-mono">{project.budget}</span></div>

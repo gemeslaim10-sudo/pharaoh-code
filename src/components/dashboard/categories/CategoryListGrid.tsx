@@ -32,7 +32,7 @@ export function CategoryListGrid({
                 <div>
                   <div className="flex items-center justify-between">
                     <h3 className="font-bold text-slate-900 dark:text-white text-base">{cat.name_ar}</h3>
-                    <span className="text-[10px] bg-amber-500/10 dark:bg-pharaohGold/10 text-amber-800 dark:text-pharaohGold border border-amber-500/20 dark:border-pharaohGold/20 px-2.5 py-1 rounded-md font-mono">{cat.slug || cat.id}</span>
+                    <span className="text-[10px] bg-amber-500/10 dark:bg-pharaohGold/10 text-amber-800 dark:text-pharaohGold border border-amber-500/20 dark:border-pharaohGold/20 px-2.5 py-1 rounded-md font-mono inline-flex items-center justify-center leading-none">{cat.slug || cat.id}</span>
                   </div>
                   {cat.name_en && (
                     <p className="text-xs text-slate-500 dark:text-gray-400 mt-1" dir="ltr">{cat.name_en}</p>

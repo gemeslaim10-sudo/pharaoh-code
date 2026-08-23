@@ -1,14 +1,20 @@
 {
-    "mission": "تقديم حلول برمجية مبتكرة ومتميزة...",
-    "vision": "أن نصبح الشركة الرائدة في مجال البرمجيات في الشرق الأوسط",
-    "faqs": [
-        {
-            "question": "ما هي الخدمات التي تقدمونها؟",
-            "answer": "نقدم خدمات تطوير الويب وتطبيقات الجوال والأنظمة الخاصة."
-        },
-        {
-            "question": "كم يستغرق بناء الموقع؟",
-            "answer": "حسب حجم المشروع، ولكن تتراوح المدة عادة بين شهر إلى 3 أشهر."
-        }
-    ]
+  "mission_ar": "أن نؤسس إمبراطوريات رقمية لا تقهر؛ نحول بها تعقيدات الأفكار إلى شفرات ذكية، منيعة، وفائقة السرعة، تُبنى بأعلى معايير الهندسة لترسم مستقبل السيطرة التكنولوجية.",
+  "mission_en": "To build invincible digital empires; transforming conceptual complexity into smart, hardened, high-velocity code engineered to define the future of software leadership.",
+  "vision_ar": "تشييد صروح برمجية أبدية، تمنح رواد الأعمال والشركات سيادة رقمية مطلقة وأماناً تكنولوجياً متكاملاً يتحدى المستقبل.",
+  "vision_en": "To forge timeless software monoliths granting forward-thinking enterprises absolute digital sovereignty and resilient technological supremacy.",
+  "faqs": [
+    {
+      "question_ar": "لماذا نختار Pharaoh Code تحديداً بينما تضج السوق بشركات وبرمجيات بلا حصر ؟",
+      "question_en": "Why choose Pharaoh Code specifically when the market is flooded with countless software companies?",
+      "answer_ar": "لأننا لا نكتب مجرد أكواد عابرة، بل نُهندس صروحاً رقمية متكاملة تجمع بين الدقة المطلقة والسرعة الخارقة، لنحول فكرتك إلى هيمنة حقيقية لا تقبل المنافسة.",
+      "answer_en": "Because we do not just write fleeting lines of code; we engineer integrated digital monuments blending precision with high velocity to turn your vision into uncontested market dominance."
+    },
+    {
+      "question_ar": "كيف نضمن أن مشاريعنا التقنية لن تتهاوى تحت وطأة الضغوط والزيادة الهائلة في المستخدمين؟",
+      "question_en": "How do we ensure our technical projects will not collapse under heavy traffic and rapid scaling?",
+      "answer_ar": "لأننا نبني بنيتنا التحتية على قواعد برمجية صلبة وذكية (Clean Architecture)، صُممت خصيصاً لتتحمل أقوى العواصف الرقمية وتبقى راسخة كالأهرامات.",
+      "answer_en": "Because we construct our infrastructure upon robust Clean Architecture, engineered specifically to endure peak digital workloads and remain as enduring as the pyramids."
+    }
+  ]
 }

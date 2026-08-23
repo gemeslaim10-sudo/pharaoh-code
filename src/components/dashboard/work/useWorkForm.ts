@@ -73,10 +73,10 @@ export function useWorkForm() {
         ? member.skills.map((s: any) => ({
             name: s.name || s.name_ar || '',
             name_ar: s.name_ar || s.name || '',
-            name_en: s.name_en || (s.name && !/[\u0600-\u06FF]/.test(s.name) ? s.name : ''),
+            name_en: s.name_en || '',
             value: s.value || ''
           }))
-        : [{ name: '', name_en: '', value: '' }]
+        : [{ name: '', name_ar: '', name_en: '', value: '' }]
     );
     statsHook.setStats(
       member.stats && member.stats.length > 0 
@@ -84,9 +84,9 @@ export function useWorkForm() {
             value: st.value || '',
             label: st.label || st.label_ar || '',
             label_ar: st.label_ar || st.label || '',
-            label_en: st.label_en || (st.label && !/[\u0600-\u06FF]/.test(st.label) ? st.label : '')
+            label_en: st.label_en || ''
           }))
-        : [{ value: '', label: '', label_en: '' }]
+        : [{ value: '', label: '', label_ar: '', label_en: '' }]
     );
     setFile(null);
     setFileStatusText('تغيير الصورة الحالية (اختياري)...');
@@ -128,31 +128,33 @@ export function useWorkForm() {
         imageUrl = uploadRes.url || '';
       }
       const memberData = {
-        name,
-        name_ar: name,
+        name: name || nameEn,
+        name_ar: name || nameEn,
         name_en: nameEn || name,
-        role,
-        role_ar: role,
+        role: role || roleEn,
+        role_ar: role || roleEn,
         role_en: roleEn || role,
         image: imageUrl,
-        description,
-        description_ar: description,
+        description: description || descriptionEn,
+        description_ar: description || descriptionEn,
         description_en: descriptionEn || description,
+        desc_ar: description || descriptionEn,
+        desc_en: descriptionEn || description,
         skills: statsHook.skills
-          .filter(s => (s.name || s.name_en) && s.value)
+          .filter(s => (s.name || s.name_ar || s.name_en) && s.value)
           .map(s => ({
-            name: s.name || s.name_en || '',
-            name_ar: s.name || s.name_en || '',
-            name_en: s.name_en || s.name || '',
+            name: s.name_ar || s.name || s.name_en || '',
+            name_ar: s.name_ar || s.name || s.name_en || '',
+            name_en: s.name_en || s.name_ar || s.name || '',
             value: s.value
           })),
         stats: statsHook.stats
-          .filter(s => s.value && (s.label || s.label_en))
+          .filter(s => s.value && (s.label || s.label_ar || s.label_en))
           .map(st => ({
             value: st.value,
-            label: st.label || st.label_en || '',
-            label_ar: st.label || st.label_en || '',
-            label_en: st.label_en || st.label || ''
+            label: st.label_ar || st.label || st.label_en || '',
+            label_ar: st.label_ar || st.label || st.label_en || '',
+            label_en: st.label_en || st.label_ar || st.label || ''
           })),
         social: { facebook: fbUrl, instagram: instaUrl }
       };

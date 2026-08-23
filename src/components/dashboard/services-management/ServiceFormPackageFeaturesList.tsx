@@ -21,7 +21,7 @@ export function ServiceFormPackageFeaturesList({
         <div className="flex items-center gap-2">
           <span className="text-sm">✨</span>
           <span className="text-xs font-bold text-slate-800 dark:text-gray-200">بنود ومميزات الباقة التفصيلية:</span>
-          <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-gray-400 font-bold">
+          <span className="inline-flex items-center leading-none text-[10px] px-2 py-0.5 rounded-full bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-gray-400 font-bold">
             {featuresAr.length} بنود
           </span>
         </div>

@@ -50,22 +50,22 @@ export async function getTeamMembers() {
                 id: doc.id,
                 ...data,
                 name_ar: data.name_ar || data.name || '',
-                name_en: data.name_en || data.name || '',
+                name_en: data.name_en || '',
                 role_ar: data.role_ar || data.role || '',
-                role_en: data.role_en || data.role || '',
+                role_en: data.role_en || '',
                 description_ar: data.description_ar || data.description || '',
-                description_en: data.description_en || data.description || '',
+                description_en: data.description_en || '',
                 skills: (data.skills || []).map((s: any) => ({
-                    name: s.name_ar || s.name || '',
+                    name: s.name || s.name_ar || '',
                     name_ar: s.name_ar || s.name || '',
-                    name_en: s.name_en || (s.name && !/[\u0600-\u06FF]/.test(s.name) ? s.name : ''),
+                    name_en: s.name_en || '',
                     value: s.value || ''
                 })),
                 stats: (data.stats || []).map((st: any) => ({
                     value: st.value || '',
-                    label: st.label_ar || st.label || '',
+                    label: st.label || st.label_ar || '',
                     label_ar: st.label_ar || st.label || '',
-                    label_en: st.label_en || (st.label && !/[\u0600-\u06FF]/.test(st.label) ? st.label : '')
+                    label_en: st.label_en || ''
                 }))
             });
         });

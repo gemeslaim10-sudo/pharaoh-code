@@ -20,7 +20,7 @@ export default function ProjectRejected({ projects }: { projects: any[] }) {
                                     <h5 className="text-sm font-black text-slate-900 dark:text-white line-through decoration-red-500">{project.name}</h5>
                                     <p className="text-[10px] text-red-600 dark:text-red-400 mt-0.5 font-bold">مرفوض ومؤرشف</p>
                                 </div>
-                                <span className="bg-red-500/10 text-red-600 dark:text-red-400 text-[10px] font-bold px-2.5 py-1 rounded-lg border border-red-500/20">{project.service}</span>
+                                <span className="bg-red-500/10 text-red-600 dark:text-red-400 text-[10px] font-bold px-2.5 py-1 rounded-lg border border-red-500/20 inline-flex items-center justify-center leading-none">{project.service}</span>
                             </div>
                             <div className="bg-red-500/10 p-3 rounded-xl border border-red-500/20 space-y-1">
                                 <span className="text-[10px] font-bold text-red-700 dark:text-red-300 block">سبب الرفض المسجل:</span>

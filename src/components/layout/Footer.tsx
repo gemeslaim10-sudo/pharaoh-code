@@ -10,6 +10,8 @@ import { FooterBottomBar } from './footer/FooterBottomBar';
 
 interface FooterProps {
   siteName?: string;
+  siteNameAr?: string;
+  siteNameEn?: string;
   logoUrl?: string;
   logoLightUrl?: string;
   socialLinks?: { fb?: string; wa?: string; ig?: string };
@@ -17,14 +19,17 @@ interface FooterProps {
 
 export default function Footer({ 
   siteName = 'PHARAOH CODE',
+  siteNameAr,
+  siteNameEn,
   logoUrl,
   logoLightUrl,
   socialLinks = { fb: '#', wa: '#', ig: '#' }
 }: FooterProps) {
-  const { direction } = useTranslation();
+  const { language, direction } = useTranslation();
   const { theme } = useTheme();
+  const currentSiteName = language === 'en' ? (siteNameEn || siteName) : (siteNameAr || siteName);
 
-  const nameParts = siteName.split(' ');
+  const nameParts = currentSiteName.split(' ');
   const firstWord = nameParts[0];
   const activeLogo = theme === 'light' ? (logoLightUrl || logoUrl || '') : (logoUrl || logoLightUrl || '');
 
@@ -49,7 +54,7 @@ export default function Footer({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 mb-16">
-          <FooterBrand siteName={siteName} activeLogo={activeLogo} socialLinks={socialLinks} />
+          <FooterBrand siteName={currentSiteName} activeLogo={activeLogo} socialLinks={socialLinks} />
           <FooterQuickLinks />
           <div className="lg:col-span-3">
             <FooterServices />
@@ -57,7 +62,7 @@ export default function Footer({
           <FooterNewsletter />
         </div>
 
-        <FooterBottomBar siteName={siteName} />
+        <FooterBottomBar siteName={currentSiteName} />
       </div>
     </footer>
   );

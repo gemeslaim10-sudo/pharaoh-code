@@ -48,7 +48,7 @@ export function HomeServicesMobile({
               dangerouslySetInnerHTML={{ __html: stripSvgColors(activeItem?.iconSvg || '') }}
             />
           </div>
-          <span className={`px-2.5 py-0.5 rounded-full border text-[10px] font-mono ${
+          <span className={`inline-flex items-center leading-none px-2.5 py-0.5 rounded-full border text-[10px] font-mono ${
             isLight
               ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
               : 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'

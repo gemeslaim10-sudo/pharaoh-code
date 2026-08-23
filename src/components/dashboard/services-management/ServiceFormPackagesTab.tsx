@@ -81,7 +81,7 @@ export function ServiceFormPackagesTab({
           <div>
             <div className="flex items-center justify-between mb-1.5">
               <label className="text-xs font-bold text-slate-700 dark:text-gray-300">عنوان قسم الباقات</label>
-              <span className="text-[10px] px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-800 dark:text-pharaohGold border border-amber-500/20 font-bold">🇸🇦 عربي</span>
+              <span className="inline-flex items-center leading-none text-[10px] px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-800 dark:text-pharaohGold border border-amber-500/20 font-bold">🇸🇦 عربي</span>
             </div>
             <input
               type="text"
@@ -94,7 +94,7 @@ export function ServiceFormPackagesTab({
           <div>
             <div className="flex items-center justify-between mb-1.5">
               <label className="text-xs font-bold text-slate-700 dark:text-gray-300">Packages Section Title</label>
-              <span className="text-[10px] px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 font-bold">🇬🇧 English</span>
+              <span className="inline-flex items-center leading-none text-[10px] px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 font-bold">🇬🇧 English</span>
             </div>
             <input
               type="text"

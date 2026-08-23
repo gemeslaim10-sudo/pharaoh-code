@@ -1,29 +1,53 @@
 [
-    {
-        "id": "home_portfolio_01",
-        "title": "منصة الاكل المنزلي ( بيتي )",
-        "category": "WEB DEVELOPMENT",
-        "categoryFilter": "web",
-        "description": "بناء موقع الاكل المنزلي ( بيتي ) متكامل مع خرائط تفاعلية ونظام إدارة وحدات.",
-        "image": "..//assets/projects/homemade_food.png",
-        "link": "https://ahmedsh72.github.io/BETIY/"
-    },
-    {
-        "id": "home_portfolio_02",
-        "title": "منصة دعم الزهايمر",
-        "category": "WEB DEVELOPMENT",
-        "categoryFilter": "app",
-        "description": "بناء موقع دعم الزهايمر متكامل مع خرائط تفاعلية ونظام إدارة وحدات.",
-        "image": "..//assets/projects/./alzheimers.png",
-        "link": "https://ahmedsh72.github.io/Alzheimer-s/"
-    },
-    {
-        "id": "home_portfolio_03",
-        "title": "منصة أكاديمية Triumph",
-        "category": "WEB DEVELOPMENT",
-        "categoryFilter": "motion",
-        "description": "بناء موقع أكاديمية Triumph متكامل مع خرائط تفاعلية ونظام إدارة وحدات.",
-        "image": "..//assets/projects/football.png",
-        "link": "https://ahmedsh72.github.io/Triumph/"
-    }
+  {
+    "id": "home_portfolio_01",
+    "title": "منصة الاكل المنزلي ( بيتي )",
+    "category": "WEB DEVELOPMENT",
+    "categoryFilter": "web",
+    "description": "بناء موقع الاكل المنزلي ( بيتي ) متكامل مع خرائط تفاعلية ونظام إدارة وحدات.",
+    "image": "..//assets/projects/homemade_food.png",
+    "link": "https://ahmedsh72.github.io/BETIY/",
+    "title_ar": "منصة الأكل المنزلي ( بيتي )",
+    "title_en": "\"Beity\" Homefood Platform",
+    "category_ar": "تطبيقات الويب",
+    "category_en": "Web Applications",
+    "desc_ar": "منصة متطورة لربط الطهاة المنزليين بالعملاء وتسهيل عمليات الطلب والدفع الإلكتروني السريع.",
+    "desc_en": "Advanced culinary marketplace connecting home chefs with customers featuring instant digital payments.",
+    "description_ar": "منصة متطورة لربط الطهاة المنزليين بالعملاء وتسهيل عمليات الطلب والدفع الإلكتروني السريع.",
+    "description_en": "Advanced culinary marketplace connecting home chefs with customers featuring instant digital payments."
+  },
+  {
+    "id": "home_portfolio_02",
+    "title": "منصة دعم الزهايمر",
+    "category": "WEB DEVELOPMENT",
+    "categoryFilter": "app",
+    "description": "بناء موقع دعم الزهايمر متكامل مع خرائط تفاعلية ونظام إدارة وحدات.",
+    "image": "..//assets/projects/./alzheimers.png",
+    "link": "https://ahmedsh72.github.io/Alzheimer-s/",
+    "title_ar": "منصة دعم الزهايمر",
+    "title_en": "Alzheimer Support Platform",
+    "category_ar": "حلول تقنية ورعاية صحية",
+    "category_en": "Healthcare Tech Solutions",
+    "desc_ar": "منصة تفاعلية متخصصة لتقديم الدعم المعرفي والطبي لأسر مرضى الزهايمر وتتبع حالتهم اليومية.",
+    "desc_en": "Specialized interactive platform delivering clinical resources and caregiver monitoring tools.",
+    "description_ar": "منصة تفاعلية متخصصة لتقديم الدعم المعرفي والطبي لأسر مرضى الزهايمر وتتبع حالتهم اليومية.",
+    "description_en": "Specialized interactive platform delivering clinical resources and caregiver monitoring tools."
+  },
+  {
+    "id": "home_portfolio_03",
+    "title": "منصة أكاديمية Triumph",
+    "category": "WEB DEVELOPMENT",
+    "categoryFilter": "motion",
+    "description": "بناء موقع أكاديمية Triumph متكامل مع خرائط تفاعلية ونظام إدارة وحدات.",
+    "image": "..//assets/projects/football.png",
+    "link": "https://ahmedsh72.github.io/Triumph/",
+    "title_ar": "منصة أكاديمية Triumph",
+    "title_en": "Triumph Academy LMS",
+    "category_ar": "منصات تعليمية LMS",
+    "category_en": "Educational LMS Platforms",
+    "desc_ar": "صرح تعليمي رقمي متكامل لإدارة الدورات والاختبارات التفاعلية والفصول الافتراضية.",
+    "desc_en": "Comprehensive digital learning ecosystem managing courses, interactive exams, and virtual classes.",
+    "description_ar": "صرح تعليمي رقمي متكامل لإدارة الدورات والاختبارات التفاعلية والفصول الافتراضية.",
+    "description_en": "Comprehensive digital learning ecosystem managing courses, interactive exams, and virtual classes."
+  }
 ]

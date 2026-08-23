@@ -83,7 +83,7 @@ export default function DashboardRecentOrders() {
                                     <span className="text-[11px] text-slate-500 dark:text-gray-500">{order.email}</span>
                                 </td>
                                 <td className="p-4">
-                                    <span className={`text-[11px] font-bold px-2.5 py-1 rounded-md border ${
+                                    <span className={`inline-flex items-center justify-center leading-none text-[11px] font-bold px-2.5 py-1 rounded-md border ${
                                         order.service.includes('تطبيق') ? 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20' :
                                         'bg-amber-500/10 dark:bg-pharaohGold/10 text-amber-800 dark:text-pharaohGold border-amber-500/20 dark:border-pharaohGold/20'
                                     }`}>
@@ -92,9 +92,9 @@ export default function DashboardRecentOrders() {
                                 </td>
                                 <td className="p-4 text-slate-500 dark:text-gray-400 text-[11px]">{order.date}</td>
                                 <td className="p-4">
-                                    {order.status === 'pending' && <span className="status-badge bg-amber-500/10 text-amber-600 dark:text-amber-500 text-[11px] font-medium px-2.5 py-1 rounded-full border border-amber-500/20">معلق</span>}
-                                    {order.status === 'contacted' && <span className="status-badge bg-emerald-500/10 text-emerald-600 dark:text-emerald-500 text-[11px] font-medium px-2.5 py-1 rounded-full border border-emerald-500/20">تم التواصل</span>}
-                                    {order.status === 'rejected' && <span className="status-badge bg-rose-500/10 text-rose-600 dark:text-rose-500 text-[11px] font-medium px-2.5 py-1 rounded-full border border-rose-500/20">مرفوض</span>}
+                                    {order.status === 'pending' && <span className="status-badge inline-flex items-center justify-center leading-none bg-amber-500/10 text-amber-600 dark:text-amber-500 text-[11px] font-medium px-2.5 py-1 rounded-full border border-amber-500/20">معلق</span>}
+                                    {order.status === 'contacted' && <span className="status-badge inline-flex items-center justify-center leading-none bg-emerald-500/10 text-emerald-600 dark:text-emerald-500 text-[11px] font-medium px-2.5 py-1 rounded-full border border-emerald-500/20">تم التواصل</span>}
+                                    {order.status === 'rejected' && <span className="status-badge inline-flex items-center justify-center leading-none bg-rose-500/10 text-rose-600 dark:text-rose-500 text-[11px] font-medium px-2.5 py-1 rounded-full border border-rose-500/20">مرفوض</span>}
                                 </td>
                                 <td className="p-4 text-center">
                                     <select 

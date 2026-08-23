@@ -57,7 +57,7 @@ export default function TeamMemberSkillsSection({
                 isLight ? 'text-slate-700' : 'text-gray-300'
               }`}>
                 <span className="font-semibold">
-                  {getDynamicText(skill, 'name', language) || (language === 'en' ? (skill.name_en || skill.name) : (skill.name_ar || skill.name))}
+                  {getDynamicText(skill, 'name', language) || (language === 'en' ? (skill.name_en || '') : (skill.name_ar || '')) || skill.name || ''}
                 </span>
                 <span className={`font-bold font-mono ${isLight ? 'text-[#8A5800]' : 'text-pharaohGold'}`}>{valStr}</span>
               </div>

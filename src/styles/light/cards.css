@@ -119,3 +119,110 @@ html[data-theme="light"] [class*="bg-pharaohGold/10"] {
   border-color: rgba(184, 134, 11, 0.3) !important;
 }
 
+/* ==========================================================================
+   DASHBOARD-SPECIFIC LIGHT MODE OVERRIDES
+   ========================================================================== */
+
+/* Dashboard Sidebar */
+html[data-theme="light"] #sidebar {
+  background-color: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+}
+
+html[data-theme="light"] #sidebar a,
+html[data-theme="light"] #sidebar nav a {
+  background-color: #F1F5F9 !important;
+  color: #78350F !important;
+  border-color: #CBD5E1 !important;
+}
+
+html[data-theme="light"] #sidebar a:hover,
+html[data-theme="light"] #sidebar nav a:hover {
+  background-color: rgba(184, 134, 11, 0.1) !important;
+  border-color: #8A5800 !important;
+}
+
+/* Dashboard Accordion Groups */
+html[data-theme="light"] .dashboard-accordion {
+  background-color: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+}
+
+html[data-theme="light"] .dashboard-accordion [role="button"] {
+  color: #0A192F !important;
+}
+
+html[data-theme="light"] .dashboard-accordion [role="button"] h3 {
+  color: #0A192F !important;
+}
+
+html[data-theme="light"] .dashboard-accordion [role="button"] p {
+  color: #475569 !important;
+}
+
+/* Dashboard Accordion Body - inner content area */
+html[data-theme="light"] .dashboard-accordion .overflow-hidden > div[class*="bg-"] {
+  background-color: #F8FAFC !important;
+}
+
+/* Dashboard Form Content Areas */
+html[data-theme="light"] .db-form-content {
+  background-color: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+}
+
+html[data-theme="light"] .db-form-content h1,
+html[data-theme="light"] .db-form-content h2,
+html[data-theme="light"] .db-form-content h3,
+html[data-theme="light"] .db-form-content h4,
+html[data-theme="light"] .db-form-content h5,
+html[data-theme="light"] .db-form-content p,
+html[data-theme="light"] .db-form-content label,
+html[data-theme="light"] .db-form-content span {
+  color: #0A192F !important;
+}
+
+html[data-theme="light"] .db-form-content input,
+html[data-theme="light"] .db-form-content textarea,
+html[data-theme="light"] .db-form-content select {
+  background-color: #FFFFFF !important;
+  color: #0A192F !important;
+  border-color: #94A3B8 !important;
+}
+
+/* bg-pharaohNavy/50 used in panels */
+html[data-theme="light"] [class*="bg-pharaohNavy/"] {
+  background-color: #F8FAFC !important;
+  border-color: #CBD5E1 !important;
+}
+
+/* Creativity "floating label" badge - Gold pill at top of card - keep it gold in light mode */
+html[data-theme="light"] [class*="bg-pharaohGold"][class*="text-[#0A192F]"] {
+  background-color: #B8860B !important;
+  color: #FFFFFF !important;
+}
+
+/* Dashboard Review Cards */
+html[data-theme="light"] .review-card {
+  background-color: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+}
+
+/* Colors for project loading state */
+html[data-theme="light"] [class*="text-gray-400"]:not(svg) {
+  color: #64748B !important;
+}
+
+/* bg-[#0A192F]/70 patterns for dark inner panels in skills/stats form */
+html[data-theme="light"] [class*="bg-[#060D1A]"],
+html[data-theme="light"] [class*="bg-[#091528]/70"],
+html[data-theme="light"] [class*="bg-[#091528]"] {
+  background-color: #F8FAFC !important;
+  border-color: #CBD5E1 !important;
+}
+
+/* Dashboard skill/stat progress bars in light mode */
+html[data-theme="light"] [class*="bg-[#091528]"] {
+  background-color: #E2E8F0 !important;
+}
+

@@ -21,9 +21,9 @@ export default function ReviewCard({ review, onWhatsApp, onApprove, onDelete }: 
         <div className={`review-card relative bg-white dark:bg-[#112240] p-6 rounded-[2rem] border shadow-sm dark:shadow-2xl transition-all duration-300 flex flex-col justify-between min-h-[280px] ${review.status === 'pending' ? 'border-orange-500/30' : 'border-green-500/30'}`}>
             <div>
                 {review.status === 'pending' ? (
-                    <span className="status-badge absolute top-4 left-4 bg-orange-500 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md z-10">بإنتظار المراجعة</span>
+                    <span className="status-badge absolute top-4 left-4 bg-orange-500 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md z-10 inline-flex items-center justify-center leading-none">بإنتظار المراجعة</span>
                 ) : (
-                    <span className="status-badge absolute top-4 left-4 bg-green-600 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md z-10">منشور على الموقع</span>
+                    <span className="status-badge absolute top-4 left-4 bg-green-600 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-md z-10 inline-flex items-center justify-center leading-none">منشور على الموقع</span>
                 )}
                 <div className="flex items-center gap-3 mb-4 mt-2 pl-[90px] relative z-0">
                     <div className="w-11 h-11 bg-amber-500/10 dark:bg-pharaohGold/10 rounded-xl flex items-center justify-center font-bold text-amber-800 dark:text-pharaohGold border border-amber-500/20 dark:border-pharaohGold/20 text-base shrink-0">

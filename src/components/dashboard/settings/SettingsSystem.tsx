@@ -133,7 +133,7 @@ export default function SettingsSystem() {
                     </td>
                     <td className="px-6 py-4 truncate max-w-[250px]">{statusData.message}</td>
                     <td className="px-6 py-4 text-center">
-                      <span className="text-xs text-amber-800 dark:text-pharaohGold bg-amber-500/10 dark:bg-pharaohGold/10 px-3 py-1 rounded-full border border-amber-500/20 dark:border-pharaohGold/20 font-bold">الحالة الحالية النشطة</span>
+                      <span className="text-xs text-amber-800 dark:text-pharaohGold bg-amber-500/10 dark:bg-pharaohGold/10 px-3 py-1 rounded-full border border-amber-500/20 dark:border-pharaohGold/20 font-bold inline-flex items-center justify-center leading-none">الحالة الحالية النشطة</span>
                     </td>
                   </tr>
                 </tbody>

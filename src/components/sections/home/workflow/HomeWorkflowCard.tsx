@@ -58,7 +58,7 @@ export function HomeWorkflowCard({
             />
           </div>
 
-          <span className={`font-mono text-xs font-black px-2.5 py-1 rounded-lg border transition-all duration-300 shadow-sm ${
+          <span className={`inline-flex items-center justify-center leading-none font-mono text-xs font-black px-2.5 py-1 rounded-lg border transition-all duration-300 shadow-sm ${
             isLight
               ? 'bg-amber-50 border-[#8A5800]/40 text-[#8A5800] group-hover:bg-[#8A5800] group-hover:text-white'
               : 'bg-white/5 border-[#C5A16F]/30 text-[#C5A16F] group-hover:bg-[#C5A16F] group-hover:text-[#050B14]'

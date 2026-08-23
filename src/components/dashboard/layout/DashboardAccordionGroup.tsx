@@ -54,7 +54,7 @@ export function DashboardAccordionGroup({
                 {group.title}
               </h3>
               {group.badge && (
-                <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-gray-300 border border-slate-200 dark:border-white/10">
+                <span className="inline-flex items-center leading-none px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-gray-300 border border-slate-200 dark:border-white/10">
                   {group.badge}
                 </span>
               )}

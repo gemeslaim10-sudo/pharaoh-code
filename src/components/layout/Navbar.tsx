@@ -15,6 +15,8 @@ import { getNavLinks } from './navbar/navbarLinks';
 
 interface NavbarProps {
   siteName?: string;
+  siteNameAr?: string;
+  siteNameEn?: string;
   logoUrl?: string;
   logoLightUrl?: string;
   reverseNavbarAr?: boolean;
@@ -22,12 +24,15 @@ interface NavbarProps {
 
 export default function Navbar({
   siteName = 'PHARAOH CODE',
+  siteNameAr,
+  siteNameEn,
   logoUrl,
   logoLightUrl,
   reverseNavbarAr = true,
 }: NavbarProps) {
   const { user } = useAuth();
   const { t, language, direction } = useTranslation();
+  const currentSiteName = language === 'en' ? (siteNameEn || siteName) : (siteNameAr || siteName);
   const { theme } = useTheme();
   const pathname = usePathname();
   const isLight = theme === 'light';
@@ -89,7 +94,7 @@ export default function Navbar({
         <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 h-full flex justify-between items-center gap-4 relative z-10">
           {/* 1. Brand Logo & Center Desktop Links */}
           <div className="flex items-center gap-6 lg:gap-8 min-w-0">
-            <NavbarBrand siteName={siteName} activeLogo={activeLogo} />
+            <NavbarBrand siteName={currentSiteName} activeLogo={activeLogo} />
             <NavbarDesktopLinks links={navLinks} pathname={pathname} />
           </div>
 
@@ -114,7 +119,7 @@ export default function Navbar({
       <NavbarMobileDrawer
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        siteName={siteName}
+        siteName={currentSiteName}
         activeLogo={activeLogo}
         links={navLinks}
         pathname={pathname}
@@ -125,7 +130,7 @@ export default function Navbar({
         isOpen={isProfileOpen}
         onClose={() => setIsProfileOpen(false)}
         activeLogo={activeLogo}
-        siteName={siteName}
+        siteName={currentSiteName}
       />
     </>
   );

@@ -1,50 +1,98 @@
 [
-    {
-        "id": "portfolio_01",
-        "title": "إيجل العقارية",
-        "category": "Web Development",
-        "categoryFilter": "web",
-        "description": "منصة متطورة للتحكم في العقارات مع خرائط حرارية ذكية.",
-        "image": "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=800"
-    },
-    {
-        "id": "portfolio_02",
-        "title": "تطبيق \"صحتي\"",
-        "category": "Application Development",
-        "categoryFilter": "app",
-        "description": "ربط المرضى بالأطباء فورياً باستخدام تقنيات الـ WebRTC.",
-        "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800"
-    },
-    {
-        "id": "portfolio_03",
-        "title": "فيديو ترويجي لشركة",
-        "category": "Motion Graphics",
-        "categoryFilter": "motion",
-        "description": "عرض إعلانات تفاعلية مع تأثيرات بصرية مذهلة.",
-        "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800"
-    },
-    {
-        "id": "portfolio_04",
-        "title": "متجر \"فاشون\"",
-        "category": "Web Development",
-        "categoryFilter": "web",
-        "description": "تجربة تسوق فريدة مع نظام دفع مشفر وسرعة فائقة.",
-        "image": "https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=800"
-    },
-    {
-        "id": "portfolio_05",
-        "title": "لوحة تحكم \"أومني\"",
-        "category": "Application Development",
-        "categoryFilter": "app",
-        "description": "نظام ERP متكامل لإدارة الشركات المتوسطة والكبيرة.",
-        "image": "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=800"
-    },
-    {
-        "id": "portfolio_06",
-        "title": "فيديو ترويجي لشركة",
-        "category": "Motion Graphics",
-        "categoryFilter": "motion",
-        "description": "عرض إعلانات تفاعلية مع تأثيرات بصرية مذهلة.",
-        "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800"
-    }
+  {
+    "id": "portfolio_01",
+    "title": "إيجل العقارية",
+    "category": "Web Development",
+    "categoryFilter": "web",
+    "description": "منصة متطورة للتحكم في العقارات مع خرائط حرارية ذكية.",
+    "image": "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=800",
+    "title_ar": "إيجل العقارية",
+    "title_en": "Eagle Real Estate Portal",
+    "category_ar": "موقع ويب",
+    "category_en": "Web Development",
+    "desc_ar": "منصة عقارية متكاملة توفر تجربة بحث سلسة وسريعة للوحدات السكنية والتجارية مع جولات افتراضية ثلاثية الأبعاد.",
+    "desc_en": "Comprehensive real estate portal offering seamless search for residential & commercial units with 3D virtual tours.",
+    "description_ar": "منصة عقارية متكاملة توفر تجربة بحث سلسة وسريعة للوحدات السكنية والتجارية مع جولات افتراضية ثلاثية الأبعاد.",
+    "description_en": "Comprehensive real estate portal offering seamless search for residential & commercial units with 3D virtual tours."
+  },
+  {
+    "id": "portfolio_02",
+    "title": "تطبيق \"صحتي\"",
+    "category": "Application Development",
+    "categoryFilter": "app",
+    "description": "ربط المرضى بالأطباء فورياً باستخدام تقنيات الـ WebRTC.",
+    "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800",
+    "title_ar": "تطبيق \"صحتي\"",
+    "title_en": "\"Sehaty\" Health App",
+    "category_ar": "تطبيق هاتف",
+    "category_en": "Mobile App",
+    "desc_ar": "تطبيق متكامل لإدارة الاستشارات الطبية وحجز المواعيد مع الأطباء وتتبع السجلات الصحية إلكترونياً.",
+    "desc_en": "Integrated health mobile app for teleconsultations, doctor appointment bookings, and digital health records.",
+    "description_ar": "تطبيق متكامل لإدارة الاستشارات الطبية وحجز المواعيد مع الأطباء وتتبع السجلات الصحية إلكترونياً.",
+    "description_en": "Integrated health mobile app for teleconsultations, doctor appointment bookings, and digital health records."
+  },
+  {
+    "id": "portfolio_03",
+    "title": "فيديو ترويجي لشركة",
+    "category": "Motion Graphics",
+    "categoryFilter": "motion",
+    "description": "عرض إعلانات تفاعلية مع تأثيرات بصرية مذهلة.",
+    "image": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800",
+    "title_ar": "فيديو ترويجي لشركة أوراسكوم",
+    "title_en": "Orascom Brand Film",
+    "category_ar": "موشن جرافيك",
+    "category_en": "Motion Graphics",
+    "desc_ar": "إنتاج مرئي سينمائي يعكس إنجازات وتاريخ الشركة باستخدام أحدث تقنيات التحريك ثلاثي الأبعاد.",
+    "desc_en": "Cinematic promotional motion graphics showcasing corporate milestones with advanced 3D animations.",
+    "description_ar": "إنتاج مرئي سينمائي يعكس إنجازات وتاريخ الشركة باستخدام أحدث تقنيات التحريك ثلاثي الأبعاد.",
+    "description_en": "Cinematic promotional motion graphics showcasing corporate milestones with advanced 3D animations."
+  },
+  {
+    "id": "portfolio_04",
+    "title": "متجر \"فاشون\"",
+    "category": "Web Development",
+    "categoryFilter": "web",
+    "description": "تجربة تسوق فريدة مع نظام دفع مشفر وسرعة فائقة.",
+    "image": "https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=800",
+    "title_ar": "متجر \"فاشون\"",
+    "title_en": "\"Fashion\" Luxury Store",
+    "category_ar": "متجر إلكتروني",
+    "category_en": "E-Commerce",
+    "desc_ar": "متجر إلكتروني للموضة والأزياء بتصميم عصري وبوابات دفع إلكترونية متعددة وإدارة ذكية للمخزون.",
+    "desc_en": "High-end fashion e-commerce storefront with multi-gateway payments and smart inventory sync.",
+    "description_ar": "متجر إلكتروني للموضة والأزياء بتصميم عصري وبوابات دفع إلكترونية متعددة وإدارة ذكية للمخزون.",
+    "description_en": "High-end fashion e-commerce storefront with multi-gateway payments and smart inventory sync."
+  },
+  {
+    "id": "portfolio_05",
+    "title": "لوحة تحكم \"أومني\"",
+    "category": "Application Development",
+    "categoryFilter": "app",
+    "description": "نظام ERP متكامل لإدارة الشركات المتوسطة والكبيرة.",
+    "image": "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=800",
+    "title_ar": "لوحة تحكم \"أومني\"",
+    "title_en": "\"Omni\" Cloud ERP Dashboard",
+    "category_ar": "حلول برمجية",
+    "category_en": "Software Solutions",
+    "desc_ar": "لوحة تحكم مركزية سحابية لإدارة العمليات المالية والمبيعات والمخزون للشركات المتوسطة والكبرى.",
+    "desc_en": "Centralized cloud ERP dashboard for managing enterprise finances, sales, and supply chain analytics.",
+    "description_ar": "لوحة تحكم مركزية سحابية لإدارة العمليات المالية والمبيعات والمخزون للشركات المتوسطة والكبرى.",
+    "description_en": "Centralized cloud ERP dashboard for managing enterprise finances, sales, and supply chain analytics."
+  },
+  {
+    "id": "portfolio_06",
+    "title": "فيديو ترويجي لشركة",
+    "category": "Motion Graphics",
+    "categoryFilter": "motion",
+    "description": "عرض إعلانات تفاعلية مع تأثيرات بصرية مذهلة.",
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800",
+    "title_ar": "فيديو ترويجي لتطبيق توصيل",
+    "title_en": "Delivery App Promo Video",
+    "category_ar": "موشن جرافيك",
+    "category_en": "Motion Graphics",
+    "desc_ar": "إعلان فيديو تفاعلي وجذاب يسلط الضوء على سرعة التوصيل وسهولة تجربة الطلب للمستخدم.",
+    "desc_en": "Engaging 2D/3D motion video highlighting on-demand delivery speed and seamless mobile order flow.",
+    "description_ar": "إعلان فيديو تفاعلي وجذاب يسلط الضوء على سرعة التوصيل وسهولة تجربة الطلب للمستخدم.",
+    "description_en": "Engaging 2D/3D motion video highlighting on-demand delivery speed and seamless mobile order flow."
+  }
 ]

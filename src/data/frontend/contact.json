@@ -1,5 +1,6 @@
 {
-    "email": "info@pharaohcode.com",
-    "address": "القاهرة، مصر - التجمع الخامس، محور الأمل",
-    "phone": "+20 123 456 7890"
+  "email": "info@pharaohcode.com",
+  "address_ar": "القاهرة، مصر - التجمع الخامس، محور الأمل",
+  "address_en": "Cairo, Egypt - 5th Settlement, Al-Amal Axis",
+  "phone": "+20 112 695 2232"
 }

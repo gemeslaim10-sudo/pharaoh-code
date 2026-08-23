@@ -161,6 +161,38 @@ export const KNOWN_TRANSLATIONS: Record<string, { ar: string; en: string }> = {
   "معايير التشفير والأمان": { ar: "معايير التشفير والأمان", en: "Data Encryption & Security Standards" },
 
   // Team Stats
+  "سنوات الخبرة": { ar: "سنوات الخبرة", en: "Years of Experience" },
+  "Years of Experience": { ar: "سنوات الخبرة", en: "Years of Experience" },
+  "الحملات الناجحة": { ar: "الحملات الناجحة", en: "Successful Campaigns" },
+  "Successful Campaigns": { ar: "الحملات الناجحة", en: "Successful Campaigns" },
+  "متوسط نمو العائد": { ar: "متوسط نمو العائد", en: "Average ROI Growth" },
+  "Average ROI Growth": { ar: "متوسط نمو العائد", en: "Average ROI Growth" },
+  "الخبرة العملية": { ar: "الخبرة العملية", en: "Practical Experience" },
+  "Practical Experience": { ar: "الخبرة العملية", en: "Practical Experience" },
+  "العملاء المحتملون": { ar: "العملاء المحتملون", en: "Potential Leads" },
+  "Potential Leads": { ar: "العملاء المحتملون", en: "Potential Leads" },
+  "معدل التحويل": { ar: "معدل التحويل", en: "Conversion Rate" },
+  "Conversion Rate": { ar: "معدل التحويل", en: "Conversion Rate" },
+  "الرضا والتفاعل": { ar: "الرضا والتفاعل", en: "Satisfaction & Engagement" },
+  "Satisfaction & Engagement": { ar: "الرضا والتفاعل", en: "Satisfaction & Engagement" },
+  "المشاريع المدارة": { ar: "المشاريع المدارة", en: "Managed Projects" },
+  "Managed Projects": { ar: "المشاريع المدارة", en: "Managed Projects" },
+  "كفاءة العمليات": { ar: "كفاءة العمليات", en: "Operations Efficiency" },
+  "Operations Efficiency": { ar: "كفاءة العمليات", en: "Operations Efficiency" },
+  "فريق العمل": { ar: "فريق العمل", en: "Team Members" },
+  "Team Members": { ar: "فريق العمل", en: "Team Members" },
+  "المشاريع المكتملة": { ar: "المشاريع المكتملة", en: "Completed Projects" },
+  "Completed Projects": { ar: "المشاريع المكتملة", en: "Completed Projects" },
+  "رضا العملاء": { ar: "رضا العملاء", en: "Client Satisfaction" },
+  "Client Satisfaction": { ar: "رضا العملاء", en: "Client Satisfaction" },
+  "العلامات التجارية": { ar: "العلامات التجارية", en: "Brand Identities" },
+  "Brand Identities": { ar: "العلامات التجارية", en: "Brand Identities" },
+  "المشاريع المنجزة": { ar: "المشاريع المنجزة", en: "Accomplished Projects" },
+  "Accomplished Projects": { ar: "المشاريع المنجزة", en: "Accomplished Projects" },
+  "العملاء": { ar: "العملاء", en: "Clients" },
+  "Clients": { ar: "العملاء", en: "Clients" },
+  "العملاء والشركاء": { ar: "العملاء والشركاء", en: "Clients & Partners" },
+  "Clients & Partners": { ar: "العملاء والشركاء", en: "Clients & Partners" },
   "مشاريع تم تأسيسها": { ar: "مشاريع تم تأسيسها", en: "Established Projects" },
   "Established Projects": { ar: "مشاريع تم تأسيسها", en: "Established Projects" },
   "سنوات القيادة": { ar: "سنوات القيادة", en: "Years of Leadership" },
@@ -192,5 +224,129 @@ export const KNOWN_TRANSLATIONS: Record<string, { ar: string; en: string }> = {
   "ثغرات أمنية مكتشفة لاحقاً": { ar: "ثغرات أمنية مكتشفة لاحقاً", en: "Discovered Vulnerabilities" },
   "Discovered Vulnerabilities": { ar: "ثغرات أمنية مكتشفة لاحقاً", en: "Discovered Vulnerabilities" },
   "أمان وخصوصية تامة": { ar: "أمان وخصوصية تامة", en: "Privacy & Data Security" },
-  "Privacy & Data Security": { ar: "أمان وخصوصية تامة", en: "Privacy & Data Security" }
+  "Privacy & Data Security": { ar: "أمان وخصوصية تامة", en: "Privacy & Data Security" },
+
+  // Team Skills & Full Names
+  "إدارة الحملات الإعلانية الممولة (Facebook, Instagram, TikTok, Google)": {
+    ar: "إدارة الحملات الإعلانية الممولة (Facebook, Instagram, TikTok, Google)",
+    en: "Paid Ad Campaigns (Meta, TikTok, Google)"
+  },
+  "اختبارات A/B واستهداف الجماهير المخصصة (Audience Targeting)": {
+    ar: "اختبارات A/B واستهداف الجماهير المخصصة (Audience Targeting)",
+    en: "A/B Testing & Audience Targeting"
+  },
+  "التخطيط الاستراتيجي للميزانيات الإعلانية": {
+    ar: "التخطيط الاستراتيجي للميزانيات الإعلانية",
+    en: "Strategic Ad Budget Planning"
+  },
+  "تحليل البيانات وقياس مؤشرات الأداء (Data Analytics & KPIs)": {
+    ar: "تحليل البيانات وقياس مؤشرات الأداء (Data Analytics & KPIs)",
+    en: "Data Analytics & Performance KPIs"
+  },
+  "تحسين معدل العائد على الإنفاق الإعلاني (ROAS Optimization)": {
+    ar: "تحسين معدل العائد على الإنفاق الإعلاني (ROAS Optimization)",
+    en: "ROAS & Conversion Rate Optimization"
+  },
+  "التواصل الفعّال ومهارات التفاوض": {
+    ar: "التواصل الفعّال ومهارات التفاوض",
+    en: "Effective Communication & Negotiation"
+  },
+  "إدارة وتوليد العملاء المحتملين (Lead Generation)": {
+    ar: "إدارة وتوليد العملاء المحتملين (Lead Generation)",
+    en: "Lead Generation & Prospecting"
+  },
+  "إدارة علاقات العملاء (CRM)": {
+    ar: "إدارة علاقات العملاء (CRM)",
+    en: "CRM & Client Relationship Management"
+  },
+  "مهارات العرض والتوضيح (Pitching)": {
+    ar: "مهارات العرض والتوضيح (Pitching)",
+    en: "Pitching & Presentation Skills"
+  },
+  "تحليل السوق وفهم احتياجات العملاء": {
+    ar: "تحليل السوق وفهم احتياجات العملاء",
+    en: "Market Analysis & Customer Needs"
+  },
+  "تصميم الهويات البصرية والعلامات التجارية (Brand Identity)": {
+    ar: "تصميم الهويات البصرية والعلامات التجارية (Brand Identity)",
+    en: "Brand Identity & Visual Design"
+  },
+  "إتقان برامج أدوبي (Adobe Creative Suite - Photoshop, Illustrator, InDesign)": {
+    ar: "إتقان برامج أدوبي (Adobe Creative Suite - Photoshop, Illustrator, InDesign)",
+    en: "Adobe Creative Suite Mastery"
+  },
+  "تصميم الواجهات وتجربة المستخدم (UI/UX Design)": {
+    ar: "تصميم الواجهات وتجربة المستخدم (UI/UX Design)",
+    en: "UI/UX Interface Design"
+  },
+  "تصميم المواد التسويقية وإعلانات السوشيال ميديا": {
+    ar: "تصميم المواد التسويقية وإعلانات السوشيال ميديا",
+    en: "Marketing & Social Media Assets"
+  },
+  "التفكير الإبداعي وابتكار المفاهيم البصرية (Creative Concepting)": {
+    ar: "التفكير الإبداعي وابتكار المفاهيم البصرية (Creative Concepting)",
+    en: "Creative Concepting & Visual Direction"
+  },
+  "التخطيط الاستراتيجي وإدارة الشركات الناشئة": {
+    ar: "التخطيط الاستراتيجي وإدارة الشركات الناشئة",
+    en: "Strategic Planning & Startup Management"
+  },
+  "تطوير الأعمال وإدارة علاقات العملاء والمستثمرين": {
+    ar: "تطوير الأعمال وإدارة علاقات العملاء والمستثمرين",
+    en: "Business Development & Investor Relations"
+  },
+  "التفكير التحليلي وحل المشكلات المعقدة": {
+    ar: "التفكير التحليلي وحل المشكلات المعقدة",
+    en: "Analytical Thinking & Complex Problem Solving"
+  },
+  "القيادة التنفيذية وتوجيه فرق العمل متعددة التخصصات": {
+    ar: "القيادة التنفيذية وتوجيه فرق العمل متعددة التخصصات",
+    en: "Executive Leadership & Cross-Functional Mentorship"
+  },
+  "إدارة المنتجات الرقمية وفهم اتجاهات التكنولوجيا الحديثة": {
+    ar: "إدارة المنتجات الرقمية وفهم اتجاهات التكنولوجيا الحديثة",
+    en: "Digital Product Management & Tech Trends"
+  },
+
+  // Team Roles
+  "خبير إعلانات رقمية ومشتري وسائل إعلام": {
+    ar: "خبير إعلانات رقمية ومشتري وسائل إعلام",
+    en: "Paid Ads Specialist & Media Buyer"
+  },
+  "خبير إعلانات ممولة ومسوق رقمي": {
+    ar: "خبير إعلانات ممولة ومسوق رقمي",
+    en: "Paid Ads Specialist & Performance Marketer"
+  },
+  "تطوير المبيعات": {
+    ar: "تطوير المبيعات",
+    en: "Sales & Business Development Lead"
+  },
+  "مسؤولة مبيعات وتطوير الأعمال": {
+    ar: "مسؤولة مبيعات وتطوير الأعمال",
+    en: "Sales & Business Development Executive"
+  },
+  "المدير التنفيذي": {
+    ar: "المدير التنفيذي",
+    en: "Chief Executive Officer & Co-Founder"
+  },
+  "المدير التنفيذي والمؤسس الشريك": {
+    ar: "المدير التنفيذي والمؤسس الشريك",
+    en: "Chief Executive Officer & Co-Founder"
+  },
+  "مصمم جرافيك": {
+    ar: "مصمم جرافيك",
+    en: "Graphic Designer & Brand Identity Specialist"
+  },
+  "مصمم جرافيك ومطور هوية بصرية": {
+    ar: "مصمم جرافيك ومطور هوية بصرية",
+    en: "Graphic Designer & Brand Identity Specialist"
+  },
+  "المؤسس والرئيس التنفيذي": {
+    ar: "المؤسس والرئيس التنفيذي",
+    en: "Founder & Chief Executive Officer"
+  },
+  "المؤسس والمدير العام": {
+    ar: "المؤسس والمدير العام",
+    en: "Founder & Managing Director"
+  }
 };

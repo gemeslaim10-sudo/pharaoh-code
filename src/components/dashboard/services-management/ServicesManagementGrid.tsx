@@ -62,17 +62,17 @@ export default function ServicesManagementGrid({ services, onEdit, onDelete, loa
                 {/* Badges Row */}
                 <div className="flex gap-1.5 flex-wrap mb-3">
                   {service.type && (
-                    <span className="text-[10px] bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-500/20 px-2.5 py-1 rounded-full font-bold">
+                    <span className="text-[10px] bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-500/20 px-2.5 py-1 rounded-full font-bold inline-flex items-center justify-center leading-none">
                       {service.type}
                     </span>
                   )}
                   {service.badge && (
-                    <span className="text-[10px] bg-amber-500/10 text-amber-800 dark:text-pharaohGold border border-amber-500/20 dark:border-pharaohGold/30 px-2.5 py-1 rounded-full font-bold">
+                    <span className="text-[10px] bg-amber-500/10 text-amber-800 dark:text-pharaohGold border border-amber-500/20 dark:border-pharaohGold/30 px-2.5 py-1 rounded-full font-bold inline-flex items-center justify-center leading-none">
                       {service.badge}
                     </span>
                   )}
                   {service.price && (
-                    <span className="text-[10px] bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 px-2.5 py-1 rounded-full font-bold">
+                    <span className="text-[10px] bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 px-2.5 py-1 rounded-full font-bold inline-flex items-center justify-center leading-none">
                       {service.price}
                     </span>
                   )}

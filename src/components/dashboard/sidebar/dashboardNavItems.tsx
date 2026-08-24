@@ -1,10 +1,6 @@
-import { ReactNode } from "react";
+import { NavItem } from '@/types/nav';
 
-export interface NavItem {
-  href: string;
-  label: string;
-  icon: ReactNode;
-}
+
 
 export const DASHBOARD_LINKS: NavItem[] = [
   {

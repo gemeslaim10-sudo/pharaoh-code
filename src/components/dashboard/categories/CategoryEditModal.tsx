@@ -1,11 +1,9 @@
 'use client';
 
-export interface CategoryItem {
-  id?: string;
-  slug?: string;
-  name_ar?: string;
-  name_en?: string;
-}
+export type { CategoryItem } from '@/types/category';
+import { CategoryItem } from '@/types/category';
+
+
 
 interface CategoryEditModalProps {
   category: CategoryItem;

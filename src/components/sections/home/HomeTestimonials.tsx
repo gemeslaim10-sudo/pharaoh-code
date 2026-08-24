@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import { SectionData } from '@/types';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
-import { TestimonialItem, FALLBACK_TESTIMONIALS } from './testimonials/HomeTestimonialsData';
+import { FALLBACK_TESTIMONIALS } from './testimonials/HomeTestimonialsData';
+import { TestimonialItem } from '@/types/review';
 import { HomeTestimonialsCard } from './testimonials/HomeTestimonialsCard';
 import { HomeTestimonialsList } from './testimonials/HomeTestimonialsList';
 

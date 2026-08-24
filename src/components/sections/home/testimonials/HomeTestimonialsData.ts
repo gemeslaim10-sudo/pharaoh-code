@@ -1,18 +1,7 @@
-export interface TestimonialItem {
-  id?: string;
-  name?: string;
-  name_en?: string;
-  role?: string;
-  role_en?: string;
-  company?: string;
-  rating?: number | string;
-  content?: string;
-  content_en?: string;
-  text?: string;
-  imageUrl?: string;
-  image?: string;
-  verified?: boolean;
-}
+export type { TestimonialItem } from '@/types/review';
+import { TestimonialItem } from '@/types/review';
+
+
 
 export const FALLBACK_TESTIMONIALS: TestimonialItem[] = [
   {

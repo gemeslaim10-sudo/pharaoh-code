@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { getClients, addClient, updateClient, deleteClient } from '@/app/actions/dashboard';
 import { uploadImage } from '@/app/actions/dashboard/upload';
 import { auth } from '@/lib/firebase/config';
-import { ClientItem } from './ClientsTable';
+import { ClientItem } from '@/types/client';
 
 export function useClientsForm() {
   const [loading, setLoading] = useState(true);

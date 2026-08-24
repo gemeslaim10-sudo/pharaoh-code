@@ -7,7 +7,7 @@ import { useEffect, useRef } from 'react';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { getDynamicText } from '@/lib/i18nHelper';
-import { HeroThemeConfig } from '@/app/actions/dashboard/heroTheme';
+import { HeroThemeConfig } from '@/types/heroTheme';
 import { isMediaVideo } from '@/lib/mediaHelper';
 import { HomeHeroButtons } from './hero/HomeHeroButtons';
 import { HomeHeroSlide } from './hero/HomeHeroSlide';

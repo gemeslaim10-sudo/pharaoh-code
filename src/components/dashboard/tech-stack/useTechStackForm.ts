@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { getTechStackContent, updateTechStackContent } from '@/app/actions/dashboard/techStack';
-import { TechStackFormData } from './TechStackHeaderFields';
+import { TechStackFormData } from '@/types/techStack';
 
 const INITIAL_TECH_STACK_FORM: TechStackFormData = {
   subtitle_ar: '', subtitle_en: '',

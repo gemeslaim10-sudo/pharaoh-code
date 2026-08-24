@@ -1,6 +1,6 @@
 'use client';
 
-import { StatsSectionData } from '@/app/actions/dashboard/stats';
+import { StatsSectionData } from '@/types/stats';
 
 interface StatsHeaderFieldsProps {
   form: StatsSectionData;

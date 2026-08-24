@@ -1,18 +1,12 @@
 'use client';
 
-import { ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/contexts/LanguageContext';
 
-export interface NavItemData {
-  id: string;
-  label: string;
-  href: string;
-  isExternal?: boolean;
-  isActive: boolean;
-  isWhatsApp?: boolean;
-  icon: (active: boolean, isLight: boolean) => ReactNode;
-}
+export type { NavItemData } from '@/types/nav';
+import { NavItemData } from '@/types/nav';
+
+
 
 export function useMobileNavItems(whatsappNumber: string = '+201000000000') {
   const pathname = usePathname();

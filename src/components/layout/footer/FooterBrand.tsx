@@ -3,7 +3,8 @@
 import Link from 'next/link';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { FooterSocialButtons, FooterSocialLinks } from './FooterSocialButtons';
+import { FooterSocialButtons } from './FooterSocialButtons';
+import { FooterSocialLinks } from '@/types/settings';
 
 interface FooterBrandProps {
   siteName?: string;

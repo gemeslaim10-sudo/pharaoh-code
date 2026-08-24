@@ -6,7 +6,7 @@ import CreativityProjectForm from '@/components/dashboard/creativity/CreativityP
 import CreativityThinkForm from '@/components/dashboard/creativity/CreativityThinkForm';
 import CreativityServicesForm from '@/components/dashboard/creativity/CreativityServicesForm';
 import CreativityRecords from '@/components/dashboard/creativity/CreativityRecords';
-import { CreativityType } from '@/app/actions/dashboard/creativity';
+import { CreativityType } from '@/types/creativity';
 
 export default function DashboardCreativity() {
   const [activeTab, setActiveTab] = useState<CreativityType>('portfolio');

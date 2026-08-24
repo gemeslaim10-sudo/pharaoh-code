@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getHeroThemeConfig, updateHeroThemeConfig, HeroThemeConfig } from '@/app/actions/dashboard/heroTheme';
+import { getHeroThemeConfig, updateHeroThemeConfig } from '@/app/actions/dashboard/heroTheme';
+import { HeroThemeConfig } from '@/types/heroTheme';
 import { uploadImage } from '@/app/actions/dashboard/upload';
 import { auth } from '@/lib/firebase/config';
 

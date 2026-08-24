@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { CreativityType, getCreativityItems, deleteCreativityItem } from '@/app/actions/dashboard/creativity';
+import { getCreativityItems, deleteCreativityItem } from '@/app/actions/dashboard/creativity';
+import { CreativityType } from '@/types/creativity';
 import { auth } from '@/lib/firebase/config';
 
 interface Props {

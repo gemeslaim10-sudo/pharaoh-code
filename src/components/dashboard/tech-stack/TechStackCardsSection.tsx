@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { TechStackFormData } from './TechStackHeaderFields';
+import { TechStackFormData } from '@/types/techStack';
 
 const TECH_META = [
   { titleAr: 'الأنظمة الخلفية', titleEn: 'Backend Systems', icon: '💻' },

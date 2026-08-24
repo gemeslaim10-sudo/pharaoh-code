@@ -2,8 +2,7 @@
 
 import { db, serializeData } from '@/lib/firebase/admin';
 import { authenticateAdmin } from './auth';
-
-export type CreativityType = 'portfolio' | 'philosophy' | 'services';
+import { CreativityType } from '@/types/creativity';
 
 export async function addCreativityItem(idToken: string, type: CreativityType, data: any) {
   await authenticateAdmin(idToken);

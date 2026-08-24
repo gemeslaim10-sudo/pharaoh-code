@@ -1,17 +1,9 @@
 'use client';
 
-export interface FooterSocialLinks {
-  fb?: string;
-  wa?: string;
-  ig?: string;
-  x?: string;
-  twitter?: string;
-  linkedin?: string;
-  youtube?: string;
-  tiktok?: string;
-  telegram?: string;
-  [key: string]: string | undefined;
-}
+export type { FooterSocialLinks } from '@/types/settings';
+import { FooterSocialLinks } from '@/types/settings';
+
+
 
 interface FooterSocialButtonsProps {
   socialLinks: FooterSocialLinks;

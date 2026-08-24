@@ -63,3 +63,22 @@ export interface SectionData {
   
   [key: string]: any;
 }
+
+// Domain-specific Barrel Exports
+export * from './user';
+export * from './team';
+export * from './stats';
+export * from './heroTheme';
+export * from './creativity';
+export * from './service';
+export * from './about';
+export * from './client';
+export * from './category';
+export * from './techStack';
+export * from './order';
+export * from './review';
+export * from './notification';
+export * from './settings';
+export * from './nav';
+export * from './i18n';
+export * from './dashboardLayout';

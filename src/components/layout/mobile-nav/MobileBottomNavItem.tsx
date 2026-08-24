@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { NavItemData } from './useMobileNavItems';
+import { NavItemData } from '@/types/nav';
 
 interface MobileBottomNavItemProps {
   item: NavItemData;

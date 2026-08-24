@@ -1,4 +1,4 @@
-import { NavLinkItem } from './NavbarDesktopLinks';
+import { NavLinkItem } from '@/types/nav';
 
 export function getNavLinks(t: (key: string) => string): NavLinkItem[] {
   return [

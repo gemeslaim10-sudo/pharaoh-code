@@ -2,7 +2,8 @@
 
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { ClientItem, HomeClientCard } from './clients/HomeClientCard';
+import { HomeClientCard } from './clients/HomeClientCard';
+import { ClientItem } from '@/types/client';
 import { HomeClientsHeader } from './clients/HomeClientsHeader';
 import { useRef, useEffect } from 'react';
 import Swiper from 'swiper';

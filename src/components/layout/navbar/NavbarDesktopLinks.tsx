@@ -4,11 +4,10 @@ import Link from 'next/link';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
 
-export interface NavLinkItem {
-  href: string;
-  label: string;
-  icon: string;
-}
+export type { NavLinkItem } from '@/types/nav';
+import { NavLinkItem } from '@/types/nav';
+
+
 
 interface NavbarDesktopLinksProps {
   links: NavLinkItem[];

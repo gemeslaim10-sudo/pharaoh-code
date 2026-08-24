@@ -1,16 +1,9 @@
 'use client';
 
-export interface ClientItem {
-    id: string;
-    name?: string;
-    name_ar?: string;
-    name_en?: string;
-    logo?: string;
-    description?: string;
-    description_ar?: string;
-    description_en?: string;
-    websiteUrl?: string;
-}
+export type { ClientItem } from '@/types/client';
+import { ClientItem } from '@/types/client';
+
+
 
 interface ClientsTableProps {
     loading: boolean;

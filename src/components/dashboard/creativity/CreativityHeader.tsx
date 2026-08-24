@@ -1,4 +1,4 @@
-import { CreativityType } from '@/app/actions/dashboard/creativity';
+import { CreativityType } from '@/types/creativity';
 
 interface Props {
     activeTab: CreativityType;

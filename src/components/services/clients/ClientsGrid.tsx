@@ -4,8 +4,8 @@ import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 import { motion } from 'framer-motion';
 import { ClientsGridHeader } from './ClientsGridHeader';
-import { ClientsGridCard, ClientItem } from './ClientsGridCard';
-
+import { ClientsGridCard } from './ClientsGridCard';
+import { ClientItem } from '@/types/client';
 export type { ClientItem };
 
 export default function ClientsGrid({ clients }: { clients: ClientItem[] }) {
@@ -68,8 +68,9 @@ export default function ClientsGrid({ clients }: { clients: ClientItem[] }) {
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           >
             {clients.map((client) => {
-              const nameText = getDynamicText(client, 'name', language) || client.name;
+              const nameText = getDynamicText(client, 'name', language) || client.name || '';
               const descText = getDynamicText(client, 'description', language) || getDynamicText(client, 'desc', language) || client.description || '';
+
 
               return (
                 <motion.div

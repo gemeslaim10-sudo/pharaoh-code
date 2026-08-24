@@ -3,20 +3,10 @@
 import Link from 'next/link';
 import { useTheme } from '@/contexts/ThemeContext';
 
-export interface ClientItem {
-  id: string;
-  name: string;
-  name_ar?: string;
-  name_en?: string;
-  description?: string;
-  description_ar?: string;
-  description_en?: string;
-  desc?: string;
-  desc_ar?: string;
-  desc_en?: string;
-  logo?: string;
-  websiteUrl?: string;
-}
+export type { ClientItem } from '@/types/client';
+import { ClientItem } from '@/types/client';
+
+
 
 interface ClientsGridCardProps {
   client: ClientItem;

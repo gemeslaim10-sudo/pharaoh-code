@@ -1,5 +1,5 @@
 'use client';
-import { TechStackFormData } from './TechStackHeaderFields';
+import { TechStackFormData } from '@/types/techStack';
 
 interface TechStackFeaturePointsProps {
   form: TechStackFormData;

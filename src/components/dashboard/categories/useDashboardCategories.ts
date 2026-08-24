@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { getCategories, addCategory, updateCategory, deleteCategory } from '@/app/actions/dashboard/categories';
-import { CategoryItem } from './CategoryEditModal';
+import { CategoryItem } from '@/types/category';
 
 export function useDashboardCategories() {
   const { user } = useAuth();

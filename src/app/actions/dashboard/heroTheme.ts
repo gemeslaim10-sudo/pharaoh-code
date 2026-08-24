@@ -1,31 +1,9 @@
 'use server';
 
-import { cache } from 'react';
 import { admin, serializeData } from '@/lib/firebase/admin';
+import { HeroThemeConfig } from '@/types/heroTheme';
 
-export interface HeroThemeConfig {
-    darkSlide1Media?: string;
-    darkSlide1Video?: string;
-    darkSlide1Image?: string;
-
-    darkSlide2Media?: string;
-    darkSlide2Video?: string;
-    darkSlide2Image?: string;
-
-    darkPreset?: string; // 'royal_gold' | 'luminous_gold' | 'sovereign_silver' | 'cinematic'
-
-    lightSlide1Media?: string;
-    lightSlide1Video?: string;
-    lightSlide1Image?: string;
-
-    lightSlide2Media?: string;
-    lightSlide2Video?: string;
-    lightSlide2Image?: string;
-
-    lightPreset?: string; // 'royal_gold' | 'luminous_gold' | 'sovereign_silver' | 'cinematic'
-}
-
-export const getHeroThemeConfig = cache(async function getHeroThemeConfig(): Promise<HeroThemeConfig | null> {
+export async function getHeroThemeConfig(): Promise<HeroThemeConfig | null> {
     try {
         const db = admin.firestore();
         const doc = await db.collection('settings').doc('heroTheme').get();
@@ -33,7 +11,7 @@ export const getHeroThemeConfig = cache(async function getHeroThemeConfig(): Pro
     } catch (error: any) {
         return null;
     }
-});
+}
 
 export async function updateHeroThemeConfig(token: string, data: HeroThemeConfig) {
     try {

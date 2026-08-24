@@ -1,5 +1,5 @@
 'use client';
-import { CategoryItem } from './CategoryEditModal';
+import { CategoryItem } from '@/types/category';
 
 interface CategoryListGridProps {
   categories: CategoryItem[];

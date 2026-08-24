@@ -2,7 +2,7 @@
 
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { NavLinkItem } from './NavbarDesktopLinks';
+import { NavLinkItem } from '@/types/nav';
 import { NavbarMobileDrawerFooter } from './NavbarMobileDrawerFooter';
 import { NavbarMobileDrawerHeader } from './NavbarMobileDrawerHeader';
 import { NavbarMobileDrawerLinks } from './NavbarMobileDrawerLinks';

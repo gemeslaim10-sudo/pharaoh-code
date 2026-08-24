@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { StatsSectionData, StatItemData } from '@/app/actions/dashboard/stats';
+import { StatsSectionData, StatItemData } from '@/types/stats';
 
 interface StatsCardsSectionProps {
   form: StatsSectionData;

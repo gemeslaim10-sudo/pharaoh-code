@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useTheme } from '@/contexts/ThemeContext';
-import { NavLinkItem } from './NavbarDesktopLinks';
+import { NavLinkItem } from '@/types/nav';
 import { motion } from 'framer-motion';
 
 interface NavbarMobileDrawerLinksProps {

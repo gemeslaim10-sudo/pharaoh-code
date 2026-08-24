@@ -32,6 +32,14 @@ export interface RoadmapStepItem {
   desc_en?: string;
 }
 
+export interface GuaranteeItem {
+  icon?: string;
+  title_ar?: string;
+  title_en?: string;
+  desc_ar?: string;
+  desc_en?: string;
+}
+
 export interface ServiceItem {
   id?: string;
   serviceId?: string;
@@ -46,13 +54,50 @@ export interface ServiceItem {
   features?: FeatureItem[];
   packages?: PackageItem[];
   roadmapSteps?: RoadmapStepItem[];
+  addedValueTitle_ar?: string;
+  addedValueTitle_en?: string;
+  addedValueSubtitle_ar?: string;
+  addedValueSubtitle_en?: string;
+  guarantees?: GuaranteeItem[];
   [key: string]: any;
 }
 
 export const DEFAULT_FEATURES: FeatureItem[] = [
-  { title_ar: '', title_en: '', desc_ar: '', desc_en: '' },
-  { title_ar: '', title_en: '', desc_ar: '', desc_en: '' },
-  { title_ar: '', title_en: '', desc_ar: '', desc_en: '' },
+  { 
+    title_ar: 'تنفيذ عالي الدقة والاحترافية:', 
+    title_en: 'High-Precision Execution:', 
+    desc_ar: 'نلتزم بأعلى معايير الجودة لتقديم نتائج تفوق التوقعات.', 
+    desc_en: 'We adhere to highest quality standards for optimal results.' 
+  },
+  { 
+    title_ar: 'حلول مخصصة ومتكاملة:', 
+    title_en: 'Customized Integrated Solutions:', 
+    desc_ar: 'نصمم وننفذ حلولاً تناسب متطلبات نشاطك وهدفك بدقة.', 
+    desc_en: 'Tailored solutions matching your business requirements.' 
+  },
+  { 
+    title_ar: 'دعم ومتابعة مستمرة:', 
+    title_en: 'Continuous Support & Follow-up:', 
+    desc_ar: 'فريق عمل متأهب لدعمك ومتابعة تنفيذ كافة التفاصيل أولاً بأول.', 
+    desc_en: 'Dedicated team for continuous support and execution tracking.' 
+  },
+];
+
+export const DEFAULT_GUARANTEES: GuaranteeItem[] = [
+  {
+    icon: '✨',
+    title_ar: 'تحليل وتخطيط متكامل',
+    title_en: 'Comprehensive Discovery & Strategy',
+    desc_ar: 'جلسة تحليل تفصيلية لتحديد المتطلبات الدقيقة ورسم خطة التنفيذ المثالية.',
+    desc_en: 'Detailed discovery session to specify requirements and timeline.'
+  },
+  {
+    icon: '🗺️',
+    title_ar: 'تسليم احترافي مع الدعم',
+    title_en: 'Professional Delivery & Support',
+    desc_ar: 'تسليم كامل مخرجات الخدمة مع توفير المتابعة والدعم الفني المباشر.',
+    desc_en: 'Complete handover of deliverables with dedicated support.'
+  }
 ];
 
 export const DEFAULT_PACKAGES: PackageItem[] = [
@@ -99,6 +144,8 @@ export interface TemplateFields {
   overviewTitleAr: string; overviewTitleEn: string;
   overviewDescAr: string; overviewDescEn: string;
   packagesTitleAr: string; packagesTitleEn: string;
+  addedValueTitleAr?: string; addedValueTitleEn?: string;
+  addedValueSubtitleAr?: string; addedValueSubtitleEn?: string;
 }
 
 export const INITIAL_TEMPLATE_FIELDS: TemplateFields = {
@@ -111,6 +158,8 @@ export const INITIAL_TEMPLATE_FIELDS: TemplateFields = {
   overviewTitleAr: '', overviewTitleEn: '',
   overviewDescAr: '', overviewDescEn: '',
   packagesTitleAr: '', packagesTitleEn: '',
+  addedValueTitleAr: '', addedValueTitleEn: '',
+  addedValueSubtitleAr: '', addedValueSubtitleEn: '',
 };
 
 export function extractTemplateFromService(s: Record<string, any>): TemplateFields {
@@ -124,5 +173,7 @@ export function extractTemplateFromService(s: Record<string, any>): TemplateFiel
     overviewTitleAr: s.overviewTitle_ar || '', overviewTitleEn: s.overviewTitle_en || '',
     overviewDescAr: s.overviewDesc_ar || '', overviewDescEn: s.overviewDesc_en || '',
     packagesTitleAr: s.packagesTitle_ar || '', packagesTitleEn: s.packagesTitle_en || '',
+    addedValueTitleAr: s.addedValueTitle_ar || '', addedValueTitleEn: s.addedValueTitle_en || '',
+    addedValueSubtitleAr: s.addedValueSubtitle_ar || '', addedValueSubtitleEn: s.addedValueSubtitle_en || '',
   };
 }

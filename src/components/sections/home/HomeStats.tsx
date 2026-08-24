@@ -40,7 +40,7 @@ export default function HomeStats({ data }: { data?: SectionData }) {
     }
   ];
 
-  const itemsToRender = (data?.items && data.items.length > 0 && data.items[0]?.iconSvg) ? data.items : defaultItems;
+  const itemsToRender = (Array.isArray(data?.items) && data.items.length > 0) ? data.items : defaultItems;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -66,18 +66,35 @@ export default function HomeStats({ data }: { data?: SectionData }) {
     },
   };
 
+  const subtitle = getDynamicText(data, 'subtitle', language) || t("stats.subtitle");
+  const titlePart1 = getDynamicText(data, 'titlePart1', language) || t("stats.titlePart1");
+  const titlePart2 = getDynamicText(data, 'titlePart2', language) || t("stats.titlePart2");
+  const desc = getDynamicText(data, 'description', language) || t("stats.description");
+
   return (
-    <section id="stats" className="relative py-14 sm:py-20 bg-[#060D1A] overflow-hidden text-white select-none" dir={direction}>
+    <section 
+      id="stats" 
+      className={`relative py-14 sm:py-20 overflow-hidden select-none transition-colors duration-300 ${
+        isLight ? 'bg-slate-50 text-slate-900' : 'bg-[#060D1A] text-white'
+      }`} 
+      dir={direction}
+    >
       {/* Dynamic ambient spotlight */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] bg-[#C5A16F]/8 blur-[150px] rounded-full pointer-events-none" />
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff04_1px,transparent_1px),linear-gradient(to_bottom,#ffffff04_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] [mask-image:radial-gradient(ellipse_70%_50%_at_50%_50%,#000_60%,transparent_100%)] pointer-events-none" />
+      <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] blur-[150px] rounded-full pointer-events-none ${
+        isLight ? 'bg-[#C5A16F]/10' : 'bg-[#C5A16F]/8'
+      }`} />
+      <div className={`absolute inset-0 [mask-image:radial-gradient(ellipse_70%_50%_at_50%_50%,#000_60%,transparent_100%)] pointer-events-none ${
+        isLight 
+          ? 'bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] bg-[size:3.5rem_3.5rem]' 
+          : 'bg-[linear-gradient(to_right,#ffffff04_1px,transparent_1px),linear-gradient(to_bottom,#ffffff04_1px,transparent_1px)] bg-[size:3.5rem_3.5rem]'
+      }`} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <HomeStatsHeader
-          subtitle={getDynamicText(data, 'subtitle', language) || t("stats.subtitle")}
-          titlePart1={t("stats.titlePart1")}
-          titlePart2={t("stats.titlePart2")}
-          desc={getDynamicText(data, 'description', language) || t("stats.description")}
+          subtitle={subtitle}
+          titlePart1={titlePart1}
+          titlePart2={titlePart2}
+          desc={desc}
           isLight={isLight}
         />
 

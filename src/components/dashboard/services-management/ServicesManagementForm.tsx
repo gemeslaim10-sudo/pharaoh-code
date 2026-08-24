@@ -9,6 +9,7 @@ import { ServiceFormOverviewTab } from './ServiceFormOverviewTab';
 import { ServiceFormPackagesTab } from './ServiceFormPackagesTab';
 import { ServiceFormRoadmapTab } from './ServiceFormRoadmapTab';
 import { ServiceFormHeroFields } from './ServiceFormHeroFields';
+import { ServiceFormGuaranteesTab } from './ServiceFormGuaranteesTab';
 
 interface Props {
   editingService: ServiceItem | null;
@@ -17,7 +18,7 @@ interface Props {
 }
 
 export default function ServicesManagementForm({ editingService, setEditingService, onSuccess }: Props) {
-  const [activeTab, setActiveTab] = useState<'basic' | 'overview' | 'packages' | 'roadmap'>('basic');
+  const [activeTab, setActiveTab] = useState<'basic' | 'overview' | 'packages' | 'roadmap' | 'guarantees'>('basic');
   const form = useServiceForm(editingService, setEditingService, onSuccess);
 
   return (
@@ -72,6 +73,7 @@ export default function ServicesManagementForm({ editingService, setEditingServi
           { id: 'overview', label: '2. النظرة العامة والمميزات (Overview & Features)' },
           { id: 'packages', label: '3. باقات التسعير الثلاث (Pricing Packages)' },
           { id: 'roadmap', label: '4. مراحل وخطوات العمل (Work Roadmap)' },
+          { id: 'guarantees', label: '5. القيمة المضافة والضمانات (Added Value & Guarantees)' },
         ].map(tab => (
           <button
             key={tab.id}
@@ -129,6 +131,7 @@ export default function ServicesManagementForm({ editingService, setEditingServi
             overviewDescAr={form.tpl.overviewDescAr} setOverviewDescAr={v => form.setTplField('overviewDescAr', v)}
             overviewDescEn={form.tpl.overviewDescEn} setOverviewDescEn={v => form.setTplField('overviewDescEn', v)}
             features={form.features} setFeatures={form.setFeatures}
+            addFeature={form.addFeature} removeFeature={form.removeFeature}
           />
         )}
 
@@ -145,6 +148,24 @@ export default function ServicesManagementForm({ editingService, setEditingServi
         {activeTab === 'roadmap' && (
           <ServiceFormRoadmapTab
             roadmapSteps={form.roadmapSteps} setRoadmapSteps={form.setRoadmapSteps}
+          />
+        )}
+
+        {/* TAB 5: ADDED VALUE & GUARANTEES */}
+        {activeTab === 'guarantees' && (
+          <ServiceFormGuaranteesTab
+            addedValueTitleAr={form.tpl.addedValueTitleAr || ''}
+            setAddedValueTitleAr={v => form.setTplField('addedValueTitleAr', v)}
+            addedValueTitleEn={form.tpl.addedValueTitleEn || ''}
+            setAddedValueTitleEn={v => form.setTplField('addedValueTitleEn', v)}
+            addedValueSubtitleAr={form.tpl.addedValueSubtitleAr || ''}
+            setAddedValueSubtitleAr={v => form.setTplField('addedValueSubtitleAr', v)}
+            addedValueSubtitleEn={form.tpl.addedValueSubtitleEn || ''}
+            setAddedValueSubtitleEn={v => form.setTplField('addedValueSubtitleEn', v)}
+            guarantees={form.guarantees}
+            setGuarantees={form.setGuarantees}
+            addGuarantee={form.addGuarantee}
+            removeGuarantee={form.removeGuarantee}
           />
         )}
 

@@ -6,8 +6,8 @@ import { addService, updateService } from '@/app/actions/dashboard';
 import { uploadImage } from '@/app/actions/dashboard/upload';
 import { ServiceItem } from './serviceFormTypes';
 import {
-  FeatureItem, PackageItem, RoadmapStepItem,
-  DEFAULT_FEATURES, DEFAULT_PACKAGES, DEFAULT_ROADMAP_STEPS,
+  FeatureItem, PackageItem, RoadmapStepItem, GuaranteeItem,
+  DEFAULT_FEATURES, DEFAULT_PACKAGES, DEFAULT_ROADMAP_STEPS, DEFAULT_GUARANTEES,
   TemplateFields, INITIAL_TEMPLATE_FIELDS, extractTemplateFromService
 } from './serviceFormTypes';
 
@@ -32,6 +32,7 @@ export function useServiceForm(
   const [tpl, setTpl] = useState<TemplateFields>(INITIAL_TEMPLATE_FIELDS);
 
   const [features, setFeatures] = useState<FeatureItem[]>(DEFAULT_FEATURES);
+  const [guarantees, setGuarantees] = useState<GuaranteeItem[]>(DEFAULT_GUARANTEES);
   const [packages, setPackages] = useState<PackageItem[]>(DEFAULT_PACKAGES);
   const [roadmapSteps, setRoadmapSteps] = useState<RoadmapStepItem[]>(DEFAULT_ROADMAP_STEPS);
 
@@ -59,14 +60,23 @@ export function useServiceForm(
       setTpl(extractTemplateFromService(s));
 
       if (Array.isArray(s.features) && s.features.length > 0) setFeatures(s.features);
+      else setFeatures(DEFAULT_FEATURES);
+
+      if (Array.isArray(s.guarantees) && s.guarantees.length > 0) setGuarantees(s.guarantees);
+      else setGuarantees(DEFAULT_GUARANTEES);
+
       if (Array.isArray(s.packages) && s.packages.length > 0) setPackages(s.packages);
+      else setPackages(DEFAULT_PACKAGES);
+
       if (Array.isArray(s.roadmapSteps) && s.roadmapSteps.length > 0) setRoadmapSteps(s.roadmapSteps);
+      else setRoadmapSteps(DEFAULT_ROADMAP_STEPS);
     } else {
       setTitle(''); setTitleEn(''); setType('لوحة تحكم شاملة'); setTypeCustom('');
       setPrice(''); setBadge(''); setBtnText(''); setSvg(''); setDesc(''); setDescEn('');
       setImageUrl(''); setImageFile(null);
       setTpl(INITIAL_TEMPLATE_FIELDS);
       setFeatures(DEFAULT_FEATURES);
+      setGuarantees(DEFAULT_GUARANTEES);
       setPackages(DEFAULT_PACKAGES);
       setRoadmapSteps(DEFAULT_ROADMAP_STEPS);
     }
@@ -78,6 +88,46 @@ export function useServiceForm(
 
   const setTplField = (field: keyof TemplateFields, value: string) => {
     setTpl(prev => ({ ...prev, [field]: value }));
+  };
+
+  const addFeature = () => {
+    setFeatures(prev => [...prev, { title_ar: '', title_en: '', desc_ar: '', desc_en: '' }]);
+  };
+
+  const removeFeature = (idx: number) => {
+    if (features.length <= 1) {
+      alert('يجب الإبقاء على ميزة واحدة على الأقل');
+      return;
+    }
+    setFeatures(prev => prev.filter((_, i) => i !== idx));
+  };
+
+  const updateFeature = (idx: number, field: keyof FeatureItem, value: string) => {
+    setFeatures(prev => {
+      const updated = [...prev];
+      updated[idx] = { ...updated[idx], [field]: value };
+      return updated;
+    });
+  };
+
+  const addGuarantee = () => {
+    setGuarantees(prev => [...prev, { icon: '✨', title_ar: '', title_en: '', desc_ar: '', desc_en: '' }]);
+  };
+
+  const removeGuarantee = (idx: number) => {
+    if (guarantees.length <= 1) {
+      alert('يجب الإبقاء على بند ضمان وقيمة مضافة واحد على الأقل');
+      return;
+    }
+    setGuarantees(prev => prev.filter((_, i) => i !== idx));
+  };
+
+  const updateGuarantee = (idx: number, field: keyof GuaranteeItem, value: string) => {
+    setGuarantees(prev => {
+      const updated = [...prev];
+      updated[idx] = { ...updated[idx], [field]: value };
+      return updated;
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -111,7 +161,9 @@ export function useServiceForm(
         overviewTitle_ar: tpl.overviewTitleAr, overviewTitle_en: tpl.overviewTitleEn,
         overviewDesc_ar: tpl.overviewDescAr, overviewDesc_en: tpl.overviewDescEn,
         packagesTitle_ar: tpl.packagesTitleAr, packagesTitle_en: tpl.packagesTitleEn,
-        features, packages, roadmapSteps
+        addedValueTitle_ar: tpl.addedValueTitleAr, addedValueTitle_en: tpl.addedValueTitleEn,
+        addedValueSubtitle_ar: tpl.addedValueSubtitleAr, addedValueSubtitle_en: tpl.addedValueSubtitleEn,
+        features, guarantees, packages, roadmapSteps
       };
 
       if (editingService && editingService.id) {
@@ -137,7 +189,9 @@ export function useServiceForm(
     loading, title, setTitle, titleEn, setTitleEn, type, setType, typeCustom, setTypeCustom,
     price, setPrice, badge, setBadge, btnText, setBtnText, svg, setSvg, desc, setDesc,
     descEn, setDescEn, imageFile, imageUrl, tpl, setTplField,
-    features, setFeatures, packages, setPackages, roadmapSteps, setRoadmapSteps,
+    features, setFeatures, addFeature, removeFeature, updateFeature,
+    guarantees, setGuarantees, addGuarantee, removeGuarantee, updateGuarantee,
+    packages, setPackages, roadmapSteps, setRoadmapSteps,
     handleFileChange, handleSubmit
   };
 }

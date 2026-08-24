@@ -6,6 +6,7 @@ import { getRecentNotifications as _getRecentNotifications } from './dashboard/n
 import { seedDashboardData as _seedDashboardData } from './dashboard/seed';
 import { getServices as _getServices, addService as _addService, updateService as _updateService, deleteService as _deleteService } from './dashboard/services';
 import { getClients as _getClients, addClient as _addClient, updateClient as _updateClient, deleteClient as _deleteClient } from './dashboard/clients';
+import { getStatsContent as _getStatsContent, updateStatsContent as _updateStatsContent } from './dashboard/stats';
 
 export async function getDashboardStats(idToken: string) { return _getDashboardStats(idToken); }
 export async function getRecentOrders(idToken: string) { return _getRecentOrders(idToken); }
@@ -28,3 +29,7 @@ export async function getClients() { return _getClients(); }
 export async function addClient(idToken: string, clientData: any) { return _addClient(idToken, clientData); }
 export async function updateClient(idToken: string, id: string, clientData: any) { return _updateClient(idToken, id, clientData); }
 export async function deleteClient(idToken: string, id: string) { return _deleteClient(idToken, id); }
+
+export async function getStatsContent() { return _getStatsContent(); }
+export async function updateStatsContent(idToken: string, statsData: any) { return _updateStatsContent(idToken, statsData); }
+

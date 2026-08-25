@@ -1,31 +1,26 @@
 'use client';
 
 import { SectionItem } from '@/types';
+import { CategoryItem } from '@/types/category';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { getDynamicText } from '@/lib/i18nHelper';
+import { getCategoryDisplayLabel } from '@/lib/categoryHelper';
 import { PortfolioCardMedia } from './PortfolioCardMedia';
 
 interface PortfolioCardProps {
   item: SectionItem;
+  categories?: CategoryItem[];
 }
 
-export function PortfolioCard({ item }: PortfolioCardProps) {
-  const { t, language, direction } = useTranslation();
+export function PortfolioCard({ item, categories }: PortfolioCardProps) {
+  const { language, direction } = useTranslation();
   const { theme } = useTheme();
   const isLight = theme === 'light';
 
   const itemTitle = getDynamicText(item, 'title', language) || item.title || '';
   const itemDesc = getDynamicText(item, 'description', language) || getDynamicText(item, 'desc', language) || item.description || '';
-  const categoryKey = (item.filterClass || item.category || 'web').toLowerCase();
-
-  const categoryLabel = categoryKey.includes('web')
-    ? (t('portfolio.filterWeb') || 'ويب')
-    : categoryKey.includes('app')
-      ? (t('portfolio.filterApp') || 'تطبيق')
-      : categoryKey.includes('motion')
-        ? (t('portfolio.filterMotion') || 'موشن')
-        : (item.category || 'مشروع');
+  const categoryLabel = getCategoryDisplayLabel(item, categories, language);
 
   const imageUrl = item.imageUrl || item.image || '/images/default-project.jpg';
   const liveUrl = item.link && item.link !== '#' ? item.link : null;

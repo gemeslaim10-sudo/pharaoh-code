@@ -72,33 +72,48 @@ export default async function PortfolioPage() {
   // Map portfolio & categories
   const dbPortfolio = portfolioDocs.map(d => {
     const p = d.data();
+    const categoriesArray = Array.isArray(p.categories) 
+      ? p.categories 
+      : (p.category ? String(p.category).split(',').map((s: string) => s.trim()).filter(Boolean) : []);
+
     return {
       id: d.id,
       title: p.title || p.title_ar || '',
       title_ar: p.title_ar || p.title || '',
       title_en: p.title_en || '',
-      category: p.category || '',
+      category: p.category || (categoriesArray.length > 0 ? categoriesArray[0] : ''),
+      categories: categoriesArray,
+      categoryLabel: p.categoryLabel || p.category || '',
+      category_ar: p.category_ar,
+      category_en: p.category_en,
+      categorySlug: p.categorySlug || p.category,
       filterClass: p.category || '',
-      image: p.image || '',
+      image: p.image || p.imageUrl || '',
+      imageUrl: p.imageUrl || p.image || '',
       description: p.desc || p.description || p.desc_ar || '',
-      description_ar: p.desc_ar || p.description_ar || p.desc || '',
+      description_ar: p.desc_ar || p.description_ar || p.desc || p.description || '',
       description_en: p.desc_en || p.description_en || '',
       link: p.link || '',
+      appLink: p.appLink || '',
     };
   });
 
   const categories = categoriesDocs.map(d => {
     const c = d.data();
+    const nameAr = c.name_ar || c.nameAr || c.name || '';
+    const nameEn = c.name_en || c.nameEn || '';
     return {
       id: d.id,
-      nameAr: c.nameAr || c.name || '',
-      nameEn: c.nameEn || '',
+      name_ar: nameAr,
+      name_en: nameEn,
+      nameAr: nameAr,
+      nameEn: nameEn,
       slug: c.slug || d.id,
     };
   });
 
   if (!data.hero) data.hero = {};
-  if (dbPortfolio.length > 0) data.hero.items = dbPortfolio;
+  data.hero.items = dbPortfolio;
   data.hero.categories = categories;
 
   return (

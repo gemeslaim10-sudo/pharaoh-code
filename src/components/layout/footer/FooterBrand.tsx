@@ -15,7 +15,7 @@ interface FooterBrandProps {
 export function FooterBrand({
   siteName = 'PHARAOH CODE',
   activeLogo,
-  socialLinks = { fb: '#', wa: '#', ig: '#' },
+  socialLinks = { items: [] },
 }: FooterBrandProps) {
   const { t } = useTranslation();
   const { theme } = useTheme();

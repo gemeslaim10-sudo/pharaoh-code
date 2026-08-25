@@ -55,7 +55,7 @@ export const getHomePageData = cache(async function getHomePageData() {
   data.testimonials.items = mapReviews(reviewsDocs);
 
   if (!data.portfolio) data.portfolio = {};
-  if (portfolioDocs.length > 0) data.portfolio.items = mapPortfolio(portfolioDocs);
+  data.portfolio.items = mapPortfolio(portfolioDocs);
   data.portfolio.categories = mapCategories(categoriesDocs);
 
   if (!data.services) data.services = {};

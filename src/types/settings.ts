@@ -11,7 +11,22 @@ export interface IdentitySettings {
   [key: string]: any;
 }
 
+export interface SocialPlatform {
+  id: string;
+  name: string;
+  name_ar?: string | undefined;
+  name_en?: string | undefined;
+  url: string;
+  icon?: string | undefined; // Image URL or preset name
+  iconSvg?: string | undefined; // Custom SVG string
+  color?: string | undefined; // Custom accent/brand color (e.g. #1877F2)
+  order?: number | undefined;
+  createdAt?: any;
+  updatedAt?: any;
+}
+
 export interface SocialSettings {
+  items?: SocialPlatform[];
   fb?: string;
   wa?: string;
   ig?: string;
@@ -26,6 +41,7 @@ export interface SocialSettings {
 }
 
 export interface FooterSocialLinks {
+  items?: SocialPlatform[];
   fb?: string;
   wa?: string;
   ig?: string;
@@ -35,7 +51,7 @@ export interface FooterSocialLinks {
   youtube?: string;
   tiktok?: string;
   telegram?: string;
-  [key: string]: string | undefined;
+  [key: string]: any;
 }
 
 export interface SystemStatusSettings {

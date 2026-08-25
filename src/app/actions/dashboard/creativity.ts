@@ -3,6 +3,7 @@
 import { db, serializeData } from '@/lib/firebase/admin';
 import { authenticateAdmin } from './auth';
 import { CreativityType } from '@/types/creativity';
+import { revalidatePath } from 'next/cache';
 
 export async function addCreativityItem(idToken: string, type: CreativityType, data: any) {
   await authenticateAdmin(idToken);
@@ -13,6 +14,11 @@ export async function addCreativityItem(idToken: string, type: CreativityType, d
       ...data,
       createdAt: new Date().toISOString()
     });
+
+    revalidatePath('/');
+    revalidatePath('/portfolio');
+    revalidatePath('/dashboard/creativity');
+
     return { success: true, id: docRef.id };
   } catch (error: any) {
     console.error(`Error adding to ${type}:`, error);
@@ -25,6 +31,11 @@ export async function deleteCreativityItem(idToken: string, type: CreativityType
 
   try {
     await db.collection(type).doc(id).delete();
+
+    revalidatePath('/');
+    revalidatePath('/portfolio');
+    revalidatePath('/dashboard/creativity');
+
     return { success: true };
   } catch (error: any) {
     console.error(`Error deleting from ${type}:`, error);

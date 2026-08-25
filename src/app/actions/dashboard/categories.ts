@@ -3,24 +3,32 @@
 import { admin, serializeData } from '@/lib/firebase/admin';
 import { revalidatePath } from 'next/cache';
 
-const DEFAULT_CATEGORIES = [
-    { id: 'web', slug: 'web', name_ar: 'تطوير الويب', name_en: 'Web Development' },
-    { id: 'app', slug: 'app', name_ar: 'تطبيقات الهواتف والويب', name_en: 'App Development' },
-    { id: 'motion', slug: 'motion', name_ar: 'موشن جرافيك وتصميم', name_en: 'Graphics & Motion' }
-];
-
 export async function getCategories() {
     try {
         const db = admin.firestore();
         const snap = await db.collection('categories').orderBy('createdAt', 'asc').get();
         if (snap.empty) {
-            return DEFAULT_CATEGORIES;
+            return [];
         }
-        const docs = snap.docs.map(doc => serializeData({ id: doc.id, ...doc.data() }));
+        const docs = snap.docs.map(doc => {
+            const d = doc.data();
+            const nameAr = d.name_ar || d.nameAr || d.name || '';
+            const nameEn = d.name_en || d.nameEn || '';
+            return serializeData({
+                id: doc.id,
+                name_ar: nameAr,
+                name_en: nameEn,
+                nameAr: nameAr,
+                nameEn: nameEn,
+                slug: d.slug || doc.id,
+                createdAt: d.createdAt,
+                updatedAt: d.updatedAt
+            });
+        });
         return docs;
     } catch (error: any) {
         console.error("Error fetching categories:", error);
-        return DEFAULT_CATEGORIES;
+        return [];
     }
 }
 
@@ -30,15 +38,23 @@ export async function addCategory(token: string, categoryData: { name_ar: string
         if (!decodedToken) throw new Error('Unauthorized');
 
         const db = admin.firestore();
-        const slug = categoryData.slug || categoryData.name_en.toLowerCase().replace(/[^a-z0-9]/g, '-') || Date.now().toString();
+        const slug = (categoryData.slug || categoryData.name_en || categoryData.name_ar || Date.now().toString())
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9\u0600-\u06FF]/g, '-')
+            .replace(/-+/g, '-')
+            .replace(/^-|-$/g, '') || `cat-${Date.now()}`;
 
         const docRef = await db.collection('categories').add({
             name_ar: categoryData.name_ar,
             name_en: categoryData.name_en,
+            nameAr: categoryData.name_ar,
+            nameEn: categoryData.name_en,
             slug: slug,
             createdAt: admin.firestore.FieldValue.serverTimestamp()
         });
 
+        revalidatePath('/');
         revalidatePath('/portfolio');
         revalidatePath('/dashboard/creativity');
         revalidatePath('/dashboard/categories');
@@ -56,11 +72,23 @@ export async function updateCategory(token: string, id: string, categoryData: { 
         if (!decodedToken) throw new Error('Unauthorized');
 
         const db = admin.firestore();
+        const slug = (categoryData.slug || categoryData.name_en || categoryData.name_ar || id)
+            .toLowerCase()
+            .trim()
+            .replace(/[^a-z0-9\u0600-\u06FF]/g, '-')
+            .replace(/-+/g, '-')
+            .replace(/^-|-$/g, '') || id;
+
         await db.collection('categories').doc(id).set({
-            ...categoryData,
+            name_ar: categoryData.name_ar,
+            name_en: categoryData.name_en,
+            nameAr: categoryData.name_ar,
+            nameEn: categoryData.name_en,
+            slug: slug,
             updatedAt: admin.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
 
+        revalidatePath('/');
         revalidatePath('/portfolio');
         revalidatePath('/dashboard/creativity');
         revalidatePath('/dashboard/categories');
@@ -80,6 +108,7 @@ export async function deleteCategory(token: string, id: string) {
         const db = admin.firestore();
         await db.collection('categories').doc(id).delete();
 
+        revalidatePath('/');
         revalidatePath('/portfolio');
         revalidatePath('/dashboard/creativity');
         revalidatePath('/dashboard/categories');

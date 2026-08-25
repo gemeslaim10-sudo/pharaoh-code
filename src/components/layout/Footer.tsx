@@ -8,13 +8,15 @@ import { FooterQuickLinks } from './footer/FooterQuickLinks';
 import { FooterNewsletter } from './footer/FooterNewsletter';
 import { FooterBottomBar } from './footer/FooterBottomBar';
 
+import { FooterSocialLinks } from '@/types/settings';
+
 interface FooterProps {
   siteName?: string;
   siteNameAr?: string;
   siteNameEn?: string;
   logoUrl?: string;
   logoLightUrl?: string;
-  socialLinks?: { fb?: string; wa?: string; ig?: string };
+  socialLinks?: FooterSocialLinks;
 }
 
 export default function Footer({ 
@@ -23,7 +25,7 @@ export default function Footer({
   siteNameEn,
   logoUrl,
   logoLightUrl,
-  socialLinks = { fb: '#', wa: '#', ig: '#' }
+  socialLinks = { items: [] }
 }: FooterProps) {
   const { language, direction } = useTranslation();
   const { theme } = useTheme();

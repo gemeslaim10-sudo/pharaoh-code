@@ -1,9 +1,11 @@
 'use client';
 
 import { SectionData, SectionItem } from '@/types';
+import { CategoryItem } from '@/types/category';
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
+import { isProjectInCategory } from '@/lib/categoryHelper';
 import PortfolioCard from '@/components/services/portfolio/PortfolioCard';
 import { HomePortfolioHeader } from './portfolio/HomePortfolioHeader';
 import { HomePortfolioFilterBar } from './portfolio/HomePortfolioFilterBar';
@@ -18,16 +20,20 @@ export default function HomePortfolio({ data }: { data?: SectionData }) {
     return data?.items || [];
   }, [data?.items]);
 
+  const categories: CategoryItem[] = useMemo(() => {
+    return (data as any)?.categories || [];
+  }, [data]);
+
   const filteredItems = useMemo(() => {
     if (activeFilter === 'all') return portfolioItems;
+    const targetCat = categories.find(c => (c.slug || c.id || '').toLowerCase() === activeFilter.toLowerCase());
     return portfolioItems.filter(item => {
-      const cat = (item.category || item.filterClass || '').toLowerCase();
-      const cats: string[] = Array.isArray((item as Record<string, unknown>).categories)
-        ? ((item as Record<string, unknown>).categories as string[]).map((c: string) => c.toLowerCase())
-        : [];
-      return cat.includes(activeFilter.toLowerCase()) || cats.some((c: string) => c.includes(activeFilter.toLowerCase()));
+      if (targetCat) {
+        return isProjectInCategory(item, targetCat);
+      }
+      return isProjectInCategory(item, activeFilter);
     });
-  }, [portfolioItems, activeFilter]);
+  }, [portfolioItems, activeFilter, categories]);
 
   const swiperContainerRef = useRef<HTMLDivElement>(null);
   const swiperInstanceRef = useRef<Swiper | null>(null);
@@ -40,34 +46,36 @@ export default function HomePortfolio({ data }: { data?: SectionData }) {
       swiperInstanceRef.current = null;
     }
 
-    swiperInstanceRef.current = new Swiper(swiperContainerRef.current, {
-      modules: [Autoplay, Pagination, Navigation],
-      slidesPerView: 1,
-      spaceBetween: 16,
-      speed: 550,
-      grabCursor: true,
-      watchSlidesProgress: true,
-      loop: filteredItems.length > 4,
-      autoplay: {
-        delay: 4500,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
-      },
-      pagination: {
-        el: '.portfolio-swiper-pagination',
-        clickable: true,
-        bulletActiveClass: '!bg-[#C5A16F] !w-6 !rounded-full',
-      },
-      navigation: {
-        nextEl: '.portfolio-swiper-next',
-        prevEl: '.portfolio-swiper-prev',
-      },
-      breakpoints: {
-        540: { slidesPerView: 2, spaceBetween: 18 },
-        840: { slidesPerView: 3, spaceBetween: 20 },
-        1140: { slidesPerView: 4, spaceBetween: 22 },
-      },
-    });
+    if (filteredItems.length > 0) {
+      swiperInstanceRef.current = new Swiper(swiperContainerRef.current, {
+        modules: [Autoplay, Pagination, Navigation],
+        slidesPerView: 1,
+        spaceBetween: 16,
+        speed: 550,
+        grabCursor: true,
+        watchSlidesProgress: true,
+        loop: filteredItems.length > 4,
+        autoplay: {
+          delay: 4500,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        },
+        pagination: {
+          el: '.portfolio-swiper-pagination',
+          clickable: true,
+          bulletActiveClass: '!bg-[#C5A16F] !w-6 !rounded-full',
+        },
+        navigation: {
+          nextEl: '.portfolio-swiper-next',
+          prevEl: '.portfolio-swiper-prev',
+        },
+        breakpoints: {
+          540: { slidesPerView: 2, spaceBetween: 18 },
+          840: { slidesPerView: 3, spaceBetween: 20 },
+          1140: { slidesPerView: 4, spaceBetween: 22 },
+        },
+      });
+    }
 
     return () => {
       if (swiperInstanceRef.current) {
@@ -81,23 +89,20 @@ export default function HomePortfolio({ data }: { data?: SectionData }) {
     const options = [
       { label: t("portfolio.filterAll") || (language === 'ar' ? 'الكل' : 'All'), filter: 'all' },
     ];
-    const dbCats = (data as any)?.categories as Array<{ id: string; nameAr: string; nameEn: string; slug: string }> | undefined;
-    if (dbCats && dbCats.length > 0) {
-      dbCats.forEach(c => {
+    if (categories && categories.length > 0) {
+      categories.forEach(c => {
+        const slug = (c.slug || c.id || '').toLowerCase();
+        const label = language === 'ar'
+          ? (c.name_ar || c.nameAr || c.name_en || c.nameEn || slug)
+          : (c.name_en || c.nameEn || c.name_ar || c.nameAr || slug);
         options.push({
-          label: language === 'ar' ? (c.nameAr || c.nameEn) : (c.nameEn || c.nameAr),
-          filter: (c.slug || c.id).toLowerCase(),
+          label,
+          filter: slug,
         });
       });
-      return options;
     }
-    return [
-      { label: t("portfolio.filterAll") || (language === 'ar' ? 'الكل' : 'All'), filter: 'all' },
-      { label: t("portfolio.filterWeb") || 'تطبيقات الويب', filter: 'web' },
-      { label: t("portfolio.filterApp") || 'تطبيقات الموبايل', filter: 'app' },
-      { label: t("portfolio.filterMotion") || 'موشن جرافيكس', filter: 'motion' },
-    ];
-  }, [data, language, t]);
+    return options;
+  }, [categories, language, t]);
 
   return (
     <section id="portfolio" className="relative py-12 sm:py-20 bg-[#0A192F] overflow-hidden" dir={direction}>
@@ -122,18 +127,27 @@ export default function HomePortfolio({ data }: { data?: SectionData }) {
           direction={direction}
         />
         
-        {/* Portfolio Swiper Carousel with Anti-Clipping Padding */}
-        <div ref={swiperContainerRef} className="swiper portfolioSwiper !overflow-visible -mx-2 sm:-mx-3 px-2 sm:px-3 pt-2 pb-6 sm:pt-3 sm:pb-8">
-          <div className="swiper-wrapper">
-            {filteredItems.map((item: SectionItem, index: number) => (
-              <div key={item.id || index} className="swiper-slide h-auto">
-                <PortfolioCard item={item} />
-              </div>
-            ))}
-          </div>
+        {/* Portfolio Content */}
+        {filteredItems.length > 0 ? (
+          <div ref={swiperContainerRef} className="swiper portfolioSwiper !overflow-visible -mx-2 sm:-mx-3 px-2 sm:px-3 pt-2 pb-6 sm:pt-3 sm:pb-8">
+            <div className="swiper-wrapper">
+              {filteredItems.map((item: SectionItem, index: number) => (
+                <div key={item.id || index} className="swiper-slide h-auto">
+                  <PortfolioCard item={item} categories={categories} />
+                </div>
+              ))}
+            </div>
 
-          <div className="portfolio-swiper-pagination flex justify-center items-center gap-1.5 mt-6" />
-        </div>
+            <div className="portfolio-swiper-pagination flex justify-center items-center gap-1.5 mt-6" />
+          </div>
+        ) : (
+          <div className="py-16 text-center bg-[#091528]/50 border border-white/5 rounded-2xl my-6">
+            <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-[#C5A16F]/10 border border-[#C5A16F]/20 flex items-center justify-center text-[#C5A16F] text-xl">✦</div>
+            <p className="text-sm font-semibold text-gray-400">
+              {language === 'ar' ? 'لا توجد مشاريع متوفرة في هذا التصنيف حالياً' : 'No projects available in this category currently.'}
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );

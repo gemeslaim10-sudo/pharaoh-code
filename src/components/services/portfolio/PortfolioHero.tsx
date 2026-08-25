@@ -1,10 +1,12 @@
 'use client';
 
 import { SectionData, SectionItem } from '@/types';
+import { CategoryItem } from '@/types/category';
 import { useState, useMemo } from 'react';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { getDynamicText } from '@/lib/i18nHelper';
+import { isProjectInCategory } from '@/lib/categoryHelper';
 import PortfolioCard from './PortfolioCard';
 import { PortfolioHeroHeader } from './PortfolioHeroHeader';
 import { PortfolioHeroFilterDock, PortfolioFilterItem } from './PortfolioHeroFilterDock';
@@ -18,45 +20,44 @@ export default function PortfolioHero({ data }: { data: SectionData }) {
 
   const items: SectionItem[] = useMemo(() => data?.items || [], [data?.items]);
 
+  const categories: CategoryItem[] = useMemo(() => {
+    return (data as any)?.categories || [];
+  }, [data]);
+
   const filterOptions: PortfolioFilterItem[] = useMemo(() => {
-    const dbCats = (data as any)?.categories as Array<{ id: string; nameAr: string; nameEn: string; slug: string }> | undefined;
-    if (dbCats && dbCats.length > 0) {
-      const dynamicList: PortfolioFilterItem[] = [
-        { label: t('portfolio.filterAll') || (language === 'ar' ? 'الكل' : 'All'), filter: 'all', count: items.length }
-      ];
-      dbCats.forEach(c => {
-        const slug = (c.slug || c.id).toLowerCase();
-        const count = items.filter((item: SectionItem) => {
-          const cat = (item.category || (item as Record<string, unknown>).category_en as string || (item as Record<string, unknown>).category_ar as string || '').toLowerCase();
-          const cats = Array.isArray((item as Record<string, unknown>).categories) ? ((item as Record<string, unknown>).categories as string[]).map(x => x.toLowerCase()) : [];
-          return cat.includes(slug) || (c.nameAr && cat.includes(c.nameAr.toLowerCase())) || (c.nameEn && cat.includes(c.nameEn.toLowerCase())) || cats.some(x => x.includes(slug));
-        }).length;
+    const dynamicList: PortfolioFilterItem[] = [
+      { label: t('portfolio.filterAll') || (language === 'ar' ? 'الكل' : 'All'), filter: 'all', count: items.length }
+    ];
+
+    if (categories && categories.length > 0) {
+      categories.forEach(c => {
+        const slug = (c.slug || c.id || '').toLowerCase();
+        const count = items.filter((item: SectionItem) => isProjectInCategory(item, c)).length;
+        const label = language === 'ar'
+          ? (c.name_ar || c.nameAr || c.name_en || c.nameEn || slug)
+          : (c.name_en || c.nameEn || c.name_ar || c.nameAr || slug);
+
         dynamicList.push({
-          label: language === 'ar' ? (c.nameAr || c.nameEn) : (c.nameEn || c.nameAr),
+          label,
           filter: slug,
           count,
         });
       });
-      return dynamicList;
     }
 
-    return [
-      { label: t('portfolio.filterAll') || 'الكل', filter: 'all', count: items.length },
-      { label: t('portfolio.filterMobile') || 'تطبيقات', filter: 'mobile', count: items.filter(item => (item.category || '').toLowerCase().includes('mobile')).length },
-      { label: t('portfolio.filterWeb') || 'مواقع الويب', filter: 'web', count: items.filter(item => (item.category || '').toLowerCase().includes('web')).length },
-      { label: t('portfolio.filterSystems') || 'أنظمة', filter: 'systems', count: items.filter(item => (item.category || '').toLowerCase().includes('system')).length },
-      { label: t('portfolio.filterDesign') || 'تصميم', filter: 'design', count: items.filter(item => (item.category || '').toLowerCase().includes('design')).length },
-    ];
-  }, [items, data, language, t]);
+    return dynamicList;
+  }, [items, categories, language, t]);
 
   const filteredItems = useMemo(() => {
     if (activeFilter === 'all') return items;
+    const targetCat = categories.find(c => (c.slug || c.id || '').toLowerCase() === activeFilter.toLowerCase());
     return items.filter((item: SectionItem) => {
-      const cat = (item.category || (item as Record<string, unknown>).category_en as string || (item as Record<string, unknown>).category_ar as string || '').toLowerCase();
-      const cats = Array.isArray((item as Record<string, unknown>).categories) ? ((item as Record<string, unknown>).categories as string[]).map(x => x.toLowerCase()) : [];
-      return cat.includes(activeFilter.toLowerCase()) || cats.some(x => x.includes(activeFilter.toLowerCase()));
+      if (targetCat) {
+        return isProjectInCategory(item, targetCat);
+      }
+      return isProjectInCategory(item, activeFilter);
     });
-  }, [items, activeFilter]);
+  }, [items, activeFilter, categories]);
 
   if (!data) return null;
 
@@ -92,7 +93,7 @@ export default function PortfolioHero({ data }: { data: SectionData }) {
                   exit={{ opacity: 0, scale: 0.92, y: -10 }}
                   transition={{ duration: 0.35, delay: index * 0.03 }}
                 >
-                  <PortfolioCard item={item} />
+                  <PortfolioCard item={item} categories={categories} />
                 </motion.div>
               ))
             ) : (

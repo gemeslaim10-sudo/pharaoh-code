@@ -22,18 +22,28 @@ export function mapReviews(docs: admin.firestore.QueryDocumentSnapshot[]) {
 export function mapPortfolio(docs: admin.firestore.QueryDocumentSnapshot[]) {
   return docs.map(doc => {
     const p = doc.data();
+    const categoriesArray = Array.isArray(p.categories) 
+      ? p.categories 
+      : (p.category ? String(p.category).split(',').map((s: string) => s.trim()).filter(Boolean) : []);
+
     return {
       id: doc.id,
       title: p.title,
       title_ar: p.title_ar || p.title,
       title_en: p.title_en,
-      category: p.category,
-      categoryLabel: p.category || '',
-      image: p.image,
+      category: p.category || (categoriesArray.length > 0 ? categoriesArray[0] : ''),
+      categories: categoriesArray,
+      categoryLabel: p.categoryLabel || p.category || '',
+      category_ar: p.category_ar,
+      category_en: p.category_en,
+      categorySlug: p.categorySlug || p.category,
+      image: p.image || p.imageUrl,
+      imageUrl: p.imageUrl || p.image,
       description: p.desc || p.description,
-      description_ar: p.desc_ar || p.description_ar || p.desc,
+      description_ar: p.desc_ar || p.description_ar || p.desc || p.description,
       description_en: p.desc_en || p.description_en,
       link: p.link,
+      appLink: p.appLink,
     };
   });
 }
@@ -89,10 +99,14 @@ export function mapClients(docs: admin.firestore.QueryDocumentSnapshot[]) {
 export function mapCategories(docs: admin.firestore.QueryDocumentSnapshot[]) {
   return docs.map(doc => {
     const cat = doc.data();
+    const nameAr = cat.name_ar || cat.nameAr || cat.name || '';
+    const nameEn = cat.name_en || cat.nameEn || '';
     return {
       id: doc.id,
-      nameAr: cat.nameAr || cat.name || '',
-      nameEn: cat.nameEn || '',
+      name_ar: nameAr,
+      name_en: nameEn,
+      nameAr: nameAr,
+      nameEn: nameEn,
       slug: cat.slug || doc.id
     };
   });

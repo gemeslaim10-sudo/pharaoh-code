@@ -31,7 +31,7 @@ export function CategoryListGrid({
               <div key={catId} className="bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 p-5 rounded-xl flex flex-col justify-between space-y-3 shadow-xs">
                 <div>
                   <div className="flex items-center justify-between">
-                    <h3 className="font-bold text-slate-900 dark:text-white text-base">{cat.name_ar}</h3>
+                    <h3 className="font-bold text-slate-900 dark:text-white text-base">{cat.name_ar || cat.nameAr || cat.name_en || cat.nameEn || cat.slug}</h3>
                     <span className="text-[10px] bg-amber-500/10 dark:bg-pharaohGold/10 text-amber-800 dark:text-pharaohGold border border-amber-500/20 dark:border-pharaohGold/20 px-2.5 py-1 rounded-md font-mono inline-flex items-center justify-center leading-none">{cat.slug || cat.id}</span>
                   </div>
                   {cat.name_en && (

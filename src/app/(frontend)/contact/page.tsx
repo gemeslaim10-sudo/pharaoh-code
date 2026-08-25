@@ -1,6 +1,7 @@
 import { SectionData } from '@/types';
 import { admin, serializeData } from '@/lib/firebase/admin';
 import ContactSection from '@/components/services/contact/ContactSection';
+import { getSocialLinks } from '@/app/actions/dashboard/settings';
 
 export const revalidate = 3600;
 
@@ -9,15 +10,14 @@ export default async function ContactPage() {
 
   try {
     const db = admin.firestore();
-    const [contactDoc, identityDoc, socialDoc] = await Promise.all([
+    const [contactDoc, identityDoc, socialData] = await Promise.all([
       db.collection('pages').doc('contact').get(),
       db.collection('settings').doc('identity').get().catch(() => ({ data: () => ({}) } as any)),
-      db.collection('settings').doc('social').get().catch(() => ({ data: () => ({}) } as any)),
+      getSocialLinks(),
     ]);
 
     const contactData = serializeData(contactDoc.data() || {});
     const identityData = serializeData(identityDoc?.data?.() || {});
-    const socialData = serializeData(socialDoc?.data?.() || {});
 
     const wa = socialData.wa || identityData.whatsapp || identityData.phone || '+201000000000';
     const email = identityData.email || contactData.info?.email || 'info@pharaohcode.com';
@@ -27,6 +27,7 @@ export default async function ContactPage() {
 
     data = serializeData({
       ...contactData,
+      socialPlatforms: socialData.items || [],
       info: {
         ...(contactData.info || {}),
         email,

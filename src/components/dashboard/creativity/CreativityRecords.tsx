@@ -85,7 +85,7 @@ export default function CreativityRecords({ activeTab, refreshKey }: Props) {
                             {activeTab === 'portfolio' && (
                                 <div className="space-y-3">
                                      <div className="flex flex-wrap gap-2 items-center">
-                                         <span className="text-xs bg-amber-500/10 dark:bg-pharaohGold/10 text-amber-800 dark:text-pharaohGold px-3 py-1 rounded-full border border-amber-500/20 dark:border-pharaohGold/20 font-bold inline-flex items-center justify-center leading-none">{record.category}</span>
+                                         <span className="text-xs bg-amber-500/10 dark:bg-pharaohGold/10 text-amber-800 dark:text-pharaohGold px-3 py-1 rounded-full border border-amber-500/20 dark:border-pharaohGold/20 font-bold inline-flex items-center justify-center leading-none">{record.categoryLabel || record.category_ar || record.category || 'تصنيف'}</span>
                                          {record.link && (
                                              <a href={record.link} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 dark:text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full hover:bg-blue-500/20 transition-colors inline-flex items-center justify-center leading-none">رابط الموقع</a>
                                          )}

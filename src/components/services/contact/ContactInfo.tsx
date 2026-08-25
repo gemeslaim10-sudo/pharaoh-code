@@ -1,7 +1,10 @@
 'use client';
+
 import { SectionData } from '@/types';
+import { SocialPlatform } from '@/types/settings';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
+import { DynamicSocialIcon } from '@/components/common/DynamicSocialIcon';
 import { motion } from 'framer-motion';
 
 const CONTACT_ITEMS = [
@@ -34,6 +37,9 @@ const CONTACT_ITEMS = [
 
 export default function ContactInfo({ data }: { data: SectionData }) {
   const { t, language } = useTranslation();
+  const socialPlatforms: SocialPlatform[] = Array.isArray((data as any)?.socialPlatforms)
+    ? (data as any).socialPlatforms
+    : [];
 
   return (
     <div className="lg:col-span-4 space-y-4">
@@ -127,6 +133,71 @@ export default function ContactInfo({ data }: { data: SectionData }) {
           </div>
         </div>
       </motion.div>
+
+      {/* 4. Dynamic Social Media Channels Card */}
+      {socialPlatforms.length > 0 && (
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+          whileHover={{ y: -4, transition: { duration: 0.2 } }}
+          className="group relative bg-[#112240] p-6 rounded-2xl border border-white/5 hover:border-[#C5A16F]/35 transition-colors duration-300 overflow-hidden shadow-lg"
+        >
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-[2px] bg-gradient-to-r from-transparent via-[#C5A16F] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#C5A16F]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+          <div className="relative z-10">
+            <h4 className="text-white text-base font-bold mb-1 flex items-center gap-2">
+              <span className="text-[#C5A16F]">🌐</span>
+              <span>{language === 'ar' ? 'قنوات التواصل الرقمي' : 'Official Social Channels'}</span>
+            </h4>
+            <p className="text-gray-400 text-xs mb-4">
+              {language === 'ar' ? 'تابعنا وتواصل معنا عبر منصاتنا الرسمية' : 'Connect with us across our official social channels'}
+            </p>
+
+            <div className="flex flex-wrap gap-2.5">
+              {socialPlatforms.map((platform) => {
+                const brandColor = platform.color || '#C5A16F';
+                const isWhatsapp = (platform.name?.toLowerCase().includes('whatsapp') || platform.icon === 'whatsapp');
+                let link = platform.url;
+                if (isWhatsapp && !link.startsWith('http')) {
+                  link = `https://wa.me/${link.replace(/[^0-9]/g, '')}`;
+                }
+
+                return (
+                  <motion.a
+                    key={platform.id}
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={platform.name}
+                    aria-label={platform.name}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 hover:border-transparent text-gray-300 hover:text-white transition-all text-xs font-semibold shadow-sm"
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = brandColor;
+                      e.currentTarget.style.boxShadow = `0 4px 15px ${brandColor}44`;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '';
+                      e.currentTarget.style.boxShadow = '';
+                    }}
+                  >
+                    <DynamicSocialIcon
+                      name={platform.name}
+                      icon={platform.icon}
+                      iconSvg={platform.iconSvg}
+                      className="w-4 h-4 flex-shrink-0"
+                    />
+                    <span className="truncate max-w-[120px]">{platform.name}</span>
+                  </motion.a>
+                );
+              })}
+            </div>
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 }

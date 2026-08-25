@@ -9,7 +9,7 @@ export function useCreativityForm(onSuccess: () => void) {
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState('');
   const [titleEn, setTitleEn] = useState('');
-  const [selectedCategories, setSelectedCategories] = useState<string[]>(['web']);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [availableCategories, setAvailableCategories] = useState<Array<{ slug?: string; id?: string; name_ar?: string; name_en?: string }>>([]);
   const [imageUrl, setImageUrl] = useState('');
   const [link, setLink] = useState('');
@@ -21,6 +21,11 @@ export function useCreativityForm(onSuccess: () => void) {
     async function fetchCats() {
       const cats = await getCategories();
       setAvailableCategories(cats);
+      if (cats && cats.length > 0) {
+        const first = cats[0];
+        const firstSlug = (first?.slug || first?.id || '');
+        if (firstSlug) setSelectedCategories([firstSlug]);
+      }
     }
     fetchCats();
   }, []);
@@ -43,6 +48,10 @@ export function useCreativityForm(onSuccess: () => void) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (selectedCategories.length === 0) {
+      alert('يرجى اختيار تصنيف واحد على الأقل للمشروع');
+      return;
+    }
     setLoading(true);
     try {
       const user = auth.currentUser;
@@ -50,14 +59,19 @@ export function useCreativityForm(onSuccess: () => void) {
       const token = await user.getIdToken();
       
       const categoryString = selectedCategories.join(',');
+      const primaryCat = availableCategories.find(c => (c.slug || c.id) === selectedCategories[0]);
 
       await addCreativityItem(token, 'portfolio', {
         title,
         title_ar: title,
         title_en: titleEn,
-        category: categoryString || 'web',
+        category: categoryString,
         categories: selectedCategories,
+        category_ar: primaryCat?.name_ar || '',
+        category_en: primaryCat?.name_en || '',
+        categoryLabel: primaryCat?.name_ar || selectedCategories[0] || '',
         image: imageUrl,
+        imageUrl: imageUrl,
         desc,
         desc_ar: desc,
         desc_en: descEn,
@@ -70,7 +84,13 @@ export function useCreativityForm(onSuccess: () => void) {
       
       setTitle('');
       setTitleEn('');
-      setSelectedCategories(['web']);
+      const firstCat = availableCategories[0];
+      const resetSlug = firstCat?.slug || firstCat?.id;
+      if (resetSlug) {
+        setSelectedCategories([resetSlug]);
+      } else {
+        setSelectedCategories([]);
+      }
       setImageUrl('');
       setLink('');
       setAppLink('');

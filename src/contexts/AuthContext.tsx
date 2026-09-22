@@ -43,9 +43,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           const adminStatus = await checkIsAdminAction(token);
           if (request !== generation) return;
           setIsAdmin(adminStatus);
-          void recordUserLoginAction(token).catch(() => {});
+          void recordUserLoginAction(token).catch((err) => console.warn('[auth] could not record login:', err));
         }
-      } catch {
+      } catch (err) {
+        console.warn('[auth] admin status check failed:', err);
         if (request === generation) setIsAdmin(false);
       } finally {
         if (request === generation) setLoading(false);

@@ -93,7 +93,8 @@ export async function checkIsAdminAction(token: string) {
     try {
         await authenticateAdmin(token);
         return true;
-    } catch {
+    } catch (error: any) {
+        console.warn('[auth] admin check failed:', error?.code || error?.message || error);
         return false;
     }
 }

@@ -11,14 +11,14 @@ import { fetchAllUsersAndStats } from './usersFetchers';
 export async function recordUserLoginAction(token: string) {
   try {
     const verified = await authenticateUser(token);
-    const account = await admin.auth().getUser(verified.uid);
-    if (!account.email) return { success: false };
+    if (!verified.email) return { success: false };
+    // Profile fields come from the verified ID token claims (no privileged Auth API call needed).
     const userData = {
-      uid: account.uid,
-      email: account.email,
-      displayName: account.displayName,
-      photoURL: account.photoURL,
-      provider: verified.firebase.sign_in_provider,
+      uid: verified.uid,
+      email: verified.email,
+      displayName: (verified.name as string | undefined) || undefined,
+      photoURL: (verified.picture as string | undefined) || undefined,
+      provider: verified.firebase?.sign_in_provider,
     };
     const db = admin.firestore();
     const userRef = db.collection('users').doc(userData.uid);
@@ -75,7 +75,8 @@ export async function deleteRegisteredUserAction(token: string, userId: string) 
     try {
       await admin.auth().deleteUser(targetUid);
     } catch (authError: any) {
-      if (authError?.code !== 'auth/user-not-found') throw authError;
+      // A missing Auth permission on the host must not block removing the Firestore record.
+      if (authError?.code !== 'auth/user-not-found') console.warn('[users] could not delete auth account:', authError?.code || authError?.message);
     }
     await db.collection('users').doc(userId).delete();
 

@@ -3,6 +3,7 @@
 import { useDashboard } from "@/contexts/DashboardContext";
 import { useState } from "react";
 import { clearSystemCache } from "@/app/actions/dashboard/cache";
+import { auth } from '@/lib/firebase/config';
 import SidebarNavLinks from "./dashboard/sidebar/SidebarNavLinks";
 import SidebarFooterActions from "./dashboard/sidebar/SidebarFooterActions";
 
@@ -26,7 +27,9 @@ export default function DashboardSidebar({
     if (confirm("هل أنت متأكد من رغبتك في تفريغ ذاكرة الكاش؟ ستظهر جميع التعديلات الحديثة في الموقع مباشرة.")) {
       setClearingCache(true);
       try {
-        const result = await clearSystemCache();
+        const token = await auth.currentUser?.getIdToken();
+        if (!token) throw new Error('Unauthorized');
+        const result = await clearSystemCache(token);
         if (result.success) {
           alert(result.message);
         } else {

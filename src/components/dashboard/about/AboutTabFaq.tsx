@@ -1,5 +1,5 @@
 'use client';
-import { AboutFormData } from './aboutDashboardTypes';
+import { type AboutFormData } from './aboutDashboardTypes';
 import { AboutFaqCardItem } from './AboutFaqCardItem';
 
 interface AboutTabFaqProps {

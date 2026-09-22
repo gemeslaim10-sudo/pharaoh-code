@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { User, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
+import { type User, signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
 import { auth, googleProvider } from '@/lib/firebase/config';
 import { checkIsAdminAction } from '@/app/actions/dashboard/settings';
 import { recordUserLoginAction } from '@/app/actions/dashboard/users';
@@ -31,27 +31,28 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setUser(user);
-      if (user?.email) {
-        const adminStatus = await checkIsAdminAction(user.email);
-        setIsAdmin(adminStatus);
-
-        // Record or refresh user profile record in Firestore
-        recordUserLoginAction({
-          uid: user.uid,
-          email: user.email,
-          displayName: user.displayName || '',
-          photoURL: user.photoURL || '',
-          provider: user.providerData?.[0]?.providerId || 'google',
-        }).catch((err) => console.error("Error updating user record:", err));
-      } else {
-        setIsAdmin(false);
+    let generation = 0;
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      const request = ++generation;
+      setUser(currentUser);
+      setIsAdmin(false);
+      setLoading(true);
+      try {
+        if (currentUser) {
+          const token = await currentUser.getIdToken();
+          const adminStatus = await checkIsAdminAction(token);
+          if (request !== generation) return;
+          setIsAdmin(adminStatus);
+          void recordUserLoginAction(token).catch(() => {});
+        }
+      } catch {
+        if (request === generation) setIsAdmin(false);
+      } finally {
+        if (request === generation) setLoading(false);
       }
-      setLoading(false);
     });
 
-    return () => unsubscribe();
+    return () => { generation++; unsubscribe(); };
   }, []);
 
   const loginWithGoogle = async () => {

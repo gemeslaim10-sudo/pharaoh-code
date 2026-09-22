@@ -79,7 +79,7 @@ export const sectionsEn = {
     commentsDesc: 'Contribute your perspectives and questions to our ongoing discussions',
     addCommentTitle: 'Post a Comment',
     thankYou: 'Thank You!',
-    commentSuccess: 'Your perspective has been recorded and will meaningfully enrich our community discourse.',
+    commentSuccess: 'Your comment was submitted and will appear after review.',
     commentError: 'An error occurred while submitting.',
     yourName: 'Your Name',
     namePlaceholder: 'e.g. John Doe',

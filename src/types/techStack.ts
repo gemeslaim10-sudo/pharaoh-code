@@ -5,6 +5,8 @@ export interface TechCardItem {
   desc_en?: string;
   description_ar?: string;
   description_en?: string;
+  /** Uploaded icon URL or inline SVG markup. Falls back to the built-in icon by index. */
+  icon?: string;
 }
 
 export interface TechStackFormData {
@@ -22,3 +24,22 @@ export interface TechStackFormData {
   aesEncrypt_en?: string;
   cards: TechCardItem[];
 }
+
+/** Header block of the public /services page — stored at pages/services -> grid. */
+export interface ServicesPageHeaderData {
+  subtitle_ar?: string;
+  subtitle_en?: string;
+  titlePart1_ar?: string;
+  titlePart1_en?: string;
+  titlePart2_ar?: string;
+  titlePart2_en?: string;
+  description_ar?: string;
+  description_en?: string;
+}
+
+export const INITIAL_SERVICES_PAGE_HEADER: ServicesPageHeaderData = {
+  subtitle_ar: '', subtitle_en: '',
+  titlePart1_ar: '', titlePart1_en: '',
+  titlePart2_ar: '', titlePart2_en: '',
+  description_ar: '', description_en: '',
+};

@@ -1,19 +1,10 @@
 'use client';
+import { SmartIcon } from '@/components/common/SmartIcon';
 
-import { motion, Variants } from 'framer-motion';
-import { SectionItem } from '@/types';
+
+import { motion, type Variants } from 'framer-motion';
+import { type SectionItem } from '@/types';
 import StatCounter from '../StatCounter';
-
-function stripSvgColors(svg: string): string {
-  if (!svg) return '';
-  return svg
-    .replace(/\s*(?:group-hover:|group-active:)?text-\[#[^\]]+\]/g, '')
-    .replace(/\s*(?:group-hover:|group-active:)?stroke-\[#[^\]]+\]/g, '')
-    .replace(/stroke="#[a-fA-F0-9]{3,6}"/g, 'stroke="currentColor"')
-    .replace(/fill="#[a-fA-F0-9]{3,6}"/g, 'fill="currentColor"')
-    .replace(/stroke:#[a-fA-F0-9]{3,6}/g, 'stroke:currentColor')
-    .replace(/fill:#[a-fA-F0-9]{3,6}/g, 'fill:currentColor');
-}
 
 interface HomeStatCardProps {
   item: SectionItem;
@@ -54,11 +45,11 @@ export function HomeStatCard({
           ? 'bg-slate-100 border-slate-300 group-hover:border-[#C5A16F]/30'
           : 'bg-white/5 border-white/10 group-hover:border-[#C5A16F]/30'
       }`}>
-        <div
+        <SmartIcon as="div"
           className={`w-5.5 h-5.5 transition-colors duration-400 flex items-center justify-center group-hover:text-[#060D1A] ${
             isLight ? 'text-[#8A5800]' : 'text-[#C5A16F]'
           }`}
-          dangerouslySetInnerHTML={{ __html: stripSvgColors(item.iconSvg || '') }}
+          value={item.iconSvg || ''} inheritColor
         />
       </div>
 

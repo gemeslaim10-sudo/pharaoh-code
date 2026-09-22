@@ -1,6 +1,6 @@
 'use client';
 
-import { SectionData, SectionItem } from '@/types';
+import { type SectionData, type SectionItem } from '@/types';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { getDynamicText } from '@/lib/i18nHelper';
@@ -75,12 +75,12 @@ export default function HomeTeam({ data }: { data?: SectionData }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <HomeTeamHeader
           subtitle={getDynamicText(data, 'subtitle', language) || t("team.subtitle")}
-          titlePart1={t("team.titlePart1")}
-          titlePart2={t("team.titlePart2")}
+          titlePart1={getDynamicText(data, 'titlePart1', language) || t("team.titlePart1")}
+          titlePart2={getDynamicText(data, 'titlePart2', language) || t("team.titlePart2")}
           desc={getDynamicText(data, 'description', language) || (language === 'ar' ? 'نخبة من المهندسين والمطورين المبدعين في صناعة البرمجيات وتطوير الحلول السيادية.' : 'Elite engineers and digital architects dedicated to software craftsmanship and sovereign solutions.')}
           isLight={isLight}
           direction={direction}
-          viewAllText={t("team.viewMembers") || (language === 'ar' ? 'استعرض كافة الفريق' : 'View Full Team')}
+          viewAllText={getDynamicText(data, 'linkText', language) || t("team.viewMembers") || (language === 'ar' ? 'استعرض كافة الفريق' : 'View Full Team')}
         />
 
         {/* High-End Team Elite Cards Swiper Carousel with Anti-Clipping Padding */}

@@ -1,4 +1,4 @@
-import { CreativityType } from '@/types/creativity';
+import { type CreativityType } from '@/types/creativity';
 
 interface Props {
     activeTab: CreativityType;

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Skill, Stat } from './workFormTypes';
+import { type Skill, type Stat } from './workFormTypes';
 
 export function useWorkSkillsAndStats() {
   const [skills, setSkills] = useState<Skill[]>([{ name: '', name_en: '', value: '' }]);

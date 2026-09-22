@@ -5,8 +5,9 @@ import { AboutTabHero } from '@/components/dashboard/about/AboutTabHero';
 import { AboutTabVisionMission } from '@/components/dashboard/about/AboutTabVisionMission';
 import { AboutTabPhilosophy } from '@/components/dashboard/about/AboutTabPhilosophy';
 import { AboutTabFaq } from '@/components/dashboard/about/AboutTabFaq';
+import { AboutTabComments } from '@/components/dashboard/about/AboutTabComments';
 import { DashboardSectionNavbar } from '@/components/dashboard/layout/DashboardSectionNavbar';
-import { DashboardSectionConfig } from '@/types/dashboardLayout';
+import { type DashboardSectionConfig } from '@/types/dashboardLayout';
 
 export default function DashboardAboutPage() {
   const {
@@ -25,6 +26,7 @@ export default function DashboardAboutPage() {
     { id: 'vision', label: 'الرؤية والرسالة (Vision & Mission)', icon: <span>🎯</span> },
     { id: 'philosophy', label: 'فلسفة التشييد (Philosophy)', icon: <span>💎</span> },
     { id: 'faq', label: 'الأسئلة الشائعة (FAQ)', icon: <span>❓</span> },
+    { id: 'comments', label: 'التعليقات (Comments)', icon: <span>💬</span> },
   ];
 
   if (loading) {
@@ -82,6 +84,7 @@ export default function DashboardAboutPage() {
         {activeTab === 'vision' && <AboutTabVisionMission form={form} setForm={setForm} />}
         {activeTab === 'philosophy' && <AboutTabPhilosophy form={form} setForm={setForm} />}
         {activeTab === 'faq' && <AboutTabFaq form={form} setForm={setForm} />}
+        {activeTab === 'comments' && <AboutTabComments form={form} setForm={setForm} />}
 
         <div className="pt-4 flex justify-end">
           <button

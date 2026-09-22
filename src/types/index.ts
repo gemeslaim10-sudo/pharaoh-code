@@ -72,6 +72,7 @@ export * from './heroTheme';
 export * from './creativity';
 export * from './service';
 export * from './about';
+export * from './homeContent';
 export * from './client';
 export * from './category';
 export * from './techStack';

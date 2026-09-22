@@ -1,5 +1,5 @@
 'use client';
-import { IdentityFormData } from '../SettingsIdentityForm';
+import { type IdentityFormData } from '../SettingsIdentityForm';
 
 interface IdentityLogosSectionProps {
   formData: IdentityFormData;

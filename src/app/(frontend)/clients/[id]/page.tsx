@@ -3,6 +3,8 @@ import { getClients } from '@/app/actions/dashboard/clients';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import ClientLogoZoom from '@/components/clients/ClientLogoZoom';
+import { safeExternalUrl } from '@/lib/safeUrl';
+import type { DocumentData } from 'firebase-admin/firestore';
 
 export async function generateStaticParams() {
     const clients = await getClients();
@@ -13,7 +15,7 @@ export async function generateStaticParams() {
 
 export default async function ClientDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
-    let client: admin.firestore.DocumentData | null = null;
+    let client: DocumentData | null = null;
     try {
         const db = admin.firestore();
         const doc = await db.collection('clients').doc(id).get();
@@ -88,7 +90,7 @@ export default async function ClientDetailPage({ params }: { params: Promise<{ i
                         {client.websiteUrl && (
                             <div className="flex justify-end pt-4 border-t border-pharaohGold/10">
                                 <a 
-                                    href={client.websiteUrl} 
+                                    href={safeExternalUrl(client.websiteUrl)}
                                     target="_blank" 
                                     rel="noopener noreferrer" 
                                     className="bg-gradient-to-r from-pharaohGold to-amber-600 text-[#0A192F] font-black text-sm px-8 py-3.5 rounded-xl shadow-xl hover:shadow-pharaohGold/10 hover:opacity-95 transition duration-300 transform active:scale-95 flex items-center gap-2"

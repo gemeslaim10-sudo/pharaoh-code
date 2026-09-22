@@ -1,5 +1,5 @@
 'use client';
-import { AboutFaqItem } from './aboutDashboardTypes';
+import { type AboutFaqItem } from './aboutDashboardTypes';
 
 interface AboutFaqCardItemProps {
   faqItem: AboutFaqItem;

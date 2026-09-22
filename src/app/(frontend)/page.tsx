@@ -23,7 +23,7 @@ export default async function HomePage() {
       <HomeHero data={data.hero} heroThemeConfig={heroThemeConfig} />
       <HomePortfolio data={data.portfolio} />
       <HomeServices data={data.services} />
-      <HomeClients clients={dbClients} />
+      <HomeClients clients={dbClients} data={data.clients} />
       <HomeCreative data={data.creative} />
       <HomeWorkflow data={data.workflow} />
       <HomeStats data={data.stats} />

@@ -1,5 +1,7 @@
 'use client';
-import { SectionData, SectionItem } from '@/types';
+import { SmartIcon } from '@/components/common/SmartIcon';
+
+import { type SectionData, type SectionItem } from '@/types';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 import { motion } from 'framer-motion';
@@ -7,6 +9,11 @@ import { motion } from 'framer-motion';
 export default function AboutHero({ data }: { data: SectionData }) {
   const { t, language, direction } = useTranslation();
   if (!data) return null;
+
+  const establishedText =
+    getDynamicText(data, 'establishedText', language) ||
+    (typeof data.establishedText === 'string' ? data.establishedText : '') ||
+    'Since 2020';
 
   return (
     <section id="about-us" className="relative pt-28 sm:pt-36 pb-16 sm:pb-24 bg-[#050D1A] overflow-hidden" dir={direction}>
@@ -52,9 +59,11 @@ export default function AboutHero({ data }: { data: SectionData }) {
               </div>
 
               {/* Top badge */}
-              <div className="absolute top-5 left-5 bg-[#8A5800] dark:bg-[#C5A16F] text-white dark:text-[#050D1A] text-[10px] font-black tracking-[0.25em] px-3 py-1.5 rounded-full uppercase shadow-lg">
-                Since 2020
-              </div>
+              {establishedText && (
+                <div className="absolute top-5 left-5 bg-[#8A5800] dark:bg-[#C5A16F] text-white dark:text-[#050D1A] text-[10px] font-black tracking-[0.25em] px-3 py-1.5 rounded-full uppercase shadow-lg">
+                  {establishedText}
+                </div>
+              )}
             </div>
           </motion.div>
 
@@ -93,7 +102,7 @@ export default function AboutHero({ data }: { data: SectionData }) {
               {data.features?.map((feature: SectionItem, index: number) => {
                 const featTitle = getDynamicText(feature, 'title', language);
                 const featDesc = getDynamicText(feature, 'description', language);
-                const hasValidSvg = feature.iconSvg && feature.iconSvg.includes('<svg');
+                const hasValidSvg = typeof feature.iconSvg === 'string' && feature.iconSvg.trim() !== '';
 
                 return (
                   <motion.div 
@@ -107,7 +116,7 @@ export default function AboutHero({ data }: { data: SectionData }) {
 
                     <div className="w-10 h-10 bg-[#C5A16F]/10 rounded-xl flex-shrink-0 flex items-center justify-center group-hover/feat:bg-[#C5A16F] transition-colors duration-300 relative">
                       {hasValidSvg ? (
-                        <div className="text-[#C5A16F] group-hover/feat:text-[#0A192F] w-5 h-5 flex items-center justify-center transition-colors [&_svg]:w-5 [&_svg]:h-5" dangerouslySetInnerHTML={{ __html: feature.iconSvg }} />
+                        <SmartIcon as="div" className="text-[#C5A16F] group-hover/feat:text-[#0A192F] w-5 h-5 flex items-center justify-center transition-colors [&_svg]:w-5 [&_svg]:h-5" value={feature.iconSvg} />
                       ) : (
                         <svg className="w-5 h-5 text-[#C5A16F] group-hover/feat:text-[#0A192F] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />

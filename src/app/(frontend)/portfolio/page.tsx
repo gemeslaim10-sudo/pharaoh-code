@@ -1,18 +1,20 @@
-import { SectionData } from '@/types';
+import { type SectionData } from '@/types';
 import { admin } from '@/lib/firebase/admin';
 
 import PortfolioHero from '@/components/services/portfolio/PortfolioHero';
 import PortfolioCore from '@/components/services/portfolio/PortfolioCore';
 import PortfolioServices from '@/components/services/portfolio/PortfolioServices';
+import { safeExternalUrl } from '@/lib/safeUrl';
+import type { DocumentData, QueryDocumentSnapshot } from 'firebase-admin/firestore';
 
 export const revalidate = 3600;
 
 export default async function PortfolioPage() {
-  let docData: admin.firestore.DocumentData = {};
-  let servicesDocs: admin.firestore.QueryDocumentSnapshot[] = [];
-  let philosophyDocs: admin.firestore.QueryDocumentSnapshot[] = [];
-  let portfolioDocs: admin.firestore.QueryDocumentSnapshot[] = [];
-  let categoriesDocs: admin.firestore.QueryDocumentSnapshot[] = [];
+  let docData: DocumentData = {};
+  let servicesDocs: QueryDocumentSnapshot[] = [];
+  let philosophyDocs: QueryDocumentSnapshot[] = [];
+  let portfolioDocs: QueryDocumentSnapshot[] = [];
+  let categoriesDocs: QueryDocumentSnapshot[] = [];
 
   try {
     const db = admin.firestore();
@@ -93,8 +95,8 @@ export default async function PortfolioPage() {
       description: p.desc || p.description || p.desc_ar || '',
       description_ar: p.desc_ar || p.description_ar || p.desc || p.description || '',
       description_en: p.desc_en || p.description_en || '',
-      link: p.link || '',
-      appLink: p.appLink || '',
+      link: p.link ? safeExternalUrl(p.link) : '',
+      appLink: p.appLink ? safeExternalUrl(p.appLink) : '',
     };
   });
 

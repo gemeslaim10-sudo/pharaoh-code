@@ -1,6 +1,9 @@
 'use client';
 import { useState } from 'react';
-import { AboutFormData } from './aboutDashboardTypes';
+import { type AboutFormData, type AboutHeroFeature, EMPTY_ABOUT_HERO_FEATURE } from './aboutDashboardTypes';
+import { IconField } from '@/components/dashboard/common/IconField';
+
+const MAX_FEATURES = 4;
 
 interface AboutHeroFeaturesProps {
   form: AboutFormData;
@@ -18,14 +21,34 @@ export function AboutHeroFeatures({ form, setForm }: AboutHeroFeaturesProps) {
   const [activeIdx, setActiveIdx] = useState<number>(0);
   const [viewMode, setViewMode] = useState<'tabs' | 'all'>('tabs');
 
-  const updateFeature = (idx: number, field: string, value: string) => {
+  const features = form.hero.features || [];
+
+  const updateFeature = (idx: number, field: keyof AboutHeroFeature, value: string) => {
     const feats = [...(form.hero.features || [])];
-    const current = feats[idx] || { title_ar: '', title_en: '', description_ar: '', description_en: '' };
+    const current = feats[idx] || { ...EMPTY_ABOUT_HERO_FEATURE };
     feats[idx] = { ...current, [field]: value };
     setForm(prev => ({ ...prev, hero: { ...prev.hero, features: feats } }));
   };
 
-  const renderFeatureCard = (feat: any, idx: number) => {
+  const addFeature = () => {
+    if (features.length >= MAX_FEATURES) {
+      alert(`الحد الأقصى ${MAX_FEATURES} مميزات في الهيرو`);
+      return;
+    }
+    setForm(prev => ({ ...prev, hero: { ...prev.hero, features: [...(prev.hero.features || []), { ...EMPTY_ABOUT_HERO_FEATURE }] } }));
+    setActiveIdx(features.length);
+  };
+
+  const removeFeature = (idx: number) => {
+    if (features.length <= 1) {
+      alert('يجب الإبقاء على ميزة واحدة على الأقل');
+      return;
+    }
+    setForm(prev => ({ ...prev, hero: { ...prev.hero, features: (prev.hero.features || []).filter((_, i) => i !== idx) } }));
+    setActiveIdx(prev => (prev >= features.length - 1 ? Math.max(0, features.length - 2) : prev));
+  };
+
+  const renderFeatureCard = (feat: AboutHeroFeature | undefined, idx: number) => {
     const meta = FEATURE_META[idx] || { defaultTitleAr: `الميزة ${idx + 1}`, defaultTitleEn: `Feature ${idx + 1}`, icon: '✨' };
 
     return (
@@ -44,7 +67,28 @@ export function AboutHeroFeatures({ form, setForm }: AboutHeroFeaturesProps) {
               </span>
             </div>
           </div>
-          <span className="text-lg">{meta.icon}</span>
+          <div className="flex items-center gap-3">
+            <span className="text-lg">{meta.icon}</span>
+            {features.length > 1 && (
+              <button
+                type="button"
+                onClick={() => removeFeature(idx)}
+                className="text-xs font-bold text-red-500 hover:text-red-400 bg-red-500/10 hover:bg-red-500/20 px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer"
+              >
+                <span>🗑️</span>
+                <span>حذف</span>
+              </button>
+            )}
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-[#112240] p-4 rounded-xl border border-slate-200 dark:border-white/10">
+          <IconField
+            label="أيقونة الميزة"
+            value={feat?.iconSvg || ''}
+            onChange={(value) => updateFeature(idx, 'iconSvg', value)}
+          />
+          <p className="text-[10px] text-slate-500 dark:text-gray-500 mt-2">اتركها فارغة لاستخدام أيقونة الصح الافتراضية.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -126,8 +170,20 @@ export function AboutHeroFeatures({ form, setForm }: AboutHeroFeaturesProps) {
             <span>✨</span>
             <span>مميزات الهيرو (Hero Features)</span>
           </h3>
-          <p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">البطاقات السريعة الأربعة التي تظهر أسفل هيرو صفحة من نحن.</p>
+          <p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">البطاقات السريعة التي تظهر أسفل هيرو صفحة من نحن (من 1 إلى {MAX_FEATURES}).</p>
         </div>
+
+        <div className="flex items-center gap-2 flex-wrap self-start sm:self-auto">
+        {features.length < MAX_FEATURES && (
+          <button
+            type="button"
+            onClick={addFeature}
+            className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-amber-500/15 dark:bg-pharaohGold/20 text-amber-900 dark:text-pharaohGold border border-amber-500/30 dark:border-pharaohGold/30 hover:bg-amber-500/25 dark:hover:bg-pharaohGold/30 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+          >
+            <span>➕</span>
+            <span>إضافة ميزة</span>
+          </button>
+        )}
 
         <div className="flex items-center gap-1 bg-slate-100 dark:bg-[#0A192F] p-1 rounded-xl border border-slate-200 dark:border-white/10 shrink-0">
           <button
@@ -153,13 +209,13 @@ export function AboutHeroFeatures({ form, setForm }: AboutHeroFeaturesProps) {
             عرض الكل
           </button>
         </div>
+        </div>
       </div>
 
       {viewMode === 'tabs' && (
         <div className="space-y-4">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            {[0, 1, 2, 3].map((idx) => {
-              const feat = form.hero.features?.[idx];
+            {features.map((feat, idx) => {
               const meta = FEATURE_META[idx] || { defaultTitleAr: `الميزة ${idx + 1}`, icon: '✨' };
               const isActive = activeIdx === idx;
               const title = feat?.title_ar || meta.defaultTitleAr;
@@ -187,13 +243,13 @@ export function AboutHeroFeatures({ form, setForm }: AboutHeroFeaturesProps) {
             })}
           </div>
 
-          {renderFeatureCard(form.hero.features?.[activeIdx], activeIdx)}
+          {renderFeatureCard(features[Math.min(activeIdx, features.length - 1)], Math.min(activeIdx, features.length - 1))}
         </div>
       )}
 
       {viewMode === 'all' && (
         <div className="space-y-4">
-          {[0, 1, 2, 3].map((idx) => renderFeatureCard(form.hero.features?.[idx], idx))}
+          {features.map((feat, idx) => renderFeatureCard(feat, idx))}
         </div>
       )}
     </div>

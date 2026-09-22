@@ -1,7 +1,9 @@
 'use client';
+import { SmartIcon } from '@/components/common/SmartIcon';
+
 
 import Link from 'next/link';
-import { SectionData } from '@/types';
+import { type SectionData } from '@/types';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { getDynamicText } from '@/lib/i18nHelper';
@@ -101,9 +103,9 @@ export default function PortfolioServices({ data }: { data?: SectionData }) {
                       ? 'bg-amber-50 border border-amber-200/80 text-[#8A5800] group-hover:bg-[#8A5800] group-hover:text-white group-hover:border-[#8A5800] group-hover:shadow-[0_4px_16px_rgba(138,88,0,0.25)]'
                       : 'bg-white/5 border border-[#C5A16F]/25 text-[#C5A16F] group-hover:bg-gradient-to-br group-hover:from-[#C5A16F] group-hover:to-[#9E7D47] group-hover:text-[#050B14] group-hover:border-[#C5A16F] group-hover:shadow-[0_4px_20px_rgba(197,161,111,0.35)]'
                   }`}>
-                    <div 
+                    <SmartIcon as="div"
                       className="w-6 h-6 flex items-center justify-center [&_svg]:w-6 [&_svg]:h-6 [&_svg]:max-w-full [&_svg]:max-h-full transition-colors duration-200"
-                      dangerouslySetInnerHTML={{ __html: item.iconSvg || item.icon }} 
+                      value={item.iconSvg || item.icon}
                     />
                   </div>
 

@@ -1,5 +1,7 @@
 'use client';
-import { SectionData, SectionItem } from '@/types';
+import { SmartIcon } from '@/components/common/SmartIcon';
+
+import { type SectionData, type SectionItem } from '@/types';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { getDynamicText } from '@/lib/i18nHelper';
@@ -65,7 +67,7 @@ export default function PortfolioCore({ data }: { data: SectionData }) {
                     ? 'bg-amber-50 border border-amber-200 text-[#8A5800] group-hover:bg-[#8A5800] group-hover:text-white group-hover:border-[#8A5800]'
                     : 'bg-white/5 border border-[#C5A16F]/25 text-[#C5A16F] group-hover:bg-[#C5A16F] group-hover:text-[#0A192F] group-hover:border-[#C5A16F]'
                 }`}>
-                  <div className="w-5 h-5 flex items-center justify-center [&_svg]:w-5 [&_svg]:h-5 [&_svg]:max-w-full [&_svg]:max-h-full transition-colors duration-200" dangerouslySetInnerHTML={{ __html: item.iconSvg }} />
+                  <SmartIcon as="div" className="w-5 h-5 flex items-center justify-center [&_svg]:w-5 [&_svg]:h-5 [&_svg]:max-w-full [&_svg]:max-h-full transition-colors duration-200" value={item.iconSvg} />
                 </div>
 
                 <h3 className={`text-base font-bold mb-2 transition-colors relative z-10 ${

@@ -6,7 +6,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 
 export type { ClientItem } from '@/types/client';
-import { ClientItem } from '@/types/client';
+import { type ClientItem } from '@/types/client';
 
 
 

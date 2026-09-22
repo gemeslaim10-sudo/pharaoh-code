@@ -13,6 +13,7 @@ export default function DashboardCharts() {
     app: 0, erp: 0, web: 0, seo: 0
   });
   const [activeOrdersCount, setActiveOrdersCount] = useState<number>(0);
+  const [weeklyAvgValue, setWeeklyAvgValue] = useState<number>(0);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
@@ -30,6 +31,9 @@ export default function DashboardCharts() {
           if (typeof chartsData?.activeOrdersCount === 'number') {
             setActiveOrdersCount(chartsData.activeOrdersCount);
           }
+          if (typeof chartsData?.weeklyAvg === 'number') {
+            setWeeklyAvgValue(chartsData.weeklyAvg);
+          }
         } catch (e) {
           console.error("Failed to fetch dashboard charts/counters data:", e);
         }
@@ -45,7 +49,8 @@ export default function DashboardCharts() {
   const erpPct = getPct(chartCounts.erp);
   const webPct = getPct(chartCounts.web);
   const seoPct = getPct(chartCounts.seo);
-  const weeklyAvg = totalServiceOrders > 0 ? (totalServiceOrders / 4).toFixed(1) : '0';
+  // Real average: orders created in the last 28 days divided by 4 weeks (computed server-side).
+  const weeklyAvg = weeklyAvgValue > 0 ? weeklyAvgValue.toFixed(1) : '0';
 
   const activityRate = totalServiceOrders > 0 ? Math.round((activeOrdersCount / totalServiceOrders) * 100) : 0;
   let activityText = "لا يوجد نشاط حالياً";

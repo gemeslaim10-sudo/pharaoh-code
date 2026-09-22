@@ -1,12 +1,15 @@
 import { admin, serializeData } from '@/lib/firebase/admin';
-import { RegisteredUser, UsersFetchStats } from '@/types/user';
+import { type RegisteredUser, type UsersFetchStats } from '@/types/user';
+import { authenticateAdmin } from './auth';
+import { OWNER_EMAIL, normalizeEmail } from '@/lib/authPolicy';
 
-export async function fetchAllUsersAndStats(): Promise<{
+export async function fetchAllUsersAndStats(token: string): Promise<{
   success: boolean;
   users: RegisteredUser[];
   stats: UsersFetchStats;
   error?: string;
 }> {
+  await authenticateAdmin(token);
   try {
     const db = admin.firestore();
     
@@ -23,9 +26,10 @@ export async function fetchAllUsersAndStats(): Promise<{
       })
     );
 
+    adminEmails.add(OWNER_EMAIL);
     const users: RegisteredUser[] = usersSnap.docs.map((doc) => {
       const data = doc.data();
-      const email = (data.email || '').toLowerCase().trim();
+      const email = normalizeEmail(data.email);
       const isAdmin = adminEmails.has(email);
 
       return serializeData({

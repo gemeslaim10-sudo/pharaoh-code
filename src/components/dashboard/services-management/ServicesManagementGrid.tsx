@@ -1,4 +1,6 @@
 'use client';
+import { SmartIcon } from '@/components/common/SmartIcon';
+
 
 interface Props {
   services: any[];
@@ -51,7 +53,7 @@ export default function ServicesManagementGrid({ services, onEdit, onDelete, loa
                   </div>
                 ) : service.icon ? (
                   <div className="w-14 h-14 bg-amber-500/10 dark:bg-pharaohGold/10 rounded-2xl flex items-center justify-center mb-4 text-amber-800 dark:text-pharaohGold border border-amber-500/20 dark:border-pharaohGold/20">
-                    <div dangerouslySetInnerHTML={{ __html: service.icon }} className="w-7 h-7 flex items-center justify-center" />
+                    <SmartIcon as="div" value={service.icon} className="w-7 h-7 flex items-center justify-center" />
                   </div>
                 ) : (
                   <div className="w-14 h-14 bg-slate-100 dark:bg-white/5 rounded-2xl flex items-center justify-center mb-4 text-2xl border border-slate-200 dark:border-white/10">

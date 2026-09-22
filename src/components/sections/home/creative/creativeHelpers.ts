@@ -1,4 +1,4 @@
-import { SectionItem } from '@/types';
+import { type SectionItem } from '@/types';
 
 export function stripSvgColors(svg: string): string {
   if (!svg) return '';

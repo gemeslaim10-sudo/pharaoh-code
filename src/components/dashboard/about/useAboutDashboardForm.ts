@@ -3,13 +3,13 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { getAboutContent, updateAboutContent } from '@/app/actions/dashboard/about';
-import { AboutFormData, INITIAL_ABOUT_FORM } from './aboutDashboardTypes';
+import { type AboutFormData, INITIAL_ABOUT_FORM } from './aboutDashboardTypes';
 
 export function useAboutDashboardForm() {
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [activeTab, setActiveTab] = useState<'hero' | 'vision' | 'philosophy' | 'faq'>('hero');
+  const [activeTab, setActiveTab] = useState<'hero' | 'vision' | 'philosophy' | 'faq' | 'comments'>('hero');
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [form, setForm] = useState<AboutFormData>(INITIAL_ABOUT_FORM);
 
@@ -22,7 +22,8 @@ export function useAboutDashboardForm() {
           hero: { ...prev.hero, ...(content.hero || {}) },
           visionMission: { ...prev.visionMission, ...(content.visionMission || {}) },
           philosophy: { ...prev.philosophy, ...(content.philosophy || {}) },
-          faq: { ...prev.faq, faqs: [], ...(content.faq || {}) }
+          faq: { ...prev.faq, faqs: [], ...(content.faq || {}) },
+          comments: { ...prev.comments, ...(content.comments || {}) }
         }));
       }
       setLoading(false);

@@ -27,7 +27,8 @@ export interface DashboardStatsData {
 }
 
 export interface DashboardChartsPayload {
-  lineChartData: number[];
+  weeklyAvg: number;
+  last28DaysCount: number;
   pieChartData: number[];
   totalOrdersCount: number;
   activeOrdersCount: number;

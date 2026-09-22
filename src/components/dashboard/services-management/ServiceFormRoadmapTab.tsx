@@ -1,8 +1,16 @@
 'use client';
 import { useState } from 'react';
-import { RoadmapStepItem } from './serviceFormTypes';
+import { type RoadmapStepItem } from './serviceFormTypes';
 
 interface ServiceFormRoadmapTabProps {
+  roadmapTitleAr: string;
+  setRoadmapTitleAr: (val: string) => void;
+  roadmapTitleEn: string;
+  setRoadmapTitleEn: (val: string) => void;
+  roadmapDescAr: string;
+  setRoadmapDescAr: (val: string) => void;
+  roadmapDescEn: string;
+  setRoadmapDescEn: (val: string) => void;
   roadmapSteps: RoadmapStepItem[];
   setRoadmapSteps: (steps: RoadmapStepItem[]) => void;
 }
@@ -15,6 +23,14 @@ const STEP_LABELS = [
 ];
 
 export function ServiceFormRoadmapTab({
+  roadmapTitleAr,
+  setRoadmapTitleAr,
+  roadmapTitleEn,
+  setRoadmapTitleEn,
+  roadmapDescAr,
+  setRoadmapDescAr,
+  roadmapDescEn,
+  setRoadmapDescEn,
   roadmapSteps,
   setRoadmapSteps,
 }: ServiceFormRoadmapTabProps) {
@@ -162,6 +178,73 @@ export function ServiceFormRoadmapTab({
           >
             عرض الكل
           </button>
+        </div>
+      </div>
+
+      {/* Section Titles (AR / EN) */}
+      <div className="bg-white dark:bg-[#112240] p-4 md:p-5 rounded-2xl border border-slate-200 dark:border-white/10 shadow-xs space-y-4">
+        <span className="text-xs font-bold text-amber-800 dark:text-pharaohGold block">العنوان العام لقسم مراحل العمل في صفحة الخدمة:</span>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="text-xs font-bold text-slate-700 dark:text-gray-300">عنوان قسم مراحل العمل</label>
+              <span className="inline-flex items-center leading-none text-[10px] px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-800 dark:text-pharaohGold border border-amber-500/20 font-bold">🇸🇦 عربي</span>
+            </div>
+            <input
+              type="text"
+              maxLength={80}
+              placeholder="مثال: مراحل وخطوات تنفيذ الخدمة"
+              value={roadmapTitleAr || ''}
+              onChange={e => setRoadmapTitleAr(e.target.value)}
+              className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl p-3 text-xs text-slate-900 dark:text-white focus:border-pharaohGold outline-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
+            />
+          </div>
+          <div>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="text-xs font-bold text-slate-700 dark:text-gray-300">Roadmap Section Title</label>
+              <span className="inline-flex items-center leading-none text-[10px] px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 font-bold">🇬🇧 English</span>
+            </div>
+            <input
+              type="text"
+              maxLength={80}
+              placeholder="e.g. Service Execution Roadmap"
+              value={roadmapTitleEn || ''}
+              onChange={e => setRoadmapTitleEn(e.target.value)}
+              className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl p-3 text-xs text-slate-900 dark:text-white focus:border-pharaohGold outline-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
+              dir="ltr"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="text-xs font-bold text-slate-700 dark:text-gray-300">فقرة شرح أسفل العنوان</label>
+              <span className="inline-flex items-center leading-none text-[10px] px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-800 dark:text-pharaohGold border border-amber-500/20 font-bold">🇸🇦 عربي</span>
+            </div>
+            <textarea
+              rows={2}
+              placeholder="مثال: خطوات منهجية واضحة تضمن تسليم الخدمة بأعلى دقة."
+              value={roadmapDescAr || ''}
+              onChange={e => setRoadmapDescAr(e.target.value)}
+              className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl p-3 text-xs text-slate-900 dark:text-white resize-none focus:border-pharaohGold outline-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
+            />
+          </div>
+          <div>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="text-xs font-bold text-slate-700 dark:text-gray-300">Roadmap Section Description</label>
+              <span className="inline-flex items-center leading-none text-[10px] px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 font-bold">🇬🇧 English</span>
+            </div>
+            <textarea
+              rows={2}
+              placeholder="e.g. Clear methodological steps ensuring accurate delivery."
+              value={roadmapDescEn || ''}
+              onChange={e => setRoadmapDescEn(e.target.value)}
+              className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl p-3 text-xs text-slate-900 dark:text-white resize-none focus:border-pharaohGold outline-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
+              dir="ltr"
+            />
+          </div>
         </div>
       </div>
 

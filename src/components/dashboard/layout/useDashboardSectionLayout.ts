@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { DashboardSectionConfig } from '@/types/dashboardLayout';
+import { type DashboardSectionConfig } from '@/types/dashboardLayout';
 
 export function useDashboardSectionLayout(
   sections: DashboardSectionConfig[],

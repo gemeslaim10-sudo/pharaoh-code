@@ -2,11 +2,18 @@
 
 import { db, serializeData } from '@/lib/firebase/admin';
 import { authenticateAdmin } from './auth';
-import { CreativityType } from '@/types/creativity';
-import { revalidatePath } from 'next/cache';
+import { type CreativityType } from '@/types/creativity';
+import { revalidateSite } from '@/lib/revalidateSite';
+
+function validateType(type: CreativityType) {
+  if (!['portfolio', 'philosophy', 'services'].includes(type)) {
+    throw new Error('Invalid collection');
+  }
+}
 
 export async function addCreativityItem(idToken: string, type: CreativityType, data: any) {
   await authenticateAdmin(idToken);
+  validateType(type);
 
   try {
     const docRef = db.collection(type).doc();
@@ -15,9 +22,7 @@ export async function addCreativityItem(idToken: string, type: CreativityType, d
       createdAt: new Date().toISOString()
     });
 
-    revalidatePath('/');
-    revalidatePath('/portfolio');
-    revalidatePath('/dashboard/creativity');
+    revalidateSite();
 
     return { success: true, id: docRef.id };
   } catch (error: any) {
@@ -26,15 +31,33 @@ export async function addCreativityItem(idToken: string, type: CreativityType, d
   }
 }
 
+export async function updateCreativityItem(idToken: string, type: CreativityType, id: string, data: any) {
+  await authenticateAdmin(idToken);
+  validateType(type);
+
+  try {
+    await db.collection(type).doc(id).set({
+      ...data,
+      updatedAt: new Date().toISOString()
+    }, { merge: true });
+
+    revalidateSite();
+
+    return { success: true };
+  } catch (error: any) {
+    console.error(`Error updating ${type}:`, error);
+    throw new Error(error.message || `Failed to update ${type} item`);
+  }
+}
+
 export async function deleteCreativityItem(idToken: string, type: CreativityType, id: string) {
   await authenticateAdmin(idToken);
+  validateType(type);
 
   try {
     await db.collection(type).doc(id).delete();
 
-    revalidatePath('/');
-    revalidatePath('/portfolio');
-    revalidatePath('/dashboard/creativity');
+    revalidateSite();
 
     return { success: true };
   } catch (error: any) {
@@ -45,6 +68,7 @@ export async function deleteCreativityItem(idToken: string, type: CreativityType
 
 export async function getCreativityItems(idToken: string, type: CreativityType) {
   await authenticateAdmin(idToken);
+  validateType(type);
 
   try {
     const snapshot = await db.collection(type).orderBy('createdAt', 'desc').get();

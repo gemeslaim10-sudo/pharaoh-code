@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/contexts/LanguageContext';
 
 export type { NavItemData } from '@/types/nav';
-import { NavItemData } from '@/types/nav';
+import { type NavItemData } from '@/types/nav';
 
 
 

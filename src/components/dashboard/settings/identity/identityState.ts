@@ -1,5 +1,5 @@
 import { uploadImage } from '@/app/actions/dashboard/upload';
-import { IdentityFormData } from '../SettingsIdentityForm';
+import { type IdentityFormData } from '../SettingsIdentityForm';
 
 export const INITIAL_IDENTITY_FORM: IdentityFormData = {
   name: '',
@@ -21,7 +21,7 @@ export const INITIAL_IDENTITY_FORM: IdentityFormData = {
   address_en: '',
   reverse_navbar_ar: true,
   show_scroll_progress: false,
-  show_side_scrollbar: false,
+  show_side_scrollbar: true,
 };
 
 export function mapIdentityDataToForm(data: Record<string, any>): IdentityFormData {
@@ -45,7 +45,7 @@ export function mapIdentityDataToForm(data: Record<string, any>): IdentityFormDa
     address_en: data.address_en || '',
     reverse_navbar_ar: data.reverse_navbar_ar !== undefined ? data.reverse_navbar_ar : true,
     show_scroll_progress: data.show_scroll_progress === true,
-    show_side_scrollbar: data.show_side_scrollbar === true,
+    show_side_scrollbar: data.show_side_scrollbar !== false,
   };
 }
 

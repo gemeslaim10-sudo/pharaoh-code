@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { IdentityFormData } from '../SettingsIdentityForm';
+import { type IdentityFormData } from '../SettingsIdentityForm';
 
 interface IdentityTogglesSectionProps {
   formData: IdentityFormData;

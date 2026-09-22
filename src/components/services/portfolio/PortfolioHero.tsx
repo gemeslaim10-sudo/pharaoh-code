@@ -1,7 +1,7 @@
 'use client';
 
-import { SectionData, SectionItem } from '@/types';
-import { CategoryItem } from '@/types/category';
+import { type SectionData, type SectionItem } from '@/types';
+import { type CategoryItem } from '@/types/category';
 import { useState, useMemo } from 'react';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -9,7 +9,7 @@ import { getDynamicText } from '@/lib/i18nHelper';
 import { isProjectInCategory } from '@/lib/categoryHelper';
 import PortfolioCard from './PortfolioCard';
 import { PortfolioHeroHeader } from './PortfolioHeroHeader';
-import { PortfolioHeroFilterDock, PortfolioFilterItem } from './PortfolioHeroFilterDock';
+import { PortfolioHeroFilterDock, type PortfolioFilterItem } from './PortfolioHeroFilterDock';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function PortfolioHero({ data }: { data: SectionData }) {

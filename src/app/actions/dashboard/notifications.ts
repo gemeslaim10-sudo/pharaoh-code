@@ -9,25 +9,14 @@ export async function getRecentNotifications(idToken: string) {
   try {
     const snapshot = await db.collection('notifications')
                              .orderBy('createdAt', 'desc')
+                             .limit(6)
                              .get();
 
     if (snapshot.empty) {
       return [];
     }
 
-    const docs = snapshot.docs;
-    
-    if (docs.length > 6) {
-        const toDelete = docs.slice(6);
-        for (let i = 0; i < toDelete.length; i += 500) {
-            const batch = db.batch();
-            const chunk = toDelete.slice(i, i + 500);
-            chunk.forEach(doc => batch.delete(doc.ref));
-            await batch.commit();
-        }
-    }
-
-    return docs.slice(0, 6).map(doc => serializeData({
+    return snapshot.docs.map(doc => serializeData({
       id: doc.id,
       ...doc.data()
     }));

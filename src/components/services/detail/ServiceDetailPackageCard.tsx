@@ -1,8 +1,8 @@
 'use client';
 
-import { motion, Variants } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { getDynamicText } from '@/lib/i18nHelper';
-import { Language } from '@/types/i18n';
+import { type Language } from '@/types/i18n';
 
 export interface PackageItem {
   level_ar?: string;

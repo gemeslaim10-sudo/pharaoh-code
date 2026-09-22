@@ -2,9 +2,11 @@
 
 import { db } from '@/lib/firebase/admin';
 import { sanitizeInput } from './utils';
+import { enforcePublicRateLimit } from './rateLimit';
 
 export async function submitContactMessage(formData: FormData) {
     try {
+        await enforcePublicRateLimit('contact');
         const name = sanitizeInput(formData.get('name') as string, 100);
         const email = sanitizeInput(formData.get('email') as string, 100);
         const phone = sanitizeInput(formData.get('phone') as string, 50);
@@ -13,7 +15,7 @@ export async function submitContactMessage(formData: FormData) {
         const source = sanitizeInput(formData.get('source') as string, 50);
         const details = sanitizeInput(formData.get('details') as string, 2000);
 
-        if (!name || !email) {
+        if (!name || !email || !details || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             throw new Error('الاسم والبريد الإلكتروني مطلوبان');
         }
 

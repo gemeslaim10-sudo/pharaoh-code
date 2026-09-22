@@ -1,7 +1,14 @@
 'use client';
 import { useTranslation } from '@/contexts/LanguageContext';
 
-export function HomeCreativeBanner() {
+interface HomeCreativeBannerProps {
+  /** CMS banner text; empty keeps the built-in bilingual sentence. */
+  text?: string;
+  /** CMS badge label; empty keeps "PHARAOH ARCHITECTURE". */
+  badge?: string;
+}
+
+export function HomeCreativeBanner({ text, badge }: HomeCreativeBannerProps) {
   const { language } = useTranslation();
 
   return (
@@ -9,13 +16,13 @@ export function HomeCreativeBanner() {
       <div className="flex items-center gap-2.5">
         <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping shrink-0" />
         <p className="text-xs sm:text-sm text-gray-300 font-light">
-          {language === 'ar' 
+          {text || (language === 'ar'
             ? 'كل سطر برمجي نصنعه يخضع لاختبارات أداء وأمان قياسية لضمان أقصى كفاءة.'
-            : 'Every line of code undergoes rigorous performance benchmarks and security audits.'}
+            : 'Every line of code undergoes rigorous performance benchmarks and security audits.')}
         </p>
       </div>
       <span className="inline-flex items-center justify-center leading-none text-[10px] font-mono font-bold tracking-wider text-[#C5A16F] uppercase px-2.5 py-1 rounded-md bg-[#C5A16F]/10 border border-[#C5A16F]/20 shrink-0">
-        PHARAOH ARCHITECTURE
+        {badge || 'PHARAOH ARCHITECTURE'}
       </span>
     </div>
   );

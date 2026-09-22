@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { getIdentity, updateIdentity } from '@/app/actions/dashboard/settings';
 import { auth } from '@/lib/firebase/config';
-import { IdentityFormData } from '../SettingsIdentityForm';
+import { type IdentityFormData } from '../SettingsIdentityForm';
 import { INITIAL_IDENTITY_FORM, mapIdentityDataToForm, uploadSingleFile } from './identityState';
 
 export function useSettingsIdentity() {
@@ -52,6 +52,7 @@ export function useSettingsIdentity() {
         title_ar: formData.title,
         keywords_ar: formData.keywords,
         desc_ar: formData.desc,
+        address_ar: formData.address,
         favicon: finalFaviconUrl,
         logo: finalLogoUrl,
         logo_dark: finalLogoUrl,

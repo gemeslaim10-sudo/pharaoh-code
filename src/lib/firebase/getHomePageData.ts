@@ -1,6 +1,7 @@
 import { cache } from 'react';
-import { SectionData } from '@/types';
+import { type SectionData } from '@/types';
 import { admin } from '@/lib/firebase/admin';
+import type { DocumentData, QueryDocumentSnapshot } from 'firebase-admin/firestore';
 import { getTeamMembers } from '@/app/actions/dashboard/team';
 import {
   mapReviews,
@@ -12,13 +13,13 @@ import {
 } from './homePageMappers';
 
 export const getHomePageData = cache(async function getHomePageData() {
-  let docSnapData: admin.firestore.DocumentData = {};
-  let reviewsDocs: admin.firestore.QueryDocumentSnapshot[] = [];
-  let portfolioDocs: admin.firestore.QueryDocumentSnapshot[] = [];
-  let philosophyDocs: admin.firestore.QueryDocumentSnapshot[] = [];
-  let servicesDocs: admin.firestore.QueryDocumentSnapshot[] = [];
-  let clientsDocs: admin.firestore.QueryDocumentSnapshot[] = [];
-  let categoriesDocs: admin.firestore.QueryDocumentSnapshot[] = [];
+  let docSnapData: DocumentData = {};
+  let reviewsDocs: QueryDocumentSnapshot[] = [];
+  let portfolioDocs: QueryDocumentSnapshot[] = [];
+  let philosophyDocs: QueryDocumentSnapshot[] = [];
+  let servicesDocs: QueryDocumentSnapshot[] = [];
+  let clientsDocs: QueryDocumentSnapshot[] = [];
+  let categoriesDocs: QueryDocumentSnapshot[] = [];
   let members: unknown[] = [];
   let identityData: Record<string, any> = {};
 
@@ -26,7 +27,7 @@ export const getHomePageData = cache(async function getHomePageData() {
     const db = admin.firestore();
     const [docSnap, reviewsSnap, portfolioSnap, philosophySnap, servicesSnap, teamMembers, clientsSnap, identitySnap, categoriesSnap] = await Promise.all([
       db.collection('pages').doc('home').get(),
-      db.collection('reviews').get(),
+      db.collection('reviews').where('status', '==', 'approved').get(),
       db.collection('portfolio').orderBy('createdAt', 'desc').get(),
       db.collection('philosophy').orderBy('createdAt', 'desc').get(),
       db.collection('services').orderBy('createdAt', 'desc').get(),

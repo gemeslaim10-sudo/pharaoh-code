@@ -1,4 +1,6 @@
 'use client';
+import { SafeSvg } from '@/components/common/SafeSvg';
+
 
 interface DynamicSocialIconProps {
   name?: string | undefined;
@@ -18,9 +20,9 @@ export function DynamicSocialIcon({
   // 1. If custom SVG string is provided
   if (iconSvg && typeof iconSvg === 'string' && iconSvg.trim().startsWith('<svg')) {
     return (
-      <span
+      <SafeSvg as="span"
         className={`inline-flex items-center justify-center [&_svg]:w-full [&_svg]:h-full [&_svg]:max-w-full [&_svg]:max-h-full ${className}`}
-        dangerouslySetInnerHTML={{ __html: iconSvg }}
+        markup={iconSvg}
       />
     );
   }

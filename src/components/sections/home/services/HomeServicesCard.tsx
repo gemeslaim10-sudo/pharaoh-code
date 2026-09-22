@@ -1,8 +1,9 @@
 'use client';
+import { SmartIcon } from '@/components/common/SmartIcon';
+
 
 import Link from 'next/link';
-import { SectionItem } from '@/types';
-import { stripSvgColors } from './homeServicesHelpers';
+import { type SectionItem } from '@/types';
 
 interface HomeServicesCardProps {
   item: SectionItem;
@@ -51,11 +52,11 @@ export function HomeServicesCard({
               ? 'bg-slate-100 border-slate-300 group-hover:bg-[#8A5800] group-hover:border-[#8A5800] group-hover:text-white'
               : 'bg-white/5 border-white/10 group-hover:bg-gradient-to-br group-hover:from-[#C5A16F] group-hover:to-[#9E7D47] group-hover:border-[#C5A16F]'
           }`}>
-            <div 
+            <SmartIcon as="div"
               className={`w-7 h-7 flex items-center justify-center [&_svg]:w-6 [&_svg]:h-6 [&_svg]:max-w-full [&_svg]:max-h-full transition-colors duration-400 group-hover:text-white ${
                 isLight ? 'text-[#8A5800]' : 'text-[#C5A16F]'
               }`}
-              dangerouslySetInnerHTML={{ __html: stripSvgColors(item.iconSvg || '') }} 
+              value={item.iconSvg || ''} inheritColor
             />
           </div>
 

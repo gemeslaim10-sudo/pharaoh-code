@@ -1,7 +1,10 @@
 'use client';
+import { SmartIcon } from '@/components/common/SmartIcon';
+import { IconField } from '@/components/dashboard/common/IconField';
+
 
 import { useState } from 'react';
-import { StatsSectionData, StatItemData } from '@/types/stats';
+import { type StatsSectionData, type StatItemData } from '@/types/stats';
 
 interface StatsCardsSectionProps {
   form: StatsSectionData;
@@ -78,9 +81,9 @@ export function StatsCardsSection({ form, setForm }: StatsCardsSectionProps) {
 
           {/* Mini Preview Box */}
           <div className="flex items-center gap-3 bg-white dark:bg-[#112240] px-4 py-2 rounded-xl border border-amber-500/20 shadow-xs">
-            <div 
+            <SmartIcon as="div"
               className="w-6 h-6 text-amber-800 dark:text-pharaohGold flex items-center justify-center shrink-0"
-              dangerouslySetInnerHTML={{ __html: item.iconSvg || '' }}
+              value={item.iconSvg || ''}
             />
             <div className="text-right">
               <span className="text-sm font-black font-mono text-amber-800 dark:text-pharaohGold">
@@ -177,48 +180,16 @@ export function StatsCardsSection({ form, setForm }: StatsCardsSectionProps) {
               <span>أيقونة البطاقة (Icon Selection)</span>
             </span>
             <span className="text-[11px] text-slate-500 dark:text-gray-400">
-              اختر أيقونة جاهزة أو الصق كود SVG
+              ارفع أيقونة SVG أو PNG من جهازك، أو اختر من الأيقونات الجاهزة
             </span>
           </div>
 
-          {/* Preset Buttons */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            {PRESET_ICONS.map((preset, pIdx) => {
-              const isSelected = item.iconSvg === preset.svg;
-              return (
-                <button
-                  key={pIdx}
-                  type="button"
-                  onClick={() => updateItem(idx, 'iconSvg', preset.svg)}
-                  className={`p-2.5 rounded-xl border text-right text-xs transition-all flex items-center gap-2 cursor-pointer ${
-                    isSelected
-                      ? 'bg-amber-500/20 dark:bg-pharaohGold/25 border-amber-500 dark:border-pharaohGold text-amber-900 dark:text-pharaohGold font-bold shadow-xs'
-                      : 'bg-slate-50 dark:bg-[#0A192F] border-slate-200 dark:border-white/5 text-slate-700 dark:text-gray-300 hover:border-amber-400'
-                  }`}
-                >
-                  <div
-                    className="w-5 h-5 shrink-0 text-amber-800 dark:text-pharaohGold"
-                    dangerouslySetInnerHTML={{ __html: preset.svg }}
-                  />
-                  <span className="truncate text-[11px]">{preset.name}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Custom SVG Textarea */}
-          <div className="pt-2">
-            <label className="block text-[11px] font-medium text-slate-700 dark:text-gray-300 mb-1">
-              كود الـ SVG المخصص (Custom SVG Code)
-            </label>
-            <textarea
-              rows={2}
-              value={item.iconSvg || ''}
-              onChange={e => updateItem(idx, 'iconSvg', e.target.value)}
-              placeholder='<svg ...>...</svg>'
-              className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl p-2.5 text-[11px] font-mono text-slate-900 dark:text-white resize-none focus:border-pharaohGold outline-none"
-            />
-          </div>
+          <IconField
+            label="أيقونة الكارت"
+            value={item.iconSvg || ''}
+            onChange={val => updateItem(idx, 'iconSvg', val)}
+            presets={PRESET_ICONS}
+          />
         </div>
       </div>
     );

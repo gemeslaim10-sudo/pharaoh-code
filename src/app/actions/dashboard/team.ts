@@ -1,48 +1,16 @@
 'use server';
 
-import { admin, db, serializeData } from '@/lib/firebase/admin';
-import teamFallback from '@/data/frontend/team.json';
-import { revalidatePath } from 'next/cache';
+import { authenticateAdmin } from './auth';
+
+import { db, serializeData } from '@/lib/firebase/admin';
+import { revalidateSite } from '@/lib/revalidateSite';
+import { safeExternalUrl } from '@/lib/safeUrl';
 
 export async function getTeamMembers() {
     try {
         const snap = await db.collection('team_members').orderBy('createdAt', 'asc').get();
         if (snap.empty) {
-            // Seed fallback data
-            const batch = db.batch();
-            const seededMembers = teamFallback.map((member, index) => {
-                const docRef = db.collection('team_members').doc(member.id);
-                const data = {
-                    name: member.name,
-                    name_ar: member.name_ar || member.name,
-                    name_en: member.name_en || member.name,
-                    role: member.role,
-                    role_ar: member.role_ar || member.role,
-                    role_en: member.role_en || member.role,
-                    image: member.image,
-                    description: member.description,
-                    description_ar: member.description_ar || member.description,
-                    description_en: member.description_en || member.description,
-                    skills: (member.skills || []).map((s: any) => ({
-                        name: s.name_ar || s.name,
-                        name_ar: s.name_ar || s.name,
-                        name_en: s.name_en || s.name,
-                        value: s.value
-                    })),
-                    stats: (member.stats || []).map((st: any) => ({
-                        value: st.value,
-                        label: st.label_ar || st.label,
-                        label_ar: st.label_ar || st.label,
-                        label_en: st.label_en || st.label
-                    })),
-                    social: member.social || { facebook: '', instagram: '' },
-                    createdAt: new Date(Date.now() + index * 1000).toISOString()
-                };
-                batch.set(docRef, data);
-                return { id: member.id, ...data };
-            });
-            await batch.commit();
-            return serializeData(seededMembers);
+            return [];
         }
         return snap.docs.map(doc => {
             const data = doc.data();
@@ -55,6 +23,10 @@ export async function getTeamMembers() {
                 role_en: data.role_en || '',
                 description_ar: data.description_ar || data.description || '',
                 description_en: data.description_en || '',
+                social: {
+                    facebook: data.social?.facebook ? safeExternalUrl(data.social.facebook) : '',
+                    instagram: data.social?.instagram ? safeExternalUrl(data.social.instagram) : '',
+                },
                 skills: (data.skills || []).map((s: any) => ({
                     name: s.name || s.name_ar || '',
                     name_ar: s.name_ar || s.name || '',
@@ -77,8 +49,7 @@ export async function getTeamMembers() {
 
 export async function addTeamMember(token: string, memberData: any) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
 
         const docRef = db.collection('team_members').doc();
         await docRef.set({
@@ -86,8 +57,7 @@ export async function addTeamMember(token: string, memberData: any) {
             createdAt: new Date().toISOString()
         });
         
-        revalidatePath('/');
-        revalidatePath('/team');
+        revalidateSite();
         return { success: true, id: docRef.id };
     } catch (error: any) {
         console.error("Failed to add team member:", error);
@@ -97,13 +67,11 @@ export async function addTeamMember(token: string, memberData: any) {
 
 export async function updateTeamMember(token: string, id: string, memberData: any) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
 
         await db.collection('team_members').doc(id).update(memberData);
         
-        revalidatePath('/');
-        revalidatePath('/team');
+        revalidateSite();
         return { success: true };
     } catch (error: any) {
         console.error("Failed to update team member:", error);
@@ -113,13 +81,11 @@ export async function updateTeamMember(token: string, id: string, memberData: an
 
 export async function deleteTeamMember(token: string, id: string) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
 
         await db.collection('team_members').doc(id).delete();
         
-        revalidatePath('/');
-        revalidatePath('/team');
+        revalidateSite();
         return { success: true };
     } catch (error: any) {
         console.error("Failed to delete team member:", error);

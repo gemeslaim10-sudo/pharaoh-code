@@ -2,15 +2,17 @@
 
 import { db } from '@/lib/firebase/admin';
 import { sanitizeInput } from './utils';
+import { enforcePublicRateLimit } from './rateLimit';
 
 export async function submitProjectRequest(formData: FormData) {
     try {
+        await enforcePublicRateLimit('project');
         const name = sanitizeInput(formData.get('name') as string, 100);
         const phone = sanitizeInput(formData.get('phone') as string, 20);
         const service = sanitizeInput(formData.get('service') as string, 100);
         const details = sanitizeInput(formData.get('details') as string, 2000);
 
-        if (!name || !phone || !service) {
+        if (!name || !phone || !service || phone.replace(/\D/g, '').length < 7) {
             throw new Error('جميع الحقول مطلوبة');
         }
 

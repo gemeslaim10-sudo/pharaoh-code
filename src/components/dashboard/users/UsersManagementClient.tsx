@@ -1,7 +1,7 @@
 'use client';
 
-import { RegisteredUser } from '@/types/user';
-import { useUsersManagement, UsersStats } from './useUsersManagement';
+import { type RegisteredUser } from '@/types/user';
+import { useUsersManagement, type UsersStats } from './useUsersManagement';
 import { UsersHeader } from './UsersHeader';
 import { UsersStatsGrid } from './UsersStatsGrid';
 import { UsersSearchBar } from './UsersSearchBar';
@@ -17,6 +17,7 @@ export default function UsersManagementClient({
   initialStats,
 }: UsersManagementClientProps) {
   const {
+    error,
     users,
     stats,
     searchQuery,
@@ -35,6 +36,7 @@ export default function UsersManagementClient({
 
   return (
     <div className="space-y-6 text-right" dir="rtl">
+      {error && <p role="alert" className="text-red-600 dark:text-red-400">{error}</p>}
       {/* Top Header */}
       <UsersHeader
         handleRefresh={handleRefresh}

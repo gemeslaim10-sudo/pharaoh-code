@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
-import { TeamMemberData } from '@/types/team';
+import { type TeamMemberData } from '@/types/team';
 import TeamMemberImageModal from './TeamMemberImageModal';
 import TeamMemberSkillsSection from './TeamMemberSkillsSection';
 import TeamMemberStatsSection from './TeamMemberStatsSection';

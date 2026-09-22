@@ -1,8 +1,13 @@
-import { admin } from '@/lib/firebase/admin';
+import type { QueryDocumentSnapshot } from 'firebase-admin/firestore';
+import { safeExternalUrl } from '@/lib/safeUrl';
 
-export function mapReviews(docs: admin.firestore.QueryDocumentSnapshot[]) {
+export function mapReviews(docs: QueryDocumentSnapshot[]) {
   return docs.map(doc => {
     const rev = doc.data();
+    // Ratings are stored as a 1-5 number; anything else is dropped so the card shows 5 stars.
+    const ratingValue = Number(rev.rating);
+    const hasRating = Number.isFinite(ratingValue) && ratingValue >= 1 && ratingValue <= 5;
+
     return {
       name: rev.name || 'عميل',
       name_ar: rev.name_ar || rev.name,
@@ -10,16 +15,19 @@ export function mapReviews(docs: admin.firestore.QueryDocumentSnapshot[]) {
       role: rev.role || 'شريك نجاح',
       role_ar: rev.role_ar || rev.role,
       role_en: rev.role_en,
+      company: rev.company || '',
+      company_ar: rev.company_ar || rev.company,
+      company_en: rev.company_en,
       content: rev.text || rev.content || '',
       content_ar: rev.text_ar || rev.content_ar || rev.text || rev.content,
       content_en: rev.text_en || rev.content_en,
-      rating: '★★★★★',
+      ...(hasRating ? { rating: ratingValue } : {}),
       imageUrl: rev.image || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'
     };
   });
 }
 
-export function mapPortfolio(docs: admin.firestore.QueryDocumentSnapshot[]) {
+export function mapPortfolio(docs: QueryDocumentSnapshot[]) {
   return docs.map(doc => {
     const p = doc.data();
     const categoriesArray = Array.isArray(p.categories) 
@@ -42,13 +50,13 @@ export function mapPortfolio(docs: admin.firestore.QueryDocumentSnapshot[]) {
       description: p.desc || p.description,
       description_ar: p.desc_ar || p.description_ar || p.desc || p.description,
       description_en: p.desc_en || p.description_en,
-      link: p.link,
-      appLink: p.appLink,
+      link: p.link ? safeExternalUrl(p.link) : '',
+      appLink: p.appLink ? safeExternalUrl(p.appLink) : '',
     };
   });
 }
 
-export function mapServices(docs: admin.firestore.QueryDocumentSnapshot[]) {
+export function mapServices(docs: QueryDocumentSnapshot[]) {
   return docs.map(doc => {
     const s = doc.data();
     return {
@@ -64,7 +72,7 @@ export function mapServices(docs: admin.firestore.QueryDocumentSnapshot[]) {
   });
 }
 
-export function mapPhilosophy(docs: admin.firestore.QueryDocumentSnapshot[]) {
+export function mapPhilosophy(docs: QueryDocumentSnapshot[]) {
   return docs.map(doc => {
     const ph = doc.data();
     return {
@@ -79,7 +87,7 @@ export function mapPhilosophy(docs: admin.firestore.QueryDocumentSnapshot[]) {
   });
 }
 
-export function mapClients(docs: admin.firestore.QueryDocumentSnapshot[]) {
+export function mapClients(docs: QueryDocumentSnapshot[]) {
   return docs.map(doc => {
     const c = doc.data();
     return {
@@ -91,12 +99,12 @@ export function mapClients(docs: admin.firestore.QueryDocumentSnapshot[]) {
       description: c.description || c.desc || '',
       description_ar: c.description_ar || c.desc_ar || c.description,
       description_en: c.description_en || c.desc_en,
-      websiteUrl: c.websiteUrl || ''
+      websiteUrl: c.websiteUrl ? safeExternalUrl(c.websiteUrl) : ''
     };
   });
 }
 
-export function mapCategories(docs: admin.firestore.QueryDocumentSnapshot[]) {
+export function mapCategories(docs: QueryDocumentSnapshot[]) {
   return docs.map(doc => {
     const cat = doc.data();
     const nameAr = cat.name_ar || cat.nameAr || cat.name || '';

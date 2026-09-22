@@ -1,7 +1,7 @@
 'use client';
 
 export type { ClientItem } from '@/types/client';
-import { ClientItem } from '@/types/client';
+import { type ClientItem } from '@/types/client';
 
 
 

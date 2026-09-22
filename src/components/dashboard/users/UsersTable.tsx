@@ -1,6 +1,6 @@
 'use client';
 
-import { RegisteredUser } from '@/types/user';
+import { type RegisteredUser } from '@/types/user';
 import { UsersTableRow } from './UsersTableRow';
 
 interface UsersTableProps {

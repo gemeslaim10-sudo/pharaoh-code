@@ -16,14 +16,15 @@ export function AboutCommentsForm({ formTitle }: AboutCommentsFormProps) {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
-    const formData = new FormData(e.currentTarget);
-    const result = await submitComment(formData);
-    setIsSubmitting(false);
-    if (result.success) {
-      setSubmitStatus('success');
-      (e.target as HTMLFormElement).reset();
-    } else {
+    const form = e.currentTarget;
+    try {
+      const result = await submitComment(new FormData(form));
+      setSubmitStatus(result.success ? 'success' : 'error');
+      if (result.success) form.reset();
+    } catch {
       setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
     }
   }
 

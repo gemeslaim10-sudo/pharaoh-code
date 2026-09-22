@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { SectionItem } from '@/types';
+import { type SectionItem } from '@/types';
 
 interface TeamHeroMemberCardProps {
   member: SectionItem;

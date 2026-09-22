@@ -5,7 +5,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
 
 export type { NavLinkItem } from '@/types/nav';
-import { NavLinkItem } from '@/types/nav';
+import { type NavLinkItem } from '@/types/nav';
 
 
 

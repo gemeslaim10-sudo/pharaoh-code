@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { SocialPlatform } from '@/types/settings';
+import { type SocialPlatform } from '@/types/settings';
 import { DynamicSocialIcon } from '@/components/common/DynamicSocialIcon';
 import { uploadImage } from '@/app/actions/dashboard/upload';
 import { useAuth } from '@/contexts/AuthContext';
@@ -249,17 +249,6 @@ export function SocialPlatformModal({
                   </label>
                   <p className="text-[10px] text-slate-500 dark:text-gray-400">PNG, SVG, JPG, WebP بحجم مناسب</p>
                 </div>
-              </div>
-              <div>
-                <label className="block text-[11px] font-bold text-slate-600 dark:text-gray-400 mb-1">أو رابط مباشر لصورة الأيقونة (Image URL)</label>
-                <input
-                  type="url"
-                  value={icon}
-                  onChange={(e) => setIcon(e.target.value)}
-                  placeholder="https://example.com/icon.svg"
-                  className="w-full bg-white dark:bg-[#112240] border border-slate-200 dark:border-white/10 rounded-lg p-2 text-xs text-slate-900 dark:text-white outline-none"
-                  dir="ltr"
-                />
               </div>
             </div>
           )}

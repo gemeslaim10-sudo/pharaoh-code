@@ -1,6 +1,6 @@
 'use client';
 
-import { SectionData, SectionItem } from '@/types';
+import { type SectionData, type SectionItem } from '@/types';
 import { useRef, useEffect } from 'react';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -16,7 +16,7 @@ export default function HomeServices({ data }: { data?: SectionData }) {
   const { theme } = useTheme();
   const isLight = theme === 'light';
 
-  const itemsToRender = (data?.items && data.items.length > 0 && data.items[0]?.iconSvg)
+  const itemsToRender = (data?.items && data.items.length > 0)
     ? data.items
     : FALLBACK_SERVICES;
 
@@ -86,13 +86,13 @@ export default function HomeServices({ data }: { data?: SectionData }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <HomeServicesHeader
           subtitle={getDynamicText(data, 'subtitle', language) || t("services.subtitle")}
-          titlePart1={t("services.titlePart1")}
-          titlePart2={t("services.titlePart2")}
-          desc={language === 'ar' ? 'حزمة متكاملة من الحلول البرمجية السيادية المطورة بأعلى معايير الدقة والهندسة الرقمية.' : 'A sovereign suite of full-cycle software architectures engineered with surgical precision.'}
+          titlePart1={getDynamicText(data, 'titlePart1', language) || t("services.titlePart1")}
+          titlePart2={getDynamicText(data, 'titlePart2', language) || t("services.titlePart2")}
+          desc={getDynamicText(data, 'description', language) || (language === 'ar' ? 'حزمة متكاملة من الحلول البرمجية السيادية المطورة بأعلى معايير الدقة والهندسة الرقمية.' : 'A sovereign suite of full-cycle software architectures engineered with surgical precision.')}
           isLight={isLight}
           direction={direction}
           language={language}
-          viewAllText={language === 'ar' ? 'عرض كافة الخدمات' : 'View All Services'}
+          viewAllText={getDynamicText(data, 'linkText', language) || (language === 'ar' ? 'عرض كافة الخدمات' : 'View All Services')}
         />
 
         {/* High-End Services Swiper Carousel with Anti-Clipping Padding */}

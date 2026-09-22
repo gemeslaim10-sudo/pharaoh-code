@@ -3,7 +3,7 @@
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 import { motion } from 'framer-motion';
-import { ServiceDetailPackageCard, PackageItem } from './ServiceDetailPackageCard';
+import { ServiceDetailPackageCard, type PackageItem } from './ServiceDetailPackageCard';
 
 interface ServiceDetailData {
   packagesTitle?: string;

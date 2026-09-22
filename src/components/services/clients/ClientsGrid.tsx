@@ -5,7 +5,7 @@ import { getDynamicText } from '@/lib/i18nHelper';
 import { motion } from 'framer-motion';
 import { ClientsGridHeader } from './ClientsGridHeader';
 import { ClientsGridCard } from './ClientsGridCard';
-import { ClientItem } from '@/types/client';
+import { type ClientItem } from '@/types/client';
 export type { ClientItem };
 
 export default function ClientsGrid({ clients }: { clients: ClientItem[] }) {

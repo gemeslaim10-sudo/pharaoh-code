@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { getSocialLinks, addSocialPlatform, updateSocialPlatform, deleteSocialPlatform } from '@/app/actions/dashboard/settings';
-import { SocialPlatform } from '@/types/settings';
+import { type SocialPlatform } from '@/types/settings';
 import { auth } from '@/lib/firebase/config';
 import { DynamicSocialIcon } from '@/components/common/DynamicSocialIcon';
 import { SocialPlatformModal } from './social/SocialPlatformModal';

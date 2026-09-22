@@ -1,7 +1,7 @@
 'use client';
 
-import { SectionItem } from '@/types';
-import { CategoryItem } from '@/types/category';
+import { type SectionItem } from '@/types';
+import { type CategoryItem } from '@/types/category';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { getDynamicText } from '@/lib/i18nHelper';
@@ -22,7 +22,7 @@ export function PortfolioCard({ item, categories }: PortfolioCardProps) {
   const itemDesc = getDynamicText(item, 'description', language) || getDynamicText(item, 'desc', language) || item.description || '';
   const categoryLabel = getCategoryDisplayLabel(item, categories, language);
 
-  const imageUrl = item.imageUrl || item.image || '/images/default-project.jpg';
+  const imageUrl = item.imageUrl || item.image || '';
   const liveUrl = item.link && item.link !== '#' ? item.link : null;
   const appUrl = item.appLink && item.appLink !== '#' ? item.appLink : null;
 

@@ -1,5 +1,6 @@
 'use client';
 import { HERO_PRESETS } from './heroPresets';
+import { MediaUploadField } from '@/components/dashboard/common/MediaUploadField';
 
 interface HeroThemeModeSectionProps {
   mode: 'dark' | 'light';
@@ -10,8 +11,6 @@ interface HeroThemeModeSectionProps {
   setSlide2Media: (val: string) => void;
   selectedPreset: string;
   onSelectPreset: (presetId: string) => void;
-  uploadingField: string | null;
-  onFileUpload: (e: React.ChangeEvent<HTMLInputElement>, fieldName: string) => void;
 }
 
 export function HeroThemeModeSection({
@@ -23,11 +22,7 @@ export function HeroThemeModeSection({
   setSlide2Media,
   selectedPreset,
   onSelectPreset,
-  uploadingField,
-  onFileUpload,
 }: HeroThemeModeSectionProps) {
-  const isVideo = (url: string) => /\.(mp4|webm|mov)(\?.*)?$/i.test(url);
-
   return (
     <div className="bg-white dark:bg-[#112240] border border-slate-200 dark:border-white/10 rounded-2xl p-6 space-y-6 shadow-xs">
       <h4 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2 border-b border-slate-200 dark:border-white/10 pb-3">
@@ -35,55 +30,22 @@ export function HeroThemeModeSection({
       </h4>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Slide 1 Media */}
-        <div>
-          <div className="flex items-center justify-between mb-2">
-            <label className="block text-xs font-bold text-slate-700 dark:text-gray-300">ميديا السلايد الأول (صورة 🖼️ أو فيديو 🎬)</label>
-            {slide1Media && (
-              <span className="inline-flex items-center leading-none text-[10px] text-amber-800 dark:text-pharaohGold bg-amber-500/10 dark:bg-pharaohGold/10 px-2 py-0.5 rounded-full font-bold">
-                {isVideo(slide1Media) ? '🎬 فيديو' : '🖼️ صورة'}
-              </span>
-            )}
-          </div>
-          <div className="flex gap-2">
-            <input
-              type="text"
-              value={slide1Media}
-              onChange={e => setSlide1Media(e.target.value)}
-              placeholder="رابط صورة أو فيديو MP4..."
-              className="flex-1 bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-xs text-slate-900 dark:text-white dir-ltr focus:border-pharaohGold outline-none"
-            />
-            <label className="cursor-pointer bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-800 dark:text-white text-xs font-bold px-4 py-3 rounded-xl border border-slate-300 dark:border-white/10 transition-colors flex items-center gap-1 shrink-0">
-              <span>{uploadingField === `${mode}Slide1Media` ? 'جاري الرفع...' : 'رفع صورة/فيديو'}</span>
-              <input type="file" accept="image/*,video/*" onChange={e => onFileUpload(e, `${mode}Slide1Media`)} className="hidden" />
-            </label>
-          </div>
-        </div>
-
-        {/* Slide 2 Media */}
-        <div>
-          <div className="flex items-center justify-between mb-2">
-            <label className="block text-xs font-bold text-slate-700 dark:text-gray-300">ميديا السلايد الثاني (صورة 🖼️ أو فيديو 🎬)</label>
-            {slide2Media && (
-              <span className="inline-flex items-center leading-none text-[10px] text-amber-800 dark:text-pharaohGold bg-amber-500/10 dark:bg-pharaohGold/10 px-2 py-0.5 rounded-full font-bold">
-                {isVideo(slide2Media) ? '🎬 فيديو' : '🖼️ صورة'}
-              </span>
-            )}
-          </div>
-          <div className="flex gap-2">
-            <input
-              type="text"
-              value={slide2Media}
-              onChange={e => setSlide2Media(e.target.value)}
-              placeholder="رابط صورة أو فيديو..."
-              className="flex-1 bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 text-xs text-slate-900 dark:text-white dir-ltr focus:border-pharaohGold outline-none"
-            />
-            <label className="cursor-pointer bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 text-slate-800 dark:text-white text-xs font-bold px-4 py-3 rounded-xl border border-slate-300 dark:border-white/10 transition-colors flex items-center gap-1 shrink-0">
-              <span>{uploadingField === `${mode}Slide2Media` ? 'جاري الرفع...' : 'رفع صورة/فيديو'}</span>
-              <input type="file" accept="image/*,video/*" onChange={e => onFileUpload(e, `${mode}Slide2Media`)} className="hidden" />
-            </label>
-          </div>
-        </div>
+        <MediaUploadField
+          label="ميديا السلايد الأول (صورة 🖼️ أو فيديو 🎬)"
+          value={slide1Media}
+          onChange={setSlide1Media}
+          accept="media"
+          previewClassName="w-full h-40"
+          hint="ارفع صورة أو فيديو MP4 من جهازك. لو تركته فارغًا تُستخدم الخلفية الافتراضية."
+        />
+        <MediaUploadField
+          label="ميديا السلايد الثاني (صورة 🖼️ أو فيديو 🎬)"
+          value={slide2Media}
+          onChange={setSlide2Media}
+          accept="media"
+          previewClassName="w-full h-40"
+          hint="ارفع صورة أو فيديو MP4 من جهازك. لو تركته فارغًا تُستخدم الخلفية الافتراضية."
+        />
       </div>
 
       {/* Color Scheme Presets */}

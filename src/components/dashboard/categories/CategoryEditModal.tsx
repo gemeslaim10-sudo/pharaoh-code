@@ -1,7 +1,7 @@
 'use client';
 
 export type { CategoryItem } from '@/types/category';
-import { CategoryItem } from '@/types/category';
+import { type CategoryItem } from '@/types/category';
 
 
 

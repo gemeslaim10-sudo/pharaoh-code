@@ -1,5 +1,5 @@
 'use client';
-import { PackageItem } from './serviceFormTypes';
+import { type PackageItem } from './serviceFormTypes';
 
 interface ServiceFormPackageMetaInputsProps {
   pkg: PackageItem;
@@ -97,6 +97,17 @@ export function ServiceFormPackageMetaInputs({
           </div>
 
           <div>
+            <label className="block text-[11px] font-medium text-slate-700 dark:text-gray-300 mb-1">مدة السعر بجانب الرقم (Period AR)</label>
+            <input
+              type="text"
+              placeholder="مثال: / شهرياً أو / للمشروع"
+              value={pkg.period_ar || ''}
+              onChange={e => onUpdate({ ...pkg, period_ar: e.target.value })}
+              className="w-full bg-white dark:bg-[#112240] border border-slate-200 dark:border-white/10 rounded-lg p-2.5 text-xs text-slate-900 dark:text-white focus:border-pharaohGold outline-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
+            />
+          </div>
+
+          <div>
             <label className="block text-[11px] font-medium text-slate-700 dark:text-gray-300 mb-1">فقرة الشرح (Description AR)</label>
             <textarea
               rows={2}
@@ -136,6 +147,17 @@ export function ServiceFormPackageMetaInputs({
               placeholder="e.g. Starter Package"
               value={pkg.title_en || ''}
               onChange={e => onUpdate({ ...pkg, title_en: e.target.value })}
+              className="w-full bg-white dark:bg-[#112240] border border-slate-200 dark:border-white/10 rounded-lg p-2.5 text-xs text-slate-900 dark:text-white focus:border-pharaohGold outline-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
+            />
+          </div>
+
+          <div>
+            <label className="block text-[11px] font-medium text-slate-700 dark:text-gray-300 mb-1">Price Period (EN)</label>
+            <input
+              type="text"
+              placeholder="e.g. / month or / project"
+              value={pkg.period_en || ''}
+              onChange={e => onUpdate({ ...pkg, period_en: e.target.value })}
               className="w-full bg-white dark:bg-[#112240] border border-slate-200 dark:border-white/10 rounded-lg p-2.5 text-xs text-slate-900 dark:text-white focus:border-pharaohGold outline-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
             />
           </div>

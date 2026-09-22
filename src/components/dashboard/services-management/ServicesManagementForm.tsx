@@ -4,7 +4,7 @@ import { useState } from 'react';
 import ServiceFormBasicInputs from './ServiceFormBasicInputs';
 import ServiceFormDescriptions from './ServiceFormDescriptions';
 import { useServiceForm } from './useServiceForm';
-import { ServiceItem } from './serviceFormTypes';
+import { type ServiceItem } from './serviceFormTypes';
 import { ServiceFormOverviewTab } from './ServiceFormOverviewTab';
 import { ServiceFormPackagesTab } from './ServiceFormPackagesTab';
 import { ServiceFormRoadmapTab } from './ServiceFormRoadmapTab';
@@ -101,10 +101,11 @@ export default function ServicesManagementForm({ editingService, setEditingServi
               titleEn={form.titleEn} setTitleEn={form.setTitleEn}
               type={form.type} setType={form.setType}
               typeCustom={form.typeCustom} setTypeCustom={form.setTypeCustom}
+              typeEn={form.typeEn} setTypeEn={form.setTypeEn}
               price={form.price} setPrice={form.setPrice}
               badge={form.badge} setBadge={form.setBadge}
-              imageFile={form.imageFile} imageUrl={form.imageUrl}
-              handleFileChange={form.handleFileChange}
+              badgeEn={form.badgeEn} setBadgeEn={form.setBadgeEn}
+              imageUrl={form.imageUrl} setImageUrl={form.setImageUrl}
               btnText={form.btnText} setBtnText={form.setBtnText}
               svg={form.svg} setSvg={form.setSvg}
             />
@@ -117,8 +118,14 @@ export default function ServicesManagementForm({ editingService, setEditingServi
             <ServiceFormHeroFields
               heroSubtitleAr={form.tpl.heroSubtitleAr} setHeroSubtitleAr={v => form.setTplField('heroSubtitleAr', v)}
               heroSubtitleEn={form.tpl.heroSubtitleEn} setHeroSubtitleEn={v => form.setTplField('heroSubtitleEn', v)}
+              heroTitle1Ar={form.tpl.heroTitle1Ar} setHeroTitle1Ar={v => form.setTplField('heroTitle1Ar', v)}
+              heroTitle1En={form.tpl.heroTitle1En} setHeroTitle1En={v => form.setTplField('heroTitle1En', v)}
               heroTitle2Ar={form.tpl.heroTitle2Ar} setHeroTitle2Ar={v => form.setTplField('heroTitle2Ar', v)}
               heroTitle2En={form.tpl.heroTitle2En} setHeroTitle2En={v => form.setTplField('heroTitle2En', v)}
+              heroDescAr={form.tpl.heroDescAr} setHeroDescAr={v => form.setTplField('heroDescAr', v)}
+              heroDescEn={form.tpl.heroDescEn} setHeroDescEn={v => form.setTplField('heroDescEn', v)}
+              heroBtnAr={form.tpl.heroBtnAr} setHeroBtnAr={v => form.setTplField('heroBtnAr', v)}
+              heroBtnEn={form.tpl.heroBtnEn} setHeroBtnEn={v => form.setTplField('heroBtnEn', v)}
             />
           </div>
         )}
@@ -126,6 +133,8 @@ export default function ServicesManagementForm({ editingService, setEditingServi
         {/* TAB 2: OVERVIEW & FEATURES */}
         {activeTab === 'overview' && (
           <ServiceFormOverviewTab
+            overviewSubtitleAr={form.tpl.overviewSubtitleAr} setOverviewSubtitleAr={v => form.setTplField('overviewSubtitleAr', v)}
+            overviewSubtitleEn={form.tpl.overviewSubtitleEn} setOverviewSubtitleEn={v => form.setTplField('overviewSubtitleEn', v)}
             overviewTitleAr={form.tpl.overviewTitleAr} setOverviewTitleAr={v => form.setTplField('overviewTitleAr', v)}
             overviewTitleEn={form.tpl.overviewTitleEn} setOverviewTitleEn={v => form.setTplField('overviewTitleEn', v)}
             overviewDescAr={form.tpl.overviewDescAr} setOverviewDescAr={v => form.setTplField('overviewDescAr', v)}
@@ -140,6 +149,8 @@ export default function ServicesManagementForm({ editingService, setEditingServi
           <ServiceFormPackagesTab
             packagesTitleAr={form.tpl.packagesTitleAr} setPackagesTitleAr={v => form.setTplField('packagesTitleAr', v)}
             packagesTitleEn={form.tpl.packagesTitleEn} setPackagesTitleEn={v => form.setTplField('packagesTitleEn', v)}
+            packagesDescAr={form.tpl.packagesDescAr} setPackagesDescAr={v => form.setTplField('packagesDescAr', v)}
+            packagesDescEn={form.tpl.packagesDescEn} setPackagesDescEn={v => form.setTplField('packagesDescEn', v)}
             packages={form.packages} setPackages={form.setPackages}
           />
         )}
@@ -147,6 +158,10 @@ export default function ServicesManagementForm({ editingService, setEditingServi
         {/* TAB 4: ROADMAP STEPS */}
         {activeTab === 'roadmap' && (
           <ServiceFormRoadmapTab
+            roadmapTitleAr={form.tpl.roadmapTitleAr} setRoadmapTitleAr={v => form.setTplField('roadmapTitleAr', v)}
+            roadmapTitleEn={form.tpl.roadmapTitleEn} setRoadmapTitleEn={v => form.setTplField('roadmapTitleEn', v)}
+            roadmapDescAr={form.tpl.roadmapDescAr} setRoadmapDescAr={v => form.setTplField('roadmapDescAr', v)}
+            roadmapDescEn={form.tpl.roadmapDescEn} setRoadmapDescEn={v => form.setTplField('roadmapDescEn', v)}
             roadmapSteps={form.roadmapSteps} setRoadmapSteps={form.setRoadmapSteps}
           />
         )}

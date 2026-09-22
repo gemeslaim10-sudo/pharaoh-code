@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { GuaranteeItem } from './serviceFormTypes';
+import { type GuaranteeItem } from './serviceFormTypes';
 
 interface ServiceFormGuaranteesTabProps {
   addedValueTitleAr: string;

@@ -1,7 +1,7 @@
 'use client';
 
-import React, { RefObject } from 'react';
-import { CropBox, DragHandle } from './cropperUtils';
+import React, { type RefObject } from 'react';
+import { type CropBox, type DragHandle } from './cropperUtils';
 
 interface CropperWorkspaceProps {
   containerRef: RefObject<HTMLDivElement | null>;

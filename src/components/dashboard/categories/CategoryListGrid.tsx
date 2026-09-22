@@ -1,5 +1,5 @@
 'use client';
-import { CategoryItem } from '@/types/category';
+import { type CategoryItem } from '@/types/category';
 
 interface CategoryListGridProps {
   categories: CategoryItem[];

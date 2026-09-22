@@ -15,6 +15,11 @@ export default function ServiceDetailHero({ service }: Props) {
     const subtitle = getDynamicText(service, 'heroSubtitle', language) || getDynamicText(service, 'description', language) || getDynamicText(service, 'desc', language) || (language === 'ar' ? 'خدمات برمجية وهندسية فاخرة مخصصة وفق أرقى معايير التقنية العالمية.' : 'Premium software engineering services tailored to global standards.');
     const btnText = getDynamicText(service, 'heroBtn', language) || (language === 'ar' ? 'طلب الخدمة الآن' : 'Request Service Now');
     const badgeText = getDynamicText(service, 'badge', language) || getDynamicText(service, 'type', language) || (language === 'ar' ? 'صرح البرمجيات السيادية' : 'Sovereign Tech Enterprise');
+    const heroDesc = getDynamicText(service, 'heroDesc', language);
+
+    const heroImage = typeof service?.image === 'string' ? service.image.trim() : '';
+    const whatsappDigits = String(service?.whatsappNumber || '').replace(/\D/g, '');
+    const whatsappHref = whatsappDigits ? `https://wa.me/${whatsappDigits}` : '';
 
     return (
         <section 
@@ -44,6 +49,19 @@ export default function ServiceDetailHero({ service }: Props) {
                     </defs>
                     <rect width="100%" height="100%" fill="url(#service-hero-pattern)" />
                 </svg>
+
+                {/* Uploaded service image as an ambient hero backdrop */}
+                {heroImage && (
+                    <>
+                        <img
+                            src={heroImage}
+                            alt=""
+                            loading="lazy"
+                            className="absolute inset-0 w-full h-full object-cover opacity-20"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-b from-[#060E1A]/80 via-[#0A192F]/85 to-[#081426]/95" />
+                    </>
+                )}
             </div>
 
             <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
@@ -63,6 +81,13 @@ export default function ServiceDetailHero({ service }: Props) {
                     </span>
                 </h1>
 
+                {/* Hero Description (CMS) */}
+                {heroDesc && (
+                    <p className="max-w-3xl mx-auto text-gray-300 text-sm md:text-base leading-relaxed mb-6">
+                        {heroDesc}
+                    </p>
+                )}
+
                 {/* Subtitle / Description Box */}
                 {subtitle && (
                     <div className="inline-block bg-[#112240]/70 backdrop-blur-md text-gray-200 text-sm md:text-base font-medium px-6 py-4 mb-8 border border-white/10 rounded-2xl max-w-3xl leading-relaxed shadow-xl">
@@ -81,15 +106,17 @@ export default function ServiceDetailHero({ service }: Props) {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                         </svg>
                     </a>
-                    <a 
-                        href="https://wa.me/201000000000" 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className="bg-[#112240]/80 border border-white/15 text-white font-bold text-sm md:text-base px-8 py-4 rounded-xl hover:bg-white/10 hover:border-[#C5A16F]/40 transition-all duration-300 backdrop-blur-md flex items-center gap-2"
-                    >
-                        <span>💬</span>
-                        <span>{language === 'ar' ? 'تواصل عبر واتساب فوراً' : 'Chat on WhatsApp Now'}</span>
-                    </a>
+                    {whatsappHref && (
+                        <a
+                            href={whatsappHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-[#112240]/80 border border-white/15 text-white font-bold text-sm md:text-base px-8 py-4 rounded-xl hover:bg-white/10 hover:border-[#C5A16F]/40 transition-all duration-300 backdrop-blur-md flex items-center gap-2"
+                        >
+                            <span>💬</span>
+                            <span>{language === 'ar' ? 'تواصل عبر واتساب فوراً' : 'Chat on WhatsApp Now'}</span>
+                        </a>
+                    )}
                 </div>
 
                 {/* Quick Trust Highlights */}

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { DashboardSectionConfig } from '@/types/dashboardLayout';
+import { type DashboardSectionConfig } from '@/types/dashboardLayout';
 
 interface DashboardSectionNavbarProps {
   sections: DashboardSectionConfig[];

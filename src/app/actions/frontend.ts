@@ -3,6 +3,7 @@
 import { submitProjectRequest as _submitProjectRequest } from './frontend/projects';
 import { submitContactMessage as _submitContactMessage } from './frontend/contact';
 import { submitComment as _submitComment } from './frontend/comments';
+import { subscribeNewsletter as _subscribeNewsletter } from './frontend/newsletter';
 
 export async function submitProjectRequest(formData: FormData) {
   return _submitProjectRequest(formData);
@@ -14,4 +15,7 @@ export async function submitContactMessage(formData: FormData) {
 
 export async function submitComment(formData: FormData) {
   return _submitComment(formData);
+}
+export async function subscribeNewsletter(formData: FormData) {
+  return _subscribeNewsletter(formData);
 }

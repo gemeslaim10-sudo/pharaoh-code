@@ -3,13 +3,21 @@
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { HomeClientCard } from './clients/HomeClientCard';
-import { ClientItem } from '@/types/client';
+import { type ClientItem } from '@/types/client';
+import { type SectionData } from '@/types';
+import { getDynamicText } from '@/lib/i18nHelper';
 import { HomeClientsHeader } from './clients/HomeClientsHeader';
 import { useRef, useEffect } from 'react';
 import Swiper from 'swiper';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
-export default function HomeClients({ clients = [] }: { clients?: ClientItem[] }) {
+interface HomeClientsProps {
+  clients?: ClientItem[];
+  /** CMS header texts from `pages/home` → `clients`. */
+  data?: SectionData;
+}
+
+export default function HomeClients({ clients = [], data }: HomeClientsProps) {
   const { t, language, direction } = useTranslation();
   const { theme } = useTheme();
   const isLight = theme === 'light';
@@ -72,13 +80,13 @@ export default function HomeClients({ clients = [] }: { clients?: ClientItem[] }
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <HomeClientsHeader
-          subtitle={t("clients.subtitle")}
-          titlePart1={t("clients.titlePart1")}
-          titlePart2={t("clients.titlePart2")}
-          desc={language === 'ar' ? 'شركاء النجاح الذين وضعوا ثقتهم في حلولنا الرقمية والهندسية المتطورة.' : 'Visionary partners who trust our high-performance software and digital solutions.'}
+          subtitle={getDynamicText(data, 'subtitle', language) || t("clients.subtitle")}
+          titlePart1={getDynamicText(data, 'titlePart1', language) || t("clients.titlePart1")}
+          titlePart2={getDynamicText(data, 'titlePart2', language) || t("clients.titlePart2")}
+          desc={getDynamicText(data, 'description', language) || (language === 'ar' ? 'شركاء النجاح الذين وضعوا ثقتهم في حلولنا الرقمية والهندسية المتطورة.' : 'Visionary partners who trust our high-performance software and digital solutions.')}
           isLight={isLight}
           direction={direction}
-          viewAllText={t("clients.viewAllClients") || (language === 'ar' ? 'عرض كافة الشركاء' : 'View All Partners')}
+          viewAllText={getDynamicText(data, 'linkText', language) || t("clients.viewAllClients") || (language === 'ar' ? 'عرض كافة الشركاء' : 'View All Partners')}
         />
 
         {/* High-End Partners Showcase Swiper Carousel with Anti-Clipping Padding */}

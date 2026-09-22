@@ -1,5 +1,5 @@
 'use client';
-import { PackageItem } from './serviceFormTypes';
+import { type PackageItem } from './serviceFormTypes';
 import { ServiceFormPackageMetaInputs } from './ServiceFormPackageMetaInputs';
 import { ServiceFormPackageFeaturesList } from './ServiceFormPackageFeaturesList';
 

@@ -1,5 +1,8 @@
 'use client';
 
+import { IconField } from '@/components/dashboard/common/IconField';
+import { MediaUploadField } from '@/components/dashboard/common/MediaUploadField';
+
 interface ServiceFormBasicInputsProps {
     title: string;
     setTitle: (val: string) => void;
@@ -9,13 +12,16 @@ interface ServiceFormBasicInputsProps {
     setType: (val: string) => void;
     typeCustom: string;
     setTypeCustom: (val: string) => void;
+    typeEn: string;
+    setTypeEn: (val: string) => void;
     price: string;
     setPrice: (val: string) => void;
     badge: string;
     setBadge: (val: string) => void;
-    imageFile: File | null;
+    badgeEn: string;
+    setBadgeEn: (val: string) => void;
     imageUrl: string;
-    handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    setImageUrl: (val: string) => void;
     btnText: string;
     setBtnText: (val: string) => void;
     svg: string;
@@ -31,13 +37,16 @@ export default function ServiceFormBasicInputs({
     setType,
     typeCustom,
     setTypeCustom,
+    typeEn,
+    setTypeEn,
     price,
     setPrice,
     badge,
     setBadge,
-    imageFile,
+    badgeEn,
+    setBadgeEn,
     imageUrl,
-    handleFileChange,
+    setImageUrl,
     btnText,
     setBtnText,
     svg,
@@ -174,6 +183,41 @@ export default function ServiceFormBasicInputs({
                         className="w-full bg-white dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white focus:border-pharaohGold outline-none transition placeholder:text-slate-400 dark:placeholder:text-gray-600 text-xs"
                     />
                 </div>
+
+                {/* English equivalents for the Arabic-only selects */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4" dir="ltr">
+                    <div className="bg-white dark:bg-[#112240] p-4 rounded-xl border border-slate-200 dark:border-white/10">
+                        <label className="block text-slate-700 dark:text-gray-300 text-xs font-bold mb-2">
+                            تصنيف ونوع النظام بالإنجليزية (Category EN)
+                        </label>
+                        <input
+                            type="text"
+                            id="adv-srv-type-en"
+                            maxLength={50}
+                            value={typeEn}
+                            onChange={e => setTypeEn(e.target.value)}
+                            placeholder="e.g. Full Admin Dashboard"
+                            className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-lg p-2.5 text-slate-900 dark:text-white focus:border-pharaohGold outline-none transition placeholder:text-slate-400 dark:placeholder:text-gray-600 text-xs"
+                        />
+                        <p className="text-[10px] text-slate-500 dark:text-gray-500 mt-1">Optional — shown on the services page in English mode.</p>
+                    </div>
+
+                    <div className="bg-white dark:bg-[#112240] p-4 rounded-xl border border-slate-200 dark:border-white/10">
+                        <label className="block text-slate-700 dark:text-gray-300 text-xs font-bold mb-2">
+                            وسم التميز بالإنجليزية (Badge EN)
+                        </label>
+                        <input
+                            type="text"
+                            id="adv-srv-badge-en"
+                            maxLength={50}
+                            value={badgeEn}
+                            onChange={e => setBadgeEn(e.target.value)}
+                            placeholder="e.g. Most Requested"
+                            className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-lg p-2.5 text-slate-900 dark:text-white focus:border-pharaohGold outline-none transition placeholder:text-slate-400 dark:placeholder:text-gray-600 text-xs"
+                        />
+                        <p className="text-[10px] text-slate-500 dark:text-gray-500 mt-1">Optional — leave empty to reuse the Arabic badge.</p>
+                    </div>
+                </div>
             </div>
 
             {/* Panel 3: Media, Action Button & SVG Code */}
@@ -188,52 +232,41 @@ export default function ServiceFormBasicInputs({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Cover Upload */}
                     <div className="bg-white dark:bg-[#112240] p-4 rounded-xl border border-slate-200 dark:border-white/10 space-y-2">
-                        <label className="block text-slate-700 dark:text-gray-300 text-xs font-bold">
-                            صورة كرت الخدمة التوضيحية <span className="text-amber-800 dark:text-pharaohGold text-[11px]">(800x450 بكسل)</span>
-                        </label>
-                        <div className="relative w-full h-[52px] bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl flex items-center justify-between px-4 cursor-pointer group hover:border-amber-500/50 dark:hover:border-pharaohGold/40 transition">
-                            <input type="file" id="adv-srv-file" accept="image/*" onChange={handleFileChange} className="absolute inset-0 opacity-0 cursor-pointer" />
-                            <span className="text-xs text-slate-600 dark:text-gray-400 group-hover:text-amber-800 dark:group-hover:text-white transition truncate" id="adv-upload-text">
-                                {imageFile ? imageFile.name : (imageUrl ? "تم رفع صورة بالفعل (اضغط للتغيير)" : "اختر صورة أو غلاف الخدمة...")}
-                            </span>
-                            <svg className="w-5 h-5 text-slate-500 dark:text-gray-400 group-hover:text-amber-800 dark:group-hover:text-pharaohGold transition shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 002-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                        </div>
+                        <MediaUploadField
+                            label="صورة الخدمة (تظهر في خلفية هيرو صفحة تفاصيل الخدمة)"
+                            value={imageUrl}
+                            onChange={setImageUrl}
+                            accept="image"
+                            hint="يفضل 800x450 بكسل — JPG, PNG, WebP, AVIF حتى 8 ميجابايت"
+                            previewClassName="w-full h-32"
+                        />
                     </div>
 
                     {/* Action Button Text */}
                     <div className="bg-white dark:bg-[#112240] p-4 rounded-xl border border-slate-200 dark:border-white/10 space-y-2">
                         <div className="flex justify-between items-center">
-                            <label className="block text-slate-700 dark:text-gray-300 text-xs font-bold">نص زر الإجراء والطلب (Button Text)</label>
+                            <label className="block text-slate-700 dark:text-gray-300 text-xs font-bold">نص زر الخدمة في صفحة الأعمال (Portfolio)</label>
                             <span className="text-[10px] text-amber-800 dark:text-pharaohGold/70 font-mono">{btnText.length}/35</span>
                         </div>
                         <input
                             type="text"
                             id="adv-srv-btn-text"
-                            required
                             maxLength={35}
                             value={btnText}
                             onChange={e => setBtnText(e.target.value)}
                             placeholder="مثال: اطلب النظام الآن"
                             className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl p-3 text-slate-900 dark:text-white focus:border-pharaohGold outline-none transition placeholder:text-slate-400 dark:placeholder:text-gray-600 text-xs md:text-sm font-bold"
                         />
+                        <p className="text-[10px] text-slate-500 dark:text-gray-500">اختياري — يظهر فقط في صفحة الأعمال (Portfolio). نص زر صفحة الخدمة يُضبط من تبويب الهيرو.</p>
                     </div>
                 </div>
 
-                {/* Inline SVG Code */}
+                {/* Service Icon */}
                 <div className="bg-white dark:bg-[#112240] p-4 rounded-xl border border-slate-200 dark:border-white/10 space-y-2">
-                    <label className="block text-slate-700 dark:text-gray-300 text-xs font-bold">
-                        كود الأيقونة البرمجية المتجاوبة (<span className="text-amber-800 dark:text-pharaohGold font-mono">Inline SVG Code</span>)
-                    </label>
-                    <textarea
-                        id="adv-srv-svg"
-                        rows={3}
+                    <IconField
+                        label="أيقونة الخدمة (تظهر في الرئيسية وصفحة الأعمال)"
                         value={svg}
-                        onChange={e => setSvg(e.target.value)}
-                        placeholder="إذا لم ترفع صورة، الصق كود الـ <svg> هنا مباشرة ليعمل كأيقونة ذهبية بديلة..."
-                        className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl p-3 text-xs text-slate-900 dark:text-white focus:border-pharaohGold outline-none transition font-mono placeholder:text-slate-400 dark:placeholder:text-gray-600"
-                        dir="ltr"
+                        onChange={setSvg}
                     />
                 </div>
             </div>

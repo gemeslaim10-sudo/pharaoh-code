@@ -1,6 +1,6 @@
 'use client';
 
-import { SectionData, SectionItem } from '@/types';
+import { type SectionData, type SectionItem } from '@/types';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { getDynamicText } from '@/lib/i18nHelper';
@@ -38,7 +38,7 @@ export default function HomeWorkflow({ data }: { data?: SectionData }) {
     }
   ];
 
-  const stepsToRender = (data?.steps && data.steps.length > 0 && data.steps[0].iconSvg) ? data.steps : defaultSteps;
+  const stepsToRender = (data?.steps && data.steps.length > 0) ? data.steps : defaultSteps;
 
   const swiperContainerRef = useRef<HTMLDivElement>(null);
   const swiperInstanceRef = useRef<Swiper | null>(null);
@@ -98,8 +98,8 @@ export default function HomeWorkflow({ data }: { data?: SectionData }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <HomeWorkflowHeader
           subtitle={getDynamicText(data, 'subtitle', language) || t("workflow.subtitle")}
-          titlePart1={t("workflow.titlePart1")}
-          titlePart2={t("workflow.titlePart2")}
+          titlePart1={getDynamicText(data, 'titlePart1', language) || t("workflow.titlePart1")}
+          titlePart2={getDynamicText(data, 'titlePart2', language) || t("workflow.titlePart2")}
           desc={getDynamicText(data, 'description', language) || (language === 'ar' ? 'منهجية دقيقة ومحكمة تقود مشروعك من الفكرة المجردة إلى إطلاق سيادي متكامل.' : 'A refined methodology that transforms your vision into a sovereign digital reality.')}
           isLight={isLight}
           direction={direction}

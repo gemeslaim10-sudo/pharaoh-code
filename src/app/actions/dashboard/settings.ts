@@ -1,16 +1,19 @@
 'use server';
 
+import { authenticateAdmin } from './auth';
+
 import { admin, serializeData } from '@/lib/firebase/admin';
-import { revalidatePath } from 'next/cache';
-import { SocialPlatform } from '@/types/settings';
+import { revalidateSite } from '@/lib/revalidateSite';
+import { type SocialPlatform } from '@/types/settings';
+import { OWNER_EMAIL, normalizeEmail } from '@/lib/authPolicy';
 
 export async function updateIdentity(token: string, data: any) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
         
         const db = admin.firestore();
         await db.collection('settings').doc('identity').set(data, { merge: true });
+        revalidateSite();
         
         return { success: true };
     } catch (error: any) {
@@ -28,7 +31,8 @@ export async function getIdentity() {
     }
 }
 
-export async function getAdmins() {
+export async function getAdmins(token: string) {
+    await authenticateAdmin(token);
     try {
         const db = admin.firestore();
         const snap = await db.collection('admins').get();
@@ -40,12 +44,19 @@ export async function getAdmins() {
 
 export async function addAdmin(token: string, email: string) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
+        email = normalizeEmail(email);
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('Invalid email');
+        if (email === OWNER_EMAIL) throw new Error('Owner is already an administrator');
         
         const db = admin.firestore();
+        await admin.auth().getUserByEmail(email);
         
-        await db.collection('admins').add({
+        const existing = await db.collection('admins').get();
+        if (existing.docs.some(doc => normalizeEmail(doc.data().email) === email)) {
+            return { success: true };
+        }
+        await db.collection('admins').doc(encodeURIComponent(email)).set({
             email,
             createdAt: admin.firestore.FieldValue.serverTimestamp()
         });
@@ -58,11 +69,19 @@ export async function addAdmin(token: string, email: string) {
 
 export async function removeAdmin(token: string, id: string) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
         
         const db = admin.firestore();
-        await db.collection('admins').doc(id).delete();
+        const target = await db.collection('admins').doc(id).get();
+        if (!target.exists) return { success: true };
+        const email = normalizeEmail(target.data()?.email);
+        if (email === OWNER_EMAIL) throw new Error('Cannot remove the owner');
+        // Remove legacy duplicate rows too; leaving one would preserve access.
+        const admins = await db.collection('admins').get();
+        const matches = admins.docs.filter(doc => doc.id === id || (email && normalizeEmail(doc.data().email) === email));
+        const batch = db.batch();
+        matches.forEach(doc => batch.delete(doc.ref));
+        await batch.commit();
         
         return { success: true };
     } catch (error: any) {
@@ -70,16 +89,11 @@ export async function removeAdmin(token: string, id: string) {
     }
 }
 
-export async function checkIsAdminAction(email: string) {
-    if (!email) return false;
-    if (email === 'cubsacademy29@gmail.com') return true;
-    
+export async function checkIsAdminAction(token: string) {
     try {
-        const db = admin.firestore();
-        const snap = await db.collection('admins').where('email', '==', email).limit(1).get();
-        return !snap.empty;
-    } catch (error) {
-        console.error("Failed to check admin status:", error);
+        await authenticateAdmin(token);
+        return true;
+    } catch {
         return false;
     }
 }
@@ -92,7 +106,7 @@ export async function getSocialLinks() {
             return { items: [] };
         }
         const data = doc.data() || {};
-        let items: SocialPlatform[] = Array.isArray(data.items) ? data.items : [];
+        const items: SocialPlatform[] = Array.isArray(data.items) ? data.items : [];
 
         // If items array is not present but legacy fields exist, convert non-empty non-hash values
         if (items.length === 0) {
@@ -135,8 +149,7 @@ export async function getSocialLinks() {
 
 export async function saveSocialPlatforms(token: string, items: SocialPlatform[]) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
 
         const db = admin.firestore();
 
@@ -153,9 +166,7 @@ export async function saveSocialPlatforms(token: string, items: SocialPlatform[]
             updatedAt: admin.firestore.FieldValue.serverTimestamp()
         });
 
-        revalidatePath('/');
-        revalidatePath('/contact');
-        revalidatePath('/dashboard/settings');
+        revalidateSite();
 
         return { success: true };
     } catch (error: any) {
@@ -166,8 +177,7 @@ export async function saveSocialPlatforms(token: string, items: SocialPlatform[]
 
 export async function addSocialPlatform(token: string, platformData: Omit<SocialPlatform, 'id'>) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
 
         const current = await getSocialLinks();
         const currentItems: SocialPlatform[] = Array.isArray(current.items) ? current.items : [];
@@ -195,8 +205,7 @@ export async function addSocialPlatform(token: string, platformData: Omit<Social
 
 export async function updateSocialPlatform(token: string, id: string, platformData: Partial<SocialPlatform>) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
 
         const current = await getSocialLinks();
         const currentItems: SocialPlatform[] = Array.isArray(current.items) ? current.items : [];
@@ -221,8 +230,7 @@ export async function updateSocialPlatform(token: string, id: string, platformDa
 
 export async function deleteSocialPlatform(token: string, id: string) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
 
         const current = await getSocialLinks();
         const currentItems: SocialPlatform[] = Array.isArray(current.items) ? current.items : [];
@@ -237,15 +245,12 @@ export async function deleteSocialPlatform(token: string, id: string) {
 
 export async function updateSocialLinks(token: string, data: { fb: string; wa: string; ig: string }) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
         
         const db = admin.firestore();
         await db.collection('settings').doc('social').set(data, { merge: true });
 
-        revalidatePath('/');
-        revalidatePath('/contact');
-        revalidatePath('/dashboard/settings');
+        revalidateSite();
         
         return { success: true };
     } catch (error: any) {
@@ -265,14 +270,14 @@ export async function getSystemStatus() {
 
 export async function updateSystemStatus(token: string, data: { mode: string; message: string }) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
         
         const db = admin.firestore();
         await db.collection('settings').doc('system').set({
             ...data,
             updatedAt: admin.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
+        revalidateSite();
         
         return { success: true };
     } catch (error: any) {

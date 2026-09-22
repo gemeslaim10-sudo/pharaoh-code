@@ -1,21 +1,25 @@
 'use server';
 
+import { authenticateAdmin, authenticateUser } from './auth';
+
 import { admin } from '@/lib/firebase/admin';
 import { fetchAllUsersAndStats } from './usersFetchers';
 
 /**
  * Record or update user profile upon login
  */
-export async function recordUserLoginAction(userData: {
-  uid: string;
-  email: string;
-  displayName?: string;
-  photoURL?: string;
-  provider?: string;
-}) {
-  if (!userData?.uid || !userData?.email) return { success: false };
-
+export async function recordUserLoginAction(token: string) {
   try {
+    const verified = await authenticateUser(token);
+    const account = await admin.auth().getUser(verified.uid);
+    if (!account.email) return { success: false };
+    const userData = {
+      uid: account.uid,
+      email: account.email,
+      displayName: account.displayName,
+      photoURL: account.photoURL,
+      provider: verified.firebase.sign_in_provider,
+    };
     const db = admin.firestore();
     const userRef = db.collection('users').doc(userData.uid);
     const doc = await userRef.get();
@@ -52,8 +56,8 @@ export async function recordUserLoginAction(userData: {
 /**
  * Get all registered / logged-in users with admin badges and statistics
  */
-export async function getRegisteredUsersAction() {
-  return fetchAllUsersAndStats();
+export async function getRegisteredUsersAction(token: string) {
+  return fetchAllUsersAndStats(token);
 }
 
 /**
@@ -61,10 +65,18 @@ export async function getRegisteredUsersAction() {
  */
 export async function deleteRegisteredUserAction(token: string, userId: string) {
   try {
-    const decodedToken = await admin.auth().verifyIdToken(token);
-    if (!decodedToken) throw new Error('غير مصرح لك بتنفيذ هذه العملية');
+    await authenticateAdmin(token);
 
     const db = admin.firestore();
+    const doc = await db.collection('users').doc(userId).get();
+    const targetUid = (doc.data()?.uid as string | undefined) || userId;
+
+    // Remove the Firebase Auth account as well, otherwise the user simply reappears on next login.
+    try {
+      await admin.auth().deleteUser(targetUid);
+    } catch (authError: any) {
+      if (authError?.code !== 'auth/user-not-found') throw authError;
+    }
     await db.collection('users').doc(userId).delete();
 
     return { success: true };

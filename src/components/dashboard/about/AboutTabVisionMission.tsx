@@ -1,5 +1,5 @@
 'use client';
-import { AboutFormData } from './aboutDashboardTypes';
+import { type AboutFormData } from './aboutDashboardTypes';
 
 interface AboutTabVisionMissionProps {
   form: AboutFormData;

@@ -1,4 +1,5 @@
 import { admin } from '@/lib/firebase/admin';
+import type { DocumentData } from 'firebase-admin/firestore';
 import { getTeamMembers } from '@/app/actions/dashboard/team';
 import { getIdentity } from '@/app/actions/dashboard/settings';
 import { notFound } from 'next/navigation';
@@ -13,7 +14,7 @@ export async function generateStaticParams() {
 
 export default async function TeamMemberPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
-    let member: admin.firestore.DocumentData | null = null;
+    let member: DocumentData | null = null;
     let identity: any = null;
     try {
         const db = admin.firestore();

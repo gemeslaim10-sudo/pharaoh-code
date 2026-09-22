@@ -1,8 +1,12 @@
 'use client';
 import { useState } from 'react';
-import { FeatureItem } from './serviceFormTypes';
+import { type FeatureItem } from './serviceFormTypes';
 
 interface ServiceFormOverviewTabProps {
+  overviewSubtitleAr: string;
+  setOverviewSubtitleAr: (val: string) => void;
+  overviewSubtitleEn: string;
+  setOverviewSubtitleEn: (val: string) => void;
   overviewTitleAr: string;
   setOverviewTitleAr: (val: string) => void;
   overviewTitleEn: string;
@@ -18,6 +22,10 @@ interface ServiceFormOverviewTabProps {
 }
 
 export function ServiceFormOverviewTab({
+  overviewSubtitleAr,
+  setOverviewSubtitleAr,
+  overviewSubtitleEn,
+  setOverviewSubtitleEn,
   overviewTitleAr,
   setOverviewTitleAr,
   overviewTitleEn,
@@ -192,6 +200,18 @@ export function ServiceFormOverviewTab({
             </div>
 
             <div>
+              <label className="block text-[11px] font-medium text-slate-700 dark:text-gray-300 mb-1">النص الصغير فوق العنوان (Overview Subtitle عربي)</label>
+              <input
+                type="text"
+                maxLength={60}
+                placeholder="مثال: نظرة عامة"
+                value={overviewSubtitleAr}
+                onChange={e => setOverviewSubtitleAr(e.target.value)}
+                className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl p-3 text-xs text-slate-900 dark:text-white focus:border-pharaohGold outline-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
+              />
+            </div>
+
+            <div>
               <label className="block text-[11px] font-medium text-slate-700 dark:text-gray-300 mb-1">عنوان القسم العلوي (عربي)</label>
               <input
                 type="text"
@@ -224,6 +244,18 @@ export function ServiceFormOverviewTab({
                 <span>English Overview</span>
               </span>
               <span className="text-[10px] text-slate-400">LTR</span>
+            </div>
+
+            <div>
+              <label className="block text-[11px] font-medium text-slate-700 dark:text-gray-300 mb-1">Overview Eyebrow / Subtitle (English)</label>
+              <input
+                type="text"
+                maxLength={60}
+                placeholder="e.g. SERVICE OVERVIEW"
+                value={overviewSubtitleEn}
+                onChange={e => setOverviewSubtitleEn(e.target.value)}
+                className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl p-3 text-xs text-slate-900 dark:text-white focus:border-pharaohGold outline-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
+              />
             </div>
 
             <div>

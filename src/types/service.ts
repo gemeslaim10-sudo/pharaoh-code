@@ -50,7 +50,14 @@ export interface ServiceItem {
   description_ar?: string;
   description_en?: string;
   icon?: string;
+  image?: string;
   category?: string;
+  type?: string;
+  type_en?: string;
+  badge?: string;
+  badge_en?: string;
+  btnText?: string;
+  whatsappNumber?: string;
   features?: FeatureItem[];
   packages?: PackageItem[];
   roadmapSteps?: RoadmapStepItem[];
@@ -144,6 +151,9 @@ export interface TemplateFields {
   overviewTitleAr: string; overviewTitleEn: string;
   overviewDescAr: string; overviewDescEn: string;
   packagesTitleAr: string; packagesTitleEn: string;
+  packagesDescAr: string; packagesDescEn: string;
+  roadmapTitleAr: string; roadmapTitleEn: string;
+  roadmapDescAr: string; roadmapDescEn: string;
   addedValueTitleAr?: string; addedValueTitleEn?: string;
   addedValueSubtitleAr?: string; addedValueSubtitleEn?: string;
 }
@@ -158,6 +168,9 @@ export const INITIAL_TEMPLATE_FIELDS: TemplateFields = {
   overviewTitleAr: '', overviewTitleEn: '',
   overviewDescAr: '', overviewDescEn: '',
   packagesTitleAr: '', packagesTitleEn: '',
+  packagesDescAr: '', packagesDescEn: '',
+  roadmapTitleAr: '', roadmapTitleEn: '',
+  roadmapDescAr: '', roadmapDescEn: '',
   addedValueTitleAr: '', addedValueTitleEn: '',
   addedValueSubtitleAr: '', addedValueSubtitleEn: '',
 };
@@ -173,6 +186,9 @@ export function extractTemplateFromService(s: Record<string, any>): TemplateFiel
     overviewTitleAr: s.overviewTitle_ar || '', overviewTitleEn: s.overviewTitle_en || '',
     overviewDescAr: s.overviewDesc_ar || '', overviewDescEn: s.overviewDesc_en || '',
     packagesTitleAr: s.packagesTitle_ar || '', packagesTitleEn: s.packagesTitle_en || '',
+    packagesDescAr: s.packagesDesc_ar || '', packagesDescEn: s.packagesDesc_en || '',
+    roadmapTitleAr: s.roadmapTitle_ar || '', roadmapTitleEn: s.roadmapTitle_en || '',
+    roadmapDescAr: s.roadmapDesc_ar || '', roadmapDescEn: s.roadmapDesc_en || '',
     addedValueTitleAr: s.addedValueTitle_ar || '', addedValueTitleEn: s.addedValueTitle_en || '',
     addedValueSubtitleAr: s.addedValueSubtitle_ar || '', addedValueSubtitleEn: s.addedValueSubtitle_en || '',
   };

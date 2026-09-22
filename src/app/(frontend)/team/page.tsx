@@ -1,10 +1,9 @@
-import { SectionData } from '@/types';
+import { type SectionData } from '@/types';
 import { admin } from '@/lib/firebase/admin';
 import { getTeamMembers } from '@/app/actions/dashboard/team';
 import { getIdentity } from '@/app/actions/dashboard/settings';
 
 import TeamHero from '@/components/services/team/TeamHero';
-import TeamModal from '@/components/services/team/TeamModal';
 import TeamProcess from '@/components/services/team/TeamProcess';
 
 export const revalidate = 3600;
@@ -32,7 +31,6 @@ export default async function TeamPage() {
   return (
     <>
       <TeamHero data={data.hero} />
-      <TeamModal />
       <TeamProcess />
     </>
   );

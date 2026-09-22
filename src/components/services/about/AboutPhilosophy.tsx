@@ -1,5 +1,7 @@
 'use client';
-import { SectionData, SectionItem } from '@/types';
+import { SmartIcon } from '@/components/common/SmartIcon';
+
+import { type SectionData, type SectionItem } from '@/types';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 import { motion } from 'framer-motion';
@@ -60,8 +62,8 @@ export default function AboutPhilosophy({ data }: { data: SectionData }) {
           {data.items?.map((item: SectionItem, index: number) => {
             const itemTitle = getDynamicText(item, 'title', language);
             const itemDesc = getDynamicText(item, 'description', language) || getDynamicText(item, 'desc', language);
-            const icon = (item.iconSvg && item.iconSvg.includes('<svg'))
-              ? <div dangerouslySetInnerHTML={{ __html: item.iconSvg }} className="w-8 h-8 [&_svg]:w-8 [&_svg]:h-8" />
+            const icon = (typeof item.iconSvg === 'string' && item.iconSvg.trim() !== '')
+              ? <SmartIcon as="div" value={item.iconSvg} className="w-8 h-8 [&_svg]:w-8 [&_svg]:h-8" imgClassName="w-8 h-8 object-contain" />
               : PHILOSOPHY_ICONS[index % 3];
 
             return (

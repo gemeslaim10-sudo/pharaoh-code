@@ -1,4 +1,4 @@
-import { SectionData, SectionItem } from '@/types';
+import { type SectionData, type SectionItem } from '@/types';
 interface PrivacyContentProps {
     data?: SectionData;
 }

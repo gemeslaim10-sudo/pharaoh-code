@@ -1,7 +1,9 @@
 'use server';
 
-import { admin, db, serializeData } from '@/lib/firebase/admin';
-import { revalidatePath } from 'next/cache';
+import { authenticateAdmin } from './auth';
+
+import { db, serializeData } from '@/lib/firebase/admin';
+import { revalidateSite } from '@/lib/revalidateSite';
 
 export async function getServices() {
     try {
@@ -18,8 +20,7 @@ export async function getServices() {
 
 export async function addService(token: string, serviceData: any) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
 
         const docRef = db.collection('services').doc();
         await docRef.set({
@@ -27,8 +28,7 @@ export async function addService(token: string, serviceData: any) {
             createdAt: new Date().toISOString()
         });
         
-        revalidatePath('/');
-        revalidatePath('/portfolio');
+        revalidateSite();
         return { success: true, id: docRef.id };
     } catch (error: any) {
         console.error("Failed to add service:", error);
@@ -38,13 +38,11 @@ export async function addService(token: string, serviceData: any) {
 
 export async function updateService(token: string, id: string, serviceData: any) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
 
         await db.collection('services').doc(id).update(serviceData);
         
-        revalidatePath('/');
-        revalidatePath('/portfolio');
+        revalidateSite();
         return { success: true };
     } catch (error: any) {
         console.error("Failed to update service:", error);
@@ -54,13 +52,11 @@ export async function updateService(token: string, id: string, serviceData: any)
 
 export async function deleteService(token: string, id: string) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
 
         await db.collection('services').doc(id).delete();
         
-        revalidatePath('/');
-        revalidatePath('/portfolio');
+        revalidateSite();
         return { success: true };
     } catch (error: any) {
         console.error("Failed to delete service:", error);

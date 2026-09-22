@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
-import { AboutFormData } from './aboutDashboardTypes';
+import { type AboutFormData, type AboutPhilosophyItem, EMPTY_ABOUT_PHILOSOPHY_ITEM } from './aboutDashboardTypes';
+import { IconField } from '@/components/dashboard/common/IconField';
 
 interface AboutTabPhilosophyProps {
   form: AboutFormData;
@@ -17,14 +18,30 @@ export function AboutTabPhilosophy({ form, setForm }: AboutTabPhilosophyProps) {
   const [activeIdx, setActiveIdx] = useState<number>(0);
   const [viewMode, setViewMode] = useState<'tabs' | 'all'>('tabs');
 
-  const updatePhilItem = (idx: number, field: string, value: string) => {
-    const items = [...(form.philosophy.items || [])];
-    const current = items[idx] || { title_ar: '', title_en: '', description_ar: '', description_en: '' };
-    items[idx] = { ...current, [field]: value };
-    setForm(prev => ({ ...prev, philosophy: { ...prev.philosophy, items } }));
+  const items = form.philosophy.items || [];
+
+  const updatePhilItem = (idx: number, field: keyof AboutPhilosophyItem, value: string) => {
+    const next = [...(form.philosophy.items || [])];
+    const current = next[idx] || { ...EMPTY_ABOUT_PHILOSOPHY_ITEM };
+    next[idx] = { ...current, [field]: value };
+    setForm(prev => ({ ...prev, philosophy: { ...prev.philosophy, items: next } }));
   };
 
-  const renderPhilCard = (item: any, idx: number) => {
+  const addPhilItem = () => {
+    setForm(prev => ({ ...prev, philosophy: { ...prev.philosophy, items: [...(prev.philosophy.items || []), { ...EMPTY_ABOUT_PHILOSOPHY_ITEM }] } }));
+    setActiveIdx(items.length);
+  };
+
+  const removePhilItem = (idx: number) => {
+    if (items.length <= 1) {
+      alert('يجب الإبقاء على بطاقة واحدة على الأقل');
+      return;
+    }
+    setForm(prev => ({ ...prev, philosophy: { ...prev.philosophy, items: (prev.philosophy.items || []).filter((_, i) => i !== idx) } }));
+    setActiveIdx(prev => (prev >= items.length - 1 ? Math.max(0, items.length - 2) : prev));
+  };
+
+  const renderPhilCard = (item: AboutPhilosophyItem | undefined, idx: number) => {
     const meta = PHIL_META[idx] || { defaultTitleAr: `البطاقة ${idx + 1}`, defaultTitleEn: `Card ${idx + 1}`, icon: '📌' };
 
     return (
@@ -36,14 +53,35 @@ export function AboutTabPhilosophy({ form, setForm }: AboutTabPhilosophyProps) {
             </span>
             <div>
               <h4 className="text-xs md:text-sm font-bold text-slate-900 dark:text-white">
-                {item.title_ar || meta.defaultTitleAr}
+                {item?.title_ar || meta.defaultTitleAr}
               </h4>
               <span className="text-[10px] text-slate-500 dark:text-gray-400 font-mono" dir="ltr">
-                {item.title_en || meta.defaultTitleEn}
+                {item?.title_en || meta.defaultTitleEn}
               </span>
             </div>
           </div>
-          <span className="text-lg">{meta.icon}</span>
+          <div className="flex items-center gap-3">
+            <span className="text-lg">{meta.icon}</span>
+            {items.length > 1 && (
+              <button
+                type="button"
+                onClick={() => removePhilItem(idx)}
+                className="text-xs font-bold text-red-500 hover:text-red-400 bg-red-500/10 hover:bg-red-500/20 px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer"
+              >
+                <span>🗑️</span>
+                <span>حذف</span>
+              </button>
+            )}
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-[#112240] p-4 rounded-xl border border-slate-200 dark:border-white/10">
+          <IconField
+            label="أيقونة البطاقة"
+            value={item?.iconSvg || ''}
+            onChange={(value) => updatePhilItem(idx, 'iconSvg', value)}
+          />
+          <p className="text-[10px] text-slate-500 dark:text-gray-500 mt-2">اتركها فارغة لاستخدام الأيقونة الافتراضية المدمجة.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -62,7 +100,7 @@ export function AboutTabPhilosophy({ form, setForm }: AboutTabPhilosophyProps) {
               <input
                 type="text"
                 placeholder={meta.defaultTitleAr}
-                value={item.title_ar || ''}
+                value={item?.title_ar || ''}
                 onChange={(e) => updatePhilItem(idx, 'title_ar', e.target.value)}
                 className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-lg p-2.5 text-xs text-slate-900 dark:text-white outline-none focus:border-pharaohGold placeholder:text-slate-400 dark:placeholder:text-gray-600"
               />
@@ -73,7 +111,7 @@ export function AboutTabPhilosophy({ form, setForm }: AboutTabPhilosophyProps) {
               <textarea
                 rows={3}
                 placeholder="نبدأ بدراسة فكرتك كأنها أساس لمعبد..."
-                value={item.description_ar || ''}
+                value={item?.description_ar || ''}
                 onChange={(e) => updatePhilItem(idx, 'description_ar', e.target.value)}
                 className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-lg p-2 text-xs text-slate-900 dark:text-white outline-none focus:border-pharaohGold resize-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
               />
@@ -95,7 +133,7 @@ export function AboutTabPhilosophy({ form, setForm }: AboutTabPhilosophyProps) {
               <input
                 type="text"
                 placeholder={meta.defaultTitleEn}
-                value={item.title_en || ''}
+                value={item?.title_en || ''}
                 onChange={(e) => updatePhilItem(idx, 'title_en', e.target.value)}
                 className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-lg p-2.5 text-xs text-slate-900 dark:text-white outline-none focus:border-pharaohGold placeholder:text-slate-400 dark:placeholder:text-gray-600"
               />
@@ -106,7 +144,7 @@ export function AboutTabPhilosophy({ form, setForm }: AboutTabPhilosophyProps) {
               <textarea
                 rows={3}
                 placeholder="We study your idea as a temple foundation..."
-                value={item.description_en || ''}
+                value={item?.description_en || ''}
                 onChange={(e) => updatePhilItem(idx, 'description_en', e.target.value)}
                 className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-lg p-2 text-xs text-slate-900 dark:text-white outline-none focus:border-pharaohGold resize-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
               />
@@ -127,6 +165,16 @@ export function AboutTabPhilosophy({ form, setForm }: AboutTabPhilosophyProps) {
           </h2>
           <p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">الركائز الفكرية والهندسية الثلاث التي تميز طريقة عمل الفريق.</p>
         </div>
+
+        <div className="flex items-center gap-2 flex-wrap self-start sm:self-auto">
+        <button
+          type="button"
+          onClick={addPhilItem}
+          className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-amber-500/15 dark:bg-pharaohGold/20 text-amber-900 dark:text-pharaohGold border border-amber-500/30 dark:border-pharaohGold/30 hover:bg-amber-500/25 dark:hover:bg-pharaohGold/30 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+        >
+          <span>➕</span>
+          <span>إضافة بطاقة</span>
+        </button>
 
         <div className="flex items-center gap-1 bg-slate-100 dark:bg-[#0A192F] p-1 rounded-xl border border-slate-200 dark:border-white/10 shrink-0">
           <button
@@ -151,6 +199,7 @@ export function AboutTabPhilosophy({ form, setForm }: AboutTabPhilosophyProps) {
           >
             عرض الكل
           </button>
+        </div>
         </div>
       </div>
 
@@ -179,14 +228,61 @@ export function AboutTabPhilosophy({ form, setForm }: AboutTabPhilosophyProps) {
         </div>
       </div>
 
-      {/* 3 Philosophy Cards Tabs */}
+
+      {/* Main title parts */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs font-bold text-slate-700 dark:text-gray-300 mb-2">العنوان الرئيسي - الجزء الأول (عربي)</label>
+          <input
+            type="text"
+            placeholder="فلسفة التشييد"
+            value={form.philosophy.titlePart1_ar || ''}
+            onChange={(e) => setForm(prev => ({ ...prev, philosophy: { ...prev.philosophy, titlePart1_ar: e.target.value } }))}
+            className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl p-3.5 text-sm text-slate-900 dark:text-white focus:border-pharaohGold outline-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-bold text-slate-700 dark:text-gray-300 mb-2">Title Part 1 (English)</label>
+          <input
+            type="text"
+            placeholder="Our Building"
+            value={form.philosophy.titlePart1_en || ''}
+            onChange={(e) => setForm(prev => ({ ...prev, philosophy: { ...prev.philosophy, titlePart1_en: e.target.value } }))}
+            className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl p-3.5 text-sm text-slate-900 dark:text-white focus:border-pharaohGold outline-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
+            dir="ltr"
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-bold text-slate-700 dark:text-gray-300 mb-2">العنوان الرئيسي - الجزء الذهبي (عربي)</label>
+          <input
+            type="text"
+            placeholder="الرقمي الفرعوني"
+            value={form.philosophy.titlePart2_ar || ''}
+            onChange={(e) => setForm(prev => ({ ...prev, philosophy: { ...prev.philosophy, titlePart2_ar: e.target.value } }))}
+            className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl p-3.5 text-sm text-slate-900 dark:text-white focus:border-pharaohGold outline-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-bold text-slate-700 dark:text-gray-300 mb-2">Title Part 2 (English)</label>
+          <input
+            type="text"
+            placeholder="Digital Philosophy"
+            value={form.philosophy.titlePart2_en || ''}
+            onChange={(e) => setForm(prev => ({ ...prev, philosophy: { ...prev.philosophy, titlePart2_en: e.target.value } }))}
+            className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl p-3.5 text-sm text-slate-900 dark:text-white focus:border-pharaohGold outline-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
+            dir="ltr"
+          />
+        </div>
+      </div>
+
+      {/* Philosophy Cards Tabs */}
       {viewMode === 'tabs' && (
         <div className="space-y-4 pt-2">
-          <div className="grid grid-cols-3 gap-2">
-            {(form.philosophy.items || [{}, {}, {}]).slice(0, 3).map((item, idx) => {
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            {items.map((item, idx) => {
               const meta = PHIL_META[idx] || { defaultTitleAr: `البطاقة ${idx + 1}`, icon: '📌' };
               const isActive = activeIdx === idx;
-              const title = item.title_ar || meta.defaultTitleAr;
+              const title = item?.title_ar || meta.defaultTitleAr;
 
               return (
                 <button
@@ -209,14 +305,14 @@ export function AboutTabPhilosophy({ form, setForm }: AboutTabPhilosophyProps) {
             })}
           </div>
 
-          {(form.philosophy.items || [{}, {}, {}])[activeIdx] && renderPhilCard((form.philosophy.items || [{}, {}, {}])[activeIdx], activeIdx)}
+          {items.length > 0 && renderPhilCard(items[Math.min(activeIdx, items.length - 1)], Math.min(activeIdx, items.length - 1))}
         </div>
       )}
 
       {/* All View */}
       {viewMode === 'all' && (
         <div className="space-y-4 pt-2">
-          {form.philosophy.items?.map((item, idx) => renderPhilCard(item, idx))}
+          {items.map((item, idx) => renderPhilCard(item, idx))}
         </div>
       )}
     </div>

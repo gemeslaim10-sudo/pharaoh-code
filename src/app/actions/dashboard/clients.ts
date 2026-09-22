@@ -1,7 +1,10 @@
 'use server';
 
-import { admin, db, serializeData } from '@/lib/firebase/admin';
-import { revalidatePath } from 'next/cache';
+import { authenticateAdmin } from './auth';
+
+import { db, serializeData } from '@/lib/firebase/admin';
+import { revalidateSite } from '@/lib/revalidateSite';
+import { safeExternalUrl } from '@/lib/safeUrl';
 
 export async function getClients() {
     try {
@@ -9,7 +12,14 @@ export async function getClients() {
         if (snap.empty) {
             return [];
         }
-        return snap.docs.map(doc => serializeData({ id: doc.id, ...doc.data() }));
+        return snap.docs.map(doc => {
+            const data = doc.data();
+            return serializeData({
+                id: doc.id,
+                ...data,
+                websiteUrl: data.websiteUrl ? safeExternalUrl(data.websiteUrl) : '',
+            });
+        });
     } catch (error: any) {
         console.error("Failed to get clients:", error);
         return [];
@@ -18,8 +28,7 @@ export async function getClients() {
 
 export async function addClient(token: string, clientData: any) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
 
         const docRef = db.collection('clients').doc();
         await docRef.set({
@@ -27,9 +36,7 @@ export async function addClient(token: string, clientData: any) {
             createdAt: new Date().toISOString()
         });
         
-        revalidatePath('/');
-        revalidatePath('/clients');
-        revalidatePath('/clients/[id]');
+        revalidateSite();
         return { success: true, id: docRef.id };
     } catch (error: any) {
         console.error("Failed to add client:", error);
@@ -39,14 +46,11 @@ export async function addClient(token: string, clientData: any) {
 
 export async function updateClient(token: string, id: string, clientData: any) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
 
         await db.collection('clients').doc(id).update(clientData);
         
-        revalidatePath('/');
-        revalidatePath('/clients');
-        revalidatePath('/clients/[id]');
+        revalidateSite();
         return { success: true };
     } catch (error: any) {
         console.error("Failed to update client:", error);
@@ -56,14 +60,11 @@ export async function updateClient(token: string, id: string, clientData: any) {
 
 export async function deleteClient(token: string, id: string) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
 
         await db.collection('clients').doc(id).delete();
         
-        revalidatePath('/');
-        revalidatePath('/clients');
-        revalidatePath('/clients/[id]');
+        revalidateSite();
         return { success: true };
     } catch (error: any) {
         console.error("Failed to delete client:", error);

@@ -17,7 +17,9 @@ export default function SettingsSecurity() {
 
   const loadData = async () => {
     try {
-      const data = await getAdmins();
+      const token = await auth.currentUser?.getIdToken();
+      if (!token) throw new Error('Unauthorized');
+      const data = await getAdmins(token);
       setAdmins(data);
     } catch (error) {
       console.error("Failed to load admins:", error);

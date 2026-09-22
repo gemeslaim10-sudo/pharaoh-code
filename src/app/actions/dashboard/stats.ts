@@ -1,8 +1,10 @@
 'use server';
 
+import { authenticateAdmin } from './auth';
+
 import { admin, serializeData } from '@/lib/firebase/admin';
-import { revalidatePath } from 'next/cache';
-import { StatsSectionData, DEFAULT_STATS_DATA } from '@/types/stats';
+import { revalidateSite } from '@/lib/revalidateSite';
+import { type StatsSectionData, DEFAULT_STATS_DATA } from '@/types/stats';
 
 
 export async function getStatsContent(): Promise<StatsSectionData> {
@@ -21,7 +23,7 @@ export async function getStatsContent(): Promise<StatsSectionData> {
       titlePart2_en: stats.titlePart2_en || DEFAULT_STATS_DATA.titlePart2_en,
       description_ar: stats.description_ar || stats.description || DEFAULT_STATS_DATA.description_ar,
       description_en: stats.description_en || stats.desc_en || DEFAULT_STATS_DATA.description_en,
-      items: Array.isArray(stats.items) && stats.items.length === 4 ? stats.items : DEFAULT_STATS_DATA.items,
+      items: Array.isArray(stats.items) && stats.items.length > 0 ? stats.items : DEFAULT_STATS_DATA.items,
     });
   } catch (error: any) {
     console.error("Error fetching stats content:", error);
@@ -31,8 +33,7 @@ export async function getStatsContent(): Promise<StatsSectionData> {
 
 export async function updateStatsContent(token: string, statsData: StatsSectionData) {
   try {
-    const decodedToken = await admin.auth().verifyIdToken(token);
-    if (!decodedToken) throw new Error('Unauthorized');
+    await authenticateAdmin(token);
 
     const db = admin.firestore();
     await db.collection('pages').doc('home').set({
@@ -40,7 +41,7 @@ export async function updateStatsContent(token: string, statsData: StatsSectionD
       updatedAt: admin.firestore.FieldValue.serverTimestamp()
     }, { merge: true });
 
-    revalidatePath('/');
+    revalidateSite();
 
     return { success: true };
   } catch (error: any) {

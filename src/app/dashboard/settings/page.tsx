@@ -1,7 +1,7 @@
 'use client';
 
 import { DashboardSectionLayout } from '@/components/dashboard/layout/DashboardSectionLayout';
-import { DashboardSectionConfig } from '@/types/dashboardLayout';
+import { type DashboardSectionConfig } from '@/types/dashboardLayout';
 import SettingsIdentity from '@/components/dashboard/settings/SettingsIdentity';
 import SettingsHeroTheme from '@/components/dashboard/settings/SettingsHeroTheme';
 import SettingsSecurity from '@/components/dashboard/settings/SettingsSecurity';

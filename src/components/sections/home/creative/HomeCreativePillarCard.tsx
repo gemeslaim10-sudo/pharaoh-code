@@ -1,7 +1,8 @@
 'use client';
+import { SmartIcon } from '@/components/common/SmartIcon';
 
-import { SectionItem } from '@/types';
-import { stripSvgColors } from './creativeHelpers';
+
+import { type SectionItem } from '@/types';
 
 interface PillarMetric {
   metric: string;
@@ -65,9 +66,9 @@ export function HomeCreativePillarCard({
                   : 'bg-white/5 text-[#C5A16F] group-hover:bg-[#C5A16F]/20'
             }`}
           >
-            <div
+            <SmartIcon as="div"
               className="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center"
-              dangerouslySetInnerHTML={{ __html: stripSvgColors(item.iconSvg || '') }}
+              value={item.iconSvg || ''} inheritColor
             />
           </div>
 

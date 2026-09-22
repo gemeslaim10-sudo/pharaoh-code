@@ -39,17 +39,20 @@ export default function UnifiedContactForm({
     setLoading(true);
     setSuccess(false);
 
-    const formData = new FormData(e.currentTarget);
-    const result = await submitContactMessage(formData);
-
-    if (result.success) {
-      setSuccess(true);
-      (e.target as HTMLFormElement).reset();
-    } else {
-      window.alert(result.error || (language === 'ar' ? 'حدث خطأ أثناء إرسال الرسالة.' : 'An error occurred while sending message.'));
+    const form = e.currentTarget;
+    try {
+      const result = await submitContactMessage(new FormData(form));
+      if (result.success) {
+        setSuccess(true);
+        form.reset();
+      } else {
+        window.alert(result.error || (language === 'ar' ? 'حدث خطأ أثناء إرسال الرسالة.' : 'An error occurred while sending message.'));
+      }
+    } catch {
+      window.alert(language === 'ar' ? 'حدث خطأ أثناء إرسال الرسالة.' : 'An error occurred while sending message.');
+    } finally {
+      setLoading(false);
     }
-    
-    setLoading(false);
   };
 
   if (success) {

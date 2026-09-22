@@ -14,6 +14,7 @@ import { UserProfileModal } from './profile/UserProfileModal';
 import { getNavLinks } from './navbar/navbarLinks';
 
 interface NavbarProps {
+  whatsappNumber?: string;
   siteName?: string;
   siteNameAr?: string;
   siteNameEn?: string;
@@ -23,6 +24,7 @@ interface NavbarProps {
 }
 
 export default function Navbar({
+  whatsappNumber,
   siteName = 'PHARAOH CODE',
   siteNameAr,
   siteNameEn,
@@ -117,6 +119,7 @@ export default function Navbar({
 
       {/* Mobile Side Drawer Menu */}
       <NavbarMobileDrawer
+        {...(whatsappNumber ? { whatsappNumber } : {})}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         siteName={currentSiteName}

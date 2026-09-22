@@ -1,17 +1,8 @@
 'use client';
+import { SmartIcon } from '@/components/common/SmartIcon';
 
-import { SectionItem } from '@/types';
 
-function stripSvgColors(svg: string): string {
-  if (!svg) return '';
-  return svg
-    .replace(/\s*(?:group-hover:|group-active:)?text-\[#[^\]]+\]/g, '')
-    .replace(/\s*(?:group-hover:|group-active:)?stroke-\[#[^\]]+\]/g, '')
-    .replace(/stroke="#[a-fA-F0-9]{3,6}"/g, 'stroke="currentColor"')
-    .replace(/fill="#[a-fA-F0-9]{3,6}"/g, 'fill="currentColor"')
-    .replace(/stroke:#[a-fA-F0-9]{3,6}/g, 'stroke:currentColor')
-    .replace(/fill:#[a-fA-F0-9]{3,6}/g, 'fill:currentColor');
-}
+import { type SectionItem } from '@/types';
 
 interface HomeWorkflowCardProps {
   step: SectionItem;
@@ -50,11 +41,11 @@ export function HomeWorkflowCard({
               ? 'bg-slate-100 border-slate-300 group-hover:bg-[#8A5800] group-hover:border-[#8A5800]'
               : 'bg-white/5 border-white/10 group-hover:bg-[#C5A16F] group-hover:border-[#C5A16F]'
           }`}>
-            <div 
+            <SmartIcon as="div"
               className={`transition-colors duration-400 group-hover:text-white ${
                 isLight ? 'text-[#8A5800]' : 'text-[#C5A16F]'
               }`}
-              dangerouslySetInnerHTML={{ __html: stripSvgColors(step.iconSvg || '') }} 
+              value={step.iconSvg || ''} inheritColor
             />
           </div>
 

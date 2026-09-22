@@ -1,16 +1,20 @@
 'use client';
+import { SmartIcon } from '@/components/common/SmartIcon';
+
 
 import { useEffect, useState } from 'react';
 import { getCreativityItems, deleteCreativityItem } from '@/app/actions/dashboard/creativity';
-import { CreativityType } from '@/types/creativity';
+import { type CreativityType } from '@/types/creativity';
 import { auth } from '@/lib/firebase/config';
 
 interface Props {
     activeTab: CreativityType;
     refreshKey: number;
+    onEdit: (record: any) => void;
+    editingId: string | null;
 }
 
-export default function CreativityRecords({ activeTab, refreshKey }: Props) {
+export default function CreativityRecords({ activeTab, refreshKey, onEdit, editingId }: Props) {
     const [records, setRecords] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -64,7 +68,7 @@ export default function CreativityRecords({ activeTab, refreshKey }: Props) {
             <div className="flex flex-col mb-8">
                 <span className="text-amber-800 dark:text-pharaohGold tracking-[0.3em] uppercase text-xs mb-2 font-bold">Control Panel Records</span>
                 <h3 className="text-3xl font-black text-slate-900 dark:text-white">سجلات <span className="text-amber-800 dark:text-pharaohGold">{getTabName()}</span></h3>
-                <p className="text-slate-600 dark:text-gray-400 text-sm mt-2">من هنا يمكنك إدارة، تعديل، أو حذف جميع السجلات المضافة ديناميكياً لتحديث الديزاين الأصلي.</p>
+                <p className="text-slate-600 dark:text-gray-400 text-sm mt-2">من هنا يمكنك تعديل أو حذف أي سجل. اضغط على أيقونة القلم لتحميل السجل في النموذج أعلاه ثم احفظ التعديلات.</p>
             </div>
 
             {loading ? (
@@ -74,12 +78,18 @@ export default function CreativityRecords({ activeTab, refreshKey }: Props) {
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     {records.map(record => (
-                        <div key={record.id} className="bg-white dark:bg-pharaohCard border border-slate-200 dark:border-white/5 rounded-2xl p-6 shadow-md dark:shadow-xl relative group">
+                        <div key={record.id} className={`bg-white dark:bg-pharaohCard border rounded-2xl p-6 shadow-md dark:shadow-xl relative group ${editingId === record.id ? 'border-pharaohGold ring-2 ring-pharaohGold/30' : 'border-slate-200 dark:border-white/5'}`}>
                             <button onClick={() => handleDelete(record.id)} className="absolute top-4 left-4 text-red-500 dark:text-red-400/50 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-500/10 p-2 rounded-lg transition opacity-100 sm:opacity-0 group-hover:opacity-100 cursor-pointer" title="حذف السجل">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                             </button>
+                            <button onClick={() => onEdit(record)} className="absolute top-4 left-14 text-amber-700 dark:text-pharaohGold/60 hover:text-amber-900 dark:hover:text-pharaohGold hover:bg-amber-500/10 p-2 rounded-lg transition opacity-100 sm:opacity-0 group-hover:opacity-100 cursor-pointer" title="تعديل السجل">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                            </button>
+                            <button onClick={() => onEdit(record)} className="absolute top-4 left-14 text-amber-700 dark:text-pharaohGold/60 hover:text-amber-900 dark:hover:text-pharaohGold hover:bg-amber-500/10 p-2 rounded-lg transition opacity-100 sm:opacity-0 group-hover:opacity-100 cursor-pointer" title="تعديل السجل">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                            </button>
                             
-                            <h4 className="text-slate-900 dark:text-white font-bold text-lg mb-1 pl-10 truncate">{record.title || record.title_ar}</h4>
+                            <h4 className="text-slate-900 dark:text-white font-bold text-lg mb-1 pl-24 truncate">{record.title || record.title_ar}</h4>
                             {record.title_en && <p className="text-amber-800 dark:text-pharaohGold/80 text-xs mb-2 italic" dir="ltr">{record.title_en}</p>}
                             
                             {activeTab === 'portfolio' && (
@@ -94,20 +104,20 @@ export default function CreativityRecords({ activeTab, refreshKey }: Props) {
                                          )}
                                      </div>
                                     <p className="text-slate-600 dark:text-gray-400 text-xs line-clamp-2">{record.desc || record.description || record.desc_ar}</p>
-                                    {record.image && <img src={record.image} alt={record.title} className="w-full h-32 object-cover rounded-xl mt-3 border border-slate-200 dark:border-white/10" />}
+                                    {(record.image || record.imageUrl) && <img src={record.image || record.imageUrl} alt={record.title} className="w-full h-32 object-cover rounded-xl mt-3 border border-slate-200 dark:border-white/10" />}
                                 </div>
                             )}
 
                             {activeTab === 'philosophy' && (
                                 <div className="space-y-3">
-                                    <div className="text-amber-800 dark:text-pharaohGold w-10 h-10" dangerouslySetInnerHTML={{ __html: record.icon }} />
+                                    <SmartIcon as="div" className="text-amber-800 dark:text-pharaohGold w-10 h-10" value={record.icon} />
                                     <p className="text-slate-600 dark:text-gray-400 text-xs line-clamp-3">{record.desc || record.description || record.desc_ar}</p>
                                 </div>
                             )}
 
                             {activeTab === 'services' && (
                                 <div className="space-y-3">
-                                    <div className="text-amber-800 dark:text-pharaohGold w-10 h-10" dangerouslySetInnerHTML={{ __html: record.icon }} />
+                                    <SmartIcon as="div" className="text-amber-800 dark:text-pharaohGold w-10 h-10" value={record.icon} />
                                     <p className="text-slate-600 dark:text-gray-400 text-xs line-clamp-3">{record.desc || record.description || record.desc_ar}</p>
                                     <span className="text-xs text-blue-600 dark:text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full mt-2 inline-flex items-center justify-center leading-none border border-blue-500/20">{record.btnText}</span>
                                 </div>

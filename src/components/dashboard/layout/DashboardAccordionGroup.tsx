@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { DashboardSettingsGroup } from '@/types/dashboardLayout';
+import { type DashboardSettingsGroup } from '@/types/dashboardLayout';
 
 interface DashboardAccordionGroupProps {
   group: DashboardSettingsGroup;

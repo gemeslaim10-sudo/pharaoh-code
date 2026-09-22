@@ -1,7 +1,8 @@
 'use client';
 
-import { FooterSocialLinks, SocialPlatform } from '@/types/settings';
+import { type FooterSocialLinks, type SocialPlatform } from '@/types/settings';
 import { DynamicSocialIcon } from '@/components/common/DynamicSocialIcon';
+import { safeExternalUrl } from '@/lib/safeUrl';
 
 interface FooterSocialButtonsProps {
   socialLinks?: FooterSocialLinks;
@@ -24,6 +25,7 @@ export function FooterSocialButtons({
         if (isWhatsapp && !link.startsWith('http')) {
           link = `https://wa.me/${link.replace(/[^0-9]/g, '')}`;
         }
+        link = safeExternalUrl(link);
 
         const brandColor = platform.color || '#C5A16F';
 

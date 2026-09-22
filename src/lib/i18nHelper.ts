@@ -1,4 +1,4 @@
-import { Language } from '@/types/i18n';
+import { type Language } from '@/types/i18n';
 import { KNOWN_TRANSLATIONS } from './i18n/knownTranslations';
 
 /**

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { CropBox, DragHandle, autoDetectTrim, generateCroppedBlob } from './cropperUtils';
+import { type CropBox, type DragHandle, autoDetectTrim, generateCroppedBlob } from './cropperUtils';
 
 export function useLogoCropper(
   imageSrc: string | null,
@@ -63,8 +63,8 @@ export function useLogoCropper(
     const minSize = 2;
 
     if (activeHandle === 'move') {
-      let newX = Math.max(0, Math.min(100 - init.width, init.x + deltaX));
-      let newY = Math.max(0, Math.min(100 - init.height, init.y + deltaY));
+      const newX = Math.max(0, Math.min(100 - init.width, init.x + deltaX));
+      const newY = Math.max(0, Math.min(100 - init.height, init.y + deltaY));
       newBox = { ...init, x: newX, y: newY };
     } else {
       if (activeHandle.includes('w')) {

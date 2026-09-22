@@ -1,6 +1,6 @@
 'use client';
 
-import { TeamMember } from './workFormTypes';
+import { type TeamMember } from './workFormTypes';
 export type { TeamMember };
 
 interface WorkFormMembersTableProps {

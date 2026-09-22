@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import { getTeamMembers, addTeamMember, updateTeamMember, deleteTeamMember } from '@/app/actions/dashboard/team';
 import { uploadImage } from '@/app/actions/dashboard/upload';
 import { auth } from '@/lib/firebase/config';
-import { TeamMember } from './WorkFormMembersTable';
-import { Skill, Stat } from './workFormTypes';
+import { type TeamMember } from './WorkFormMembersTable';
+import { type Skill, type Stat } from './workFormTypes';
 import { useWorkSkillsAndStats } from './useWorkSkillsAndStats';
 
 export type { Skill, Stat };

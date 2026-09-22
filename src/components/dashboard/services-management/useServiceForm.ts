@@ -3,13 +3,21 @@
 import { useState, useEffect } from 'react';
 import { auth } from '@/lib/firebase/config';
 import { addService, updateService } from '@/app/actions/dashboard';
-import { uploadImage } from '@/app/actions/dashboard/upload';
-import { ServiceItem } from './serviceFormTypes';
-import {
-  FeatureItem, PackageItem, RoadmapStepItem, GuaranteeItem,
+import { type ServiceItem ,
+  type FeatureItem, type PackageItem, type RoadmapStepItem, type GuaranteeItem,
   DEFAULT_FEATURES, DEFAULT_PACKAGES, DEFAULT_ROADMAP_STEPS, DEFAULT_GUARANTEES,
-  TemplateFields, INITIAL_TEMPLATE_FIELDS, extractTemplateFromService
+  type TemplateFields, INITIAL_TEMPLATE_FIELDS, extractTemplateFromService
 } from './serviceFormTypes';
+
+
+/** Builds a URL friendly slug (lowercase, dashes) used by /services/[id]. */
+function slugify(value: string): string {
+  return (value || '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^\p{L}\p{N}]+/gu, '-')
+    .replace(/^-+|-+$/g, '');
+}
 
 export function useServiceForm(
   editingService: ServiceItem | null,
@@ -21,13 +29,14 @@ export function useServiceForm(
   const [titleEn, setTitleEn] = useState('');
   const [type, setType] = useState('لوحة تحكم شاملة');
   const [typeCustom, setTypeCustom] = useState('');
+  const [typeEn, setTypeEn] = useState('');
   const [price, setPrice] = useState('');
   const [badge, setBadge] = useState('');
+  const [badgeEn, setBadgeEn] = useState('');
   const [btnText, setBtnText] = useState('');
   const [svg, setSvg] = useState('');
   const [desc, setDesc] = useState('');
   const [descEn, setDescEn] = useState('');
-  const [imageFile, setImageFile] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState('');
   const [tpl, setTpl] = useState<TemplateFields>(INITIAL_TEMPLATE_FIELDS);
 
@@ -49,14 +58,15 @@ export function useServiceForm(
         setType(s.type || 'لوحة تحكم شاملة');
         setTypeCustom('');
       }
+      setTypeEn(s.type_en || '');
       setPrice(s.price || '');
       setBadge(s.badge || '');
+      setBadgeEn(s.badge_en || '');
       setBtnText(s.btnText || '');
       setSvg(s.icon || '');
       setDesc(s.desc || s.desc_ar || '');
       setDescEn(s.desc_en || '');
       setImageUrl(s.image || '');
-      setImageFile(null);
       setTpl(extractTemplateFromService(s));
 
       if (Array.isArray(s.features) && s.features.length > 0) setFeatures(s.features);
@@ -71,9 +81,9 @@ export function useServiceForm(
       if (Array.isArray(s.roadmapSteps) && s.roadmapSteps.length > 0) setRoadmapSteps(s.roadmapSteps);
       else setRoadmapSteps(DEFAULT_ROADMAP_STEPS);
     } else {
-      setTitle(''); setTitleEn(''); setType('لوحة تحكم شاملة'); setTypeCustom('');
-      setPrice(''); setBadge(''); setBtnText(''); setSvg(''); setDesc(''); setDescEn('');
-      setImageUrl(''); setImageFile(null);
+      setTitle(''); setTitleEn(''); setType('لوحة تحكم شاملة'); setTypeCustom(''); setTypeEn('');
+      setPrice(''); setBadge(''); setBadgeEn(''); setBtnText(''); setSvg(''); setDesc(''); setDescEn('');
+      setImageUrl('');
       setTpl(INITIAL_TEMPLATE_FIELDS);
       setFeatures(DEFAULT_FEATURES);
       setGuarantees(DEFAULT_GUARANTEES);
@@ -81,10 +91,6 @@ export function useServiceForm(
       setRoadmapSteps(DEFAULT_ROADMAP_STEPS);
     }
   }, [editingService]);
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files?.[0]) setImageFile(e.target.files[0]);
-  };
 
   const setTplField = (field: keyof TemplateFields, value: string) => {
     setTpl(prev => ({ ...prev, [field]: value }));
@@ -138,20 +144,16 @@ export function useServiceForm(
       if (!user) throw new Error('Not authenticated');
       const token = await user.getIdToken();
 
-      let finalImageUrl = imageUrl;
-      if (imageFile) {
-        const formData = new FormData();
-        formData.append('file', imageFile);
-        const uploadRes = await uploadImage(token, formData);
-        if (uploadRes.success && uploadRes.url) finalImageUrl = uploadRes.url;
-        else throw new Error(uploadRes.error || 'فشل رفع الصورة');
-      }
+      const existingSlug = ((editingService as Record<string, any> | null)?.slug || '').trim();
+      const slug = existingSlug || slugify(titleEn || title) || '';
 
       const serviceData = {
         title, title_ar: title, title_en: titleEn,
+        slug,
         type: type === 'custom_option' ? typeCustom : type,
-        price, badge, btnText, icon: svg,
-        desc, desc_ar: desc, desc_en: descEn, image: finalImageUrl,
+        type_en: typeEn,
+        price, badge, badge_en: badgeEn, btnText, icon: svg,
+        desc, desc_ar: desc, desc_en: descEn, image: imageUrl,
         heroSubtitle_ar: tpl.heroSubtitleAr, heroSubtitle_en: tpl.heroSubtitleEn,
         heroTitle1_ar: tpl.heroTitle1Ar, heroTitle1_en: tpl.heroTitle1En,
         heroTitle2_ar: tpl.heroTitle2Ar, heroTitle2_en: tpl.heroTitle2En,
@@ -161,6 +163,9 @@ export function useServiceForm(
         overviewTitle_ar: tpl.overviewTitleAr, overviewTitle_en: tpl.overviewTitleEn,
         overviewDesc_ar: tpl.overviewDescAr, overviewDesc_en: tpl.overviewDescEn,
         packagesTitle_ar: tpl.packagesTitleAr, packagesTitle_en: tpl.packagesTitleEn,
+        packagesDesc_ar: tpl.packagesDescAr, packagesDesc_en: tpl.packagesDescEn,
+        roadmapTitle_ar: tpl.roadmapTitleAr, roadmapTitle_en: tpl.roadmapTitleEn,
+        roadmapDesc_ar: tpl.roadmapDescAr, roadmapDesc_en: tpl.roadmapDescEn,
         addedValueTitle_ar: tpl.addedValueTitleAr, addedValueTitle_en: tpl.addedValueTitleEn,
         addedValueSubtitle_ar: tpl.addedValueSubtitleAr, addedValueSubtitle_en: tpl.addedValueSubtitleEn,
         features, guarantees, packages, roadmapSteps
@@ -187,11 +192,12 @@ export function useServiceForm(
 
   return {
     loading, title, setTitle, titleEn, setTitleEn, type, setType, typeCustom, setTypeCustom,
-    price, setPrice, badge, setBadge, btnText, setBtnText, svg, setSvg, desc, setDesc,
-    descEn, setDescEn, imageFile, imageUrl, tpl, setTplField,
+    typeEn, setTypeEn, price, setPrice, badge, setBadge, badgeEn, setBadgeEn,
+    btnText, setBtnText, svg, setSvg, desc, setDesc,
+    descEn, setDescEn, imageUrl, setImageUrl, tpl, setTplField,
     features, setFeatures, addFeature, removeFeature, updateFeature,
     guarantees, setGuarantees, addGuarantee, removeGuarantee, updateGuarantee,
     packages, setPackages, roadmapSteps, setRoadmapSteps,
-    handleFileChange, handleSubmit
+    handleSubmit
   };
 }

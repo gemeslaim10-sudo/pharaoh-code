@@ -1,6 +1,5 @@
 import DashboardSidebar from "@/components/DashboardSidebar";
 import DashboardHeader from "@/components/DashboardHeader";
-import Script from "next/script";
 
 import AdminRouteGuard from "@/components/AdminRouteGuard";
 import { DashboardProvider } from "@/contexts/DashboardContext";
@@ -19,9 +18,6 @@ export default async function DashboardLayout({
 
   return (
     <div className="flex min-h-screen relative text-slate-900 dark:text-white bg-slate-50 dark:bg-[#0A192F] text-right overflow-x-hidden transition-colors" dir="rtl">
-      {/* Load Chart.js globally for the dashboard */}
-      <Script src="https://cdn.jsdelivr.net/npm/chart.js" strategy="afterInteractive" />
-      
       <DashboardProvider>
         <AdminRouteGuard>
           <DashboardSidebarOverlay />

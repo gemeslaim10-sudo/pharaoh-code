@@ -1,6 +1,6 @@
 'use client';
 
-import { UsersStats } from './useUsersManagement';
+import { type UsersStats } from './useUsersManagement';
 
 interface UsersStatsGridProps {
   stats: UsersStats;

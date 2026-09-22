@@ -20,8 +20,8 @@ export async function getProjectRequests(idToken: string) {
   return fetchersModule.getProjectRequests(idToken);
 }
 
-export async function updateOrderStatus(idToken: string, orderId: string, status: string) {
-  return mutationsModule.updateOrderStatus(idToken, orderId, status);
+export async function updateOrderStatus(idToken: string, orderId: string, status: string, extra?: { rejectReason?: string }) {
+  return mutationsModule.updateOrderStatus(idToken, orderId, status, extra);
 }
 
 export async function deleteOrder(idToken: string, orderId: string) {

@@ -2,7 +2,7 @@
 
 import { db, serializeData } from '@/lib/firebase/admin';
 import { authenticateAdmin } from './auth';
-import { revalidatePath } from 'next/cache';
+import { revalidateSite } from '@/lib/revalidateSite';
 
 export async function getReviews(idToken: string) {
   await authenticateAdmin(idToken);
@@ -28,7 +28,7 @@ export async function approveReview(idToken: string, reviewId: string) {
 
   try {
     await db.collection('reviews').doc(reviewId).update({ status: 'approved' });
-    revalidatePath('/');
+    revalidateSite();
     return { success: true };
   } catch (error) {
     console.error('Error approving review:', error);
@@ -41,7 +41,7 @@ export async function deleteReview(idToken: string, reviewId: string) {
 
   try {
     await db.collection('reviews').doc(reviewId).delete();
-    revalidatePath('/');
+    revalidateSite();
     return { success: true };
   } catch (error) {
     console.error('Error deleting review:', error);

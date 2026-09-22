@@ -2,7 +2,7 @@
 import { TechStackFeaturePoints } from './TechStackFeaturePoints';
 
 export type { TechCardItem, TechStackFormData } from '@/types/techStack';
-import { TechStackFormData } from '@/types/techStack';
+import { type TechStackFormData } from '@/types/techStack';
 
 
 

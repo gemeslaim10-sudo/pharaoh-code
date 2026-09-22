@@ -1,5 +1,5 @@
 'use client';
-import { SectionData } from '@/types';
+import { type SectionData } from '@/types';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 import { AboutCommentsForm } from './AboutCommentsForm';

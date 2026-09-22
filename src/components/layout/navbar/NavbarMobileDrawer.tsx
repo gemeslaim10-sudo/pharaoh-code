@@ -2,7 +2,7 @@
 
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { NavLinkItem } from '@/types/nav';
+import { type NavLinkItem } from '@/types/nav';
 import { NavbarMobileDrawerFooter } from './NavbarMobileDrawerFooter';
 import { NavbarMobileDrawerHeader } from './NavbarMobileDrawerHeader';
 import { NavbarMobileDrawerLinks } from './NavbarMobileDrawerLinks';
@@ -15,6 +15,7 @@ interface NavbarMobileDrawerProps {
   activeLogo?: string;
   links: NavLinkItem[];
   pathname: string;
+  whatsappNumber?: string;
 }
 
 export function NavbarMobileDrawer({
@@ -24,6 +25,7 @@ export function NavbarMobileDrawer({
   activeLogo,
   links,
   pathname,
+  whatsappNumber,
 }: NavbarMobileDrawerProps) {
   const { direction } = useTranslation();
   const { theme } = useTheme();
@@ -114,7 +116,7 @@ export function NavbarMobileDrawer({
             </div>
 
             <div className={`relative p-5 sm:p-6 border-t ${isLight ? 'border-slate-100' : 'border-white/[0.06]'}`}>
-              <NavbarMobileDrawerFooter onClose={() => setIsOpen(false)} />
+              <NavbarMobileDrawerFooter onClose={() => setIsOpen(false)} {...(whatsappNumber ? { whatsappNumber } : {})} />
             </div>
           </motion.div>
         </div>

@@ -5,9 +5,17 @@ import { motion } from 'framer-motion';
 interface HomeHeroButtonsProps {
   discoverText: string;
   contactText: string;
+  /** CMS-controlled destinations; default to the original hardcoded routes. */
+  discoverHref?: string;
+  contactHref?: string;
 }
 
-export function HomeHeroButtons({ discoverText, contactText }: HomeHeroButtonsProps) {
+export function HomeHeroButtons({
+  discoverText,
+  contactText,
+  discoverHref = '/services',
+  contactHref = '/contact',
+}: HomeHeroButtonsProps) {
   return (
     <div className="flex flex-wrap items-center justify-center gap-3.5 sm:gap-5">
       {/* Primary Levitating Floating Gold Button */}
@@ -27,8 +35,8 @@ export function HomeHeroButtons({ discoverText, contactText }: HomeHeroButtonsPr
         {/* Pulsing Ambient Gold Aura */}
         <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#C5A16F]/40 via-[#DFB77D]/60 to-[#C5A16F]/40 blur-lg opacity-70 group-hover:opacity-100 transition-opacity duration-500 animate-pulse pointer-events-none" />
 
-        <Link 
-          href="/services" 
+        <Link
+          href={discoverHref}
           className="relative overflow-hidden btn-pharaoh-gold px-5 py-3 sm:px-7 sm:py-3.5 rounded-2xl font-black text-xs sm:text-sm md:text-base shadow-2xl flex items-center gap-2 text-[#070F1E] transition-all duration-300 whitespace-nowrap shrink-0"
         >
           {/* Shimmer Light Sweep on Hover */}
@@ -56,8 +64,8 @@ export function HomeHeroButtons({ discoverText, contactText }: HomeHeroButtonsPr
         whileTap={{ scale: 0.95 }}
         className="relative group"
       >
-        <Link 
-          href="/contact" 
+        <Link
+          href={contactHref}
           className="relative overflow-hidden px-5 py-3 sm:px-7 sm:py-3.5 rounded-2xl font-bold text-xs sm:text-sm md:text-base transition-all duration-300 flex items-center gap-2 border border-white/20 text-white hover:border-[#C5A16F] hover:text-[#C5A16F] bg-[#070F1E]/60 backdrop-blur-xl hover:bg-[#070F1E]/90 shadow-xl whitespace-nowrap shrink-0"
         >
           {/* Shimmer Light Sweep */}

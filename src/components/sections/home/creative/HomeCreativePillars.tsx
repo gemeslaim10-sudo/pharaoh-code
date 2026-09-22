@@ -1,6 +1,6 @@
 'use client';
 
-import { SectionItem } from '@/types';
+import { type SectionItem } from '@/types';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { getDynamicText } from '@/lib/i18nHelper';

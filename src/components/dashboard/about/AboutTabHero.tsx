@@ -1,6 +1,7 @@
 'use client';
-import { AboutFormData } from './aboutDashboardTypes';
+import { type AboutFormData } from './aboutDashboardTypes';
 import { AboutHeroFeatures } from './AboutHeroFeatures';
+import { MediaUploadField } from '@/components/dashboard/common/MediaUploadField';
 
 interface AboutTabHeroProps {
   form: AboutFormData;
@@ -15,6 +16,18 @@ export function AboutTabHero({ form, setForm }: AboutTabHeroProps) {
   return (
     <div className="bg-white dark:bg-[#112240] p-6 md:p-8 rounded-2xl border border-slate-200 dark:border-white/10 space-y-6 shadow-sm">
       <h2 className="text-xl font-bold text-amber-800 dark:text-pharaohGold border-b border-slate-200 dark:border-white/10 pb-3">تعديل قسم الهيرو (Hero Section)</h2>
+
+      {/* Hero image */}
+      <div className="bg-slate-50 dark:bg-[#0A192F] p-5 rounded-2xl border border-slate-200 dark:border-white/10">
+        <MediaUploadField
+          label="صورة الهيرو في صفحة من نحن"
+          value={form.hero.imageUrl || ''}
+          onChange={(url) => updateHero('imageUrl', url)}
+          accept="image"
+          previewClassName="w-full h-40"
+          hint="صورة رأسية يفضل 1000x1200 بكسل — JPG, PNG, WebP, AVIF حتى 8 ميجابايت"
+        />
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
@@ -134,6 +147,43 @@ export function AboutTabHero({ form, setForm }: AboutTabHeroProps) {
             dir="ltr"
           />
         </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label className="block text-xs font-bold text-slate-700 dark:text-gray-300 mb-2">شارة سنة التأسيس فوق الصورة (عربي)</label>
+          <input
+            type="text"
+            placeholder="منذ 2020"
+            value={form.hero.establishedText_ar || ''}
+            onChange={(e) => updateHero('establishedText_ar', e.target.value)}
+            className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl p-3.5 text-sm text-slate-900 dark:text-white focus:border-pharaohGold outline-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
+          />
+        </div>
+        <div>
+          <label className="block text-xs font-bold text-slate-700 dark:text-gray-300 mb-2">Established Badge (English)</label>
+          <input
+            type="text"
+            placeholder="Since 2020"
+            value={form.hero.establishedText_en || ''}
+            onChange={(e) => updateHero('establishedText_en', e.target.value)}
+            className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl p-3.5 text-sm text-slate-900 dark:text-white focus:border-pharaohGold outline-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
+            dir="ltr"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label className="block text-xs font-bold text-slate-700 dark:text-gray-300 mb-2">رابط زر الهيرو (Button Link)</label>
+        <input
+          type="text"
+          placeholder="/portfolio"
+          value={form.hero.buttonLink || ''}
+          onChange={(e) => updateHero('buttonLink', e.target.value)}
+          className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl p-3.5 text-sm text-slate-900 dark:text-white focus:border-pharaohGold outline-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
+          dir="ltr"
+        />
+        <p className="text-[11px] text-slate-500 dark:text-gray-500 mt-1">مسار داخلي مثل /portfolio أو رابط خارجي كامل. الافتراضي: /portfolio</p>
       </div>
 
       <AboutHeroFeatures form={form} setForm={setForm} />

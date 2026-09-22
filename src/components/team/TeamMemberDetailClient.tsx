@@ -2,7 +2,7 @@
 
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { TeamMemberData } from '@/types/team';
+import { type TeamMemberData } from '@/types/team';
 import TeamMemberDetailCard from './TeamMemberDetailCard';
 
 interface TeamMemberDetailClientProps {

@@ -6,25 +6,39 @@ import CreativityProjectForm from '@/components/dashboard/creativity/CreativityP
 import CreativityThinkForm from '@/components/dashboard/creativity/CreativityThinkForm';
 import CreativityServicesForm from '@/components/dashboard/creativity/CreativityServicesForm';
 import CreativityRecords from '@/components/dashboard/creativity/CreativityRecords';
-import { CreativityType } from '@/types/creativity';
+import { type CreativityType } from '@/types/creativity';
 
 export default function DashboardCreativity() {
-  const [activeTab, setActiveTab] = useState<CreativityType>('portfolio');
+  const [activeTab, setActiveTabState] = useState<CreativityType>('portfolio');
   const [refreshKey, setRefreshKey] = useState(0);
+  const [editingItem, setEditingItem] = useState<any | null>(null);
 
-  const handleItemAdded = () => {
+  const setActiveTab = (tab: CreativityType) => {
+    setEditingItem(null);
+    setActiveTabState(tab);
+  };
+
+  const handleSaved = () => {
+    setEditingItem(null);
     setRefreshKey(prev => prev + 1);
+  };
+
+  const handleEdit = (record: any) => {
+    setEditingItem(record);
+    document.getElementById('creativity-form')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <div className="space-y-6">
       <CreativityHeader activeTab={activeTab} setActiveTab={setActiveTab} />
-      
-      {activeTab === 'portfolio' && <CreativityProjectForm onSuccess={handleItemAdded} />}
-      {activeTab === 'philosophy' && <CreativityThinkForm onSuccess={handleItemAdded} />}
-      {activeTab === 'services' && <CreativityServicesForm onSuccess={handleItemAdded} />}
-      
-      <CreativityRecords activeTab={activeTab} refreshKey={refreshKey} />
+
+      <div id="creativity-form">
+        {activeTab === 'portfolio' && <CreativityProjectForm onSuccess={handleSaved} editingItem={editingItem} onCancelEdit={() => setEditingItem(null)} />}
+        {activeTab === 'philosophy' && <CreativityThinkForm onSuccess={handleSaved} editingItem={editingItem} onCancelEdit={() => setEditingItem(null)} />}
+        {activeTab === 'services' && <CreativityServicesForm onSuccess={handleSaved} editingItem={editingItem} onCancelEdit={() => setEditingItem(null)} />}
+      </div>
+
+      <CreativityRecords activeTab={activeTab} refreshKey={refreshKey} onEdit={handleEdit} editingId={editingItem?.id || null} />
     </div>
   );
 }

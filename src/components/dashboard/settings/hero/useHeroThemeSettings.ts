@@ -2,39 +2,42 @@
 
 import { useState, useEffect } from 'react';
 import { getHeroThemeConfig, updateHeroThemeConfig } from '@/app/actions/dashboard/heroTheme';
-import { HeroThemeConfig } from '@/types/heroTheme';
-import { uploadImage } from '@/app/actions/dashboard/upload';
+import { type HeroThemeConfig } from '@/types/heroTheme';
 import { auth } from '@/lib/firebase/config';
+
+const EMPTY_CONFIG: HeroThemeConfig = {
+  darkSlide1Media: '', darkSlide1Video: '', darkSlide1Image: '',
+  darkSlide2Media: '', darkSlide2Video: '', darkSlide2Image: '',
+  darkPreset: 'royal_gold',
+  lightSlide1Media: '', lightSlide1Video: '', lightSlide1Image: '',
+  lightSlide2Media: '', lightSlide2Video: '', lightSlide2Image: '',
+  lightPreset: 'royal_gold',
+};
+
+/** Normalises the three legacy keys (Media/Video/Image) of a slide into one value. */
+function pickSlide(data: HeroThemeConfig, mode: 'dark' | 'light', slide: 1 | 2): string {
+  const base = `${mode}Slide${slide}` as const;
+  return (data[`${base}Media`] || data[`${base}Video`] || data[`${base}Image`] || '') as string;
+}
 
 export function useHeroThemeSettings() {
   const [loading, setLoading] = useState(false);
   const [initialLoad, setInitialLoad] = useState(true);
-  const [config, setConfig] = useState<HeroThemeConfig>({
-    darkSlide1Video: '',
-    darkSlide2Video: '',
-    darkSlide2Image: '',
-    darkPreset: 'royal_gold',
-    lightSlide1Video: '',
-    lightSlide2Video: '',
-    lightSlide2Image: '',
-    lightPreset: 'royal_gold',
-  });
-
-  const [uploadingField, setUploadingField] = useState<string | null>(null);
+  const [config, setConfig] = useState<HeroThemeConfig>(EMPTY_CONFIG);
 
   useEffect(() => {
     const loadData = async () => {
       try {
         const data = await getHeroThemeConfig();
         if (data) {
+          const d1 = pickSlide(data, 'dark', 1), d2 = pickSlide(data, 'dark', 2);
+          const l1 = pickSlide(data, 'light', 1), l2 = pickSlide(data, 'light', 2);
           setConfig({
-            darkSlide1Video: data.darkSlide1Video || '',
-            darkSlide2Video: data.darkSlide2Video || '',
-            darkSlide2Image: data.darkSlide2Image || '',
+            darkSlide1Media: d1, darkSlide1Video: d1, darkSlide1Image: d1,
+            darkSlide2Media: d2, darkSlide2Video: d2, darkSlide2Image: d2,
             darkPreset: data.darkPreset || 'royal_gold',
-            lightSlide1Video: data.lightSlide1Video || '',
-            lightSlide2Video: data.lightSlide2Video || '',
-            lightSlide2Image: data.lightSlide2Image || '',
+            lightSlide1Media: l1, lightSlide1Video: l1, lightSlide1Image: l1,
+            lightSlide2Media: l2, lightSlide2Video: l2, lightSlide2Image: l2,
             lightPreset: data.lightPreset || 'royal_gold',
           });
         }
@@ -47,32 +50,6 @@ export function useHeroThemeSettings() {
     loadData();
   }, []);
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, fieldKey: string) => {
-    if (!e.target.files || !e.target.files[0]) return;
-    const file = e.target.files[0];
-    setUploadingField(fieldKey);
-
-    try {
-      const user = auth.currentUser;
-      if (!user) throw new Error('Not authenticated');
-      const token = await user.getIdToken();
-
-      const uploadData = new FormData();
-      uploadData.append('file', file);
-      const uploadRes = await uploadImage(token, uploadData);
-      if (!uploadRes.success) throw new Error(uploadRes.error);
-      if (uploadRes.url) {
-        setConfig(prev => ({ ...prev, [fieldKey]: uploadRes.url }));
-      }
-    } catch (error) {
-      const err = error as Error;
-      console.error(err);
-      alert(`حدث خطأ أثناء رفع الملف: ${err?.message || 'تعذر الرفع.'}`);
-    } finally {
-      setUploadingField(null);
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -82,7 +59,7 @@ export function useHeroThemeSettings() {
       const token = await user.getIdToken();
 
       await updateHeroThemeConfig(token, config);
-      alert("تم حفظ وتحديث ميديا وقوالب ألوان الهيرو بنجاح!");
+      alert("تم حفظ وتحديث ميديا وقوالب ألوان الهيرو بنجاح! التغييرات ظاهرة الآن على الموقع.");
     } catch (error) {
       const err = error as Error;
       console.error(err);
@@ -92,7 +69,5 @@ export function useHeroThemeSettings() {
     }
   };
 
-  return {
-    loading, initialLoad, config, setConfig, uploadingField, handleFileUpload, handleSubmit
-  };
+  return { loading, initialLoad, config, setConfig, handleSubmit };
 }

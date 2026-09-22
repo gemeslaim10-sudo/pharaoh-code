@@ -9,9 +9,11 @@ import { NavbarMobileUserSection } from './NavbarMobileUserSection';
 
 interface NavbarMobileDrawerFooterProps {
   onClose: () => void;
+  whatsappNumber?: string;
 }
 
-export function NavbarMobileDrawerFooter({ onClose }: NavbarMobileDrawerFooterProps) {
+export function NavbarMobileDrawerFooter({ onClose, whatsappNumber = '' }: NavbarMobileDrawerFooterProps) {
+  const waDigits = whatsappNumber.replace(/[^0-9]/g, '');
   const { user, isAdmin, logout } = useAuth();
   const { t, language, direction } = useTranslation();
   const { theme } = useTheme();
@@ -70,7 +72,7 @@ export function NavbarMobileDrawerFooter({ onClose }: NavbarMobileDrawerFooterPr
 
       {/* Direct WhatsApp Quick Connect */}
       <a
-        href="https://wa.me/201000000000"
+        href={waDigits ? `https://wa.me/${waDigits}` : '/contact'}
         target="_blank"
         rel="noopener noreferrer"
         onClick={onClose}

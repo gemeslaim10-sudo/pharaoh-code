@@ -1,5 +1,5 @@
 'use client';
-import { TermItem } from './termsData';
+import { type TermItem } from './termsData';
 import { useTranslation } from '@/contexts/LanguageContext';
 
 interface TermsCardProps {

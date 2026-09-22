@@ -2,15 +2,17 @@
 
 import { db, serializeData } from '@/lib/firebase/admin';
 import { sanitizeInput } from './utils';
+import { enforcePublicRateLimit } from './rateLimit';
 
 export async function submitComment(formData: FormData) {
     try {
+        await enforcePublicRateLimit('comment');
         const name = sanitizeInput(formData.get('name') as string, 100);
         const email = sanitizeInput(formData.get('email') as string, 100);
         const phone = sanitizeInput(formData.get('phone') as string, 50) || '';
         const comment = sanitizeInput(formData.get('comment') as string, 2000);
 
-        if (!name || !email || !comment) {
+        if (!name || !email || !comment || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             throw new Error('جميع الحقول مطلوبة');
         }
 
@@ -37,7 +39,7 @@ export async function submitComment(formData: FormData) {
             initials,
             text: comment,
             date,
-            status: 'approved',
+            status: 'pending',
             createdAt: timestamp
         });
 
@@ -69,10 +71,16 @@ export async function getApprovedReviews() {
             return [];
         }
 
-        return snapshot.docs.map(doc => serializeData({
-            id: doc.id,
-            ...doc.data()
-        }));
+        return snapshot.docs.map(doc => {
+            const review = doc.data();
+            return serializeData({
+                id: doc.id,
+                name: review.name || '',
+                initials: review.initials || '',
+                text: review.text || '',
+                date: review.date || '',
+            });
+        });
     } catch (error) {
         console.error('Error fetching approved reviews:', error);
         return []; // Fail gracefully for public frontend

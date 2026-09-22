@@ -65,8 +65,7 @@ export default function ProjectDashboardManager() {
             const user = auth.currentUser;
             if (!user) return;
             const token = await user.getIdToken();
-            // We might want to save the reject reason in the order too
-            await updateOrderStatus(token, selectedProjectForReject.id, 'rejected'); // We need a way to pass rejectReason, let's update updateOrderStatus later or just keep status
+            await updateOrderStatus(token, selectedProjectForReject.id, 'rejected', { rejectReason: reason });
             
             setProjects(prev => prev.map(p => p.id === selectedProjectForReject.id ? { ...p, status: 'rejected', rejectReason: reason } : p));
             setRejectModalOpen(false);

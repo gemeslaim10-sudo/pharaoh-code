@@ -1,7 +1,7 @@
 'use client';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
-import { TestimonialItem } from '@/types/review';
+import { type TestimonialItem } from '@/types/review';
 import { motion } from 'framer-motion';
 
 interface HomeTestimonialsListProps {

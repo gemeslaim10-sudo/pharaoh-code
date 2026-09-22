@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
-import { TechStackFormData } from '@/types/techStack';
+import { type TechStackFormData, type TechCardItem } from '@/types/techStack';
+import { IconField } from '@/components/dashboard/common/IconField';
 
 const TECH_META = [
   { titleAr: 'الأنظمة الخلفية', titleEn: 'Backend Systems', icon: '💻' },
@@ -14,19 +15,37 @@ const TECH_META = [
 interface TechStackCardsSectionProps {
   form: TechStackFormData;
   setForm: React.Dispatch<React.SetStateAction<TechStackFormData>>;
+  addCard: () => void;
+  removeCard: (idx: number) => void;
 }
 
-export function TechStackCardsSection({ form, setForm }: TechStackCardsSectionProps) {
+export function TechStackCardsSection({ form, setForm, addCard, removeCard }: TechStackCardsSectionProps) {
   const [activeIdx, setActiveIdx] = useState<number>(0);
   const [viewMode, setViewMode] = useState<'tabs' | 'all'>('tabs');
 
-  const updateCard = (idx: number, updates: any) => {
-    const cards = [...(form.cards || [])];
-    cards[idx] = { ...cards[idx], ...updates };
-    setForm({ ...form, cards });
+  const cards = form.cards || [];
+
+  const updateCard = (idx: number, updates: Partial<TechCardItem>) => {
+    const next = [...(form.cards || [])];
+    next[idx] = { ...next[idx], ...updates };
+    setForm({ ...form, cards: next });
   };
 
-  const renderTechCard = (card: any, idx: number) => {
+  const handleAddCard = () => {
+    addCard();
+    setActiveIdx(cards.length);
+  };
+
+  const handleRemoveCard = (idx: number) => {
+    if (cards.length <= 1) {
+      alert('يجب الإبقاء على بطاقة تقنية واحدة على الأقل');
+      return;
+    }
+    removeCard(idx);
+    setActiveIdx(prev => (prev >= cards.length - 1 ? Math.max(0, cards.length - 2) : prev));
+  };
+
+  const renderTechCard = (card: TechCardItem | undefined, idx: number) => {
     const meta = TECH_META[idx] || { titleAr: `البطاقة ${idx + 1}`, titleEn: `Card ${idx + 1}`, icon: '⚡' };
 
     return (
@@ -45,7 +64,28 @@ export function TechStackCardsSection({ form, setForm }: TechStackCardsSectionPr
               </span>
             </div>
           </div>
-          <span className="text-lg">{meta.icon}</span>
+          <div className="flex items-center gap-3">
+            <span className="text-lg">{meta.icon}</span>
+            {cards.length > 1 && (
+              <button
+                type="button"
+                onClick={() => handleRemoveCard(idx)}
+                className="text-xs font-bold text-red-500 hover:text-red-400 bg-red-500/10 hover:bg-red-500/20 px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer"
+              >
+                <span>🗑️</span>
+                <span>حذف</span>
+              </button>
+            )}
+          </div>
+        </div>
+
+        <div className="bg-white dark:bg-[#112240] p-4 rounded-xl border border-slate-200 dark:border-white/10">
+          <IconField
+            label="أيقونة البطاقة (تظهر في قسم التقنيات بصفحة الخدمات)"
+            value={card?.icon || ''}
+            onChange={(value) => updateCard(idx, { icon: value })}
+          />
+          <p className="text-[10px] text-slate-500 dark:text-gray-500 mt-2">اتركها فارغة لاستخدام الأيقونة الافتراضية المدمجة.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -125,10 +165,20 @@ export function TechStackCardsSection({ form, setForm }: TechStackCardsSectionPr
         <div>
           <h2 className="text-xl font-bold text-amber-800 dark:text-pharaohGold flex items-center gap-2">
             <span>💻</span>
-            <span>بطاقات التقنيات الست (6 Tech Cards)</span>
+            <span>بطاقات التقنيات ({cards.length} Tech Cards)</span>
           </h2>
-          <p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">البطاقات التفصيلية لمجالات وتخصصات الترسانة البرمجية.</p>
+          <p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">البطاقات التفصيلية لمجالات وتخصصات الترسانة البرمجية. يمكنك إضافة أو حذف أي عدد من البطاقات.</p>
         </div>
+
+        <div className="flex items-center gap-2 flex-wrap self-start sm:self-auto">
+        <button
+          type="button"
+          onClick={handleAddCard}
+          className="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-amber-500/15 dark:bg-pharaohGold/20 text-amber-900 dark:text-pharaohGold border border-amber-500/30 dark:border-pharaohGold/30 hover:bg-amber-500/25 dark:hover:bg-pharaohGold/30 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+        >
+          <span>➕</span>
+          <span>إضافة بطاقة</span>
+        </button>
 
         <div className="flex items-center gap-1 bg-slate-100 dark:bg-[#0A192F] p-1 rounded-xl border border-slate-200 dark:border-white/10 shrink-0">
           <button
@@ -154,14 +204,14 @@ export function TechStackCardsSection({ form, setForm }: TechStackCardsSectionPr
             عرض الكل
           </button>
         </div>
+        </div>
       </div>
 
       {/* Sub-Tabs Grid */}
       {viewMode === 'tabs' && (
         <div className="space-y-4">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
-            {[0, 1, 2, 3, 4, 5].map((idx) => {
-              const card = form.cards?.[idx];
+            {cards.map((card, idx) => {
               const meta = TECH_META[idx] || { titleAr: `مجال ${idx + 1}`, icon: '⚡' };
               const isActive = activeIdx === idx;
               const title = card?.title_ar || meta.titleAr;
@@ -187,14 +237,14 @@ export function TechStackCardsSection({ form, setForm }: TechStackCardsSectionPr
             })}
           </div>
 
-          {renderTechCard(form.cards?.[activeIdx], activeIdx)}
+          {renderTechCard(cards[Math.min(activeIdx, cards.length - 1)], Math.min(activeIdx, cards.length - 1))}
         </div>
       )}
 
       {/* All Cards View */}
       {viewMode === 'all' && (
         <div className="space-y-4">
-          {[0, 1, 2, 3, 4, 5].map((idx) => renderTechCard(form.cards?.[idx], idx))}
+          {cards.map((card, idx) => renderTechCard(card, idx))}
         </div>
       )}
     </div>

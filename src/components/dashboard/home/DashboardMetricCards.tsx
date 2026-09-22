@@ -30,7 +30,7 @@ export function DashboardMetricCards({
         </h4>
         <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-amber-500/10 dark:bg-pharaohGold/10 text-amber-800 dark:text-pharaohGold border border-amber-500/30 dark:border-pharaohGold/30 flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          <span>محدث الآن</span>
+          <span>بيانات حية</span>
         </span>
       </div>
 
@@ -55,7 +55,7 @@ export function DashboardMetricCards({
             {weeklyAvg}
           </h3>
           <span className="text-[10px] text-slate-500 dark:text-gray-400 mt-2 block">
-            متوسط طلبات / أسبوع
+            متوسط الطلبات أسبوعياً (آخر 4 أسابيع)
           </span>
         </div>
 

@@ -79,7 +79,7 @@ export const sectionsAr = {
     commentsDesc: 'شاركنا رأيك أو استفسارك لينضم إلى صرح مناقشاتنا',
     addCommentTitle: 'إضافة تعليق جديد',
     thankYou: 'شكراً لك!',
-    commentSuccess: 'تم إرسال تعليقك بنجاح وسيكون له أثر كبير في مجتمعنا.',
+    commentSuccess: 'تم إرسال تعليقك بنجاح، وسيظهر بعد مراجعته.',
     commentError: 'حدث خطأ أثناء الإرسال.',
     yourName: 'الاسم الكريم',
     namePlaceholder: 'مثال: أحمد الملك',

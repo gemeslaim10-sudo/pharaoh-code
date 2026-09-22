@@ -1,7 +1,9 @@
 'use server';
 
+import { authenticateAdmin } from './auth';
+
 import { admin, serializeData } from '@/lib/firebase/admin';
-import { revalidatePath } from 'next/cache';
+import { revalidateSite } from '@/lib/revalidateSite';
 
 export async function getCategories() {
     try {
@@ -34,8 +36,7 @@ export async function getCategories() {
 
 export async function addCategory(token: string, categoryData: { name_ar: string; name_en: string; slug?: string | undefined }) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
 
         const db = admin.firestore();
         const slug = (categoryData.slug || categoryData.name_en || categoryData.name_ar || Date.now().toString())
@@ -54,10 +55,7 @@ export async function addCategory(token: string, categoryData: { name_ar: string
             createdAt: admin.firestore.FieldValue.serverTimestamp()
         });
 
-        revalidatePath('/');
-        revalidatePath('/portfolio');
-        revalidatePath('/dashboard/creativity');
-        revalidatePath('/dashboard/categories');
+        revalidateSite();
 
         return { success: true, id: docRef.id };
     } catch (error: any) {
@@ -68,8 +66,7 @@ export async function addCategory(token: string, categoryData: { name_ar: string
 
 export async function updateCategory(token: string, id: string, categoryData: { name_ar: string; name_en: string; slug?: string | undefined }) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
 
         const db = admin.firestore();
         const slug = (categoryData.slug || categoryData.name_en || categoryData.name_ar || id)
@@ -88,10 +85,7 @@ export async function updateCategory(token: string, id: string, categoryData: { 
             updatedAt: admin.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
 
-        revalidatePath('/');
-        revalidatePath('/portfolio');
-        revalidatePath('/dashboard/creativity');
-        revalidatePath('/dashboard/categories');
+        revalidateSite();
 
         return { success: true };
     } catch (error: any) {
@@ -102,16 +96,12 @@ export async function updateCategory(token: string, id: string, categoryData: { 
 
 export async function deleteCategory(token: string, id: string) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
 
         const db = admin.firestore();
         await db.collection('categories').doc(id).delete();
 
-        revalidatePath('/');
-        revalidatePath('/portfolio');
-        revalidatePath('/dashboard/creativity');
-        revalidatePath('/dashboard/categories');
+        revalidateSite();
 
         return { success: true };
     } catch (error: any) {

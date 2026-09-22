@@ -1,5 +1,5 @@
 'use client';
-import { Skill } from './workFormTypes';
+import { type Skill } from './workFormTypes';
 
 interface WorkFormSkillsProps {
     skills: Skill[];

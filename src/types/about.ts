@@ -3,6 +3,8 @@ export interface AboutHeroFeature {
   title_en: string;
   description_ar: string;
   description_en: string;
+  /** Uploaded icon URL or inline SVG markup. */
+  iconSvg?: string;
 }
 
 export interface AboutHeroData {
@@ -17,6 +19,9 @@ export interface AboutHeroData {
   buttonText_ar: string;
   buttonText_en: string;
   establishedText?: string;
+  establishedText_ar?: string;
+  establishedText_en?: string;
+  buttonLink?: string;
   imageUrl?: string;
   features: AboutHeroFeature[];
 }
@@ -37,6 +42,8 @@ export interface AboutPhilosophyItem {
   title_en: string;
   description_ar: string;
   description_en: string;
+  /** Uploaded icon URL or inline SVG markup. */
+  iconSvg?: string;
 }
 
 export interface AboutPhilosophyData {
@@ -68,11 +75,27 @@ export interface AboutFaqData {
   faqs: AboutFaqItem[];
 }
 
+export interface AboutCommentsData {
+  subtitle_ar: string;
+  subtitle_en: string;
+  titlePart1_ar: string;
+  titlePart1_en: string;
+  titlePart2_ar: string;
+  titlePart2_en: string;
+  description_ar: string;
+  description_en: string;
+  formTitle_ar: string;
+  formTitle_en: string;
+  /** Single (non translated) watermark word behind the comments form. */
+  backgroundText: string;
+}
+
 export interface AboutFormData {
   hero: AboutHeroData;
   visionMission: AboutVisionMissionData;
   philosophy: AboutPhilosophyData;
   faq: AboutFaqData;
+  comments: AboutCommentsData;
 }
 
 export const INITIAL_ABOUT_FORM: AboutFormData = {
@@ -82,10 +105,11 @@ export const INITIAL_ABOUT_FORM: AboutFormData = {
     titlePart2_ar: '', titlePart2_en: '',
     description_ar: '', description_en: '',
     buttonText_ar: '', buttonText_en: '',
-    establishedText: '', imageUrl: '',
+    establishedText: '', establishedText_ar: '', establishedText_en: '',
+    buttonLink: '', imageUrl: '',
     features: [
-      { title_ar: '', title_en: '', description_ar: '', description_en: '' },
-      { title_ar: '', title_en: '', description_ar: '', description_en: '' }
+      { title_ar: '', title_en: '', description_ar: '', description_en: '', iconSvg: '' },
+      { title_ar: '', title_en: '', description_ar: '', description_en: '', iconSvg: '' }
     ]
   },
   visionMission: {
@@ -99,9 +123,9 @@ export const INITIAL_ABOUT_FORM: AboutFormData = {
     titlePart1_ar: '', titlePart1_en: '',
     titlePart2_ar: '', titlePart2_en: '',
     items: [
-      { title_ar: '', title_en: '', description_ar: '', description_en: '' },
-      { title_ar: '', title_en: '', description_ar: '', description_en: '' },
-      { title_ar: '', title_en: '', description_ar: '', description_en: '' }
+      { title_ar: '', title_en: '', description_ar: '', description_en: '', iconSvg: '' },
+      { title_ar: '', title_en: '', description_ar: '', description_en: '', iconSvg: '' },
+      { title_ar: '', title_en: '', description_ar: '', description_en: '', iconSvg: '' }
     ]
   },
   faq: {
@@ -109,5 +133,21 @@ export const INITIAL_ABOUT_FORM: AboutFormData = {
     titlePart1_ar: '', titlePart1_en: '',
     titlePart2_ar: '', titlePart2_en: '',
     faqs: []
+  },
+  comments: {
+    subtitle_ar: '', subtitle_en: '',
+    titlePart1_ar: '', titlePart1_en: '',
+    titlePart2_ar: '', titlePart2_en: '',
+    description_ar: '', description_en: '',
+    formTitle_ar: '', formTitle_en: '',
+    backgroundText: ''
   }
+};
+
+export const EMPTY_ABOUT_HERO_FEATURE: AboutHeroFeature = {
+  title_ar: '', title_en: '', description_ar: '', description_en: '', iconSvg: ''
+};
+
+export const EMPTY_ABOUT_PHILOSOPHY_ITEM: AboutPhilosophyItem = {
+  title_ar: '', title_en: '', description_ar: '', description_en: '', iconSvg: ''
 };

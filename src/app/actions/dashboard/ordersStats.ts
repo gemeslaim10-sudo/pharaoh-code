@@ -59,10 +59,11 @@ export async function getDashboardChartsData(idToken: string) {
     
     if (ordersSnap.empty) {
       return {
-        lineChartData: [0, 0, 0, 0, 0, 0, 0],
         pieChartData: [0, 0, 0, 0],
         totalOrdersCount: 0,
-        activeOrdersCount: 0
+        activeOrdersCount: 0,
+        weeklyAvg: 0,
+        last28DaysCount: 0
       };
     }
 
@@ -71,11 +72,15 @@ export async function getDashboardChartsData(idToken: string) {
     let webCount = 0;
     let seoCount = 0;
     let activeOrdersCount = 0;
+    let last28DaysCount = 0;
+    const since = Date.now() - 28 * 24 * 60 * 60 * 1000;
 
     ordersSnap.forEach(doc => {
         const data = doc.data();
         const service = data.service || '';
         const status = data.status || '';
+        const createdAt = data.createdAt ? new Date(data.createdAt).getTime() : NaN;
+        if (!Number.isNaN(createdAt) && createdAt >= since) last28DaysCount++;
 
         if (status === 'contacted' || status === 'in_progress' || status === 'completed') {
             activeOrdersCount++;
@@ -88,7 +93,8 @@ export async function getDashboardChartsData(idToken: string) {
     });
 
     return {
-        lineChartData: [0, 0, 0, 0, 0, 0, 0],
+        weeklyAvg: Math.round((last28DaysCount / 4) * 10) / 10,
+        last28DaysCount,
         pieChartData: [
             appCount, 
             erpCount, 

@@ -1,7 +1,9 @@
 'use server';
 
+import { authenticateAdmin } from './auth';
+
 import { admin, serializeData } from '@/lib/firebase/admin';
-import { revalidatePath } from 'next/cache';
+import { revalidateSite } from '@/lib/revalidateSite';
 
 export async function getAboutContent() {
     try {
@@ -16,8 +18,7 @@ export async function getAboutContent() {
 
 export async function updateAboutContent(token: string, data: any) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
         
         const db = admin.firestore();
         await db.collection('pages').doc('about').set({
@@ -25,7 +26,7 @@ export async function updateAboutContent(token: string, data: any) {
             updatedAt: admin.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
         
-        revalidatePath('/about');
+        revalidateSite();
         
         return { success: true };
     } catch (error: any) {

@@ -1,7 +1,7 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
-import { Language, Direction, LanguageContextType, Translations } from '@/types/i18n';
+import React, { createContext, useContext, useState, useEffect, type ReactNode, useCallback } from 'react';
+import { type Language, type Direction, type LanguageContextType, type Translations } from '@/types/i18n';
 import { dictionary } from '@/data/translations';
 
 const STORAGE_KEY = 'app_language';

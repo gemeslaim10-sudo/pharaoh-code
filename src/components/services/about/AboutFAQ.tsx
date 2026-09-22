@@ -1,5 +1,5 @@
 'use client';
-import { SectionData, SectionItem } from '@/types';
+import { type SectionData, type SectionItem } from '@/types';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 import { motion } from 'framer-motion';
@@ -8,7 +8,9 @@ export default function AboutFAQ({ data }: { data: SectionData }) {
   const { t, language, direction } = useTranslation();
   if (!data) return null;
 
-  const faqs = (data?.faqs && data.faqs.length > 0) ? data.faqs : [
+  // Fall back to the built-in FAQs only when the CMS has never stored a list.
+  // An explicitly emptied list stays empty.
+  const faqs = Array.isArray(data?.faqs) ? data.faqs : [
     {
       question_ar: 'ما هي الخدمات التي تقدمونها؟',
       question_en: 'What services do you offer?',

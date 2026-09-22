@@ -1,10 +1,11 @@
 'use client';
 
-import { SectionData } from '@/types';
-import { SocialPlatform } from '@/types/settings';
+import { type SectionData } from '@/types';
+import { type SocialPlatform } from '@/types/settings';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 import { DynamicSocialIcon } from '@/components/common/DynamicSocialIcon';
+import { safeExternalUrl } from '@/lib/safeUrl';
 import { motion } from 'framer-motion';
 
 const CONTACT_ITEMS = [
@@ -164,7 +165,8 @@ export default function ContactInfo({ data }: { data: SectionData }) {
                   link = `https://wa.me/${link.replace(/[^0-9]/g, '')}`;
                 }
 
-                return (
+                  link = safeExternalUrl(link);
+                  return (
                   <motion.a
                     key={platform.id}
                     href={link}

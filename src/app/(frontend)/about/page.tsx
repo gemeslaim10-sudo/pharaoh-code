@@ -1,4 +1,4 @@
-import { SectionData } from '@/types';
+import { type SectionData } from '@/types';
 import { admin } from '@/lib/firebase/admin';
 
 import AboutHero from '@/components/services/about/AboutHero';

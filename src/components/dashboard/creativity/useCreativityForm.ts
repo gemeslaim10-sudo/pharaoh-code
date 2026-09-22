@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { auth } from '@/lib/firebase/config';
-import { addCreativityItem } from '@/app/actions/dashboard/creativity';
+import { addCreativityItem, updateCreativityItem } from '@/app/actions/dashboard/creativity';
 import { getCategories } from '@/app/actions/dashboard/categories';
 
-export function useCreativityForm(onSuccess: () => void) {
+export function useCreativityForm(onSuccess: () => void, editingItem: any | null = null) {
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState('');
   const [titleEn, setTitleEn] = useState('');
@@ -30,6 +30,22 @@ export function useCreativityForm(onSuccess: () => void) {
     fetchCats();
   }, []);
 
+  // Prefill when an existing record is being edited
+  useEffect(() => {
+    if (!editingItem) return;
+    setTitle(editingItem.title_ar || editingItem.title || '');
+    setTitleEn(editingItem.title_en || '');
+    const cats: string[] = Array.isArray(editingItem.categories) && editingItem.categories.length > 0
+      ? editingItem.categories
+      : (editingItem.category ? String(editingItem.category).split(',').map((c: string) => c.trim()).filter(Boolean) : []);
+    if (cats.length > 0) setSelectedCategories(cats);
+    setImageUrl(editingItem.image || editingItem.imageUrl || '');
+    setLink(editingItem.link || '');
+    setAppLink(editingItem.appLink || '');
+    setDesc(editingItem.desc_ar || editingItem.desc || editingItem.description || '');
+    setDescEn(editingItem.desc_en || editingItem.description_en || '');
+  }, [editingItem]);
+
   const isAppCategory = selectedCategories.some(cat => 
     cat.toLowerCase().includes('app') || 
     cat.includes('تطبيق') || 
@@ -52,6 +68,10 @@ export function useCreativityForm(onSuccess: () => void) {
       alert('يرجى اختيار تصنيف واحد على الأقل للمشروع');
       return;
     }
+    if (!imageUrl) {
+      alert('يرجى رفع صورة غلاف المشروع من جهازك أولاً');
+      return;
+    }
     setLoading(true);
     try {
       const user = auth.currentUser;
@@ -61,7 +81,7 @@ export function useCreativityForm(onSuccess: () => void) {
       const categoryString = selectedCategories.join(',');
       const primaryCat = availableCategories.find(c => (c.slug || c.id) === selectedCategories[0]);
 
-      await addCreativityItem(token, 'portfolio', {
+      const payload = {
         title,
         title_ar: title,
         title_en: titleEn,
@@ -80,7 +100,12 @@ export function useCreativityForm(onSuccess: () => void) {
         description_en: descEn,
         link,
         appLink: isAppCategory ? appLink : ''
-      });
+      };
+      if (editingItem?.id) {
+        await updateCreativityItem(token, 'portfolio', editingItem.id, payload);
+      } else {
+        await addCreativityItem(token, 'portfolio', payload);
+      }
       
       setTitle('');
       setTitleEn('');
@@ -99,14 +124,16 @@ export function useCreativityForm(onSuccess: () => void) {
       onSuccess();
     } catch (error) {
       console.error(error);
-      alert('حدث خطأ أثناء إضافة المشروع.');
+      alert(editingItem ? 'حدث خطأ أثناء تعديل المشروع.' : 'حدث خطأ أثناء إضافة المشروع.');
     } finally {
       setLoading(false);
     }
   };
 
+  const isEditing = Boolean(editingItem?.id);
+
   return {
-    loading, title, setTitle, titleEn, setTitleEn,
+    loading, isEditing, title, setTitle, titleEn, setTitleEn,
     selectedCategories, availableCategories, toggleCategory,
     isAppCategory, imageUrl, setImageUrl, link, setLink,
     appLink, setAppLink, desc, setDesc, descEn, setDescEn,

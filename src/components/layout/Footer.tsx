@@ -8,7 +8,7 @@ import { FooterQuickLinks } from './footer/FooterQuickLinks';
 import { FooterNewsletter } from './footer/FooterNewsletter';
 import { FooterBottomBar } from './footer/FooterBottomBar';
 
-import { FooterSocialLinks } from '@/types/settings';
+import { type FooterSocialLinks } from '@/types/settings';
 
 interface FooterProps {
   siteName?: string;

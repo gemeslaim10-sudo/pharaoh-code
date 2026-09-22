@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { PackageItem } from './serviceFormTypes';
+import { type PackageItem } from './serviceFormTypes';
 import { ServiceFormPackageItemEditor } from './ServiceFormPackageItemEditor';
 
 interface ServiceFormPackagesTabProps {
@@ -8,6 +8,10 @@ interface ServiceFormPackagesTabProps {
   setPackagesTitleAr: (val: string) => void;
   packagesTitleEn: string;
   setPackagesTitleEn: (val: string) => void;
+  packagesDescAr: string;
+  setPackagesDescAr: (val: string) => void;
+  packagesDescEn: string;
+  setPackagesDescEn: (val: string) => void;
   packages: PackageItem[];
   setPackages: (packages: PackageItem[]) => void;
 }
@@ -23,6 +27,10 @@ export function ServiceFormPackagesTab({
   setPackagesTitleAr,
   packagesTitleEn,
   setPackagesTitleEn,
+  packagesDescAr,
+  setPackagesDescAr,
+  packagesDescEn,
+  setPackagesDescEn,
   packages,
   setPackages,
 }: ServiceFormPackagesTabProps) {
@@ -102,6 +110,36 @@ export function ServiceFormPackagesTab({
               value={packagesTitleEn || ''}
               onChange={e => setPackagesTitleEn(e.target.value)}
               className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl p-3 text-xs text-slate-900 dark:text-white focus:border-pharaohGold outline-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
+              dir="ltr"
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="text-xs font-bold text-slate-700 dark:text-gray-300">فقرة شرح أسفل عنوان الباقات</label>
+              <span className="inline-flex items-center leading-none text-[10px] px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-800 dark:text-pharaohGold border border-amber-500/20 font-bold">🇸🇦 عربي</span>
+            </div>
+            <textarea
+              rows={2}
+              placeholder="مثال: اختر الباقة المناسبة لنطاق وحجم العمل المطلوب."
+              value={packagesDescAr || ''}
+              onChange={e => setPackagesDescAr(e.target.value)}
+              className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl p-3 text-xs text-slate-900 dark:text-white resize-none focus:border-pharaohGold outline-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
+            />
+          </div>
+          <div>
+            <div className="flex items-center justify-between mb-1.5">
+              <label className="text-xs font-bold text-slate-700 dark:text-gray-300">Packages Section Description</label>
+              <span className="inline-flex items-center leading-none text-[10px] px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 font-bold">🇬🇧 English</span>
+            </div>
+            <textarea
+              rows={2}
+              placeholder="e.g. Select the package matching your project scope."
+              value={packagesDescEn || ''}
+              onChange={e => setPackagesDescEn(e.target.value)}
+              className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl p-3 text-xs text-slate-900 dark:text-white resize-none focus:border-pharaohGold outline-none placeholder:text-slate-400 dark:placeholder:text-gray-600"
               dir="ltr"
             />
           </div>

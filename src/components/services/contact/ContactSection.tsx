@@ -1,5 +1,5 @@
 'use client';
-import { SectionData } from '@/types';
+import { type SectionData } from '@/types';
 import ContactInfo from './ContactInfo';
 import ContactForm from './ContactForm';
 import { useTranslation } from '@/contexts/LanguageContext';

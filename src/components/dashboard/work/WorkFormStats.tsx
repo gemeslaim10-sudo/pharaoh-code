@@ -1,5 +1,5 @@
 'use client';
-import { Stat } from './workFormTypes';
+import { type Stat } from './workFormTypes';
 
 interface WorkFormStatsProps {
     stats: Stat[];

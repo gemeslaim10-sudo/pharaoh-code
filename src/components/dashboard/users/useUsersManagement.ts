@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useTransition } from 'react';
-import { RegisteredUser } from '@/types/user';
+import { useState, useTransition, useEffect, useCallback } from 'react';
+import { type RegisteredUser } from '@/types/user';
 import { getRegisteredUsersAction, deleteRegisteredUserAction } from '@/app/actions/dashboard/users';
 import { auth } from '@/lib/firebase/config';
 
@@ -20,6 +20,7 @@ export function useUsersManagement(initialUsers: RegisteredUser[], initialStats:
   const [isPending, startTransition] = useTransition();
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [copiedEmail, setCopiedEmail] = useState<string | null>(null);
+  const [error, setError] = useState('');
 
   // Filter users based on search and role
   const filteredUsers = users.filter((user) => {
@@ -35,15 +36,25 @@ export function useUsersManagement(initialUsers: RegisteredUser[], initialStats:
     return true;
   });
 
-  const handleRefresh = () => {
+  const handleRefresh = useCallback(() => {
     startTransition(async () => {
-      const res = await getRegisteredUsersAction();
-      if (res.success) {
+      setError('');
+      try {
+        const token = await auth.currentUser?.getIdToken();
+        if (!token) throw new Error('Unauthorized');
+        const res = await getRegisteredUsersAction(token);
+        if (!res.success) throw new Error('Failed to load users');
         setUsers(res.users);
         setStats(res.stats);
+      } catch {
+        setUsers([]);
+        setStats({ totalUsers: 0, adminCount: 0, memberCount: 0, activeRecentCount: 0 });
+        setError('تعذر تحميل المستخدمين. تحقق من صلاحياتك ثم أعد المحاولة.');
       }
     });
-  };
+  }, []);
+
+  useEffect(() => { handleRefresh(); }, [handleRefresh]);
 
   const handleCopyEmail = (email: string) => {
     navigator.clipboard.writeText(email);
@@ -66,11 +77,7 @@ export function useUsersManagement(initialUsers: RegisteredUser[], initialStats:
 
       const res = await deleteRegisteredUserAction(token, userId);
       if (res.success) {
-        setUsers((prev) => prev.filter((u) => u.id !== userId));
-        setStats((prev) => ({
-          ...prev,
-          totalUsers: Math.max(0, prev.totalUsers - 1),
-        }));
+        handleRefresh();
       } else {
         alert(res.error || 'فشل حذف المستخدم');
       }
@@ -110,6 +117,7 @@ export function useUsersManagement(initialUsers: RegisteredUser[], initialStats:
   };
 
   return {
+    error,
     users,
     stats,
     searchQuery,

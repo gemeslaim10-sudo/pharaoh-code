@@ -2,12 +2,12 @@
 
 import Swiper from 'swiper';
 import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
-import { SectionData } from '@/types';
+import { type SectionData } from '@/types';
 import { useEffect, useRef } from 'react';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import { getDynamicText } from '@/lib/i18nHelper';
-import { HeroThemeConfig } from '@/types/heroTheme';
+import { type HeroThemeConfig } from '@/types/heroTheme';
 import { isMediaVideo } from '@/lib/mediaHelper';
 import { HomeHeroButtons } from './hero/HomeHeroButtons';
 import { HomeHeroSlide } from './hero/HomeHeroSlide';
@@ -77,19 +77,30 @@ export default function HomeHero({ data, heroThemeConfig }: HomeHeroProps) {
 
   const accentClass = presetAccentClasses[activePresetKey] || 'text-pharaohGold';
 
-  const slide1Title1 = getDynamicText(heroData.slides?.[0] || heroData, 'titlePart1', language) || t('hero.slide1.titlePart1') || 'نبني المستقبل';
-  const slide1Title2 = getDynamicText(heroData.slides?.[0] || heroData, 'titlePart2', language) || t('hero.slide1.titlePart2') || 'الرقمي';
-  const slide1Title3 = getDynamicText(heroData.slides?.[0] || heroData, 'titlePart3', language) || t('hero.slide1.titlePart3') || 'بفكر فرعوني سيادي';
-  const slide1Subtitle = getDynamicText(heroData.slides?.[0] || heroData, 'subtitle', language) || getDynamicText(heroData, 'description', language) || t('hero.slide1.subtitle');
+  // CMS (dashboard → الصفحة الرئيسية) wins, then the legacy `slides[]` shape, then i18n.
+  const slide1Title1 = getDynamicText(heroData, 'titlePart1', language) || getDynamicText(heroData.slides?.[0], 'titlePart1', language) || t('hero.slide1.titlePart1') || 'نبني المستقبل';
+  const slide1Title2 = getDynamicText(heroData, 'titlePart2', language) || getDynamicText(heroData.slides?.[0], 'titlePart2', language) || t('hero.slide1.titlePart2') || 'الرقمي';
+  const slide1Title3 = getDynamicText(heroData, 'titlePart3', language) || getDynamicText(heroData.slides?.[0], 'titlePart3', language) || t('hero.slide1.titlePart3') || 'بفكر فرعوني سيادي';
+  const slide1Subtitle = getDynamicText(heroData, 'subtitle', language)
+    || getDynamicText(heroData, 'description', language)
+    || getDynamicText(heroData.slides?.[0], 'subtitle', language)
+    || t('hero.slide1.subtitle');
 
-  const slide2Title1 = getDynamicText(heroData.slides?.[1], 'titlePart1', language) || t('hero.slide2.titlePart1') || 'حلول برمجية';
-  const slide2Title2 = getDynamicText(heroData.slides?.[1], 'titlePart2', language) || t('hero.slide2.titlePart2') || 'استثنائية وفارقة';
-  const slide2Subtitle = getDynamicText(heroData.slides?.[1], 'subtitle', language) || t('hero.slide2.subtitle');
+  const slide2Title1 = getDynamicText(heroData, 'slide2TitlePart1', language) || getDynamicText(heroData.slides?.[1], 'titlePart1', language) || t('hero.slide2.titlePart1') || 'حلول برمجية';
+  const slide2Title2 = getDynamicText(heroData, 'slide2TitlePart2', language) || getDynamicText(heroData.slides?.[1], 'titlePart2', language) || t('hero.slide2.titlePart2') || 'استثنائية وفارقة';
+  const slide2Subtitle = getDynamicText(heroData, 'slide2Subtitle', language) || getDynamicText(heroData.slides?.[1], 'subtitle', language) || t('hero.slide2.subtitle');
+
+  const primaryBtnText = getDynamicText(heroData, 'primaryBtnText', language) || (language === 'ar' ? 'اكتشف عالمنا' : 'Discover Our World');
+  const secondaryBtnText = getDynamicText(heroData, 'secondaryBtnText', language) || (language === 'ar' ? 'تواصل معنا' : 'Contact Us');
+  const primaryBtnLink = (typeof heroData.primaryBtnLink === 'string' && heroData.primaryBtnLink.trim()) || '/services';
+  const secondaryBtnLink = (typeof heroData.secondaryBtnLink === 'string' && heroData.secondaryBtnLink.trim()) || '/contact';
 
   const buttons = (
     <HomeHeroButtons
-      discoverText={language === 'ar' ? 'اكتشف عالمنا' : 'Discover Our World'}
-      contactText={language === 'ar' ? 'تواصل معنا' : 'Contact Us'}
+      discoverText={primaryBtnText}
+      contactText={secondaryBtnText}
+      discoverHref={primaryBtnLink}
+      contactHref={secondaryBtnLink}
     />
   );
 

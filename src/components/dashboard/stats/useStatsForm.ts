@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { auth } from '@/lib/firebase/config';
 import { getStatsContent, updateStatsContent } from '@/app/actions/dashboard/stats';
-import { StatsSectionData, DEFAULT_STATS_DATA } from '@/types/stats';
+import { type StatsSectionData, DEFAULT_STATS_DATA } from '@/types/stats';
 
 
 export function useStatsForm() {

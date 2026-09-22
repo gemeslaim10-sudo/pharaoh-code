@@ -1,4 +1,4 @@
-import { Translations } from '@/types/i18n';
+import { type Translations } from '@/types/i18n';
 import { ar } from './translations/ar';
 import { en } from './translations/en';
 

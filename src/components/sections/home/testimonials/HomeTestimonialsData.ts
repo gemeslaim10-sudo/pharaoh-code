@@ -1,5 +1,5 @@
 export type { TestimonialItem } from '@/types/review';
-import { TestimonialItem } from '@/types/review';
+import { type TestimonialItem } from '@/types/review';
 
 
 

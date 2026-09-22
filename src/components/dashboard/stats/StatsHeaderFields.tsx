@@ -1,6 +1,6 @@
 'use client';
 
-import { StatsSectionData } from '@/types/stats';
+import { type StatsSectionData } from '@/types/stats';
 
 interface StatsHeaderFieldsProps {
   form: StatsSectionData;

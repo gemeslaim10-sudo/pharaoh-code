@@ -1,7 +1,6 @@
 import Preloader from "@/components/layout/Preloader";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import GlobalScripts from "@/components/layout/GlobalScripts";
 import PageTransitionWrapper from "@/components/layout/PageTransitionWrapper";
 import ScrollProgressBar from "@/components/layout/ScrollProgressBar";
 import FloatingActions from "@/components/layout/FloatingActions";
@@ -73,7 +72,7 @@ export default async function FrontendLayout({
     <>
       {showScrollProgress && <ScrollProgressBar />}
       <Preloader siteName={siteName} logoUrl={logoUrl} logoLightUrl={logoLightUrl} />
-      <Navbar siteName={siteName} siteNameAr={siteNameAr} siteNameEn={siteNameEn} logoUrl={logoUrl} logoLightUrl={logoLightUrl} reverseNavbarAr={reverseNavbarAr} />
+      <Navbar whatsappNumber={whatsappNumber} siteName={siteName} siteNameAr={siteNameAr} siteNameEn={siteNameEn} logoUrl={logoUrl} logoLightUrl={logoLightUrl} reverseNavbarAr={reverseNavbarAr} />
       
       <main className="flex-grow pb-16 md:pb-0">
         <PageTransitionWrapper>{children}</PageTransitionWrapper>
@@ -82,7 +81,6 @@ export default async function FrontendLayout({
       {showSideScrollbar && <FloatingActions whatsappNumber={whatsappNumber} />}
       <MobileBottomNav whatsappNumber={whatsappNumber} logoUrl={logoUrl} logoLightUrl={logoLightUrl} />
       <Footer siteName={siteName} siteNameAr={siteNameAr} siteNameEn={siteNameEn} logoUrl={logoUrl} logoLightUrl={logoLightUrl} socialLinks={socialLinks} />
-      <GlobalScripts />
     </>
   );
 }

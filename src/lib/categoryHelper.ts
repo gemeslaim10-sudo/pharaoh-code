@@ -1,5 +1,5 @@
-import { CategoryItem } from '@/types/category';
-import { SectionItem } from '@/types';
+import { type CategoryItem } from '@/types/category';
+import { type SectionItem } from '@/types';
 
 /**
  * Checks if a portfolio project belongs to a given category.

@@ -11,8 +11,6 @@ export default function SettingsHeroTheme() {
     initialLoad,
     config,
     setConfig,
-    uploadingField,
-    handleFileUpload,
     handleSubmit,
   } = useHeroThemeSettings();
 
@@ -52,8 +50,6 @@ export default function SettingsHeroTheme() {
               setSlide2Media={val => setConfig(prev => ({ ...prev, darkSlide2Media: val, darkSlide2Video: val, darkSlide2Image: val }))}
               selectedPreset={config.darkPreset || 'royal_gold'}
               onSelectPreset={id => setConfig(prev => ({ ...prev, darkPreset: id }))}
-              uploadingField={uploadingField}
-              onFileUpload={handleFileUpload}
             />
           ),
         }}
@@ -79,8 +75,6 @@ export default function SettingsHeroTheme() {
               setSlide2Media={val => setConfig(prev => ({ ...prev, lightSlide2Media: val, lightSlide2Video: val, lightSlide2Image: val }))}
               selectedPreset={config.lightPreset || 'royal_gold'}
               onSelectPreset={id => setConfig(prev => ({ ...prev, lightPreset: id }))}
-              uploadingField={uploadingField}
-              onFileUpload={handleFileUpload}
             />
           ),
         }}

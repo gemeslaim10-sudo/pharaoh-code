@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { DashboardSectionLayoutProps } from '@/types/dashboardLayout';
+import { type DashboardSectionLayoutProps } from '@/types/dashboardLayout';
 import { DashboardSectionNavbar } from './DashboardSectionNavbar';
 import { DashboardAccordionGroup } from './DashboardAccordionGroup';
 import { DashboardAccordionToolbar } from './DashboardAccordionToolbar';

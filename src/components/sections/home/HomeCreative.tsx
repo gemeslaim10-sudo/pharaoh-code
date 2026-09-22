@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { SectionData } from '@/types';
+import { type SectionData } from '@/types';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 import { FALLBACK_CREATIVE } from './creative/creativeHelpers';
@@ -37,9 +37,9 @@ export default function HomeCreative({ data }: { data?: SectionData }) {
           </div>
 
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white leading-[1.3] mb-3 tracking-normal pt-0.5">
-            {t("creative.titlePart1")}{' '}
+            {getDynamicText(data, 'titlePart1', language) || t("creative.titlePart1")}{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F5DEB3] via-[#C5A16F] to-[#9E7D47] italic">
-              {t("creative.titlePart2")}
+              {getDynamicText(data, 'titlePart2', language) || t("creative.titlePart2")}
             </span>
           </h3>
 
@@ -54,7 +54,10 @@ export default function HomeCreative({ data }: { data?: SectionData }) {
           onHoverPillar={setActivePillar}
         />
 
-        <HomeCreativeBanner />
+        <HomeCreativeBanner
+          text={getDynamicText(data, 'bannerText', language)}
+          badge={typeof data?.bannerBadge === 'string' ? data.bannerBadge : ''}
+        />
       </div>
     </section>
   );

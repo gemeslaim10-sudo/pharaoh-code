@@ -1,4 +1,5 @@
 'use client';
+import { OWNER_EMAIL } from '@/lib/authPolicy';
 
 interface AdminItem {
   id: string;
@@ -23,7 +24,7 @@ export function AdminsTable({ admins, onDelete }: AdminsTableProps) {
         <tbody>
           {/* Master Admin */}
           <tr className="border-b border-slate-200 dark:border-white/5 hover:bg-slate-50 dark:hover:bg-white/5 transition">
-            <td className="px-6 py-4 font-bold text-slate-900 dark:text-white">cubsacademy29@gmail.com</td>
+            <td className="px-6 py-4 font-bold text-slate-900 dark:text-white">{OWNER_EMAIL}</td>
             <td className="px-6 py-4 text-center">
               <span className="inline-flex items-center gap-1.5 text-xs text-amber-800 dark:text-pharaohGold bg-amber-500/10 dark:bg-pharaohGold/10 px-3 py-1 rounded-full border border-amber-500/20 dark:border-pharaohGold/20 font-bold">
                 <svg className="w-3.5 h-3.5 text-amber-800 dark:text-pharaohGold" fill="none" viewBox="0 0 24 24" stroke="currentColor">

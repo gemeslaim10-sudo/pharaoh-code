@@ -1,18 +1,19 @@
 'use client';
 
+import { ServicesPageHeaderFields } from '@/components/dashboard/tech-stack/ServicesPageHeaderFields';
 import { TechStackHeaderFields } from '@/components/dashboard/tech-stack/TechStackHeaderFields';
 import { TechStackCardsSection } from '@/components/dashboard/tech-stack/TechStackCardsSection';
 import { useTechStackForm } from '@/components/dashboard/tech-stack/useTechStackForm';
 
 export default function DashboardTechStackPage() {
-  const { loading, saving, message, form, setForm, handleSave } = useTechStackForm();
+  const { loading, saving, message, form, setForm, header, setHeaderField, addCard, removeCard, handleSave } = useTechStackForm();
 
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-pharaohGold text-lg font-bold flex items-center gap-3">
           <div className="w-6 h-6 border-2 border-pharaohGold border-t-transparent rounded-full animate-spin" />
-          جاري تحميل بيانات قسم التقنيات...
+          جاري تحميل بيانات صفحة الخدمات...
         </div>
       </div>
     );
@@ -22,8 +23,8 @@ export default function DashboardTechStackPage() {
     <div className="space-y-8 max-w-6xl mx-auto pb-12">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-pharaohGold/10 pb-6">
         <div>
-          <h1 className="text-3xl font-black text-slate-900 dark:text-white">إدارة محتوى قسم التقنيات (Tech Stack)</h1>
-          <p className="text-slate-600 dark:text-gray-400 text-sm mt-1">تعديل النصوص العربية والإنجليزية لقسم التقنيات مع الحفاظ على القيم الافتراضية</p>
+          <h1 className="text-3xl font-black text-slate-900 dark:text-white">صفحة الخدمات: الرأس وقسم التقنيات</h1>
+          <p className="text-slate-600 dark:text-gray-400 text-sm mt-1">تعديل رأس صفحة الخدمات وبطاقات قسم التقنيات بالعربية والإنجليزية مع الحفاظ على القيم الافتراضية</p>
         </div>
         <button
           onClick={handleSave}
@@ -47,8 +48,9 @@ export default function DashboardTechStackPage() {
       )}
 
       <form onSubmit={handleSave} className="space-y-8">
+        <ServicesPageHeaderFields header={header} setHeaderField={setHeaderField} />
         <TechStackHeaderFields form={form} setForm={setForm} />
-        <TechStackCardsSection form={form} setForm={setForm} />
+        <TechStackCardsSection form={form} setForm={setForm} addCard={addCard} removeCard={removeCard} />
 
         <div className="pt-4 flex justify-end">
           <button

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { getDynamicText } from '@/lib/i18nHelper';
-import { Language } from '@/types/i18n';
+import { type Language } from '@/types/i18n';
 
 interface TeamMemberStatsSectionProps {
   stats: any[];

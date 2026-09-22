@@ -1,7 +1,7 @@
 'use client';
 
-import { SectionData, SectionItem } from '@/types';
-import { CategoryItem } from '@/types/category';
+import { type SectionData, type SectionItem } from '@/types';
+import { type CategoryItem } from '@/types/category';
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
@@ -113,11 +113,11 @@ export default function HomePortfolio({ data }: { data?: SectionData }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <HomePortfolioHeader
           subtitle={getDynamicText(data, 'subtitle', language) || t("portfolio.subtitle")}
-          titlePart1={t("portfolio.titlePart1")}
-          titlePart2={t("portfolio.titlePart2")}
+          titlePart1={getDynamicText(data, 'titlePart1', language) || t("portfolio.titlePart1")}
+          titlePart2={getDynamicText(data, 'titlePart2', language) || t("portfolio.titlePart2")}
           desc={getDynamicText(data, 'description', language) || (language === 'ar' ? 'معرض يضم أبرز مشاريعنا وحلولنا البرمجية المبتكرة ذات الأثر الملموس.' : 'A showcase of our premier digital architectures and high-impact software solutions.')}
           direction={direction}
-          viewAllText={t("portfolio.viewAllProjects") || (language === 'ar' ? 'عرض كافة الأعمال' : 'View Full Portfolio')}
+          viewAllText={getDynamicText(data, 'linkText', language) || t("portfolio.viewAllProjects") || (language === 'ar' ? 'عرض كافة الأعمال' : 'View Full Portfolio')}
         />
 
         <HomePortfolioFilterBar

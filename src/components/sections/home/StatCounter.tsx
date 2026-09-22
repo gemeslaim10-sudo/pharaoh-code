@@ -34,7 +34,7 @@ export default function StatCounter({ targetValue, duration = 2000 }: { targetVa
   useEffect(() => {
     if (!isVisible) return;
 
-    let start = 0;
+    const start = 0;
     const end = targetValue;
     if (start === end) return;
 

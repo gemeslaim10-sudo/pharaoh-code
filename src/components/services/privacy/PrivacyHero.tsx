@@ -1,4 +1,4 @@
-import { SectionData } from '@/types';
+import { type SectionData } from '@/types';
 interface PrivacyHeroProps {
     data?: SectionData;
 }

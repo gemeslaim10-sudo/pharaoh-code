@@ -2,31 +2,46 @@
 
 import { CreativityCategorySelector } from './CreativityCategorySelector';
 import { useCreativityForm } from './useCreativityForm';
+import { MediaUploadField } from '@/components/dashboard/common/MediaUploadField';
 
 interface Props {
   onSuccess: () => void;
+  editingItem?: any | null;
+  onCancelEdit?: () => void;
 }
 
-export default function CreativityProjectForm({ onSuccess }: Props) {
+const inputCls = "w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition";
+const labelCls = "block text-xs font-bold text-amber-800 dark:text-pharaohGold uppercase tracking-wider mb-2";
+
+export default function CreativityProjectForm({ onSuccess, editingItem = null, onCancelEdit }: Props) {
   const {
-    loading, title, setTitle, titleEn, setTitleEn,
+    loading, isEditing, title, setTitle, titleEn, setTitleEn,
     selectedCategories, availableCategories, toggleCategory,
     isAppCategory, imageUrl, setImageUrl, link, setLink,
     appLink, setAppLink, desc, setDesc, descEn, setDescEn,
     handleSubmit
-  } = useCreativityForm(onSuccess);
+  } = useCreativityForm(onSuccess, editingItem);
 
   return (
     <form onSubmit={handleSubmit} className="db-form-content bg-white dark:bg-[#112240] border border-slate-200 dark:border-white/5 rounded-3xl p-6 lg:p-10 shadow-md dark:shadow-2xl relative">
-      <div className="absolute top-0 left-10 transform -translate-y-1/2 bg-pharaohGold text-[#0A192F] font-black text-[10px] uppercase tracking-[3px] px-4 py-1.5 rounded-full shadow-lg">PORTFOLIO DEPLOYMENT</div>
+      <div className="absolute top-0 left-10 transform -translate-y-1/2 bg-pharaohGold text-[#0A192F] font-black text-[10px] uppercase tracking-[3px] px-4 py-1.5 rounded-full shadow-lg">
+        {isEditing ? 'EDIT PROJECT' : 'PORTFOLIO DEPLOYMENT'}
+      </div>
+
+      {isEditing && (
+        <div className="mb-6 bg-amber-500/10 border border-amber-500/30 dark:border-pharaohGold/30 text-amber-900 dark:text-pharaohGold text-xs font-bold px-4 py-3 rounded-xl">
+          أنت تعدّل المشروع: <span className="font-black">{editingItem?.title_ar || editingItem?.title}</span>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
-          <label className="block text-xs font-bold text-amber-800 dark:text-pharaohGold uppercase tracking-wider mb-2">عنوان المشروع (بالعربية)</label>
-          <input type="text" required value={title} onChange={e => setTitle(e.target.value)} className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition" placeholder="مثال: منصة حورس للتجارة الإلكترونية" />
+          <label className={labelCls}>عنوان المشروع (بالعربية)</label>
+          <input type="text" required value={title} onChange={e => setTitle(e.target.value)} className={inputCls} placeholder="مثال: منصة حورس للتجارة الإلكترونية" />
         </div>
         <div>
-          <label className="block text-xs font-bold text-amber-800 dark:text-pharaohGold uppercase tracking-wider mb-2">عنوان المشروع (بالإنجليزية - Title EN)</label>
-          <input type="text" value={titleEn} onChange={e => setTitleEn(e.target.value)} className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition" placeholder="e.g. Horus E-Commerce Platform" dir="ltr" />
+          <label className={labelCls}>عنوان المشروع (بالإنجليزية - Title EN)</label>
+          <input type="text" value={titleEn} onChange={e => setTitleEn(e.target.value)} className={inputCls} placeholder="e.g. Horus E-Commerce Platform" dir="ltr" />
         </div>
 
         <CreativityCategorySelector
@@ -51,27 +66,39 @@ export default function CreativityProjectForm({ onSuccess }: Props) {
         )}
 
         <div>
-          <label className="block text-xs font-bold text-amber-800 dark:text-pharaohGold uppercase tracking-wider mb-2">رابط غلاف المشروع (Image URL)</label>
-          <input type="url" required value={imageUrl} onChange={e => setImageUrl(e.target.value)} className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition" placeholder="https://example.com/image.jpg" />
+          <MediaUploadField
+            label="غلاف المشروع (صورة من الجهاز)"
+            value={imageUrl}
+            onChange={setImageUrl}
+            accept="image"
+            required
+            previewClassName="w-full h-32"
+          />
         </div>
 
         <div>
-          <label className="block text-xs font-bold text-amber-800 dark:text-pharaohGold uppercase tracking-wider mb-2">رابط المشروع الحي (Project Link - اختياري)</label>
-          <input type="url" value={link} onChange={e => setLink(e.target.value)} className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition" placeholder="https://my-project.com" dir="ltr" />
+          <label className={labelCls}>رابط المشروع الحي (Project Link - اختياري)</label>
+          <input type="url" value={link} onChange={e => setLink(e.target.value)} className={inputCls} placeholder="https://my-project.com" dir="ltr" />
         </div>
 
         <div>
-          <label className="block text-xs font-bold text-amber-800 dark:text-pharaohGold uppercase tracking-wider mb-2">شرح المشروع (بالعربية)</label>
-          <textarea rows={3} required value={desc} onChange={e => setDesc(e.target.value)} className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition resize-none" placeholder="اكتب هنا التفاصيل المعمارية البرمجية للمشروع المنجز..." />
+          <label className={labelCls}>شرح المشروع (بالعربية)</label>
+          <textarea rows={3} required value={desc} onChange={e => setDesc(e.target.value)} className={`${inputCls} resize-none`} placeholder="اكتب هنا التفاصيل المعمارية البرمجية للمشروع المنجز..." />
         </div>
         <div>
-          <label className="block text-xs font-bold text-amber-800 dark:text-pharaohGold uppercase tracking-wider mb-2">شرح المشروع (بالإنجليزية - Description EN)</label>
-          <textarea rows={3} value={descEn} onChange={e => setDescEn(e.target.value)} className="w-full bg-slate-50 dark:bg-[#0A192F] border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-pharaohGold transition resize-none" placeholder="Write software architectural details in English..." dir="ltr" />
+          <label className={labelCls}>شرح المشروع (بالإنجليزية - Description EN)</label>
+          <textarea rows={3} value={descEn} onChange={e => setDescEn(e.target.value)} className={`${inputCls} resize-none`} placeholder="Write software architectural details in English..." dir="ltr" />
         </div>
       </div>
-      <div className="mt-8 flex justify-end">
+
+      <div className="mt-8 flex justify-end gap-3">
+        {isEditing && onCancelEdit && (
+          <button type="button" onClick={onCancelEdit} className="border border-slate-300 dark:border-white/20 text-slate-700 dark:text-gray-300 font-bold text-xs px-6 py-4 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 transition cursor-pointer">
+            إلغاء التعديل
+          </button>
+        )}
         <button type="submit" disabled={loading} className="bg-gradient-to-r from-pharaohGold to-amber-600 text-pharaohNavy font-black text-xs uppercase tracking-widest px-8 py-4 rounded-xl shadow-xl shadow-pharaohGold/10 hover:opacity-90 transition disabled:opacity-50 cursor-pointer">
-          {loading ? 'جاري التنصيب...' : 'تنصيب المشروع في المعرض'}
+          {loading ? 'جاري الحفظ...' : (isEditing ? 'حفظ تعديلات المشروع' : 'تنصيب المشروع في المعرض')}
         </button>
       </div>
     </form>

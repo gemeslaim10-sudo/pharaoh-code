@@ -8,6 +8,8 @@ interface HomeTestimonialsCardProps {
   activeContent: string;
   activeCompany?: string;
   activeImg?: string;
+  /** Stored review rating; anything outside 1-5 falls back to a full 5 stars. */
+  activeRating?: number | string;
 }
 
 export function HomeTestimonialsCard({
@@ -16,8 +18,13 @@ export function HomeTestimonialsCard({
   activeContent,
   activeCompany,
   activeImg,
+  activeRating,
 }: HomeTestimonialsCardProps) {
   const { language, direction } = useTranslation();
+
+  const starCount = typeof activeRating === 'number' && activeRating >= 1 && activeRating <= 5
+    ? Math.round(activeRating)
+    : 5;
 
   return (
     <div className="lg:col-span-7 flex flex-col justify-between rounded-2xl p-6 sm:p-8 bg-gradient-to-br from-[#0F1E38] via-[#091528] to-[#050B14] border border-[#C5A16F]/30 shadow-[0_15px_40px_rgba(0,0,0,0.7)] relative overflow-hidden group">
@@ -32,8 +39,11 @@ export function HomeTestimonialsCard({
       {/* Top Stars & Verified Status */}
       <div className="flex items-center justify-between relative z-10 mb-5">
         <div className="flex items-center gap-0.5 text-[#C5A16F] text-sm sm:text-base">
-          {[...Array(5)].map((_, i) => (
+          {[...Array(starCount)].map((_, i) => (
             <span key={i} className="drop-shadow-[0_0_6px_rgba(197,161,111,0.5)]">★</span>
+          ))}
+          {[...Array(5 - starCount)].map((_, i) => (
+            <span key={`empty-${i}`} className="text-white/20">★</span>
           ))}
         </div>
 

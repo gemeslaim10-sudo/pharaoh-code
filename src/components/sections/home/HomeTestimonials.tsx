@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { SectionData } from '@/types';
+import { type SectionData } from '@/types';
 import { useTranslation } from '@/contexts/LanguageContext';
 import { getDynamicText } from '@/lib/i18nHelper';
 import { FALLBACK_TESTIMONIALS } from './testimonials/HomeTestimonialsData';
-import { TestimonialItem } from '@/types/review';
+import { type TestimonialItem } from '@/types/review';
 import { HomeTestimonialsCard } from './testimonials/HomeTestimonialsCard';
 import { HomeTestimonialsList } from './testimonials/HomeTestimonialsList';
 
@@ -28,7 +28,7 @@ export default function HomeTestimonials({ data }: { data?: SectionData }) {
   const activeName = getDynamicText(activeReview, 'name', language) || activeReview.name || '';
   const activeRole = getDynamicText(activeReview, 'role', language) || activeReview.role || (language === 'ar' ? 'شريك نجاح' : 'Success Partner');
   const activeContent = getDynamicText(activeReview, 'content', language) || getDynamicText(activeReview, 'text', language) || activeReview.content || activeReview.text || '';
-  const activeCompany = activeReview.company || '';
+  const activeCompany = getDynamicText(activeReview, 'company', language) || activeReview.company || '';
   const activeImg = activeReview.imageUrl || activeReview.image || '';
 
   return (
@@ -56,16 +56,16 @@ export default function HomeTestimonials({ data }: { data?: SectionData }) {
           </div>
 
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white leading-[1.3] mb-2.5 tracking-normal pt-0.5">
-            {t("testimonials.titlePart1")}{' '}
+            {getDynamicText(data, 'titlePart1', language) || t("testimonials.titlePart1")}{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F3E0B5] via-[#C5A16F] to-[#9E7D47] italic">
-              {t("testimonials.titlePart2")}
+              {getDynamicText(data, 'titlePart2', language) || t("testimonials.titlePart2")}
             </span>
           </h3>
 
           <p className="text-gray-400 text-xs sm:text-sm md:text-base leading-relaxed font-light max-w-2xl">
-            {language === 'ar' 
-              ? 'شهادات حقيقية من قادة الأعمال والشركات التي وثقت بنا لتحقيق تحولها الرقمي وصناعة الفارق.' 
-              : 'Authentic testimonials from industry leaders and visionary enterprises who partnered with us.'}
+            {getDynamicText(data, 'description', language) || (language === 'ar'
+              ? 'شهادات حقيقية من قادة الأعمال والشركات التي وثقت بنا لتحقيق تحولها الرقمي وصناعة الفارق.'
+              : 'Authentic testimonials from industry leaders and visionary enterprises who partnered with us.')}
           </p>
         </div>
 
@@ -77,6 +77,7 @@ export default function HomeTestimonials({ data }: { data?: SectionData }) {
             activeContent={activeContent}
             activeCompany={activeCompany}
             activeImg={activeImg}
+            {...(activeReview.rating !== undefined ? { activeRating: activeReview.rating } : {})}
           />
           <HomeTestimonialsList
             items={displayItems}

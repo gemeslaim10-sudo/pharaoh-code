@@ -3,7 +3,6 @@ import { Tajawal } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from '@/contexts/AuthContext';
 import { LanguageProvider } from '@/contexts/LanguageContext';
-import Script from 'next/script';
 
 const tajawal = Tajawal({
   subsets: ["arabic", "latin"],
@@ -38,7 +37,6 @@ export default function RootLayout({
       <body
         className={`${tajawal.className} ${tajawal.variable} font-sans antialiased`}
       >
-        <Script src="https://code.jquery.com/jquery-3.7.1.min.js" strategy="afterInteractive" />
         <ThemeProvider>
           <LanguageProvider>
             <AuthProvider>

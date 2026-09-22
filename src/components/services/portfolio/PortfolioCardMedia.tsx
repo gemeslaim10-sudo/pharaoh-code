@@ -21,12 +21,16 @@ export function PortfolioCardMedia({
 }: PortfolioCardMediaProps) {
   return (
     <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-950">
-      <img
-        src={imageUrl}
-        alt={itemTitle}
-        className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-108 group-hover:brightness-105"
-        loading="lazy"
-      />
+      {imageUrl ? (
+        <img
+          src={imageUrl}
+          alt={itemTitle}
+          className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-108 group-hover:brightness-105"
+          loading="lazy"
+        />
+      ) : (
+        <div className="w-full h-full bg-gradient-to-br from-[#112240] via-[#0A192F] to-[#050B14] flex items-center justify-center text-[#C5A16F]/40 text-5xl font-serif select-none">✦</div>
+      )}
 
       {/* Ambient Dark Scrim */}
       <div className="absolute inset-0 bg-gradient-to-t from-[#050B14]/90 via-transparent to-black/30 pointer-events-none" />

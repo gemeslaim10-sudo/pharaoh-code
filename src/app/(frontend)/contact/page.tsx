@@ -1,4 +1,4 @@
-import { SectionData } from '@/types';
+import { type SectionData } from '@/types';
 import { admin, serializeData } from '@/lib/firebase/admin';
 import ContactSection from '@/components/services/contact/ContactSection';
 import { getSocialLinks } from '@/app/actions/dashboard/settings';
@@ -43,8 +43,6 @@ export default async function ContactPage() {
   }
 
   return (
-    <>
-      <ContactSection data={data} />
-    </>
+    <ContactSection data={data} />
   );
 }

@@ -1,7 +1,10 @@
 'use server';
 
+import { authenticateAdmin } from './auth';
+
 import { admin, serializeData } from '@/lib/firebase/admin';
-import { HeroThemeConfig } from '@/types/heroTheme';
+import { type HeroThemeConfig } from '@/types/heroTheme';
+import { revalidateSite } from '@/lib/revalidateSite';
 
 export async function getHeroThemeConfig(): Promise<HeroThemeConfig | null> {
     try {
@@ -15,15 +18,14 @@ export async function getHeroThemeConfig(): Promise<HeroThemeConfig | null> {
 
 export async function updateHeroThemeConfig(token: string, data: HeroThemeConfig) {
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        if (!decodedToken) throw new Error('Unauthorized');
+        await authenticateAdmin(token);
         
         const db = admin.firestore();
         await db.collection('settings').doc('heroTheme').set({
             ...data,
             updatedAt: admin.firestore.FieldValue.serverTimestamp()
         }, { merge: true });
-        
+        revalidateSite();
         return { success: true };
     } catch (error: any) {
         throw new Error(error.message);

@@ -28,7 +28,7 @@ export async function GET() {
 
   const results = [];
   results.push(await probe('import firebase-admin/app', () => import('firebase-admin/app').then(m => Object.keys(m).length)));
-  results.push(await probe('import isomorphic-dompurify', () => import('isomorphic-dompurify').then(m => typeof (m.default as any)?.sanitize)));
+  results.push(await probe('import sanitize-html', () => import('sanitize-html').then(m => typeof m.default)));
   results.push(await probe('sanitizeSvg("<svg/>")', () => import('@/lib/sanitizeSvg').then(m => m.sanitizeSvg('<svg viewBox="0 0 1 1"></svg>'))));
   results.push(await probe('import lib/firebase/admin', () => import('@/lib/firebase/admin').then(m => Object.keys(m))));
   results.push(await probe('firestore read services(limit 1)', () => import('@/lib/firebase/admin').then(m => m.db.collection('services').limit(1).get().then(s => s.size))));

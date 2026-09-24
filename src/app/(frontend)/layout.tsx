@@ -7,6 +7,7 @@ import FloatingActions from "@/components/layout/FloatingActions";
 import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import { getIdentity, getSocialLinks, getSystemStatus } from '@/app/actions/dashboard/settings';
 import Link from 'next/link';
+import MetaPixel from "@/components/layout/MetaPixel";
 
 export default async function FrontendLayout({
   children,
@@ -31,6 +32,8 @@ export default async function FrontendLayout({
 
   if (systemStatus?.mode === 'on') {
     return (
+      <>
+      <MetaPixel />
       <main className="min-h-screen bg-[#0A192F] flex flex-col items-center justify-center p-6 text-center relative overflow-hidden" dir="rtl">
         {/* Animated Background Elements */}
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-pharaohGold/5 rounded-full blur-[100px] animate-pulse"></div>
@@ -65,11 +68,13 @@ export default async function FrontendLayout({
           </div>
         </div>
       </main>
+      </>
     );
   }
 
   return (
     <>
+      <MetaPixel />
       {showScrollProgress && <ScrollProgressBar />}
       <Preloader siteName={siteName} logoUrl={logoUrl} logoLightUrl={logoLightUrl} />
       <Navbar whatsappNumber={whatsappNumber} siteName={siteName} siteNameAr={siteNameAr} siteNameEn={siteNameEn} logoUrl={logoUrl} logoLightUrl={logoLightUrl} reverseNavbarAr={reverseNavbarAr} />

@@ -10,7 +10,17 @@ interface Props {
   language: string;
 }
 
-/** Masonry grid of the project's designs/screens with a keyboard-friendly lightbox. */
+/** Column count that fills every row for the common gallery sizes (no lonely last tile). */
+function gridColsFor(count: number): string {
+  if (count <= 1) return 'grid-cols-1';
+  if (count === 2) return 'grid-cols-2';
+  if (count === 3) return 'grid-cols-1 sm:grid-cols-3';
+  if (count === 4) return 'grid-cols-2 lg:grid-cols-4';
+  if (count % 3 === 0) return 'grid-cols-2 lg:grid-cols-3';
+  return 'grid-cols-2 lg:grid-cols-4';
+}
+
+/** Grid of the project's designs/screens with a keyboard-friendly lightbox. */
 export function PortfolioDetailGallery({ images, title, theme, language }: Props) {
   const [open, setOpen] = useState<number | null>(null);
   const isRtl = language === 'ar';
@@ -38,24 +48,26 @@ export function PortfolioDetailGallery({ images, title, theme, language }: Props
 
   return (
     <>
-      <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 [column-fill:_balance]">
+      <div className={`grid gap-4 ${gridColsFor(images.length)}`}>
         {images.map((src, i) => (
           <button
             key={`${src}-${i}`}
             type="button"
             onClick={() => setOpen(i)}
-            className={`group relative mb-4 block w-full break-inside-avoid overflow-hidden rounded-2xl border cursor-zoom-in ${
-              theme.isLight ? 'bg-white border-slate-200' : 'bg-[#0A1628] border-white/10'
-            }`}
+            className={`group relative block w-full overflow-hidden rounded-2xl border cursor-zoom-in ${
+              images.length === 1 ? 'aspect-[16/9]' : 'aspect-[4/5]'
+            } ${theme.isLight ? 'bg-white border-slate-200' : 'bg-[#0A1628] border-white/10'}`}
             aria-label={`${title} — ${i + 1}`}
           >
             <img
               src={src}
               alt={`${title} — ${i + 1}`}
               loading="lazy"
-              className="w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+              className={`absolute inset-0 w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.04] ${
+                images.length === 1 ? 'object-contain' : 'object-cover'
+              }`}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <span className="absolute bottom-3 end-3 w-9 h-9 rounded-xl bg-white/15 backdrop-blur-md border border-white/25 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-1 group-hover:translate-y-0">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" /></svg>
             </span>

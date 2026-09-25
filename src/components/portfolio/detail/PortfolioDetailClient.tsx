@@ -90,47 +90,74 @@ export default function PortfolioDetailClient({ project, categories, related }: 
     </svg>
   );
 
+  const excerpt = description.length > 240 ? `${description.slice(0, 240).trim()}…` : description;
+  const hasAside = project.tools.length > 0 || Boolean(project.link) || Boolean(project.appLink);
+  const mediaSummary = [
+    project.gallery.length > 0 && tr(`${project.gallery.length} تصميم`, `${project.gallery.length} designs`),
+    project.videos.length > 0 && tr(`${project.videos.length} فيديو`, `${project.videos.length} videos`),
+  ].filter(Boolean).join(' · ');
+
   return (
     <div className={`relative min-h-screen overflow-hidden transition-colors duration-500 ${c.page}`} dir={direction}>
-      {/* Ambient lighting */}
-      <div className="absolute inset-x-0 top-0 h-[640px] pointer-events-none overflow-hidden">
-        <div className={`absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[420px] rounded-full blur-[150px] ${isLight ? 'bg-[#C5A16F]/15' : 'bg-[#C5A16F]/10'}`} />
-        <div className={`absolute top-40 -start-40 w-96 h-96 rounded-full blur-[150px] ${isLight ? 'bg-blue-300/20' : 'bg-blue-600/10'}`} />
+      {/* ── Page backdrop: faint grid + gold/blue glows so the page never reads as a flat color ── */}
+      <div className="absolute inset-0 pointer-events-none select-none" aria-hidden>
+        <svg className={`absolute inset-0 w-full h-full ${isLight ? 'opacity-[0.05]' : 'opacity-[0.045]'}`} xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="pd-grid" width="56" height="56" patternUnits="userSpaceOnUse">
+              <path d="M 56 0 L 0 0 0 56" fill="none" stroke="#C5A16F" strokeWidth="0.8" />
+              <circle cx="28" cy="28" r="1.2" fill="#C5A16F" />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#pd-grid)" />
+        </svg>
+        <div className={`absolute top-[8%] -start-40 w-[520px] h-[520px] rounded-full blur-[160px] ${isLight ? 'bg-blue-300/25' : 'bg-blue-600/15'}`} />
+        <div className={`absolute top-[38%] -end-40 w-[560px] h-[560px] rounded-full blur-[170px] ${isLight ? 'bg-[#C5A16F]/20' : 'bg-[#C5A16F]/10'}`} />
+        <div className={`absolute top-[72%] -start-32 w-[480px] h-[480px] rounded-full blur-[160px] ${isLight ? 'bg-[#C5A16F]/15' : 'bg-indigo-600/10'}`} />
       </div>
 
       {/* ───────────── Hero ───────────── */}
-      <section className="relative pt-28 sm:pt-32 pb-10 sm:pb-14">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <nav className={`flex items-center gap-2 text-xs font-bold mb-8 ${c.muted}`} aria-label="breadcrumb">
+      <section className="relative isolate overflow-hidden pt-24 sm:pt-28 pb-10 sm:pb-14">
+        {/* Blurred cover as ambient hero light */}
+        {project.image && (
+          <div
+            className="absolute inset-0 -z-10 overflow-hidden"
+            style={{ maskImage: 'linear-gradient(to bottom, black 55%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, black 55%, transparent)' }}
+            aria-hidden
+          >
+            <img src={project.image} alt="" className={`w-full h-full object-cover scale-125 blur-3xl ${isLight ? 'opacity-20' : 'opacity-25'}`} />
+            <div className={`absolute inset-0 ${isLight ? 'bg-slate-50/70' : 'bg-[#060D1A]/65'}`} />
+          </div>
+        )}
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <nav className={`flex items-center gap-2 text-xs font-bold mb-6 sm:mb-8 ${c.muted}`} aria-label="breadcrumb">
             <Link href="/" className="hover:underline">{tr('الرئيسية', 'Home')}</Link>
-            <span>/</span>
+            <span className="opacity-50">/</span>
             <Link href="/portfolio" className="hover:underline">{tr('أعمالنا', 'Our Work')}</Link>
-            <span>/</span>
-            <span className={`${c.gold} truncate max-w-[200px]`}>{title}</span>
+            <span className="opacity-50">/</span>
+            <span className={`${c.gold} truncate max-w-[220px]`}>{title}</span>
           </nav>
 
-          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            <div className="lg:col-span-5 order-2 lg:order-1">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+            <div className="order-2 lg:order-1">
               {categoryLabels.length > 0 && (
-                <div className="flex flex-wrap gap-2 mb-5">
+                <div className="flex flex-wrap gap-2 mb-4">
                   {categoryLabels.map((label, i) => (
-                    <span key={i} className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-[11px] font-black tracking-wide ${c.chip}`}>
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#C5A16F]" />
+                    <span key={i} className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-[11px] font-black tracking-wide backdrop-blur-md ${c.chip}`}>
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#C5A16F] animate-pulse" />
                       {label}
                     </span>
                   ))}
                 </div>
               )}
 
-              <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-black leading-tight tracking-tight ${c.heading}`}>
+              <h1 className={`text-4xl sm:text-5xl xl:text-6xl font-black leading-[1.1] tracking-tight ${c.heading}`}>
                 {title}
               </h1>
+              <div className="mt-5 h-1 w-20 rounded-full bg-gradient-to-r from-[#C5A16F] to-transparent" />
 
-              {clientName && (
-                <p className={`mt-4 text-sm font-bold ${c.muted}`}>
-                  {tr('لصالح', 'For')} <span className={c.gold}>{clientName}</span>
-                  {project.projectYear && <span> · {project.projectYear}</span>}
-                </p>
+              {excerpt && (
+                <p className={`mt-5 text-sm sm:text-base leading-8 line-clamp-4 ${c.body}`}>{excerpt}</p>
               )}
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -150,9 +177,18 @@ export default function PortfolioDetailClient({ project, categories, related }: 
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
                   </a>
                 )}
+                {(project.gallery.length > 0 || project.videos.length > 0) && (
+                  <a href={project.gallery.length > 0 ? '#gallery' : '#videos'}
+                    className={`inline-flex items-center gap-2 font-black text-sm px-6 py-3.5 rounded-xl border transition-all hover:-translate-y-0.5 ${
+                      isLight ? 'bg-white border-[#C5A16F]/50 text-[#8A5800] hover:bg-[#C5A16F] hover:text-[#0A192F]' : 'bg-[#C5A16F]/10 border-[#C5A16F]/40 text-[#C5A16F] hover:bg-[#C5A16F] hover:text-[#0A192F]'
+                    }`}>
+                    {tr('شاهد الأعمال', 'View the Work')}
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+                  </a>
+                )}
                 <Link href="/portfolio"
-                  className={`inline-flex items-center gap-2 font-bold text-sm px-5 py-3.5 rounded-xl border transition-all ${
-                    isLight ? 'border-slate-300 text-slate-700 hover:border-[#8A5800] hover:text-[#8A5800]' : 'border-white/15 text-gray-200 hover:border-[#C5A16F]/50 hover:text-[#C5A16F]'
+                  className={`inline-flex items-center gap-2 font-bold text-sm px-5 py-3.5 rounded-xl border backdrop-blur-md transition-all ${
+                    isLight ? 'bg-white/60 border-slate-300 text-slate-700 hover:border-[#8A5800] hover:text-[#8A5800]' : 'bg-white/[0.03] border-white/15 text-gray-200 hover:border-[#C5A16F]/50 hover:text-[#C5A16F]'
                   }`}>
                   {backArrow}
                   {tr('كل الأعمال', 'All Work')}
@@ -160,10 +196,11 @@ export default function PortfolioDetailClient({ project, categories, related }: 
               </div>
             </div>
 
-            <div className="lg:col-span-7 order-1 lg:order-2">
-              <div className={`relative rounded-3xl p-2 border ${c.card}`}>
-                <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-[#C5A16F]/40 via-transparent to-[#C5A16F]/20 pointer-events-none opacity-60" />
-                <div className={`relative aspect-[16/10] rounded-2xl overflow-hidden ${isLight ? 'bg-slate-100' : 'bg-[#050C18]'}`}>
+            {/* Cover */}
+            <div className="order-1 lg:order-2 relative">
+              <div className="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-tr from-[#C5A16F]/25 via-transparent to-blue-500/15 blur-2xl pointer-events-none" />
+              <div className="relative rounded-[1.75rem] p-[1.5px] bg-gradient-to-br from-[#DFB77D] via-[#C5A16F]/30 to-[#9E7D47]/60 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]">
+                <div className={`relative aspect-[16/11] rounded-[1.65rem] overflow-hidden ${isLight ? 'bg-white' : 'bg-[#050C18]'}`}>
                   {project.image ? (
                     <img src={project.image} alt={title} className="w-full h-full object-cover object-top" />
                   ) : (
@@ -171,78 +208,77 @@ export default function PortfolioDetailClient({ project, categories, related }: 
                   )}
                 </div>
               </div>
+              {mediaSummary && (
+                <div className={`absolute -bottom-4 start-6 inline-flex items-center gap-2 px-4 py-2 rounded-xl border backdrop-blur-xl text-xs font-black shadow-xl ${
+                  isLight ? 'bg-white/90 border-[#C5A16F]/40 text-[#8A5800]' : 'bg-[#0A1628]/85 border-[#C5A16F]/35 text-[#C5A16F]'
+                }`}>
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                  {mediaSummary}
+                </div>
+              )}
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* ───────────── Facts bar ───────────── */}
-      {facts.length > 0 && (
-        <section className="relative pb-10 sm:pb-14">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
-            <div className={`grid grid-cols-2 gap-3 sm:gap-4 ${FACT_COLS[facts.length] || 'lg:grid-cols-4'}`}>
+          {/* Facts strip */}
+          {facts.length > 0 && (
+            <div className={`mt-12 sm:mt-14 grid grid-cols-2 ${FACT_COLS[facts.length] || 'lg:grid-cols-4'} rounded-2xl border backdrop-blur-xl overflow-hidden ${
+              isLight ? 'bg-white/80 border-slate-200 shadow-[0_10px_30px_rgba(15,23,42,0.06)]' : 'bg-[#0B1730]/70 border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.35)]'
+            }`}>
               {facts.map((f, i) => (
-                <div key={i} className={`rounded-2xl border p-4 sm:p-5 flex items-start gap-3 ${c.card}`}>
-                  <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border ${c.chip}`}>
+                <div key={i} className={`p-4 sm:p-5 flex items-center gap-3 max-lg:border-b lg:border-e last:border-e-0 ${i % 2 === 0 ? 'max-lg:border-e' : ''} ${c.divider}`}>
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border ${c.chip}`}>
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={f.icon} /></svg>
                   </div>
                   <div className="min-w-0">
-                    <div className={`text-[11px] font-bold uppercase tracking-wider ${c.muted}`}>{f.label}</div>
-                    <div className={`text-sm sm:text-base font-black mt-0.5 break-words ${c.heading}`}>{f.value}</div>
+                    <div className={`text-[10px] font-bold uppercase tracking-wider ${c.muted}`}>{f.label}</div>
+                    <div className={`text-sm font-black mt-0.5 break-words ${c.heading}`}>{f.value}</div>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-      )}
+          )}
+        </div>
+      </section>
 
       {/* ───────────── Overview ───────────── */}
-      <section className="relative pb-14 sm:pb-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-3 gap-6">
-          <div className={`lg:col-span-2 rounded-3xl border p-6 sm:p-10 ${c.card}`}>
+      <section className="relative py-8 sm:py-12">
+        <div className={`max-w-7xl mx-auto px-4 sm:px-6 grid gap-6 ${hasAside ? 'lg:grid-cols-12' : ''}`}>
+          <div className={`relative overflow-hidden rounded-3xl border p-6 sm:p-10 ${hasAside ? 'lg:col-span-8' : ''} ${c.card}`}>
+            <div className="absolute top-0 inset-x-10 h-[2px] bg-gradient-to-r from-transparent via-[#C5A16F]/70 to-transparent" />
             <SectionTitle theme={c} eyebrow={tr('نبذة', 'Overview')} title={tr('عن المشروع', 'About the Project')} />
-            <p className={`mt-6 text-sm sm:text-base leading-8 whitespace-pre-line ${c.body}`}>
+            <p className={`relative mt-6 text-sm sm:text-[15px] leading-8 sm:leading-9 whitespace-pre-line ${c.body}`}>
               {description || tr('لا يوجد وصف لهذا المشروع بعد.', 'No description yet.')}
             </p>
           </div>
 
-          <aside className={`rounded-3xl border p-6 sm:p-8 space-y-6 h-fit ${c.card}`}>
-            <h3 className={`text-sm font-black ${c.heading}`}>{tr('تفاصيل سريعة', 'Quick Details')}</h3>
-            <dl className="space-y-4">
-              {facts.map((f, i) => (
-                <div key={i} className={`flex items-start justify-between gap-4 pb-4 border-b last:border-b-0 last:pb-0 ${c.divider}`}>
-                  <dt className={`text-xs font-bold ${c.muted}`}>{f.label}</dt>
-                  <dd className={`text-xs font-black text-end ${c.heading}`}>{f.value}</dd>
+          {hasAside && (
+            <aside className="lg:col-span-4 space-y-6">
+              {project.tools.length > 0 && (
+                <div className={`rounded-3xl border p-6 ${c.card}`}>
+                  <h3 className={`text-sm font-black mb-4 ${c.heading}`}>{tr('الأدوات والتقنيات', 'Tools & Technologies')}</h3>
+                  <div className="flex flex-wrap gap-2" dir="ltr">
+                    {project.tools.map((tool, i) => (
+                      <span key={i} className={`px-3 py-1.5 rounded-lg border text-[11px] font-bold ${c.chip}`}>{tool}</span>
+                    ))}
+                  </div>
                 </div>
-              ))}
-            </dl>
-
-            {project.tools.length > 0 && (
-              <div>
-                <h4 className={`text-xs font-bold mb-3 ${c.muted}`}>{tr('الأدوات والتقنيات', 'Tools & Technologies')}</h4>
-                <div className="flex flex-wrap gap-2" dir="ltr">
-                  {project.tools.map((tool, i) => (
-                    <span key={i} className={`px-3 py-1.5 rounded-lg border text-[11px] font-bold ${c.chip}`}>{tool}</span>
-                  ))}
+              )}
+              {(project.link || project.appLink) && (
+                <div className={`rounded-3xl border p-6 space-y-2 ${c.card}`}>
+                  <h3 className={`text-sm font-black mb-3 ${c.heading}`}>{tr('روابط المشروع', 'Project Links')}</h3>
+                  {project.link && <ExternalRow theme={c} href={project.link} label={tr('الموقع', 'Website')} />}
+                  {project.appLink && <ExternalRow theme={c} href={project.appLink} label={tr('التطبيق', 'App')} />}
                 </div>
-              </div>
-            )}
-
-            {(project.link || project.appLink) && (
-              <div className={`pt-5 border-t space-y-2 ${c.divider}`}>
-                {project.link && <ExternalRow theme={c} href={project.link} label={tr('رابط المشروع', 'Live link')} />}
-                {project.appLink && <ExternalRow theme={c} href={project.appLink} label={tr('رابط التطبيق', 'App link')} />}
-              </div>
-            )}
-          </aside>
+              )}
+            </aside>
+          )}
         </div>
       </section>
 
       {/* ───────────── Gallery ───────────── */}
       {project.gallery.length > 0 && (
-        <section className="relative pb-14 sm:pb-20">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <section id="gallery" className={`relative py-12 sm:py-16 mt-4 border-y scroll-mt-24 ${isLight ? 'bg-white/60 border-slate-200' : 'bg-white/[0.015] border-white/5'}`}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <SectionTitle theme={c} eyebrow={tr('المعرض', 'Gallery')} title={tr('التصميمات والصور', 'Designs & Visuals')} count={project.gallery.length} />
             <div className="mt-8">
               <PortfolioDetailGallery images={project.gallery} title={title} theme={c} language={language} />
@@ -253,8 +289,8 @@ export default function PortfolioDetailClient({ project, categories, related }: 
 
       {/* ───────────── Videos ───────────── */}
       {project.videos.length > 0 && (
-        <section className="relative pb-14 sm:pb-20">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <section id="videos" className="relative py-12 sm:py-16 scroll-mt-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <SectionTitle theme={c} eyebrow={tr('فيديو', 'Video')} title={tr('فيديوهات المشروع', 'Project Videos')} count={project.videos.length} />
             <div className="mt-8">
               <PortfolioDetailVideos videos={project.videos} theme={c} />
@@ -264,17 +300,20 @@ export default function PortfolioDetailClient({ project, categories, related }: 
       )}
 
       {/* ───────────── CTA ───────────── */}
-      <section className="relative pb-14 sm:pb-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className={`relative overflow-hidden rounded-3xl border p-8 sm:p-12 text-center ${
-            isLight ? 'bg-gradient-to-br from-amber-50 to-white border-[#C5A16F]/30' : 'bg-gradient-to-br from-[#112240] to-[#0A192F] border-[#C5A16F]/25'
+      <section className="relative py-10 sm:py-14">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className={`relative overflow-hidden rounded-3xl border px-6 py-10 sm:px-12 sm:py-12 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-start ${
+            isLight ? 'bg-gradient-to-br from-amber-50 via-white to-amber-50 border-[#C5A16F]/30' : 'bg-gradient-to-br from-[#14284A] via-[#0D1C36] to-[#0A192F] border-[#C5A16F]/25'
           }`}>
-            <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[500px] h-[200px] bg-[#C5A16F]/15 blur-[100px] rounded-full pointer-events-none" />
-            <h2 className={`relative text-2xl sm:text-3xl font-black ${c.heading}`}>{tr('عايز مشروع بنفس المستوى؟', 'Want a project like this?')}</h2>
-            <p className={`relative mt-3 text-sm sm:text-base ${c.body}`}>{tr('احكيلنا فكرتك وفريقنا هيحولها لتجربة متكاملة.', 'Tell us your idea and our team will bring it to life.')}</p>
+            <div className="absolute -top-24 start-1/4 w-[480px] h-[220px] bg-[#C5A16F]/20 blur-[110px] rounded-full pointer-events-none" />
+            <div className="relative">
+              <h2 className={`text-2xl sm:text-3xl font-black ${c.heading}`}>{tr('عايز مشروع بنفس المستوى؟', 'Want a project like this?')}</h2>
+              <p className={`mt-2 text-sm sm:text-base ${c.body}`}>{tr('احكيلنا فكرتك وفريقنا هيحولها لتجربة متكاملة.', 'Tell us your idea and our team will bring it to life.')}</p>
+            </div>
             <Link href="/start-project"
-              className="relative mt-7 inline-flex items-center gap-2 bg-gradient-to-r from-[#C5A16F] to-[#DFB77D] text-[#0A192F] font-black text-sm px-8 py-4 rounded-xl shadow-lg shadow-[#C5A16F]/25 hover:-translate-y-0.5 transition-all">
+              className="relative shrink-0 inline-flex items-center gap-2 bg-gradient-to-r from-[#C5A16F] to-[#DFB77D] text-[#0A192F] font-black text-sm px-8 py-4 rounded-xl shadow-lg shadow-[#C5A16F]/25 hover:-translate-y-0.5 transition-all">
               {tr('ابدأ مشروعك الآن', 'Start Your Project')}
+              <svg className={`w-4 h-4 ${direction === 'rtl' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
             </Link>
           </div>
         </div>
@@ -282,8 +321,8 @@ export default function PortfolioDetailClient({ project, categories, related }: 
 
       {/* ───────────── Related ───────────── */}
       {relatedItems.length > 0 && (
-        <section className="relative pb-20 sm:pb-28">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <section className="relative pt-6 pb-20 sm:pb-24">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <SectionTitle theme={c} eyebrow={tr('المزيد', 'More')} title={tr('أعمال أخرى قد تعجبك', 'More of Our Work')} />
             <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {relatedItems.map(item => (

@@ -112,6 +112,7 @@ export default function TeamMemberDetailCard({ member, activeLogo, isLight = fal
             
             <TeamMemberSocialLinks
               social={socialLinks}
+              links={member?.links}
               isLight={isLight}
               contactTitle={t('team.contactChannels') || 'قنوات التواصل المباشرة'}
             />

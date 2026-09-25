@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { type SectionItem } from '@/types';
 import { type CategoryItem } from '@/types/category';
 import { useTranslation } from '@/contexts/LanguageContext';
@@ -25,6 +26,7 @@ export function PortfolioCard({ item, categories }: PortfolioCardProps) {
   const imageUrl = item.imageUrl || item.image || '';
   const liveUrl = item.link && item.link !== '#' ? item.link : null;
   const appUrl = item.appLink && item.appLink !== '#' ? item.appLink : null;
+  const detailsHref = item.id ? `/portfolio/${item.id}` : null;
 
   return (
     <article
@@ -34,8 +36,13 @@ export function PortfolioCard({ item, categories }: PortfolioCardProps) {
           : 'bg-gradient-to-b from-[#0F1E38] via-[#091528] to-[#050C18] border-white/10 hover:border-[#C5A16F]/70 shadow-lg hover:shadow-[0_20px_45px_-10px_rgba(197,161,111,0.3)]'
       }`}
     >
+      {/* Whole card opens the project details page (external links in the media overlay sit above it) */}
+      {detailsHref && (
+        <Link href={detailsHref} className="absolute inset-0 z-[25]" aria-label={itemTitle} />
+      )}
+
       {/* Top golden shimmer accent */}
-      <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C5A16F] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-30 shadow-[0_0_12px_#C5A16F]" />
+      <div className="pointer-events-none absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#C5A16F] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-30 shadow-[0_0_12px_#C5A16F]" />
 
       {/* Shimmer Light Sweep on Hover */}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none z-30" />
@@ -82,7 +89,20 @@ export function PortfolioCard({ item, categories }: PortfolioCardProps) {
           </div>
 
           {/* Action Button */}
-          {(liveUrl || appUrl) ? (
+          {detailsHref ? (
+            <span
+              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold text-xs transition-all duration-300 border shadow-sm whitespace-nowrap shrink-0 ${
+                isLight
+                  ? 'bg-amber-50/80 border-[#C5A16F]/40 text-[#8A5800] group-hover:bg-[#C5A16F] group-hover:text-[#050B14]'
+                  : 'bg-[#C5A16F]/10 border-[#C5A16F]/30 text-[#C5A16F] group-hover:bg-[#C5A16F] group-hover:text-[#050B14]'
+              }`}
+            >
+              <span className="whitespace-nowrap shrink-0">{language === 'ar' ? 'تفاصيل المشروع' : 'Project Details'}</span>
+              <span className={`shrink-0 transition-transform duration-300 ${direction === 'rtl' ? 'rotate-180 group-hover:-translate-x-0.5' : 'group-hover:translate-x-0.5'}`}>
+                →
+              </span>
+            </span>
+          ) : (liveUrl || appUrl) ? (
             <a
               href={liveUrl || appUrl || '#'}
               target="_blank"

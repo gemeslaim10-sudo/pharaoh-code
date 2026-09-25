@@ -4,6 +4,7 @@ import { getTeamMembers } from '@/app/actions/dashboard/team';
 import { getIdentity } from '@/app/actions/dashboard/settings';
 import { notFound } from 'next/navigation';
 import TeamMemberDetailClient from '@/components/team/TeamMemberDetailClient';
+import { normalizeMemberLinks } from '@/lib/memberLinks';
 
 export async function generateStaticParams() {
     const members = await getTeamMembers();
@@ -36,6 +37,7 @@ export default async function TeamMemberPage({ params }: { params: Promise<{ id:
                 description: data.description || data.description_ar || data.desc_ar || '',
                 description_ar: data.description_ar || data.description || data.desc_ar || '',
                 description_en: data.description_en || data.desc_en || '',
+                links: normalizeMemberLinks(data.links),
                 skills: (data.skills || []).map((s: any) => ({
                     name: s.name || s.name_ar || '',
                     name_ar: s.name_ar || s.name || '',

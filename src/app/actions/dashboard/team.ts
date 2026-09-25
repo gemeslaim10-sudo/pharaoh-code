@@ -5,6 +5,7 @@ import { authenticateAdmin } from './auth';
 import { db, serializeData } from '@/lib/firebase/admin';
 import { revalidateSite } from '@/lib/revalidateSite';
 import { safeExternalUrl } from '@/lib/safeUrl';
+import { normalizeMemberLinks } from '@/lib/memberLinks';
 
 export async function getTeamMembers() {
     try {
@@ -27,6 +28,7 @@ export async function getTeamMembers() {
                     facebook: data.social?.facebook ? safeExternalUrl(data.social.facebook) : '',
                     instagram: data.social?.instagram ? safeExternalUrl(data.social.instagram) : '',
                 },
+                links: normalizeMemberLinks(data.links),
                 skills: (data.skills || []).map((s: any) => ({
                     name: s.name || s.name_ar || '',
                     name_ar: s.name_ar || s.name || '',

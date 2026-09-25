@@ -77,3 +77,37 @@ export async function uploadMedia(token: string, formData: FormData): Promise<Up
         return { success: false, error: detailMessage };
     }
 }
+
+export type SignedUploadParams = {
+    cloudName: string;
+    apiKey: string;
+    timestamp: number;
+    signature: string;
+    folder: string;
+    allowedFormats: string;
+    resourceType: 'image' | 'video';
+};
+
+/**
+ * Signs a direct browser -> Cloudinary upload. Used for project galleries/videos, which are
+ * too large to pass through a server action on the hosting platform (request body cap ~4.5 MB).
+ * The API secret never leaves the server; the signature only authorizes this folder + format list.
+ */
+export async function getSignedUploadParams(token: string, resourceType: 'image' | 'video'): Promise<SignedUploadParams> {
+    await authenticateAdmin(token);
+    if (resourceType !== 'image' && resourceType !== 'video') throw new Error('Invalid resource type');
+
+    const cloudName = process.env['NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME'] || '';
+    const apiKey = process.env['NEXT_PUBLIC_CLOUDINARY_API_KEY'] || '';
+    const apiSecret = process.env['CLOUDINARY_API_SECRET'] || '';
+    if (!cloudName || !apiKey || !apiSecret) throw new Error('Cloudinary is not configured.');
+
+    const timestamp = Math.round(Date.now() / 1000);
+    const allowedFormats = (resourceType === 'video' ? VIDEO_FORMATS : IMAGE_FORMATS).join(',');
+    const signature = cloudinary.utils.api_sign_request(
+        { timestamp, folder: UPLOAD_FOLDER, allowed_formats: allowedFormats },
+        apiSecret,
+    );
+
+    return { cloudName, apiKey, timestamp, signature, folder: UPLOAD_FOLDER, allowedFormats, resourceType };
+}

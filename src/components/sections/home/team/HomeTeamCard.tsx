@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { type SectionItem } from '@/types';
+import TeamMemberLinkIcons from '@/components/team/TeamMemberLinkIcons';
 
 interface HomeTeamCardProps {
   member: SectionItem;
@@ -25,9 +26,10 @@ export function HomeTeamCard({
   language,
 }: HomeTeamCardProps) {
   return (
+    <div className="relative h-full transition-transform duration-300 hover:-translate-y-1.5">
     <Link 
       href={`/team/${member.id}`} 
-      className={`team-card group relative flex flex-col justify-between h-full rounded-2xl p-5 sm:p-6 border transition-all duration-300 overflow-hidden text-center block hover:-translate-y-1.5 select-none ${
+      className={`team-card group relative flex flex-col justify-between h-full rounded-2xl p-5 sm:p-6 border transition-all duration-300 overflow-hidden text-center block select-none ${
         isLight
           ? 'bg-white border-slate-300 shadow-sm hover:border-[#8A5800] hover:shadow-[0_16px_36px_-8px_rgba(138,88,0,0.2)]'
           : 'bg-gradient-to-b from-[#0F1E38] via-[#091528] to-[#050B14] border-white/10 hover:border-[#C5A16F]/70 shadow-[0_10px_30px_rgba(0,0,0,0.4)] hover:shadow-[0_16px_36px_-8px_rgba(197,161,111,0.25)]'
@@ -130,5 +132,15 @@ export function HomeTeamCard({
         </div>
       </div>
     </Link>
+
+    {/* Custom profile links (siblings of the card link, since links cannot be nested) */}
+    <TeamMemberLinkIcons
+      links={member.links}
+      isLight={isLight}
+      variant="card"
+      max={4}
+      className="absolute top-4 end-4 z-40"
+    />
+    </div>
   );
 }

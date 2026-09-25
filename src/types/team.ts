@@ -12,6 +12,13 @@ export interface Stat {
   label_en?: string;
 }
 
+/** A custom profile link added from the dashboard: any URL shown as an uploaded icon. */
+export interface MemberLink {
+  url: string;
+  icon: string;
+  label?: string;
+}
+
 export interface TeamMember {
   id: string;
   name?: string;
@@ -31,6 +38,7 @@ export interface TeamMember {
     instagram?: string;
     [key: string]: string | undefined;
   };
+  links?: MemberLink[];
   [key: string]: any;
 }
 
@@ -55,4 +63,5 @@ export interface TeamMemberData {
     whatsapp?: string;
     email?: string;
   };
+  links?: MemberLink[];
 }

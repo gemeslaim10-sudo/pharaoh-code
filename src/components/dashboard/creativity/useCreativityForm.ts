@@ -16,6 +16,16 @@ export function useCreativityForm(onSuccess: () => void, editingItem: any | null
   const [appLink, setAppLink] = useState('');
   const [desc, setDesc] = useState('');
   const [descEn, setDescEn] = useState('');
+  const [clientName, setClientName] = useState('');
+  const [clientNameEn, setClientNameEn] = useState('');
+  const [projectYear, setProjectYear] = useState('');
+  const [tools, setTools] = useState('');
+  const [gallery, setGallery] = useState<string[]>([]);
+  const [videos, setVideos] = useState<string[]>([]);
+  // Counter, because the image and video galleries can upload at the same time.
+  const [uploadsInFlight, setUploadsInFlight] = useState(0);
+  const mediaUploading = uploadsInFlight > 0;
+  const setMediaUploading = (uploading: boolean) => setUploadsInFlight(n => Math.max(0, n + (uploading ? 1 : -1)));
 
   useEffect(() => {
     async function fetchCats() {
@@ -44,6 +54,12 @@ export function useCreativityForm(onSuccess: () => void, editingItem: any | null
     setAppLink(editingItem.appLink || '');
     setDesc(editingItem.desc_ar || editingItem.desc || editingItem.description || '');
     setDescEn(editingItem.desc_en || editingItem.description_en || '');
+    setClientName(editingItem.clientName_ar || editingItem.clientName || '');
+    setClientNameEn(editingItem.clientName_en || '');
+    setProjectYear(editingItem.projectYear || '');
+    setTools(Array.isArray(editingItem.tools) ? editingItem.tools.join(', ') : (editingItem.tools || ''));
+    setGallery(Array.isArray(editingItem.gallery) ? editingItem.gallery : []);
+    setVideos(Array.isArray(editingItem.videos) ? editingItem.videos : []);
   }, [editingItem]);
 
   const isAppCategory = selectedCategories.some(cat => 
@@ -66,6 +82,10 @@ export function useCreativityForm(onSuccess: () => void, editingItem: any | null
     e.preventDefault();
     if (selectedCategories.length === 0) {
       alert('يرجى اختيار تصنيف واحد على الأقل للمشروع');
+      return;
+    }
+    if (mediaUploading) {
+      alert('يرجى الانتظار حتى يكتمل رفع الصور والفيديوهات');
       return;
     }
     if (!imageUrl) {
@@ -99,7 +119,14 @@ export function useCreativityForm(onSuccess: () => void, editingItem: any | null
         description_ar: desc,
         description_en: descEn,
         link,
-        appLink: isAppCategory ? appLink : ''
+        appLink: isAppCategory ? appLink : '',
+        clientName: clientName.trim(),
+        clientName_ar: clientName.trim(),
+        clientName_en: clientNameEn.trim(),
+        projectYear: projectYear.trim(),
+        tools: tools.split(/[,،]/).map(t => t.trim()).filter(Boolean),
+        gallery,
+        videos
       };
       if (editingItem?.id) {
         await updateCreativityItem(token, 'portfolio', editingItem.id, payload);
@@ -121,6 +148,12 @@ export function useCreativityForm(onSuccess: () => void, editingItem: any | null
       setAppLink('');
       setDesc('');
       setDescEn('');
+      setClientName('');
+      setClientNameEn('');
+      setProjectYear('');
+      setTools('');
+      setGallery([]);
+      setVideos([]);
       onSuccess();
     } catch (error) {
       console.error(error);
@@ -137,6 +170,9 @@ export function useCreativityForm(onSuccess: () => void, editingItem: any | null
     selectedCategories, availableCategories, toggleCategory,
     isAppCategory, imageUrl, setImageUrl, link, setLink,
     appLink, setAppLink, desc, setDesc, descEn, setDescEn,
+    clientName, setClientName, clientNameEn, setClientNameEn,
+    projectYear, setProjectYear, tools, setTools,
+    gallery, setGallery, videos, setVideos, mediaUploading, setMediaUploading,
     handleSubmit
   };
 }

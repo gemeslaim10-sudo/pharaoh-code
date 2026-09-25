@@ -7,6 +7,8 @@ import { auth } from '@/lib/firebase/config';
 import { type TeamMember } from './WorkFormMembersTable';
 import { type Skill, type Stat } from './workFormTypes';
 import { useWorkSkillsAndStats } from './useWorkSkillsAndStats';
+import { type MemberLink } from '@/types/team';
+import { normalizeLinkUrl } from '@/lib/memberLinks';
 
 export type { Skill, Stat };
 
@@ -23,6 +25,7 @@ export function useWorkForm() {
   const [descriptionEn, setDescriptionEn] = useState('');
   const [fbUrl, setFbUrl] = useState('');
   const [instaUrl, setInstaUrl] = useState('');
+  const [links, setLinks] = useState<MemberLink[]>([]);
   const [existingImage, setExistingImage] = useState('');
   const [file, setFile] = useState<File | null>(null);
   const [fileStatusText, setFileStatusText] = useState('اختر صورة المطور من جهازك...');
@@ -52,7 +55,7 @@ export function useWorkForm() {
 
   const resetForm = () => {
     setEditingId(null); setName(''); setNameEn(''); setRole(''); setRoleEn('');
-    setDescription(''); setDescriptionEn(''); setFbUrl(''); setInstaUrl('');
+    setDescription(''); setDescriptionEn(''); setFbUrl(''); setInstaUrl(''); setLinks([]);
     setExistingImage(''); setFile(null); setFileStatusText('اختر صورة المطور من جهازك...');
     statsHook.resetSkillsAndStats();
   };
@@ -67,6 +70,7 @@ export function useWorkForm() {
     setDescriptionEn(member.description_en || '');
     setFbUrl(member.social?.facebook || '');
     setInstaUrl(member.social?.instagram || '');
+    setLinks((member.links || []).map(l => ({ url: l.url || '', icon: l.icon || '', label: l.label || '' })));
     setExistingImage(member.image || '');
     statsHook.setSkills(
       member.skills && member.skills.length > 0 
@@ -93,6 +97,11 @@ export function useWorkForm() {
     document.getElementById('team-management-section')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const handleAddLink = () => setLinks(prev => [...prev, { url: '', icon: '', label: '' }]);
+  const handleRemoveLink = (index: number) => setLinks(prev => prev.filter((_, i) => i !== index));
+  const handleLinkChange = (index: number, field: keyof MemberLink, val: string) =>
+    setLinks(prev => prev.map((l, i) => (i === index ? { ...l, [field]: val } : l)));
+
   const handleDelete = async (id: string) => {
     if (!confirm("هل أنت متأكد من حذف هذا الخبير من صرح التيم؟ ❌")) return;
     try {
@@ -112,6 +121,11 @@ export function useWorkForm() {
     e.preventDefault();
     if (!editingId && !file) {
       alert("يرجى اختيار صورة للعضو الجديد!");
+      return;
+    }
+    const filledLinks = links.filter(l => l.url.trim() || l.icon);
+    if (filledLinks.some(l => !l.url.trim() || !l.icon)) {
+      alert("كل رابط إضافي يحتاج إلى رابط وأيقونة معًا. أكمل البيانات أو احذف الرابط الناقص.");
       return;
     }
     setSubmitLoading(true);
@@ -156,7 +170,12 @@ export function useWorkForm() {
             label_ar: st.label_ar || st.label || st.label_en || '',
             label_en: st.label_en || st.label_ar || st.label || ''
           })),
-        social: { facebook: fbUrl, instagram: instaUrl }
+        social: { facebook: fbUrl, instagram: instaUrl },
+        links: filledLinks.map(l => ({
+          url: normalizeLinkUrl(l.url),
+          icon: l.icon,
+          label: (l.label || '').trim()
+        }))
       };
       if (editingId) {
         await updateTeamMember(token, editingId, memberData);
@@ -181,6 +200,7 @@ export function useWorkForm() {
     name, setName, nameEn, setNameEn, role, setRole, roleEn, setRoleEn,
     description, setDescription, descriptionEn, setDescriptionEn,
     fbUrl, setFbUrl, instaUrl, setInstaUrl, fileStatusText,
+    links, handleAddLink, handleRemoveLink, handleLinkChange,
     skills: statsHook.skills, stats: statsHook.stats,
     handleFileChange, handleAddSkill: statsHook.handleAddSkill,
     handleRemoveSkill: statsHook.handleRemoveSkill, handleSkillChange: statsHook.handleSkillChange,

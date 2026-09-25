@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { type SectionItem } from '@/types';
+import TeamMemberLinkIcons from '@/components/team/TeamMemberLinkIcons';
 
 interface TeamHeroMemberCardProps {
   member: SectionItem;
@@ -25,6 +26,7 @@ export function TeamHeroMemberCard({
   language,
 }: TeamHeroMemberCardProps) {
   return (
+    <div className="relative h-full">
     <Link
       href={`/team/${member.id}`}
       className={`team-card group relative flex flex-col justify-between h-full rounded-2xl p-3.5 sm:p-4 border transition-all duration-400 overflow-hidden text-center block select-none ${
@@ -128,5 +130,15 @@ export function TeamHeroMemberCard({
         </div>
       </div>
     </Link>
+
+    {/* Custom profile links (siblings of the card link, since links cannot be nested) */}
+    <TeamMemberLinkIcons
+      links={member.links}
+      isLight={isLight}
+      variant="card"
+      max={4}
+      className="absolute top-6 end-6 sm:top-[1.625rem] sm:end-[1.625rem] z-40"
+    />
+    </div>
   );
 }

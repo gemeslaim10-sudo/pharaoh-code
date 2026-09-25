@@ -3,6 +3,7 @@
 import { CreativityCategorySelector } from './CreativityCategorySelector';
 import { useCreativityForm } from './useCreativityForm';
 import { MediaUploadField } from '@/components/dashboard/common/MediaUploadField';
+import { MediaGalleryField } from '@/components/dashboard/common/MediaGalleryField';
 
 interface Props {
   onSuccess: () => void;
@@ -19,6 +20,9 @@ export default function CreativityProjectForm({ onSuccess, editingItem = null, o
     selectedCategories, availableCategories, toggleCategory,
     isAppCategory, imageUrl, setImageUrl, link, setLink,
     appLink, setAppLink, desc, setDesc, descEn, setDescEn,
+    clientName, setClientName, clientNameEn, setClientNameEn,
+    projectYear, setProjectYear, tools, setTools,
+    gallery, setGallery, videos, setVideos, mediaUploading, setMediaUploading,
     handleSubmit
   } = useCreativityForm(onSuccess, editingItem);
 
@@ -83,12 +87,54 @@ export default function CreativityProjectForm({ onSuccess, editingItem = null, o
 
         <div>
           <label className={labelCls}>شرح المشروع (بالعربية)</label>
-          <textarea rows={3} required value={desc} onChange={e => setDesc(e.target.value)} className={`${inputCls} resize-none`} placeholder="اكتب هنا التفاصيل المعمارية البرمجية للمشروع المنجز..." />
+          <textarea rows={5} required value={desc} onChange={e => setDesc(e.target.value)} className={`${inputCls} resize-none`} placeholder="اكتب هنا التفاصيل المعمارية البرمجية للمشروع المنجز..." />
         </div>
         <div>
           <label className={labelCls}>شرح المشروع (بالإنجليزية - Description EN)</label>
-          <textarea rows={3} value={descEn} onChange={e => setDescEn(e.target.value)} className={`${inputCls} resize-none`} placeholder="Write software architectural details in English..." dir="ltr" />
+          <textarea rows={5} value={descEn} onChange={e => setDescEn(e.target.value)} className={`${inputCls} resize-none`} placeholder="Write software architectural details in English..." dir="ltr" />
         </div>
+
+        <div>
+          <label className={labelCls}>اسم العميل (بالعربية - اختياري)</label>
+          <input type="text" value={clientName} onChange={e => setClientName(e.target.value)} className={inputCls} placeholder="مثال: مطاعم بيت الأكل" />
+        </div>
+        <div>
+          <label className={labelCls}>اسم العميل (بالإنجليزية - اختياري)</label>
+          <input type="text" value={clientNameEn} onChange={e => setClientNameEn(e.target.value)} className={inputCls} placeholder="e.g. Beit El Akl Restaurants" dir="ltr" />
+        </div>
+
+        <div>
+          <label className={labelCls}>سنة التنفيذ (اختياري)</label>
+          <input type="text" inputMode="numeric" maxLength={9} value={projectYear} onChange={e => setProjectYear(e.target.value)} className={inputCls} placeholder="2026" dir="ltr" />
+        </div>
+        <div>
+          <label className={labelCls}>الأدوات والتقنيات المستخدمة (اختياري)</label>
+          <input type="text" value={tools} onChange={e => setTools(e.target.value)} className={inputCls} placeholder="Next.js, Firebase, Photoshop, Illustrator" dir="ltr" />
+          <p className="text-[11px] text-slate-500 dark:text-gray-400 mt-1.5">افصل بينها بفاصلة ( , )</p>
+        </div>
+      </div>
+
+      <div className="mt-10 pt-8 border-t border-slate-200 dark:border-white/10 space-y-8">
+        <div>
+          <h5 className="text-sm font-black text-slate-900 dark:text-white">معرض الأعمال والوسائط</h5>
+          <p className="text-[11px] text-slate-500 dark:text-gray-400 mt-1">كل الصور والفيديوهات هنا تظهر في صفحة تفاصيل العمل على الموقع بنفس الترتيب.</p>
+        </div>
+        <MediaGalleryField
+          kind="image"
+          label="الصور والتصميمات واللوجوهات"
+          description="تصميمات جرافيك، لوجو، صور شاشات، هوية بصرية..."
+          value={gallery}
+          onChange={setGallery}
+          onUploadingChange={setMediaUploading}
+        />
+        <MediaGalleryField
+          kind="video"
+          label="الفيديوهات"
+          description="فيديو واحد أو أكثر (موشن جرافيك، إعلان، عرض للمشروع...)"
+          value={videos}
+          onChange={setVideos}
+          onUploadingChange={setMediaUploading}
+        />
       </div>
 
       <div className="mt-8 flex justify-end gap-3">
@@ -97,8 +143,8 @@ export default function CreativityProjectForm({ onSuccess, editingItem = null, o
             إلغاء التعديل
           </button>
         )}
-        <button type="submit" disabled={loading} className="bg-gradient-to-r from-pharaohGold to-amber-600 text-pharaohNavy font-black text-xs uppercase tracking-widest px-8 py-4 rounded-xl shadow-xl shadow-pharaohGold/10 hover:opacity-90 transition disabled:opacity-50 cursor-pointer">
-          {loading ? 'جاري الحفظ...' : (isEditing ? 'حفظ تعديلات المشروع' : 'تنصيب المشروع في المعرض')}
+        <button type="submit" disabled={loading || mediaUploading} className="bg-gradient-to-r from-pharaohGold to-amber-600 text-pharaohNavy font-black text-xs uppercase tracking-widest px-8 py-4 rounded-xl shadow-xl shadow-pharaohGold/10 hover:opacity-90 transition disabled:opacity-50 cursor-pointer">
+          {mediaUploading ? 'جاري رفع الوسائط...' : loading ? 'جاري الحفظ...' : (isEditing ? 'حفظ تعديلات المشروع' : 'تنصيب المشروع في المعرض')}
         </button>
       </div>
     </form>

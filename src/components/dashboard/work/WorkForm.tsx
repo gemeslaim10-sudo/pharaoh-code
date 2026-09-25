@@ -3,6 +3,7 @@
 import WorkFormBasicInputs from './WorkFormBasicInputs';
 import WorkFormSkills from './WorkFormSkills';
 import WorkFormStats from './WorkFormStats';
+import WorkFormLinks from './WorkFormLinks';
 import WorkFormMembersTable from './WorkFormMembersTable';
 import { useWorkForm } from './useWorkForm';
 
@@ -20,6 +21,7 @@ export default function WorkForm() {
         descriptionEn, setDescriptionEn,
         fbUrl, setFbUrl,
         instaUrl, setInstaUrl,
+        links, handleAddLink, handleRemoveLink, handleLinkChange,
         fileStatusText,
         skills,
         stats,
@@ -71,6 +73,13 @@ export default function WorkForm() {
                             setDescription={setDescription}
                             descriptionEn={descriptionEn}
                             setDescriptionEn={setDescriptionEn}
+                        />
+
+                        <WorkFormLinks
+                            links={links}
+                            onAddLink={handleAddLink}
+                            onRemoveLink={handleRemoveLink}
+                            onLinkChange={handleLinkChange}
                         />
 
                         <WorkFormSkills

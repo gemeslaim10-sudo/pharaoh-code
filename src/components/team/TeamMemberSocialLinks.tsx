@@ -1,6 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { type MemberLink } from '@/types/team';
+import TeamMemberLinkIcons from './TeamMemberLinkIcons';
 
 interface TeamMemberSocialLinksProps {
   social?: {
@@ -12,16 +14,20 @@ interface TeamMemberSocialLinksProps {
     whatsapp?: string | undefined;
     [key: string]: string | undefined;
   } | undefined;
+  links?: MemberLink[] | undefined;
   isLight: boolean;
   contactTitle?: string;
 }
 
 export default function TeamMemberSocialLinks({
   social,
+  links,
   isLight,
   contactTitle = 'قنوات التواصل المباشرة'
 }: TeamMemberSocialLinksProps) {
-  if (!social || Object.values(social).every(val => !val)) {
+  const hasSocial = Boolean(social && Object.values(social).some(val => val));
+  const hasLinks = Boolean(links && links.length > 0);
+  if (!hasSocial && !hasLinks) {
     return null;
   }
 
@@ -39,6 +45,7 @@ export default function TeamMemberSocialLinks({
         <span>{contactTitle}</span>
       </span>
 
+      {hasSocial && social && (
       <div className="flex flex-wrap gap-2.5 sm:gap-3">
         {social.facebook && (
           <a 
@@ -76,6 +83,11 @@ export default function TeamMemberSocialLinks({
           </a>
         )}
       </div>
+      )}
+
+      {hasLinks && (
+        <TeamMemberLinkIcons links={links} isLight={isLight} className={hasSocial ? 'mt-3' : ''} />
+      )}
     </motion.div>
   );
 }

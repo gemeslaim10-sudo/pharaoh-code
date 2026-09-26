@@ -90,7 +90,6 @@ export default function PortfolioDetailClient({ project, categories, related }: 
     </svg>
   );
 
-  const excerpt = description.length > 240 ? `${description.slice(0, 240).trim()}…` : description;
   const hasAside = project.tools.length > 0 || Boolean(project.link) || Boolean(project.appLink);
   const mediaSummary = [
     project.gallery.length > 0 && tr(`${project.gallery.length} تصميم`, `${project.gallery.length} designs`),
@@ -138,7 +137,7 @@ export default function PortfolioDetailClient({ project, categories, related }: 
             <span className={`${c.gold} truncate max-w-[220px]`}>{title}</span>
           </nav>
 
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-start">
             <div className="order-2 lg:order-1">
               {categoryLabels.length > 0 && (
                 <div className="flex flex-wrap gap-2 mb-4">
@@ -156,8 +155,8 @@ export default function PortfolioDetailClient({ project, categories, related }: 
               </h1>
               <div className="mt-5 h-1 w-20 rounded-full bg-gradient-to-r from-[#C5A16F] to-transparent" />
 
-              {excerpt && (
-                <p className={`mt-5 text-sm sm:text-base leading-8 line-clamp-4 ${c.body}`}>{excerpt}</p>
+              {description && (
+                <p className={`mt-5 text-sm sm:text-base leading-8 whitespace-pre-line ${c.body}`}>{description}</p>
               )}
 
               <div className="mt-8 flex flex-wrap gap-3">
@@ -197,14 +196,14 @@ export default function PortfolioDetailClient({ project, categories, related }: 
             </div>
 
             {/* Cover */}
-            <div className="order-1 lg:order-2 relative">
+            <div className="order-1 lg:order-2 relative lg:sticky lg:top-28">
               <div className="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-tr from-[#C5A16F]/25 via-transparent to-blue-500/15 blur-2xl pointer-events-none" />
               <div className="relative rounded-[1.75rem] p-[1.5px] bg-gradient-to-br from-[#DFB77D] via-[#C5A16F]/30 to-[#9E7D47]/60 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]">
-                <div className={`relative aspect-[16/11] rounded-[1.65rem] overflow-hidden ${isLight ? 'bg-white' : 'bg-[#050C18]'}`}>
+                <div className={`relative rounded-[1.65rem] overflow-hidden ${isLight ? 'bg-white' : 'bg-[#050C18]'}`}>
                   {project.image ? (
-                    <img src={project.image} alt={title} className="w-full h-full object-cover object-top" />
+                    <img src={project.image} alt={title} className="block w-full h-auto" />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-6xl text-[#C5A16F]/40 font-serif">✦</div>
+                    <div className="aspect-[16/11] w-full flex items-center justify-center text-6xl text-[#C5A16F]/40 font-serif">✦</div>
                   )}
                 </div>
               </div>
@@ -240,40 +239,30 @@ export default function PortfolioDetailClient({ project, categories, related }: 
         </div>
       </section>
 
-      {/* ───────────── Overview ───────────── */}
-      <section className="relative py-8 sm:py-12">
-        <div className={`max-w-7xl mx-auto px-4 sm:px-6 grid gap-6 ${hasAside ? 'lg:grid-cols-12' : ''}`}>
-          <div className={`relative overflow-hidden rounded-3xl border p-6 sm:p-10 ${hasAside ? 'lg:col-span-8' : ''} ${c.card}`}>
-            <div className="absolute top-0 inset-x-10 h-[2px] bg-gradient-to-r from-transparent via-[#C5A16F]/70 to-transparent" />
-            <SectionTitle theme={c} eyebrow={tr('نبذة', 'Overview')} title={tr('عن المشروع', 'About the Project')} />
-            <p className={`relative mt-6 text-sm sm:text-[15px] leading-8 sm:leading-9 whitespace-pre-line ${c.body}`}>
-              {description || tr('لا يوجد وصف لهذا المشروع بعد.', 'No description yet.')}
-            </p>
+      {/* ───────────── Tools & links ───────────── */}
+      {hasAside && (
+        <section className="relative py-8 sm:py-10">
+          <div className={`max-w-7xl mx-auto px-4 sm:px-6 grid gap-6 ${project.tools.length > 0 && (project.link || project.appLink) ? 'md:grid-cols-2' : ''}`}>
+            {project.tools.length > 0 && (
+              <div className={`rounded-3xl border p-6 ${c.card}`}>
+                <h3 className={`text-sm font-black mb-4 ${c.heading}`}>{tr('الأدوات والتقنيات', 'Tools & Technologies')}</h3>
+                <div className="flex flex-wrap gap-2" dir="ltr">
+                  {project.tools.map((tool, i) => (
+                    <span key={i} className={`px-3 py-1.5 rounded-lg border text-[11px] font-bold ${c.chip}`}>{tool}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+            {(project.link || project.appLink) && (
+              <div className={`rounded-3xl border p-6 space-y-2 ${c.card}`}>
+                <h3 className={`text-sm font-black mb-3 ${c.heading}`}>{tr('روابط المشروع', 'Project Links')}</h3>
+                {project.link && <ExternalRow theme={c} href={project.link} label={tr('الموقع', 'Website')} />}
+                {project.appLink && <ExternalRow theme={c} href={project.appLink} label={tr('التطبيق', 'App')} />}
+              </div>
+            )}
           </div>
-
-          {hasAside && (
-            <aside className="lg:col-span-4 space-y-6">
-              {project.tools.length > 0 && (
-                <div className={`rounded-3xl border p-6 ${c.card}`}>
-                  <h3 className={`text-sm font-black mb-4 ${c.heading}`}>{tr('الأدوات والتقنيات', 'Tools & Technologies')}</h3>
-                  <div className="flex flex-wrap gap-2" dir="ltr">
-                    {project.tools.map((tool, i) => (
-                      <span key={i} className={`px-3 py-1.5 rounded-lg border text-[11px] font-bold ${c.chip}`}>{tool}</span>
-                    ))}
-                  </div>
-                </div>
-              )}
-              {(project.link || project.appLink) && (
-                <div className={`rounded-3xl border p-6 space-y-2 ${c.card}`}>
-                  <h3 className={`text-sm font-black mb-3 ${c.heading}`}>{tr('روابط المشروع', 'Project Links')}</h3>
-                  {project.link && <ExternalRow theme={c} href={project.link} label={tr('الموقع', 'Website')} />}
-                  {project.appLink && <ExternalRow theme={c} href={project.appLink} label={tr('التطبيق', 'App')} />}
-                </div>
-              )}
-            </aside>
-          )}
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ───────────── Gallery ───────────── */}
       {project.gallery.length > 0 && (
